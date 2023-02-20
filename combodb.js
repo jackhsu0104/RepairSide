@@ -1,0 +1,55 @@
+ TableComboConfigs = {
+   "通用": {
+       "OEM機台型號":"OEM機台副資料庫:System model::機台型號",		//tableName:valueField:displayFfields:displayCaptions:displayWidths , 如果不指定 displayFields, 自動以valueField當顯示欄位,不指定displayCaptions則以displayFields當表頭
+	   "群呈Sponser":"群呈Sponser:群呈Sponser",
+	   "登錄人":"群呈Sponser:群呈Sponser",
+	   "Sponser":"群呈Sponser:群呈Sponser",
+	   "業務名稱":"群呈Sponser:群呈Sponser",
+	   "業務ID":"群呈Sponser:群呈Sponser",
+	   "OEM製造廠":"OEM廠商副資料庫:OEM::OEM製造廠",
+	   "客戶名稱":"crm.Company:CoShortName:CompanyID,CoShortName:公司代號,公司名稱",
+	   "Customer":"crm.Company:CoShortName:CompanyID,CoShortName:公司代號,公司名稱",
+	   "System ID":"CTI OEM system install base總資料庫:System ID",
+	   "Chamber ID":"Chamber ID副資料庫:Chamber ID",
+	   "產品機型":"CTI型號副資料庫:Model",
+	   "P/N":"P/N副資料庫:P/N",
+	   "工號分類":"工號分類副資料庫:分類縮寫:分類縮寫,分類內容",
+	   "Process":"Process分類副資料庫:Process簡寫:Process簡寫,Process分類",
+	   "SL入廠原因":"入廠維修原因代碼:代碼:代碼,內容",
+	   "EX/F分類":"Exchange Form分類副資料庫:分類縮寫:分類縮寫,Exchange Form分類內容",
+	   "In P/N":"P/N副資料庫:P/N",
+	   "Out P/N":"P/N副資料庫:P/N",
+	   "In Model":"CTI型號副資料庫:Model:Model,Remarks,生產廠商",
+	   "型號(EX form)":"CTI型號副資料庫:Model:Model,Remarks,生產廠商",
+	   "委外供應商":"SELECT DISTINCT 委外供應商 FROM UU100_委外總資料庫:委外供應商:",
+	   "ProductID":"crm.Product:ProductID:ProductID,ProductCategoryID,ProductNameCHT,ProductSpecCHT",
+	   "CompanyID":"crm.Company:CompanyID:CompanyID,CoShortName,CoFullName",
+	   "ContactID":"crm.Contact:ContactID:ContactID,DisplayName",
+	   "ContactName":"crm.Contact:DisplayName:ContactID,DisplayName",
+	   "IncidentTypeID":"crm.IncidentType:IncidentTypeID:IncidentTypeID,IncidentTypeNameCHT",
+	   "DeptID":"crm.Department:DeptID:DeptID,DeptShortNameCHT",
+	   "ServiceEmplID":"crm.Employee:EmplID:EmplID,DisplayName",
+	   "SystemNo":"SELECT DISTINCT Incident.SystemNo AS 系統序號 FROM crm.Incident WHERE (Incident.SystemNo <> N'') ORDER BY Incident.SystemNo:系統序號::",
+	   "Module":"SELECT DISTINCT Incident.Module FROM crm.Incident WHERE (Incident.Module <> N'') ORDER BY Incident.Module:Module::",
+	   "ProductNo":"SELECT DISTINCT Incident.ProductNo AS 產品序號 FROM crm.Incident WHERE (Incident.ProductNo <> N'') ORDER BY Incident.ProductNo:ProductNo::",
+	   "SystemVendor":"SELECT DISTINCT Incident.SystemVendor AS 系統廠商 FROM crm.Incident WHERE (Incident.SystemVendor <> N'') ORDER BY Incident.SystemVendor:系統廠商::",
+	   "SystemType":"SELECT DISTINCT Incident.SystemType AS 系統型號 FROM crm.Incident WHERE (Incident.SystemType <> N'') ORDER BY Incident.SystemType:系統型號::",
+	   "CustomerTool":"SELECT DISTINCT Incident.CustomerTool  FROM crm.Incident WHERE (Incident.CustomerTool <> N'') ORDER BY Incident.CustomerTool:CustomerTool::",
+	   "BU3_Process":"Process分類副資料庫:Process簡寫:Process簡寫,Process分類",
+	   "PAYMENT":"Payment副資料表:PAYMENT::",
+	   "DELIVERY": "Delivery副資料表:DELIVERY::",
+	   "Issue by": "Issuer:Issue by::",
+	   "CIC P/N":"Cryo價目總表:CIC P/N:CIC P/N,ND,Description,NT sales list,US$ sales list:",
+   },
+   "工號登錄總資料表": {
+   },
+   "CTI Control Number總資料庫": {
+   },
+   "crm.ServiceRecord":{
+	   "WorkTypeID":"crm.WorkType:WorkTypeID:WorkTypeID,WorkTypeNameCHT",
+	   "BU3_ID":"SELECT erp.RMAXI.XI002 AS ID, RMAXI.XI003 AS 換出產品代號, INVMB.MB002 AS 換出產品名稱, RMAXI.XI004 AS 庫存數量 FROM RMAXI INNER JOIN INVMB ON RMAXI.XI003 = INVMB.MB001:ID:產品代號,換出產品名稱,庫存數量",
+
+   },
+   "crm.Incident":{
+   }
+};
