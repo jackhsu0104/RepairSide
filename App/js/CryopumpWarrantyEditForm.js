@@ -1,6 +1,6 @@
 // The default code is a module class (inherited from xui.Module)
 // Ensure that all the value of "key/value pair" does not refer to external variables
-xui.Class('App.RepairEditForm', 'xui.Module',{
+xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
     Instance:{
         // Dependency classes
         Dependencies:[],
@@ -36,9 +36,9 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("3.2666666666666666em")
                 .setTop("1.5238095238095237em")
-                .setWidth("65.21904761904761em")
+                .setWidth("69.86666666666666em")
                 .setHeight("59em")
-                .setCaption("CryoPump維修工單")
+                .setCaption("CryoPump Warranty 原因分析表")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
             );
@@ -131,7 +131,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input176")
                 .setName("Pump")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Pump")
                 .setLeft("26em")
                 .setTop("0.6em")
@@ -160,7 +160,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input177")
                 .setName("登錄編號")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("登錄編號")
                 .setLeft("37.2em")
                 .setTop("0.7333333333333333em")
@@ -187,31 +187,32 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setItems([
                     {
                         "id" : "a",
-                        "caption" : "基本資料登錄",
+                        "caption" : "基本資料",
                         "imageClass" : ""
                     },
                     {
                         "id" : "b",
-                        "caption" : "A.拆解清洗"
-                    },
-                    {
-                        "id" : "c",
-                        "caption" : "B. Vacuum Side 組裝"
+                        "caption" : "A.基本檢查"
                     },
                     {
                         "id" : "d",
-                        "caption" : "C. Helium Side 組裝",
+                        "caption" : "B. Helium Side檢查",
                         "closeBtn" : false,
                         "optBtn" : false,
                         "popBtn" : false
                     },
                     {
+                        "id" : "c",
+                        "caption" : "C.Crosshead檢查",
+                        "renderer" : ""
+                    },
+                    {
                         "id" : "e",
-                        "caption" : "D.Test Data"
+                        "caption" : "D.Vaccum Side檢查"
                     },
                     {
                         "id" : "f",
-                        "caption" : "Test Data"
+                        "caption" : "E.Test Data"
                     }
                 ])
                 .setLeft("0em")
@@ -232,7 +233,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox30")
                 .setName("Repair")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Repair")
                 .setLeft("0.6666666666666666em")
                 .setTop("0.6666666666666666em")
@@ -242,35 +243,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block1.append(
                 xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox31")
-                .setName("CIC/W")
-                .setDataBinder("rdb")
-                .setDataField("CIC/W")
-                .setLeft("6em")
-                .setTop("0.6666666666666666em")
-                .setWidth("5em")
-                .setCaption("CIC/W")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox32")
-                .setName("OT")
-                .setDataBinder("db")
-                .setDataField("OT")
-                .setLeft("12em")
-                .setTop("0.7333333333333333em")
-                .setWidth("5em")
-                .setCaption("OT")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox33")
                 .setName("Exchange")
                 .setDataBinder("rdb")
                 .setDataField("Exchange")
-                .setLeft("17.333333333333332em")
+                .setLeft("6.933333333333334em")
                 .setTop("0.7333333333333333em")
                 .setWidth("8em")
                 .setCaption("Exchange")
@@ -280,7 +257,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input185")
                 .setName("上次登錄編號")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("上次登錄編號")
                 .setLeft("1.3333333333333333em")
                 .setTop("3.3333333333333335em")
@@ -309,9 +286,9 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput312")
                 .setName("保固期")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("保固期")
-                .setLeft("38.666666666666664em")
+                .setLeft("37.25714285714286em")
                 .setTop("3.3333333333333335em")
                 .setWidth("18.666666666666668em")
                 .setLabelSize("8em")
@@ -338,11 +315,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input215")
                 .setName("進廠原因")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("進廠原因")
                 .setLeft("21.333333333333332em")
                 .setTop("5.333333333333333em")
-                .setWidth("18em")
+                .setWidth("34.74285714285714em")
                 .setLabelSize("8em")
                 .setLabelCaption("進廠原因")
                 .setMaxlength("200")
@@ -366,7 +343,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input217")
                 .setName("Pump S/N")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Pump S/N")
                 .setLeft("21.333333333333332em")
                 .setTop("7.333333333333333em")
@@ -394,9 +371,9 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input219")
                 .setName("Module1 S/N")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Module1 S/N")
-                .setLeft("41.93333333333333em")
+                .setLeft("40.457142857142856em")
                 .setTop("10em")
                 .setWidth("16em")
                 .setLabelSize("5em")
@@ -422,9 +399,9 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input221")
                 .setName("Module2 S/N")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Module2 S/N")
-                .setLeft("39.06666666666667em")
+                .setLeft("37.63809523809524em")
                 .setTop("12.066666666666666em")
                 .setWidth("18.933333333333334em")
                 .setLabelSize("8em")
@@ -450,7 +427,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input223")
                 .setName("Module2 Name")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Module2 Name")
                 .setLeft("1.3333333333333333em")
                 .setTop("12em")
@@ -475,108 +452,134 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             );
             
             host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input225")
-                .setName("Pump與Module是否相符")
-                .setDataBinder("db")
-                .setDataField("Pump與Module是否相符")
-                .setLeft("47.333333333333336em")
-                .setTop("18em")
-                .setWidth("10.666666666666666em")
-                .setHeight("3.6em")
-                .setLabelSize("2em")
-                .setLabelPos("top")
-                .setLabelCaption("Pump與Module是否相符")
-                .setLabelHAlign("left")
-                .setMaxlength("1")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y"
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N"
-                    }
-                ])
-            );
-            
-            host.block1.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input227")
                 .setName("特殊零件")
                 .setDataBinder("rdb")
-                .setDataField("特殊零件")
-                .setLeft("39.06666666666667em")
-                .setTop("15.333333333333334em")
-                .setWidth("18.933333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("特殊零件")
+                .setDataField("Other")
+                .setLeft("45.79047619047619em")
+                .setTop("19.885714285714286em")
+                .setWidth("10.59047619047619em")
                 .setMaxlength("32")
             );
             
             host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput317")
-                .setName("上次Diode Line更換日期")
-                .setDataBinder("db")
-                .setDataField("上次Diode Line更換日期")
-                .setLeft("17em")
-                .setTop("19.266666666666666em")
-                .setWidth("23.266666666666666em")
-                .setLabelSize("12em")
-                .setLabelCaption("上次Diode Line更換日期")
-                .setType("date")
-                .setMaxlength("null")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input228")
-                .setName("上次維修有無更換Diode Lin")
-                .setDataBinder("rdb")
-                .setDataField("上次維修有無更換Diode Lin")
-                .setLeft("16em")
-                .setTop("21.333333333333332em")
-                .setWidth("24.266666666666666em")
-                .setLabelSize("13em")
-                .setLabelCaption("上次維修有無更換Diode Lin")
-                .setMaxlength("1")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y"
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N"
-                    }
-                ])
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.ComboInput")
+                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input226")
-                .setName("配件是否齊全")
-                .setDataBinder("db")
-                .setDataField("配件是否齊全")
+                .setName("Compressor Model")
+                .setDataBinder("rdb")
+                .setDataField("Compressor Model")
                 .setLeft("17em")
                 .setTop("17.266666666666666em")
                 .setWidth("23.266666666666666em")
                 .setLabelSize("12em")
-                .setLabelCaption("配件是否齊全")
-                .setType("listbox")
-                .setMaxlength("1")
+                .setLabelCaption("Compressor Model")
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox262")
+                .setDataBinder("rdb")
+                .setDataField("Pump與Module是否相符")
                 .setItems([
                     {
                         "id" : "Y",
-                        "caption" : "Y"
+                        "caption" : "Y",
+                        "imageClass" : ""
                     },
                     {
                         "id" : "N",
-                        "caption" : "N"
+                        "caption" : "N",
+                        "imageClass" : ""
                     }
                 ])
+                .setLeft("15.923809523809524em")
+                .setTop("22.01904761904762em")
+                .setWidth("22.857142857142858em")
+                .setHeight("2.361904761904762em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Pump與Module是否相符")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox328")
+                .setDataBinder("rdb")
+                .setDataField("Pump與Module是否相符")
+                .setItems([
+                    {
+                        "id" : "PVD",
+                        "caption" : "PVD",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "IMP",
+                        "caption" : "IMP",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Other",
+                        "caption" : "Other"
+                    }
+                ])
+                .setLeft("25.904761904761905em")
+                .setTop("19.733333333333334em")
+                .setWidth("19.504761904761907em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("3em")
+                .setLabelGap("0em")
+                .setLabelCaption("製程")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput654")
+                .setName("Motor#2")
+                .setDataBinder("rdb")
+                .setDataField("Compressor Model#2")
+                .setLeft("40.38095238095238em")
+                .setTop("17.447619047619046em")
+                .setWidth("4.8em")
+                .setLabelSize("1em")
+                .setLabelCaption("/")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput655")
+                .setName("Motor#3")
+                .setDataBinder("rdb")
+                .setDataField("Compressor Model#3")
+                .setLeft("44.95238095238095em")
+                .setTop("17.447619047619046em")
+                .setWidth("4.733333333333333em")
+                .setLabelSize("2em")
+                .setLabelCaption("of")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.xui_ui_tabs18.append(
@@ -595,44 +598,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("Diode 1st")
                 .setLeft("2.6666666666666665em")
-                .setTop("0.6666666666666666em")
+                .setTop("3.7333333333333334em")
                 .setWidth("13.466666666666667em")
                 .setLabelSize("8em")
-                .setLabelCaption("1.  Diode 1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput480")
-                .setName("Diode 1st#1")
-                .setDataBinder("db")
-                .setDataField("Diode 1st#1")
-                .setLeft("16em")
-                .setTop("0.6666666666666666em")
-                .setWidth("8.133333333333333em")
-                .setLabelSize("2em")
-                .setLabelCaption("/V")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput481")
-                .setName("Diode 1st#2")
-                .setDataBinder("rdb")
-                .setDataField("Diode 1st#2")
-                .setLeft("24em")
-                .setTop("0.6666666666666666em")
-                .setWidth("7.466666666666667em")
-                .setLabelSize("3em")
-                .setLabelCaption("室溫")
+                .setLabelCaption("  Diode 室溫1<sup>st</sup>")
                 .setType("number")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -643,10 +612,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput482")
                 .setName("Diode 2nd")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Diode 2nd")
                 .setLeft("2.6666666666666665em")
-                .setTop("2.6666666666666665em")
+                .setTop("5.714285714285714em")
                 .setWidth("13.333333333333334em")
                 .setLabelSize("8em")
                 .setLabelCaption("2<sup>nd</sup>")
@@ -658,57 +627,9 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput483")
-                .setName("Diode 2nd#1")
-                .setDataBinder("rdb")
-                .setDataField("Diode 2nd#1")
-                .setLeft("16em")
-                .setTop("2.6666666666666665em")
-                .setWidth("8em")
-                .setLabelSize("2em")
-                .setLabelCaption("/V")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput484")
-                .setName("Diode 2nd#2")
-                .setDataBinder("db")
-                .setDataField("Diode 2nd#2")
-                .setLeft("24em")
-                .setTop("2.6666666666666665em")
-                .setWidth("7.333333333333333em")
-                .setLabelSize("3em")
-                .setLabelCaption("室溫")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input506")
-                .setName("Heater & Cylinder S/N")
-                .setDataBinder("rdb")
-                .setDataField("Heater & Cylinder S/N")
-                .setLeft("-1.3333333333333333em")
-                .setTop("5.333333333333333em")
-                .setWidth("20.666666666666668em")
-                .setLabelSize("12em")
-                .setLabelCaption("Heater & Cylinder S/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput485")
                 .setName("Heater 1st")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Heater 1st")
                 .setLeft("2.742857142857143em")
                 .setTop("8em")
@@ -742,7 +663,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput487")
                 .setName("Heater交叉")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Heater交叉")
                 .setLeft("2.6666666666666665em")
                 .setTop("10.666666666666666em")
@@ -776,7 +697,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput489")
                 .setName("Motor#1")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Motor#1")
                 .setLeft("2.742857142857143em")
                 .setTop("14em")
@@ -810,7 +731,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput491")
                 .setName("Motor#3")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Motor#3")
                 .setLeft("20em")
                 .setTop("14em")
@@ -844,7 +765,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input510")
                 .setName("Rough Valve")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Rough Valve")
                 .setLeft("2.6666666666666665em")
                 .setTop("16.666666666666668em")
@@ -861,7 +782,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("Purge Valve")
                 .setLeft("2.6666666666666665em")
-                .setTop("20.733333333333334em")
+                .setTop("18.97142857142857em")
                 .setWidth("16.666666666666668em")
                 .setLabelSize("8em")
                 .setLabelCaption("Purge Valve")
@@ -872,10 +793,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input515")
                 .setName("Exhaust Valve")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Exhaust Valve")
                 .setLeft("2.742857142857143em")
-                .setTop("23.4em")
+                .setTop("21.257142857142856em")
                 .setWidth("16.6em")
                 .setLabelSize("8em")
                 .setLabelCaption("Exhaust Valve")
@@ -884,71 +805,15 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input518")
-                .setName("Xhead原S/N")
-                .setDataBinder("rdb")
-                .setDataField("Xhead原S/N")
-                .setLeft("2.742857142857143em")
-                .setTop("28.733333333333334em")
-                .setWidth("16.6em")
-                .setLabelSize("8em")
-                .setLabelCaption("Xhead原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input519")
-                .setName("1st Displacer原S/N")
-                .setDataBinder("db")
-                .setDataField("1st Displacer原S/N")
-                .setLeft("0.6666666666666666em")
-                .setTop("31.4em")
-                .setWidth("18.666666666666668em")
-                .setLabelSize("10em")
-                .setLabelCaption("1<sup>st</sup> Displacer原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input520")
-                .setName("2nd Displacer原S/N")
-                .setDataBinder("rdb")
-                .setDataField("2nd Displacer原S/N")
-                .setLeft("0.6666666666666666em")
-                .setTop("34.06666666666667em")
-                .setWidth("18.666666666666668em")
-                .setLabelSize("10em")
-                .setLabelCaption("2<sup>nd</sup> Displacer原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input521")
                 .setName("故障原因主要")
-                .setDataBinder("db")
-                .setDataField("故障原因主要")
+                .setDataBinder("rdb")
+                .setDataField("其他異常狀況")
                 .setLeft("2.742857142857143em")
-                .setTop("36.733333333333334em")
+                .setTop("28.495238095238093em")
                 .setWidth("38.6em")
                 .setLabelSize("8em")
-                .setLabelCaption("故障原因主要")
-                .setMaxlength("200")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input522")
-                .setName("故障原因次要")
-                .setDataBinder("rdb")
-                .setDataField("故障原因次要")
-                .setLeft("2.6666666666666665em")
-                .setTop("38.6em")
-                .setWidth("38.666666666666664em")
-                .setLabelSize("8em")
-                .setLabelCaption("故障原因次要")
+                .setLabelCaption("其他異常狀況")
                 .setMaxlength("200")
             );
             
@@ -956,86 +821,20 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input526")
                 .setName("A組裝簽名")
-                .setDataBinder("db")
-                .setDataField("A組裝簽名")
+                .setDataBinder("rdb")
+                .setDataField("A測試簽名")
                 .setLeft("21.333333333333332em")
                 .setTop("44.733333333333334em")
                 .setWidth("18em")
                 .setLabelSize("8em")
-                .setLabelCaption("組裝簽名")
+                .setLabelCaption("測試簽名")
                 .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input527")
-                .setName("A組長覆核")
-                .setDataBinder("rdb")
-                .setDataField("A組長覆核")
-                .setLeft("38em")
-                .setTop("44.6em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("組長覆核")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox4")
-                .setDataBinder("db")
-                .setDataField("Diode 1st#3 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("32.666666666666664em")
-                .setTop("0.4em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox5")
-                .setDataBinder("rdb")
-                .setDataField("Diode 2nd#3 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("32.666666666666664em")
-                .setTop("2.2666666666666666em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox8")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Heater #3 Y/N")
                 .setItems([
                     {
@@ -1087,7 +886,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox14")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Motor#5 Y/N")
                 .setItems([
                     {
@@ -1112,35 +911,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox20")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#1清潔/更換")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.866666666666667em")
-                .setTop("16.466666666666665em")
-                .setWidth("12em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox21")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Rough Valve#2 Y/N")
                 .setItems([
                     {
@@ -1154,61 +926,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("32.53333333333333em")
+                .setLeft("20.571428571428573em")
                 .setTop("16.266666666666666em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox29")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve 上座旋緊 / 鎖緊 確認 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("32.53333333333333em")
-                .setTop("18.266666666666666em")
-                .setWidth("8.2em")
-                .setHeight("2.6666666666666665em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox30")
-                .setDataBinder("db")
-                .setDataField("Purge Valve#1")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.8em")
-                .setTop("20.466666666666665em")
-                .setWidth("12em")
                 .setHeight("2.4em")
                 .setLabelPos("top")
                 .setLabelHAlign("left")
@@ -1233,35 +952,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("32.53333333333333em")
-                .setTop("20.666666666666668em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox32")
-                .setDataBinder("db")
-                .setDataField("Exhaust Valve#1清潔/更換")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.8em")
-                .setTop("23.066666666666666em")
-                .setWidth("12em")
+                .setLeft("20.571428571428573em")
+                .setTop("18.590476190476192em")
                 .setHeight("2.4em")
                 .setLabelPos("top")
                 .setLabelHAlign("left")
@@ -1286,8 +978,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("32.53333333333333em")
-                .setTop("22.866666666666667em")
+                .setLeft("20.571428571428573em")
+                .setTop("20.952380952380953em")
                 .setHeight("2.4em")
                 .setLabelPos("top")
                 .setLabelHAlign("left")
@@ -1298,8 +990,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox34")
-                .setDataBinder("db")
-                .setDataField("更換Purge Valve O-ring Coil軸心鎖緊")
+                .setDataBinder("rdb")
+                .setDataField("Crosshead運作是否正常 Y/N")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1312,125 +1004,145 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("32.53333333333333em")
-                .setTop("25.4em")
+                .setLeft("20.571428571428573em")
+                .setTop("24.228571428571428em")
                 .setWidth("8.066666666666666em")
                 .setHeight("2.6666666666666665em")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label23")
-                .setLeft("17.466666666666665em")
-                .setTop("18.933333333333334em")
-                .setCaption("Rough Valve 上座旋緊 / 鎖緊 確認")
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label24")
-                .setLeft("16.666666666666668em")
-                .setTop("26em")
-                .setCaption("更換Purge Valve O-ring Coil軸心鎖緊")
+                .setLeft("9.142857142857142em")
+                .setTop("24.685714285714287em")
+                .setCaption("Crosshead運作是否正常")
             );
             
             host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox35")
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1213")
+                .setName("故障原因主要")
                 .setDataBinder("rdb")
-                .setDataField("Xhead原S/N清潔更換")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.8em")
-                .setTop("28.4em")
-                .setWidth("12em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
+                .setDataField("Crosshead運作是否正常#2")
+                .setLeft("2.742857142857143em")
+                .setTop("26.20952380952381em")
+                .setWidth("38.4em")
+                .setLabelSize("8em")
+                .setMaxlength("200")
             );
             
             host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox36")
-                .setDataBinder("db")
-                .setDataField("1st Displacer原S/N清潔更換")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.8em")
-                .setTop("31em")
-                .setWidth("12em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox37")
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1216")
+                .setName("Helium Side Leak Test：(5x10-6)")
                 .setDataBinder("rdb")
-                .setDataField("2nd Displacer原S/N清潔更換")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("19.733333333333334em")
-                .setTop("33.733333333333334em")
-                .setWidth("12em")
-                .setHeight("2.4em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label25")
-                .setLeft("4.666666666666667em")
-                .setTop("40.8em")
-                .setCaption("Pump清洗(非原廠貼紙清除)")
+                .setDataField("Helium Side Leak Test")
+                .setLeft("0em")
+                .setTop("31.16190476190476em")
+                .setWidth("26em")
+                .setLabelSize("15em")
+                .setLabelCaption("Helium Side Leak Test：")
+                .setMaxlength("32")
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox38")
-                .setDataBinder("db")
-                .setDataField("Pump清洗(非原廠貼紙清除) Y/N")
+                .setHost(host,"xui_ui_radiobox535")
+                .setDataBinder("rdb")
+                .setDataField("Helium Side Leak Test Y/N")
+                .setItems([
+                    {
+                        "id" : "PASS",
+                        "caption" : "PASS"
+                    },
+                    {
+                        "id" : "FAIL",
+                        "caption" : "FAIL"
+                    }
+                ])
+                .setLeft("26.590476190476192em")
+                .setTop("31.00952380952381em")
+                .setWidth("13.333333333333334em")
+                .setHeight("1.7333333333333334em")
+                .setLabelSize("1em")
+                .setLabelGap("0em")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input197")
+                .setName("Helium Side Leak Test：(5x10-6)")
+                .setDataBinder("rdb")
+                .setDataField("Vaccum Side Leak Test")
+                .setLeft("0em")
+                .setTop("33.44761904761905em")
+                .setWidth("26em")
+                .setLabelSize("15em")
+                .setLabelCaption("Vaccum Side Leak Test：")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox117")
+                .setDataBinder("rdb")
+                .setDataField("Vaccum Side Leak Test Y/N")
+                .setItems([
+                    {
+                        "id" : "PASS",
+                        "caption" : "PASS"
+                    },
+                    {
+                        "id" : "FAIL",
+                        "caption" : "FAIL"
+                    }
+                ])
+                .setLeft("26.666666666666668em")
+                .setTop("33.06666666666667em")
+                .setWidth("13.333333333333334em")
+                .setHeight("1.7333333333333334em")
+                .setLabelSize("1em")
+                .setLabelGap("0em")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input198")
+                .setName("Purge Valve")
+                .setDataBinder("rdb")
+                .setDataField("上架測試")
+                .setLeft("2.2857142857142856em")
+                .setTop("38.01904761904762em")
+                .setWidth("16.666666666666668em")
+                .setLabelSize("8em")
+                .setLabelCaption("上架測試")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox118")
+                .setDataBinder("rdb")
+                .setDataField("上架測試 Y/N")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1443,109 +1155,150 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("16.666666666666668em")
-                .setTop("40.2em")
-                .setWidth("8.066666666666666em")
-                .setHeight("2.6666666666666665em")
-                .setLabelVAlign("middle")
+                .setLeft("20.19047619047619em")
+                .setTop("37.63809523809524em")
+                .setHeight("2.4em")
+                .setLabelPos("top")
+                .setLabelHAlign("left")
                 .setCheckBox(true)
                 .setValue("")
             );
             
             host.xui_ui_block178.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox39")
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input306")
+                .setName("Helium Side Leak Test：(5x10-6)")
                 .setDataBinder("rdb")
-                .setDataField("Pump清洗(非原廠貼紙清除) 送洗 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("28.666666666666668em")
-                .setTop("40.06666666666667em")
-                .setWidth("8.066666666666666em")
-                .setHeight("2.6666666666666665em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label26")
-                .setLeft("27.133333333333333em")
-                .setTop("40.666666666666664em")
-                .setCaption("送洗")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label27")
-                .setLeft("0.6666666666666666em")
-                .setTop("42.666666666666664em")
-                .setCaption("Pump配件掛牌(P/N：、S/N：)入烤箱")
+                .setDataField("TC Gauge")
+                .setLeft("0em")
+                .setTop("35.80952380952381em")
+                .setWidth("19.047619047619047em")
+                .setLabelSize("15em")
+                .setLabelCaption("TC Gauge")
+                .setMaxlength("32")
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox40")
-                .setDataBinder("db")
-                .setDataField("Pump配件掛牌(P/N：、S/N：)入烤箱 Y/N")
+                .setHost(host,"xui_ui_radiobox171")
+                .setDataBinder("rdb")
+                .setDataField("TC Gauge#3")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "PASS",
+                        "caption" : "PASS"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "FAIL",
+                        "caption" : "FAIL"
                     }
                 ])
-                .setLeft("16.666666666666668em")
-                .setTop("42.06666666666667em")
-                .setWidth("8.066666666666666em")
-                .setHeight("2.6666666666666665em")
+                .setLeft("26.666666666666668em")
+                .setTop("35.58095238095238em")
+                .setWidth("13.333333333333334em")
+                .setHeight("1.7333333333333334em")
+                .setLabelSize("1em")
+                .setLabelGap("0em")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input307")
+                .setName("故障原因主要")
+                .setDataBinder("rdb")
+                .setDataField("故障主因")
+                .setLeft("2.2857142857142856em")
+                .setTop("40.304761904761904em")
+                .setWidth("38.6em")
+                .setLabelSize("8em")
+                .setLabelCaption("故障主因")
+                .setMaxlength("200")
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput735")
-                .setName("日期")
+                .setHost(host,"xui_ui_comboinput151")
+                .setName("Motor#3")
                 .setDataBinder("rdb")
-                .setDataField("A組裝日期")
-                .setLeft("24.333333333333332em")
-                .setTop("42.53333333333333em")
-                .setWidth("15em")
-                .setLabelSize("5em")
-                .setLabelCaption("組裝日期")
-                .setType("date")
+                .setDataField("TC Gauge#2")
+                .setLeft("19.276190476190475em")
+                .setTop("35.733333333333334em")
+                .setWidth("6.628571428571429em")
+                .setLabelSize("1em")
+                .setLabelCaption("μ")
+                .setType("number")
                 .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input547")
+                .setName("Failed Reason")
+                .setDataBinder("rdb")
+                .setDataField("Failed Reason")
+                .setLeft("2.2857142857142856em")
+                .setTop("42.666666666666664em")
+                .setWidth("16.666666666666668em")
+                .setLabelSize("8em")
+                .setLabelCaption("Failed Reason")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox409")
+                .setDataBinder("rdb")
+                .setDataField("外觀配件是否完整 Y/N")
+                .setItems([
+                    {
+                        "id" : "Y",
+                        "caption" : "Y",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "N",
+                        "caption" : "N",
+                        "imageClass" : ""
+                    }
+                ])
+                .setLeft("22.857142857142858em")
+                .setTop("1.4476190476190476em")
+                .setWidth("23.847619047619048em")
+                .setHeight("2.2857142857142856em")
+                .setLabelSize("10em")
+                .setLabelGap("0em")
+                .setLabelCaption("外觀配件是否完整")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
             );
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput809")
+                .setHost(host,"xui_ui_comboinput210")
                 .setName("日期")
-                .setDataBinder("db")
-                .setDataField("A覆核日期")
-                .setLeft("40.93333333333333em")
-                .setTop("42.6em")
+                .setDataBinder("rdb")
+                .setDataField("A測試日期")
+                .setLeft("41.142857142857146em")
+                .setTop("44.49523809523809em")
                 .setWidth("15em")
                 .setLabelSize("5em")
-                .setLabelCaption("覆核日期")
+                .setLabelCaption("測試日期")
                 .setType("date")
                 .setMaxlength("null")
             );
@@ -1564,250 +1317,52 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput939")
                 .setName("HeaterB 1st")
                 .setDataBinder("rdb")
-                .setDataField("HeaterB 1st")
-                .setLeft("6.666666666666667em")
-                .setTop("4.666666666666667em")
-                .setWidth("16em")
-                .setLabelSize("8em")
-                .setLabelCaption("HeaterB 1<sup>st</sup>")
+                .setDataField("Valve Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("4.8em")
+                .setWidth("12.952380952380953em")
                 .setType("number")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput940")
-                .setName("HeaterB 2nd")
-                .setDataBinder("db")
-                .setDataField("HeaterB 2nd")
-                .setLeft("23.333333333333332em")
-                .setTop("4.666666666666667em")
-                .setWidth("7.333333333333333em")
-                .setLabelSize("3em")
-                .setLabelCaption("Ω  2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input940")
-                .setName("交叉B")
-                .setDataBinder("rdb")
-                .setDataField("交叉B")
-                .setLeft("6.666666666666667em")
-                .setTop("7.333333333333333em")
-                .setWidth("16em")
-                .setLabelSize("8em")
-                .setLabelCaption("交叉")
-                .setMaxlength("20")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input941")
-                .setName("接地B")
-                .setDataBinder("db")
-                .setDataField("接地B")
-                .setLeft("18.266666666666666em")
-                .setTop("7.333333333333333em")
-                .setWidth("12.4em")
-                .setLabelSize("8em")
-                .setLabelCaption("接地")
-                .setMaxlength("20")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput941")
-                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("rdb")
-                .setDataField("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setLeft("12.666666666666666em")
-                .setTop("17.333333333333332em")
-                .setWidth("8.666666666666666em")
-                .setLabelSize("2em")
-                .setLabelCaption("1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput942")
-                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #2")
-                .setDataBinder("db")
-                .setDataField("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #2")
-                .setLeft("22.666666666666668em")
-                .setTop("17.333333333333332em")
-                .setWidth("8.666666666666666em")
-                .setLabelSize("2em")
-                .setLabelCaption("2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input947")
-                .setName("New Diode 1st S/N")
-                .setDataBinder("rdb")
-                .setDataField("New Diode 1st S/N")
-                .setLeft("4.666666666666667em")
-                .setTop("20em")
-                .setWidth("18em")
-                .setLabelSize("10em")
-                .setLabelCaption("New Diode 1<sup>st</sup>  S/N")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input948")
-                .setName("New Diode 1st V")
-                .setDataBinder("db")
-                .setDataField("New Diode 1st V")
-                .setLeft("23.533333333333335em")
-                .setTop("20em")
-                .setWidth("9.133333333333333em")
-                .setLabelSize("1em")
-                .setLabelCaption("V")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input949")
-                .setName("New Diode 2nd S/N")
-                .setDataBinder("rdb")
-                .setDataField("New Diode 2nd S/N")
-                .setLeft("4.666666666666667em")
-                .setTop("22em")
-                .setWidth("18em")
-                .setLabelSize("10em")
-                .setLabelCaption("New Diode 2<sup>nd</sup> S/N")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input950")
-                .setName("New Diode 2nd V")
-                .setDataBinder("db")
-                .setDataField("New Diode 2nd V")
-                .setLeft("23.466666666666665em")
-                .setTop("22em")
-                .setWidth("9.2em")
-                .setLabelSize("1em")
-                .setLabelCaption("V")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput943")
-                .setName("TC Gauge")
-                .setDataBinder("rdb")
-                .setDataField("TC Gauge")
-                .setLeft("6.666666666666667em")
-                .setTop("30.2em")
-                .setWidth("15.066666666666666em")
-                .setLabelSize("8em")
-                .setLabelCaption("TC Gauge")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input955")
-                .setName("Vacuum Side Leak Test：(5x10-9)")
-                .setDataBinder("db")
-                .setDataField("Vacuum Side Leak Test：(5x10-9)")
-                .setLeft("7.333333333333333em")
-                .setTop("32.666666666666664em")
-                .setWidth("24.666666666666668em")
-                .setLabelSize("16em")
-                .setLabelCaption("Vacuum Side Leak Test：(5x10<Sup>-9</sup>)")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input957")
-                .setName("80k Radiation Shield 安裝")
-                .setDataBinder("rdb")
-                .setDataField("80k Radiation Shield 安裝")
-                .setLeft("5.333333333333333em")
-                .setTop("35.333333333333336em")
-                .setWidth("26.666666666666668em")
-                .setLabelSize("18em")
-                .setLabelCaption("80k Radiation Shield 安裝")
-                .setMaxlength("32")
             );
             
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input958")
                 .setName("B組裝簽名")
-                .setDataBinder("db")
-                .setDataField("B組裝簽名")
-                .setLeft("13.333333333333334em")
-                .setTop("40em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("組裝簽名")
-                .setMaxlength("32")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input959")
-                .setName("B組長覆核")
                 .setDataBinder("rdb")
-                .setDataField("B組長覆核")
-                .setLeft("13.333333333333334em")
-                .setTop("42.666666666666664em")
+                .setDataField("C測試簽名")
+                .setLeft("6.095238095238095em")
+                .setTop("38.4em")
                 .setWidth("18em")
                 .setLabelSize("8em")
-                .setLabelCaption("組長覆核")
+                .setLabelCaption("測試簽名")
                 .setMaxlength("32")
             );
             
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox182")
-                .setDataBinder("db")
-                .setDataField("Check表單與Pump配件相符")
+                .setDataBinder("rdb")
+                .setDataField("Valve Bearing")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
                 .setLeft("3.3333333333333335em")
-                .setTop("0.3333333333333333em")
-                .setWidth("21.733333333333334em")
-                .setHeight("1.6666666666666667em")
+                .setTop("4.495238095238095em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
                 .setLabelSize("13em")
                 .setLabelGap("0em")
-                .setLabelCaption("Check表單與Pump配件相符")
+                .setLabelCaption("Valve Bearing")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -1823,12 +1378,168 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput978")
                 .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
                 .setDataBinder("rdb")
-                .setDataField("Heater & Cylinder S/N2")
-                .setLeft("4.666666666666667em")
-                .setTop("2.6666666666666665em")
-                .setWidth("18em")
+                .setDataField("Crosshead S/N")
+                .setLeft("6.857142857142857em")
+                .setTop("2.2095238095238097em")
+                .setWidth("20.571428571428573em")
                 .setLabelSize("10em")
-                .setLabelCaption("Heater & Cylinder S/N")
+                .setLabelCaption("Crosshead S/N")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput1311")
+                .setName("日期")
+                .setDataBinder("rdb")
+                .setDataField("C測試日期")
+                .setLeft("25.447619047619046em")
+                .setTop("38.4em")
+                .setWidth("15em")
+                .setLabelSize("5em")
+                .setLabelCaption("測試日期")
+                .setType("date")
+                .setMaxlength("null")
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox681")
+                .setDataBinder("rdb")
+                .setDataField("Driver Bearing")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("3.3523809523809525em")
+                .setTop("6.780952380952381em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Driver Bearing")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox682")
+                .setDataBinder("rdb")
+                .setDataField("偏心軸")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("3.3523809523809525em")
+                .setTop("9.066666666666666em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("偏心軸")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox683")
+                .setDataBinder("rdb")
+                .setDataField("Timing Valve")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("3.3523809523809525em")
+                .setTop("11.352380952380953em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Timing Valve")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput672")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Driver Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("7.0095238095238095em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput673")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("偏心軸#2")
+                .setLeft("27.428571428571427em")
+                .setTop("9.295238095238096em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput674")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Timing Valve#2")
+                .setLeft("27.428571428571427em")
+                .setTop("11.504761904761905em")
+                .setWidth("12.952380952380953em")
                 .setType("number")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -1837,62 +1548,26 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox204")
-                .setDataBinder("db")
-                .setDataField("Heater & Cylinder New Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("28.733333333333334em")
-                .setTop("2.3333333333333335em")
-                .setWidth("11.866666666666667em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("3em")
-                .setLabelGap("0em")
-                .setLabelCaption("New")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox249")
+                .setHost(host,"xui_ui_radiobox684")
                 .setDataBinder("rdb")
-                .setDataField("HeaterB  Y/N")
+                .setDataField("Bushing")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
-                .setLeft("30.666666666666668em")
-                .setTop("4.4em")
-                .setWidth("11.866666666666667em")
-                .setHeight("1.8em")
-                .setLabelSize("1em")
+                .setLeft("3.3523809523809525em")
+                .setTop("13.638095238095238em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
                 .setLabelGap("0em")
-                .setLabelCaption("Ω")
+                .setLabelCaption("Bushing")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -1904,207 +1579,57 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             );
             
             host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox319")
-                .setDataBinder("db")
-                .setDataField("交叉B Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("30.666666666666668em")
-                .setTop("6.933333333333334em")
-                .setWidth("11.866666666666667em")
-                .setHeight("1.8em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox320")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput675")
+                .setName("HeaterB 1st")
                 .setDataBinder("rdb")
-                .setDataField("Vacuum Side 組裝零件之連接面鋪設銦片")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("13.733333333333333em")
-                .setTop("9.266666666666667em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("18em")
-                .setLabelGap("0em")
-                .setLabelCaption("Vacuum Side 組裝零件之連接面鋪設銦片")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setDataField("Bushing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("13.790476190476191em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox321")
-                .setDataBinder("db")
-                .setDataField("Diode Connector Pin 接點阻值確認")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("13.733333333333333em")
-                .setTop("11.333333333333334em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.8666666666666667em")
-                .setLabelSize("18em")
-                .setLabelGap("0em")
-                .setLabelCaption("Diode Connector Pin 接點阻值確認")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox322")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput676")
+                .setName("HeaterB 1st")
                 .setDataBinder("rdb")
-                .setDataField("Diode Line正確固定並保持彈性")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("13.8em")
-                .setTop("13.266666666666667em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.8666666666666667em")
-                .setLabelSize("18em")
-                .setLabelGap("0em")
-                .setLabelCaption("Diode Line正確固定並保持彈性")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label93")
-                .setLeft("17.2em")
-                .setTop("15.6em")
-                .setWidth("21.933333333333334em")
-                .setHeight("0em")
-                .setCaption("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k)")
+                .setDataField("Teflon Seal#2")
+                .setLeft("27.428571428571427em")
+                .setTop("16.228571428571428em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox323")
-                .setDataBinder("db")
-                .setDataField("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #3 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("30.733333333333334em")
-                .setTop("16.933333333333334em")
-                .setWidth("11.866666666666667em")
-                .setHeight("1.8em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox380")
+                .setHost(host,"xui_ui_radiobox685")
                 .setDataBinder("rdb")
-                .setDataField("更換Diode需與Module做校正")
+                .setDataField("Teflon Seal")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
-                .setLeft("13.6em")
-                .setTop("24em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("18em")
+                .setLeft("3.3523809523809525em")
+                .setTop("15.923809523809524em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
                 .setLabelGap("0em")
-                .setLabelCaption("更換Diode需與Module做校正")
+                .setLabelCaption("Teflon Seal")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -2117,62 +1642,26 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox381")
-                .setDataBinder("db")
-                .setDataField("Rough Valve 上座旋緊 / 鎖緊 確認 B")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("13.666666666666666em")
-                .setTop("26em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("18em")
-                .setLabelGap("0em")
-                .setLabelCaption("Rough Valve 上座旋緊 / 鎖緊 確認")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox382")
+                .setHost(host,"xui_ui_radiobox686")
                 .setDataBinder("rdb")
-                .setDataField("Rough / Purge Valve Coil軸心鎖緊確認")
+                .setDataField("O-ring Seal")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
-                .setLeft("13.733333333333333em")
-                .setTop("27.933333333333334em")
-                .setWidth("26.666666666666668em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("18em")
+                .setLeft("3.3523809523809525em")
+                .setTop("18.20952380952381em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
                 .setLabelGap("0em")
-                .setLabelCaption("Rough / Purge Valve Coil軸心鎖緊確認")
+                .setLabelCaption("O-ring Seal")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -2185,99 +1674,208 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox383")
-                .setDataBinder("db")
-                .setDataField("VCR Cable 接頭確認")
+                .setHost(host,"xui_ui_radiobox687")
+                .setDataBinder("rdb")
+                .setDataField("Yoke")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
-                .setLeft("21.733333333333334em")
-                .setTop("29.933333333333334em")
-                .setWidth("18.666666666666668em")
-                .setHeight("1.8em")
+                .setLeft("3.3523809523809525em")
+                .setTop("20.495238095238093em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Yoke")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox688")
+                .setDataBinder("rdb")
+                .setDataField("Motor Bearing")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("3.3523809523809525em")
+                .setTop("22.78095238095238em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Motor Bearing")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput677")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("O-ring Seal#2")
+                .setLeft("27.428571428571427em")
+                .setTop("18.438095238095237em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput678")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Yoke#2")
+                .setLeft("27.428571428571427em")
+                .setTop("20.723809523809525em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput679")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Motor Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("22.933333333333334em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox689")
+                .setDataBinder("rdb")
+                .setDataField("Motor 軸心")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("3.3523809523809525em")
+                .setTop("25.066666666666666em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Motor 軸心")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput680")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Motor 軸心#2")
+                .setLeft("27.428571428571427em")
+                .setTop("25.21904761904762em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput720")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("rdb")
+                .setDataField("軸心彈力#1")
+                .setLeft("7.619047619047619em")
+                .setTop("28.114285714285714em")
+                .setWidth("19.80952380952381em")
                 .setLabelSize("10em")
-                .setLabelGap("0em")
-                .setLabelCaption("μ VCR Cable 接頭確認")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox384")
-                .setDataBinder("rdb")
-                .setDataField("Vacuum Side Leak Test：(5x10-9)Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("30.666666666666668em")
-                .setTop("32.266666666666666em")
-                .setWidth("11.866666666666667em")
-                .setHeight("1.8em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setLabelCaption("軸心彈力  原")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1310")
-                .setName("日期")
-                .setDataBinder("db")
-                .setDataField("B覆核日期")
-                .setLeft("32.666666666666664em")
-                .setTop("42.666666666666664em")
-                .setWidth("15em")
-                .setLabelSize("5em")
-                .setLabelCaption("覆核日期")
-                .setType("date")
+                .setHost(host,"xui_ui_comboinput721")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("rdb")
+                .setDataField("軸心彈力#2")
+                .setLeft("26.666666666666668em")
+                .setTop("28.114285714285714em")
+                .setWidth("13.714285714285714em")
+                .setLabelSize("3em")
+                .setLabelCaption("現")
+                .setType("number")
                 .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1311")
-                .setName("日期")
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input957")
+                .setName("80k Radiation Shield 安裝")
                 .setDataBinder("rdb")
-                .setDataField("B組裝日期")
-                .setLeft("32.666666666666664em")
-                .setTop("40em")
-                .setWidth("15em")
-                .setLabelSize("5em")
-                .setLabelCaption("組裝日期")
-                .setType("date")
-                .setMaxlength("null")
+                .setDataField("其他狀況描述C")
+                .setLeft("-0.45714285714285713em")
+                .setTop("31.16190476190476em")
+                .setWidth("40.838095238095235em")
+                .setHeight("6.095238095238095em")
+                .setLabelSize("18em")
+                .setLabelCaption("其他狀況描述")
+                .setMaxlength("32")
+                .setMultiLines(true)
             );
             
             host.xui_ui_tabs18.append(
@@ -2291,210 +1889,29 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1648")
-                .setName("”X” head Timing Valve 校正")
-                .setDataBinder("db")
-                .setDataField("”X” head Timing Valve 校正")
-                .setLeft("14em")
-                .setTop("2.6666666666666665em")
-                .setWidth("20em")
-                .setLabelSize("12em")
-                .setLabelCaption("”X” head Timing Valve 校正")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1649")
-                .setName("”X” head S/N C")
-                .setDataBinder("rdb")
-                .setDataField("”X” head S/N C")
-                .setLeft("7.333333333333333em")
-                .setTop("4.666666666666667em")
-                .setWidth("16.666666666666668em")
-                .setLabelSize("8em")
-                .setLabelCaption("”X” head S/N")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1509")
-                .setName("Motor：Ω#1")
-                .setDataBinder("db")
-                .setDataField("Motor：Ω#1")
-                .setLeft("1.3333333333333333em")
-                .setTop("6.666666666666667em")
-                .setWidth("11.333333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("Motor")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1510")
-                .setName("Motor：Ω#2")
-                .setDataBinder("rdb")
-                .setDataField("Motor：Ω#2")
-                .setLeft("12.666666666666666em")
-                .setTop("6.666666666666667em")
-                .setWidth("4.133333333333334em")
-                .setLabelSize("1em")
-                .setLabelCaption("/")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1511")
-                .setName("Motor：Ω#3")
-                .setDataBinder("db")
-                .setDataField("Motor：Ω#3")
-                .setLeft("16.666666666666668em")
-                .setTop("6.666666666666667em")
-                .setWidth("4.666666666666667em")
-                .setLabelSize("1em")
-                .setLabelCaption("/")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1512")
-                .setName("Motor：Ω#4")
-                .setDataBinder("rdb")
-                .setDataField("Motor：Ω#4")
-                .setLeft("21.8em")
-                .setTop("6.666666666666667em")
-                .setWidth("4.866666666666666em")
-                .setLabelSize("1em")
-                .setLabelCaption("⏚")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1513")
-                .setName("CABLE：Ω#1")
-                .setDataBinder("db")
-                .setDataField("CABLE：Ω#1")
-                .setLeft("1.3333333333333333em")
-                .setTop("8.666666666666666em")
-                .setWidth("11.333333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("CABLE")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1514")
-                .setName("CABLE：Ω#2")
-                .setDataBinder("rdb")
-                .setDataField("CABLE：Ω#2")
-                .setLeft("12.666666666666666em")
-                .setTop("8.666666666666666em")
-                .setWidth("4.133333333333334em")
-                .setLabelSize("1em")
-                .setLabelCaption("/")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1515")
-                .setName("CABLE：Ω#3")
-                .setDataBinder("db")
-                .setDataField("CABLE：Ω#3")
-                .setLeft("16.666666666666668em")
-                .setTop("8.666666666666666em")
-                .setWidth("4.533333333333333em")
-                .setLabelSize("1em")
-                .setLabelCaption("/")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1516")
-                .setName("CABLE：Ω#4")
-                .setDataBinder("rdb")
-                .setDataField("CABLE：Ω#4")
-                .setLeft("21.8em")
-                .setTop("8.666666666666666em")
-                .setWidth("4.866666666666666em")
-                .setLabelSize("1em")
-                .setLabelCaption("⏚")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1653")
                 .setName("Displacer 1st S/N")
-                .setDataBinder("db")
-                .setDataField("Displacer 1st S/N")
-                .setLeft("1.3333333333333333em")
-                .setTop("13.333333333333334em")
-                .setWidth("13.333333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("1<sup>st</sup> S/N")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1517")
-                .setName("Displacer 1st Flow")
                 .setDataBinder("rdb")
-                .setDataField("Displacer 1st Flow")
-                .setLeft("14.533333333333333em")
-                .setTop("13.333333333333334em")
-                .setWidth("8.8em")
-                .setLabelSize("3em")
-                .setLabelCaption("Flow")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
+                .setDataField("Displacer S/N")
+                .setLeft("1.3333333333333333em")
+                .setTop("1.4476190476190476em")
+                .setWidth("17.752380952380953em")
+                .setLabelSize("8em")
+                .setLabelCaption("Displacer S/N")
+                .setMaxlength("32")
             );
             
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1657")
                 .setName("Seal 1st")
-                .setDataBinder("db")
-                .setDataField("Seal 1st")
+                .setDataBinder("rdb")
+                .setDataField("原Flow")
                 .setLeft("1.3333333333333333em")
-                .setTop("18em")
+                .setTop("3.7333333333333334em")
                 .setWidth("13.333333333333334em")
                 .setLabelSize("8em")
-                .setLabelCaption("Seal 1st")
+                .setLabelCaption("原Flow")
                 .setMaxlength("32")
             );
             
@@ -2503,12 +1920,12 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1658")
                 .setName("Seal 2nd")
                 .setDataBinder("rdb")
-                .setDataField("Seal 2nd")
-                .setLeft("14.466666666666667em")
-                .setTop("18em")
+                .setDataField("現Flow")
+                .setLeft("14.476190476190476em")
+                .setTop("3.7333333333333334em")
                 .setWidth("8.866666666666667em")
-                .setLabelSize("3em")
-                .setLabelCaption("2nd")
+                .setLabelSize("4em")
+                .setLabelCaption("現Flow")
                 .setMaxlength("32")
             );
             
@@ -2516,13 +1933,13 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1659")
                 .setName("Seal 推")
-                .setDataBinder("db")
-                .setDataField("Seal 推")
-                .setLeft("22em")
-                .setTop("18em")
+                .setDataBinder("rdb")
+                .setDataField("Seal")
+                .setLeft("24.38095238095238em")
+                .setTop("3.7333333333333334em")
                 .setWidth("7.4em")
                 .setLabelSize("3em")
-                .setLabelCaption("/推")
+                .setLabelCaption("/Seal")
                 .setMaxlength("32")
             );
             
@@ -2531,143 +1948,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1660")
                 .setName("Seal 拉")
                 .setDataBinder("rdb")
-                .setDataField("Seal 拉")
-                .setLeft("28.666666666666668em")
-                .setTop("18em")
-                .setWidth("6.666666666666667em")
-                .setLabelSize("2em")
-                .setLabelCaption("拉")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1661")
-                .setName("Depth")
-                .setDataBinder("db")
-                .setDataField("Depth")
-                .setLeft("1.3333333333333333em")
-                .setTop("20.666666666666668em")
-                .setWidth("17.333333333333332em")
-                .setLabelSize("8em")
-                .setLabelCaption("Depth")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1662")
-                .setName("Setting")
-                .setDataBinder("rdb")
-                .setDataField("Setting")
-                .setLeft("16.666666666666668em")
-                .setTop("20.666666666666668em")
-                .setWidth("18.666666666666668em")
-                .setLabelSize("8em")
-                .setLabelCaption("Setting")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1519")
-                .setName("Displacer-Collar間距校正值")
-                .setDataBinder("db")
-                .setDataField("Displacer-Collar間距校正值")
-                .setLeft("2em")
-                .setTop("23.333333333333332em")
-                .setWidth("24em")
-                .setLabelSize("13em")
-                .setLabelCaption("Displacer-Collar間距校正值")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox247")
-                .setName("M350")
-                .setDataBinder("rdb")
-                .setDataField("M350")
-                .setLeft("2.6666666666666665em")
-                .setTop("27.933333333333334em")
-                .setWidth("8.8em")
-                .setCaption("M350")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox248")
-                .setName("M22")
-                .setDataBinder("db")
-                .setDataField("M22")
-                .setLeft("12.666666666666666em")
-                .setTop("27.933333333333334em")
-                .setWidth("6.133333333333334em")
-                .setCaption("M22")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox249")
-                .setName("M1020")
-                .setDataBinder("rdb")
-                .setDataField("M1020")
-                .setLeft("2.6666666666666665em")
-                .setTop("29.933333333333334em")
-                .setWidth("5.866666666666666em")
-                .setCaption("M1020")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox250")
-                .setName("M1050")
-                .setDataBinder("db")
-                .setDataField("M1050")
-                .setLeft("12.666666666666666em")
-                .setTop("29.933333333333334em")
-                .setWidth("7.4em")
-                .setCaption("M1050")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox251")
-                .setName("M600/M900")
-                .setDataBinder("rdb")
-                .setDataField("M600/M900")
-                .setLeft("2.6666666666666665em")
-                .setTop("31.933333333333334em")
-                .setWidth("7.866666666666666em")
-                .setCaption("M600/M900")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox252")
-                .setName("P300")
-                .setDataBinder("db")
-                .setDataField("P300")
-                .setLeft("12.666666666666666em")
-                .setTop("31.866666666666667em")
-                .setWidth("5.266666666666667em")
-                .setCaption("P300")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1665")
-                .setName("Helium Side Leak Test：(5x10-6)")
-                .setDataBinder("rdb")
-                .setDataField("Helium Side Leak Test：(5x10-6)")
-                .setLeft("0em")
-                .setTop("34.6em")
-                .setWidth("26em")
-                .setLabelSize("15em")
-                .setLabelCaption("Helium Side Leak Test：(5x10<sup>-6</sup>)")
+                .setDataField("其他#2")
+                .setLeft("8.380952380952381em")
+                .setTop("9.066666666666666em")
+                .setWidth("19.123809523809523em")
                 .setMaxlength("32")
             );
             
@@ -2675,13 +1959,13 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1670")
                 .setName("C組裝簽名")
-                .setDataBinder("db")
-                .setDataField("C組裝簽名")
-                .setLeft("6.666666666666667em")
-                .setTop("43.266666666666666em")
+                .setDataBinder("rdb")
+                .setDataField("B測試簽名")
+                .setLeft("0.0761904761904762em")
+                .setTop("13.638095238095238em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
-                .setLabelCaption("組裝簽名")
+                .setLabelCaption("測試簽名")
                 .setMaxlength("32")
             );
             
@@ -2697,498 +1981,6 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
                 .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox552")
-                .setDataBinder("db")
-                .setDataField("Check表單與Pump配件相符C")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("13.6em")
-                .setTop("0.3333333333333333em")
-                .setWidth("21.733333333333334em")
-                .setHeight("1.6666666666666667em")
-                .setLabelSize("13em")
-                .setLabelGap("0em")
-                .setLabelCaption("Check表單與Pump配件相符")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox553")
-                .setDataBinder("rdb")
-                .setDataField("Check表單與Pump配件相符C")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("22.733333333333334em")
-                .setTop("4.4em")
-                .setWidth("12em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("4em")
-                .setLabelGap("0em")
-                .setLabelCaption("New")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox589")
-                .setDataBinder("db")
-                .setDataField("Motor：Ω# Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("25.733333333333334em")
-                .setTop("6.466666666666667em")
-                .setWidth("9.466666666666667em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox626")
-                .setDataBinder("rdb")
-                .setDataField("CABLE：Ω# Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("25.6em")
-                .setTop("8.4em")
-                .setWidth("9.466666666666667em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label150")
-                .setLeft("5.8em")
-                .setTop("11.333333333333334em")
-                .setWidth("4.466666666666667em")
-                .setCaption("Displacer:")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox627")
-                .setDataBinder("db")
-                .setDataField("Displacer 1st New")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("22.666666666666668em")
-                .setTop("13.2em")
-                .setWidth("12em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("4em")
-                .setLabelGap("0em")
-                .setLabelCaption("New")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1791")
-                .setName("Displacer 1st S/N")
-                .setDataBinder("rdb")
-                .setDataField("Displacer 2nd S/N")
-                .setLeft("1.3333333333333333em")
-                .setTop("15.466666666666667em")
-                .setWidth("13.333333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("2<sup>nd</sup> S/N")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1641")
-                .setName("Displacer 1st Flow")
-                .setDataBinder("db")
-                .setDataField("Displacer 2nd Flow")
-                .setLeft("14.533333333333333em")
-                .setTop("15.466666666666667em")
-                .setWidth("8.8em")
-                .setLabelSize("3em")
-                .setLabelCaption("Flow")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox628")
-                .setDataBinder("rdb")
-                .setDataField("Displacer 2nd New Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("22.666666666666668em")
-                .setTop("15.133333333333333em")
-                .setWidth("12em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("4em")
-                .setLabelGap("0em")
-                .setLabelCaption("New")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox629")
-                .setDataBinder("db")
-                .setDataField("Displacer-Collar間距校正值 Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("26em")
-                .setTop("23.066666666666666em")
-                .setWidth("9.466666666666667em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox630")
-                .setDataBinder("rdb")
-                .setDataField("Purge Helium Side Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("15em")
-                .setTop("25.333333333333332em")
-                .setWidth("20.466666666666665em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("12em")
-                .setLabelGap("0em")
-                .setLabelCaption("Purge Helium Side Y/N")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label151")
-                .setLeft("19.533333333333335em")
-                .setTop("28.266666666666666em")
-                .setWidth("13.4em")
-                .setHeight("1.3333333333333333em")
-                .setCaption("-------------------->250 ±5 Psi")
-                .setHAlign("left")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label152")
-                .setLeft("19.6em")
-                .setTop("29.933333333333334em")
-                .setWidth("13.4em")
-                .setHeight("1.3333333333333333em")
-                .setCaption("-------------------->250 ±5 Psi")
-                .setHAlign("left")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label153")
-                .setLeft("19.533333333333335em")
-                .setTop("31.866666666666667em")
-                .setWidth("13.4em")
-                .setHeight("1.3333333333333333em")
-                .setCaption("-------------------->300 ±5 Psi")
-                .setHAlign("left")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox631")
-                .setDataBinder("db")
-                .setDataField("Helium Side Leak Test：(5x10-6) Y/N")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("25.8em")
-                .setTop("34.2em")
-                .setWidth("9.466666666666667em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("1em")
-                .setLabelGap("0em")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox632")
-                .setDataBinder("rdb")
-                .setDataField("Crosshead 螺絲安裝/畫線確認")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("12.8em")
-                .setTop("36.6em")
-                .setWidth("23.4em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("14em")
-                .setLabelGap("0em")
-                .setLabelCaption("Crosshead 螺絲安裝/畫線確認")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox633")
-                .setDataBinder("db")
-                .setDataField("15k Array間距調整(不可接觸)")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("12.733333333333333em")
-                .setTop("38.6em")
-                .setWidth("23.4em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("14em")
-                .setLabelGap("0em")
-                .setLabelCaption("15k Array間距調整(不可接觸)")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox634")
-                .setDataBinder("rdb")
-                .setDataField("Pump各配件Cable確實接好固定")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("12.666666666666666em")
-                .setTop("40.6em")
-                .setWidth("23.4em")
-                .setHeight("1.7333333333333334em")
-                .setLabelSize("14em")
-                .setLabelGap("0em")
-                .setLabelCaption("Pump各配件Cable確實接好固定")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1769")
-                .setName("日期")
-                .setDataBinder("db")
-                .setDataField("C組裝日期")
-                .setLeft("25.333333333333332em")
-                .setTop("43.266666666666666em")
-                .setWidth("15em")
-                .setLabelSize("5em")
-                .setLabelCaption("組裝日期")
-                .setType("date")
-                .setMaxlength("null")
             );
             
             host.block4.append(
@@ -3210,6 +2002,76 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 })
             );
             
+            host.block4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox181")
+                .setDataBinder("rdb")
+                .setDataField("正常")
+                .setLeft("3.0476190476190474em")
+                .setTop("6.857142857142857em")
+                .setWidth("6.704761904761905em")
+                .setCaption("正常")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox182")
+                .setDataBinder("rdb")
+                .setDataField("粉塵汙染")
+                .setLeft("8.380952380952381em")
+                .setTop("6.780952380952381em")
+                .setWidth("6.704761904761905em")
+                .setCaption("粉塵汙染")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox183")
+                .setDataBinder("rdb")
+                .setDataField("醛汙染")
+                .setLeft("15.238095238095237em")
+                .setTop("6.780952380952381em")
+                .setWidth("6.704761904761905em")
+                .setCaption("醛汙染")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox184")
+                .setDataBinder("rdb")
+                .setDataField("Seal不良")
+                .setLeft("21.333333333333332em")
+                .setTop("6.780952380952381em")
+                .setWidth("6.704761904761905em")
+                .setCaption("Seal不良")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox185")
+                .setDataBinder("rdb")
+                .setDataField("其他")
+                .setLeft("3.0476190476190474em")
+                .setTop("9.066666666666666em")
+                .setWidth("6.704761904761905em")
+                .setCaption("其他")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput1769")
+                .setName("日期")
+                .setDataBinder("rdb")
+                .setDataField("B測試日期")
+                .setLeft("18.285714285714285em")
+                .setTop("13.638095238095238em")
+                .setWidth("15em")
+                .setLabelSize("5em")
+                .setLabelCaption("測試日期")
+                .setType("date")
+                .setMaxlength("null")
+            );
+            
             host.xui_ui_tabs18.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block5")
@@ -3222,15 +2084,185 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block5.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput2015")
-                .setName("Supply Pressure")
-                .setDataBinder("db")
-                .setDataField("Supply Pressure")
-                .setLeft("2em")
-                .setTop("2em")
+                .setHost(host,"xui_ui_comboinput842")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("80K Array#2")
+                .setLeft("24.076190476190476em")
+                .setTop("0.9904761904761905em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1450")
+                .setName("B組裝簽名")
+                .setDataBinder("rdb")
+                .setDataField("D測試簽名")
+                .setLeft("2.742857142857143em")
+                .setTop("34.59047619047619em")
                 .setWidth("18em")
                 .setLabelSize("8em")
-                .setLabelCaption("Supply Pressure")
+                .setLabelCaption("測試簽名")
+                .setMaxlength("32")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox792")
+                .setDataBinder("rdb")
+                .setDataField("80K Array")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("0.6857142857142857em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("80K Array")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput844")
+                .setName("日期")
+                .setDataBinder("rdb")
+                .setDataField("D測試日期")
+                .setLeft("22.095238095238095em")
+                .setTop("34.59047619047619em")
+                .setWidth("15em")
+                .setLabelSize("5em")
+                .setLabelCaption("測試日期")
+                .setType("date")
+                .setMaxlength("null")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox793")
+                .setDataBinder("rdb")
+                .setDataField("80K Rad. Shield")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("2.9714285714285715em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("80K Rad. Shield")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox794")
+                .setDataBinder("rdb")
+                .setDataField("15K Array")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("5.257142857142857em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("15K Array")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox795")
+                .setDataBinder("rdb")
+                .setDataField("1st Diode")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("7.542857142857143em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("1<sup>st</sup>   Diode")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput845")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("80K Rad. Shield#2")
+                .setLeft("24.076190476190476em")
+                .setTop("3.2em")
+                .setWidth("12.952380952380953em")
                 .setType("number")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -3239,15 +2271,310 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block5.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput2016")
-                .setName("Return Pressure")
+                .setHost(host,"xui_ui_comboinput846")
+                .setName("HeaterB 1st")
                 .setDataBinder("rdb")
-                .setDataField("Return Pressure")
-                .setLeft("22.666666666666668em")
-                .setTop("2em")
-                .setWidth("17.333333333333332em")
-                .setLabelSize("8em")
-                .setLabelCaption("Return Pressure")
+                .setDataField("15K Array#2")
+                .setLeft("24.076190476190476em")
+                .setTop("5.485714285714286em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput847")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("1st Diode#2")
+                .setLeft("24.076190476190476em")
+                .setTop("7.695238095238095em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox796")
+                .setDataBinder("rdb")
+                .setDataField("2nd Diode")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("9.82857142857143em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("2<sup>nd</sup>   Diode")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput848")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("2nd Diode#2")
+                .setLeft("24.076190476190476em")
+                .setTop("9.980952380952381em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput849")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Diode Line#2")
+                .setLeft("24.076190476190476em")
+                .setTop("12.41904761904762em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox797")
+                .setDataBinder("rdb")
+                .setDataField("Diode Line")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("12.114285714285714em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Diode Line")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox798")
+                .setDataBinder("rdb")
+                .setDataField("Diode Connector")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("14.4em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Diode Connector")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox799")
+                .setDataBinder("rdb")
+                .setDataField("D.Rough Valve")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("16.685714285714287em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Rough Valve")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox800")
+                .setDataBinder("rdb")
+                .setDataField("D.Purge Valve")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("18.97142857142857em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Purge Valve")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput850")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("Diode Connector#2")
+                .setLeft("24.076190476190476em")
+                .setTop("14.628571428571428em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput851")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("D.Rough Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("16.914285714285715em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput852")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("D.Purge Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("19.123809523809523em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox801")
+                .setDataBinder("rdb")
+                .setDataField("D.Relif Valve")
+                .setItems([
+                    {
+                        "id" : "正常",
+                        "caption" : "正常"
+                    },
+                    {
+                        "id" : "異常",
+                        "caption" : "異常"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("21.257142857142856em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
+                .setLabelSize("13em")
+                .setLabelGap("0em")
+                .setLabelCaption("Relif Valve")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput853")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("D.Relif Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("21.409523809523808em")
+                .setWidth("12.952380952380953em")
                 .setType("number")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -3256,254 +2583,57 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.block5.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2093")
-                .setName("Ch")
-                .setDataBinder("db")
-                .setDataField("Ch")
-                .setLeft("43.333333333333336em")
-                .setTop("2em")
-                .setWidth("6.666666666666667em")
-                .setLabelSize("2em")
-                .setLabelCaption("Ch")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2094")
-                .setName("Compressor Model")
+                .setHost(host,"xui_ui_input1451")
+                .setName("80k Radiation Shield 安裝")
                 .setDataBinder("rdb")
-                .setDataField("Compressor Model")
-                .setLeft("0em")
-                .setTop("4em")
-                .setWidth("20em")
-                .setLabelSize("10em")
-                .setLabelCaption("Compressor Model")
+                .setDataField("其他狀況描述D")
+                .setLeft("-4.571428571428571em")
+                .setTop("27.35238095238095em")
+                .setWidth("40.838095238095235em")
+                .setHeight("6.095238095238095em")
+                .setLabelSize("18em")
+                .setLabelCaption("其他狀況描述")
                 .setMaxlength("32")
+                .setMultiLines(true)
             );
             
             host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2095")
-                .setName("Start Cooldown#1")
-                .setDataBinder("db")
-                .setDataField("Start Cooldown#1")
-                .setLeft("20.666666666666668em")
-                .setTop("4em")
-                .setWidth("12.8em")
-                .setLabelSize("8em")
-                .setLabelCaption("Start Cooldown")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2096")
-                .setName("Start Cooldown#2")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput906")
+                .setName("HeaterB 1st")
                 .setDataBinder("rdb")
-                .setDataField("Start Cooldown#2")
-                .setLeft("33.333333333333336em")
-                .setTop("4em")
-                .setWidth("5.4em")
-                .setLabelSize("2em")
-                .setLabelCaption("of")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2097")
-                .setName("Start Cooldown#3")
-                .setDataBinder("db")
-                .setDataField("Start Cooldown#3")
-                .setLeft("39.333333333333336em")
-                .setTop("4em")
-                .setWidth("10.666666666666666em")
-                .setLabelSize("3em")
-                .setLabelCaption("Pump")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2098")
-                .setName("底溫#1")
-                .setDataBinder("rdb")
-                .setDataField("底溫#1")
-                .setLeft("-0.13333333333333333em")
-                .setTop("6em")
-                .setWidth("8.666666666666666em")
-                .setLabelSize("4em")
-                .setLabelCaption("底溫")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2099")
-                .setName("底溫#2")
-                .setDataBinder("db")
-                .setDataField("底溫#2")
-                .setLeft("8em")
-                .setTop("6em")
-                .setWidth("5.333333333333333em")
-                .setLabelSize("2em")
-                .setLabelCaption("of")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2100")
-                .setName("底溫#3")
-                .setDataBinder("rdb")
-                .setDataField("底溫#3")
-                .setLeft("14em")
-                .setTop("6em")
-                .setWidth("9.333333333333334em")
-                .setLabelSize("3em")
-                .setLabelCaption("Pump")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2101")
-                .setName("1st 設溫#1")
-                .setDataBinder("db")
-                .setDataField("1st 設溫#1")
-                .setLeft("24.666666666666668em")
-                .setTop("6em")
-                .setWidth("8.666666666666666em")
-                .setLabelSize("4em")
-                .setLabelCaption("1<sup>st </sup>設溫")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2102")
-                .setName("1st 設溫#2")
-                .setDataBinder("rdb")
-                .setDataField("1st 設溫#2")
-                .setLeft("33.333333333333336em")
-                .setTop("6em")
-                .setWidth("5.333333333333333em")
-                .setLabelSize("2em")
-                .setLabelCaption("of")
-                .setMaxlength("10")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2103")
-                .setName("1st 設溫#3")
-                .setDataBinder("db")
-                .setDataField("1st 設溫#3")
-                .setLeft("39.333333333333336em")
-                .setTop("6em")
-                .setWidth("10.666666666666666em")
-                .setLabelSize("3em")
-                .setLabelCaption("Pump")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2111")
-                .setName("測試人員簽名")
-                .setDataBinder("rdb")
-                .setDataField("測試人員簽名")
-                .setLeft("0em")
-                .setTop("15.333333333333334em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("測試人員簽名")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2112")
-                .setName("測試組長覆核")
-                .setDataBinder("db")
-                .setDataField("測試組長覆核")
-                .setLeft("0em")
-                .setTop("17.333333333333332em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("測試組長覆核")
-                .setMaxlength("32")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox333")
-                .setDataBinder("rdb")
-                .setDataField("管線配接符合Pump要求")
-                .setLeft("2.6666666666666665em")
-                .setTop("0.26666666666666666em")
-                .setWidth("20.533333333333335em")
-                .setHeight("1.1333333333333333em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("管線配接符合Pump要求  Pass")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox334")
-                .setDataBinder("db")
-                .setDataField("依Test標準參數設定")
-                .setLeft("32em")
-                .setTop("0.26666666666666666em")
-                .setWidth("17.4em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("依Test標準參數設定    Pass")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label216")
-                .setLeft("20.4em")
-                .setTop("2.066666666666667em")
-                .setHeight("1.3333333333333333em")
-                .setCaption("psi")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label217")
-                .setLeft("40.333333333333336em")
-                .setTop("2.2em")
-                .setCaption("psi")
+                .setDataField("D.Module#2")
+                .setLeft("24.076190476190476em")
+                .setTop("23.695238095238096em")
+                .setWidth("12.952380952380953em")
+                .setType("number")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block5.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox952")
+                .setHost(host,"xui_ui_radiobox849")
                 .setDataBinder("rdb")
-                .setDataField("Test完成後Runtime 歸零 Y/N")
+                .setDataField("D.Module")
                 .setItems([
                     {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
+                        "id" : "正常",
+                        "caption" : "正常"
                     },
                     {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
+                        "id" : "異常",
+                        "caption" : "異常"
                     }
                 ])
-                .setLeft("-0.6666666666666666em")
-                .setTop("8em")
-                .setWidth("21.733333333333334em")
-                .setHeight("1.6666666666666667em")
+                .setLeft("0em")
+                .setTop("23.542857142857144em")
+                .setWidth("26.742857142857144em")
+                .setHeight("2.057142857142857em")
                 .setLabelSize("13em")
                 .setLabelGap("0em")
-                .setLabelCaption("Test完成後Runtime 歸零")
+                .setLabelCaption("Module")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -3512,106 +2642,6 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox348")
-                .setDataBinder("db")
-                .setDataField("Test完成後,Helium Side Purge Pass")
-                .setLeft("30em")
-                .setTop("8.666666666666666em")
-                .setWidth("20.533333333333335em")
-                .setHeight("1.1333333333333333em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("Test完成後,Helium Side Purge    Pass")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox349")
-                .setDataBinder("rdb")
-                .setDataField("15k Array間距調整檢查(不可接觸)Pass")
-                .setLeft("30em")
-                .setTop("10.533333333333333em")
-                .setWidth("20.533333333333335em")
-                .setHeight("1.2em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("15k Array間距調整檢查(不可接觸)Pass")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox1003")
-                .setDataBinder("db")
-                .setDataField("1<sup>st</sup> Temp設溫 無 0k 65k 100k")
-                .setItems([
-                    {
-                        "id" : "無",
-                        "caption" : "無",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "0k",
-                        "caption" : "0k",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "65k",
-                        "caption" : "65k"
-                    },
-                    {
-                        "id" : "100k",
-                        "caption" : "100k"
-                    }
-                ])
-                .setLeft("-0.6666666666666666em")
-                .setTop("10.266666666666667em")
-                .setWidth("28.933333333333334em")
-                .setHeight("2.066666666666667em")
-                .setLabelSize("8em")
-                .setLabelGap("0em")
-                .setLabelCaption("1<sup>st</sup> Temp設溫")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "KEY" : {
-                    },
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox364")
-                .setDataBinder("rdb")
-                .setDataField("Test完成後，Vacuum Side Leak Test")
-                .setLeft("2em")
-                .setTop("12.666666666666666em")
-                .setWidth("20.533333333333335em")
-                .setHeight("1.1333333333333333em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("Test完成後，Vacuum Side Leak Test  Pass")
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox365")
-                .setDataBinder("db")
-                .setDataField("Pump入庫前外觀檢查 Pass")
-                .setLeft("30em")
-                .setTop("12.466666666666667em")
-                .setWidth("20.533333333333335em")
-                .setHeight("2em")
-                .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("Pump入庫前外觀檢查 Pass")
             );
             
             host.xui_ui_tabs18.append(
@@ -3629,7 +2659,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDock("fill")
                 .setLeft("7.466666666666667em")
                 .setTop("5.40952380952381em")
-                .setWidth("62.55238095238095em")
+                .setWidth("67.2em")
                 .setHeight("44.57142857142857em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
@@ -3751,7 +2781,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                     ],
                     "rowSetting" : {
                         "1" : {
-                            "manualHeight" : 30
+                            "manualHeight" : 145
                         },
                         "2" : {
                             "manualHeight" : 30
@@ -4023,47 +3053,248 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div747")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("61.02857142857143em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("65.67619047619047em")
+                .setHeight("10.971428571428572em"),
                 "A1"
             );
             
             host.xui_ui_div747.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_div781")
+                .setDock("bottom")
+                .setLeft("12.876190476190477em")
+                .setTop("6.095238095238095em")
+                .setHeight("2.361904761904762em")
+            );
+            
+            host.xui_ui_div781.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput4318")
-                .setLeft("-1.3333333333333333em")
-                .setTop("0em")
+                .setHost(host,"xui_ui_comboinput1199")
+                .setDataBinder("rdb")
+                .setDataField("Test Date")
+                .setLeft("-0.5333333333333333em")
+                .setTop("0.3047619047619048em")
                 .setWidth("11.733333333333333em")
                 .setLabelSize("4em")
                 .setLabelCaption("Date")
                 .setType("date")
             );
             
-            host.xui_ui_div747.append(
+            host.xui_ui_div781.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5226")
+                .setHost(host,"xui_ui_input1930")
                 .setName("P/N")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("P/N")
-                .setLeft("13.533333333333333em")
-                .setTop("0em")
+                .setLeft("14.323809523809524em")
+                .setTop("0.3047619047619048em")
                 .setWidth("12.466666666666667em")
                 .setLabelSize("4em")
                 .setLabelCaption("P/N")
                 .setMaxlength("32")
             );
             
-            host.xui_ui_div747.append(
+            host.xui_ui_div781.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5227")
+                .setHost(host,"xui_ui_input1931")
                 .setName("S/N")
                 .setDataBinder("rdb")
                 .setDataField("S/N")
-                .setLeft("28.2em")
-                .setTop("0em")
+                .setLeft("28.952380952380953em")
+                .setTop("0.3047619047619048em")
                 .setWidth("13.133333333333333em")
                 .setLabelSize("4em")
                 .setLabelCaption("S/N")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_div747.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block238")
+                .setDock("fill")
+                .setLeft("12.952380952380953em")
+                .setTop("3.0476190476190474em")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2009")
+                .setName("New Diode 1st S/N")
+                .setDataBinder("rdb")
+                .setDataField("Supply Pressure")
+                .setLeft("0.6857142857142857em")
+                .setTop("1.4476190476190476em")
+                .setWidth("18em")
+                .setLabelSize("10em")
+                .setLabelCaption("1.Supply Pressure")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2010")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("Return Pressure")
+                .setLeft("18.97142857142857em")
+                .setTop("1.4476190476190476em")
+                .setWidth("16.83809523809524em")
+                .setLabelSize("10em")
+                .setLabelCaption("psi / Return Pressure")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2011")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("Ch")
+                .setLeft("35.885714285714286em")
+                .setTop("1.4476190476190476em")
+                .setWidth("16.685714285714287em")
+                .setLabelSize("6em")
+                .setLabelCaption("psi /  &emsp;&emsp;Ch")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2012")
+                .setName("New Diode 1st S/N")
+                .setDataBinder("rdb")
+                .setDataField("E.Compressor Model")
+                .setLeft("0.6857142857142857em")
+                .setTop("3.7333333333333334em")
+                .setWidth("18em")
+                .setLabelSize("10em")
+                .setLabelCaption("2.Compressor Model")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2013")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("Start Cooldown#1")
+                .setLeft("18.97142857142857em")
+                .setTop("3.7333333333333334em")
+                .setWidth("12.647619047619047em")
+                .setLabelSize("9em")
+                .setLabelCaption("/ Start Cool Down")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2014")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("Start Cooldown#2")
+                .setLeft("31.16190476190476em")
+                .setTop("3.7333333333333334em")
+                .setWidth("5.79047619047619em")
+                .setLabelSize("2em")
+                .setLabelCaption("of")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2015")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("Start Cooldown#3")
+                .setLeft("36.49523809523809em")
+                .setTop("3.7333333333333334em")
+                .setWidth("16em")
+                .setLabelSize("4em")
+                .setLabelCaption("Pump")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2016")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("底溫#1")
+                .setLeft("1.4476190476190476em")
+                .setTop("6.019047619047619em")
+                .setWidth("7.619047619047619em")
+                .setLabelSize("3em")
+                .setLabelCaption("底溫")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2017")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("底溫#2")
+                .setLeft("9.066666666666666em")
+                .setTop("6.019047619047619em")
+                .setWidth("5.79047619047619em")
+                .setLabelSize("2em")
+                .setLabelCaption("of")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2018")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("底溫#3")
+                .setLeft("14.4em")
+                .setTop("6.019047619047619em")
+                .setWidth("12.19047619047619em")
+                .setLabelSize("4em")
+                .setLabelCaption("Pump")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2115")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("設溫#3")
+                .setLeft("40.304761904761904em")
+                .setTop("6.019047619047619em")
+                .setWidth("12.19047619047619em")
+                .setLabelSize("4em")
+                .setLabelCaption("Pump")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2116")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("設溫#2")
+                .setLeft("34.97142857142857em")
+                .setTop("6.019047619047619em")
+                .setWidth("5.79047619047619em")
+                .setLabelSize("2em")
+                .setLabelCaption("of")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_block238.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2117")
+                .setName("New Diode 1st V")
+                .setDataBinder("rdb")
+                .setDataField("設溫#1")
+                .setLeft("27.35238095238095em")
+                .setTop("6.019047619047619em")
+                .setWidth("7.619047619047619em")
+                .setLabelSize("3em")
+                .setLabelCaption("/ 設溫")
                 .setMaxlength("32")
             );
             
@@ -4072,7 +3303,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div748")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("61.02857142857143em")
+                .setWidth("65.67619047619047em")
                 .setHeight("2.1333333333333333em"),
                 "A2"
             );
@@ -4088,7 +3319,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div748.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1515")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Test Plate：CT OB/IS/P300 SHI Other")
                 .setItems([
                     {
@@ -4146,7 +3377,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div749")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D4"
             );
@@ -4154,7 +3385,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div749.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1516")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Room Temp (Diode or Gauge) Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -4207,7 +3438,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div750")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D6"
             );
@@ -4266,7 +3497,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div751")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("3.657142857142857em"),
                 "D7"
             );
@@ -4327,7 +3558,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div752")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D8"
             );
@@ -4335,7 +3566,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div752.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1519")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec≦ 10.9k or Gauge 0 psi 2nd Stage Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -4388,7 +3619,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div753")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D10"
             );
@@ -4449,7 +3680,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div754")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D11"
             );
@@ -4457,7 +3688,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div754.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1521")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -4509,7 +3740,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div755")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D12"
             );
@@ -4570,7 +3801,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div756")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D13"
             );
@@ -4578,7 +3809,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div756.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1523")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Minutes to Bottom OutPass")
                 .setIsFormField(false)
                 .setItems([
@@ -4631,7 +3862,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div757")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("3.657142857142857em"),
                 "D14"
             );
@@ -4692,7 +3923,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div758")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D15"
             );
@@ -4702,7 +3933,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div759")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D25"
             );
@@ -4712,7 +3943,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div760")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("2.1333333333333333em"),
                 "D26"
             );
@@ -4722,7 +3953,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div761")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B6"
             );
@@ -4730,7 +3961,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div761.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5228")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Minutes to 20k/Spec=#1")
                 .setDock("fill")
                 .setLeft("3.0476190476190474em")
@@ -4745,7 +3976,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div762")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("3.657142857142857em"),
                 "B7"
             );
@@ -4768,7 +3999,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div763")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B8"
             );
@@ -4776,7 +4007,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div763.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5230")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec≦ 10.9k or Gauge 0 psi 2nd Stage")
                 .setDock("fill")
                 .setLeft("3.8095238095238093em")
@@ -4791,7 +4022,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div764")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B12"
             );
@@ -4814,7 +4045,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div765")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B13"
             );
@@ -4822,7 +4053,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div765.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5232")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Minutes to Bottom Out#1")
                 .setDock("fill")
                 .setLeft("3.8095238095238093em")
@@ -4837,7 +4068,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div766")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("3.657142857142857em"),
                 "B14"
             );
@@ -4865,7 +4096,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div766.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5234")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Bottom Out Reading After 14k，Spec <=50k 1st Stage And<=10.9k 2nd Stage 2nd")
                 .setDock("top")
                 .setDockMargin({
@@ -4887,7 +4118,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div767")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B10"
             );
@@ -4908,7 +4139,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div767.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5236")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Diode Reading @Room Temp 2nd")
                 .setDock("fill")
                 .setLeft("4.571428571428571em")
@@ -4923,7 +4154,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div768")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("31.695238095238096em")
+                .setWidth("34.13333333333333em")
                 .setHeight("2.1333333333333333em"),
                 "B16"
             );
@@ -4951,7 +4182,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5238")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 65K±2k #1 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -4991,7 +4222,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5240")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 65K±2k #2 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -5013,7 +4244,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div769")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("31.695238095238096em")
+                .setWidth("34.13333333333333em")
                 .setHeight("2.1333333333333333em"),
                 "B18"
             );
@@ -5041,7 +4272,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div769.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5242")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 85K±2k #1 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -5081,7 +4312,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div769.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5244")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 85K±2k #2 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -5103,7 +4334,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div770")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("31.695238095238096em")
+                .setWidth("34.13333333333333em")
                 .setHeight("2.1333333333333333em"),
                 "B20"
             );
@@ -5131,7 +4362,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div770.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5246")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 100K±2k #1 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -5171,7 +4402,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div770.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5248")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Spec= 100K±2k #2 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -5193,7 +4424,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div771")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("31.695238095238096em")
+                .setWidth("34.13333333333333em")
                 .setHeight("2.1333333333333333em"),
                 "B23"
             );
@@ -5222,7 +4453,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4319")
                 .setName("B5")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Reset Factory Regan Parameter Ext#1 Time")
                 .setLeft("12.876190476190477em")
                 .setTop("0em")
@@ -5238,7 +4469,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div772")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("31.695238095238096em")
+                .setWidth("34.13333333333333em")
                 .setHeight("2.1333333333333333em"),
                 "B24"
             );
@@ -5267,7 +4498,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4320")
                 .setName("B5")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Reset Factory Regan Parameter Ext#2 Time")
                 .setLeft("12.876190476190477em")
                 .setTop("0em")
@@ -5284,7 +4515,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("55.00952380952381em")
+                .setWidth("59.2em")
                 .setHeight("2.1333333333333333em"),
                 "A26"
             );
@@ -5292,7 +4523,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div773.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1525")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Test Data Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -5345,7 +4576,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div776")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("11.123809523809523em"),
                 "D16"
             );
@@ -5406,7 +4637,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div777")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
+                .setWidth("6.4em")
                 .setHeight("6.628571428571429em"),
                 "D22"
             );
@@ -5414,7 +4645,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             host.xui_ui_div777.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1527")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("2nd Stage Heater Test")
                 .setIsFormField(false)
                 .setItems([
@@ -5467,7 +4698,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div817")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("61.02857142857143em")
+                .setWidth("65.67619047619047em")
                 .setHeight("18.895238095238096em"),
                 "A27"
             );
@@ -5511,7 +4742,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_label414")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("23.238095238095237em")
+                .setWidth("24.99047619047619em")
                 .setHeight("3.657142857142857em")
                 .setCaption("Bottom Out Reading After 14k，Spec<br> <=50k 1st Stage And<=10.9k 2nd Stage ")
                 .setHAlign("left"),
@@ -5523,7 +4754,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_label415")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("23.238095238095237em")
+                .setWidth("24.99047619047619em")
                 .setHeight("3.657142857142857em")
                 .setCaption("Minutes to 11k after 20k/ Gauge <br>15k，must be ≦ 40 mins")
                 .setHAlign("left"),
@@ -5535,7 +4766,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_label416")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("23.238095238095237em")
+                .setWidth("24.99047619047619em")
                 .setHeight("2.1333333333333333em")
                 .setCaption("1<sup>st</sup> Stage Temp Control Test")
                 .setHAlign("left"),
@@ -5547,7 +4778,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_label417")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("23.238095238095237em")
+                .setWidth("24.99047619047619em")
                 .setHeight("2.1333333333333333em")
                 .setCaption("IS 1<sup>st</sup> Stage Temp Control Test")
                 .setHAlign("left"),
@@ -5559,7 +4790,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_label418")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("23.238095238095237em")
+                .setWidth("24.99047619047619em")
                 .setHeight("2.1333333333333333em")
                 .setCaption("2<sup>nd</sup> Stage Heater Test")
                 .setHAlign("left"),
@@ -5574,7 +4805,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataField("Room Temp (Diode or Gauge) #1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none"),
                 "B4"
@@ -5584,11 +4815,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4321")
                 .setName("B5")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Start Time")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none")
                 .setType("time"),
@@ -5603,7 +4834,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataField("Minutes to 20k/Spec=#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none"),
                 "C6"
@@ -5613,11 +4844,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5255")
                 .setName("C7")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Minutes to 11k after 20k/ Gauge 15k，must be ≦ 40 mins#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("3.657142857142857em")
                 .setLabelPos("none"),
                 "C7"
@@ -5631,7 +4862,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataField("Spec≦ 10.9k or Gauge 0 psi 2nd Stage#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none"),
                 "C8"
@@ -5641,11 +4872,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4322")
                 .setName("B11")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("Start Time2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none")
                 .setType("time"),
@@ -5657,7 +4888,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block543")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "B25"
             );
@@ -5667,7 +4898,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block544")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em"),
                 "C25"
             );
@@ -5679,7 +4910,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataField("Minutes to 17k/Spec=#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none"),
                 "C12"
@@ -5693,7 +4924,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setDataField("Minutes to Bottom Out#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("15.847619047619048em")
+                .setWidth("17.066666666666666em")
                 .setHeight("2.1333333333333333em")
                 .setLabelPos("none"),
                 "C13"

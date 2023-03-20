@@ -1,6 +1,6 @@
 // The default code is a module class (inherited from xui.Module)
 // Ensure that all the value of "key/value pair" does not refer to external variables
-xui.Class('App.CrossheadEditForm', 'xui.Module',{
+xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
     Instance:{
         // Dependency classes
         Dependencies:[],
@@ -110,7 +110,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("10.133333333333333em")
                 .setTop("3.4285714285714284em")
-                .setHeight("12.19047619047619em")
+                .setHeight("10.666666666666666em")
             );
             
             host.xui_ui_div868.append(
@@ -177,47 +177,21 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("Model")
                 .setItems([
                     {
-                        "id" : "OB-M350",
-                        "caption" : "OB-M350",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "OB-M1020/50",
-                        "caption" : "OB-M1020/50",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "OB-M350 3PH",
-                        "caption" : "OB-M350 3PH",
+                        "id" : "RD203-Z",
+                        "caption" : "RD203-Z",
                         "imageClass" : ""
                     },
                     {
                         "id" : "Other",
                         "caption" : "Other",
                         "imageClass" : ""
-                    },
-                    {
-                        "id" : "CT-M350",
-                        "caption" : "CT-M350"
-                    },
-                    {
-                        "id" : "CT-M1020/50",
-                        "caption" : "CT-M1020/50"
-                    },
-                    {
-                        "id" : "IS-M600/M900",
-                        "caption" : "IS-M600/M900"
-                    },
-                    {
-                        "id" : "P300",
-                        "caption" : "P300"
                     }
                 ])
-                .setLeft("1.5238095238095237em")
-                .setTop("3.0476190476190474em")
-                .setWidth("38.095238095238095em")
-                .setHeight("4.571428571428571em")
-                .setLabelSize("5em")
+                .setLeft("1.8285714285714285em")
+                .setTop("2.9714285714285715em")
+                .setWidth("18.742857142857144em")
+                .setHeight("1.980952380952381em")
+                .setLabelSize("3em")
                 .setLabelCaption("Model")
                 .setLabelHAlign("left")
                 .setLabelVAlign("middle")
@@ -236,9 +210,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("Model#2")
-                .setLeft("39.61904761904762em")
+                .setLeft("19.047619047619047em")
                 .setTop("3.3523809523809525em")
-                .setWidth("9.142857142857142em")
+                .setWidth("12.952380952380953em")
                 .setLabelCaption("登錄編號")
                 .setMaxlength("20")
             );
@@ -261,7 +235,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("1.5238095238095237em")
-                .setTop("7.619047619047619em")
+                .setTop("5.333333333333333em")
                 .setWidth("20.571428571428573em")
                 .setHeight("1.9333333333333333em")
                 .setLabelSize("5em")
@@ -284,7 +258,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataBinder("crdb")
                 .setDataField("S/N")
                 .setLeft("21.333333333333332em")
-                .setTop("7.923809523809524em")
+                .setTop("5.6380952380952385em")
                 .setWidth("14.476190476190476em")
                 .setLabelSize("8em")
                 .setLabelCaption("Crosshead S/N")
@@ -298,7 +272,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataBinder("crdb")
                 .setDataField("S/N#2")
                 .setLeft("35.80952380952381em")
-                .setTop("7.923809523809524em")
+                .setTop("5.6380952380952385em")
                 .setWidth("8.380952380952381em")
                 .setLabelSize("1em")
                 .setLabelCaption("/")
@@ -312,7 +286,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataBinder("crdb")
                 .setDataField("Running Time")
                 .setLeft("0.6095238095238096em")
-                .setTop("10.133333333333333em")
+                .setTop("7.847619047619047em")
                 .setWidth("14.476190476190476em")
                 .setLabelSize("8em")
                 .setLabelCaption("Running Time")
@@ -326,10 +300,24 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataBinder("crdb")
                 .setDataField("Remark")
                 .setLeft("15.238095238095237em")
-                .setTop("10.133333333333333em")
+                .setTop("7.847619047619047em")
                 .setWidth("39.923809523809524em")
                 .setLabelSize("4em")
                 .setLabelCaption("Remark")
+                .setMaxlength("20")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input247")
+                .setName("登錄編號")
+                .setDataBinder("crdb")
+                .setDataField("S/N")
+                .setLeft("33.523809523809526em")
+                .setTop("3.276190476190476em")
+                .setWidth("20.876190476190477em")
+                .setLabelSize("10em")
+                .setLabelCaption("Crosshead 編號：XH")
                 .setMaxlength("20")
             );
             
@@ -344,7 +332,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                     },
                     {
                         "id" : "b",
-                        "caption" : "B. Driver Housing & Valve Plate"
+                        "caption" : "B. Driver Housing"
                     },
                     {
                         "id" : "c",
@@ -605,8 +593,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("A3#2")
                 .setItems([
                     {
-                        "id" : "CTI",
-                        "caption" : "CTI",
+                        "id" : "SHI",
+                        "caption" : "SHI",
                         "imageClass" : ""
                     },
                     {
@@ -631,132 +619,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.xui_ui_div910.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox806")
-                .setDataBinder("crdb")
-                .setDataField("A3#3")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("27.428571428571427em")
-                .setTop("13.028571428571428em")
-                .setWidth("10.285714285714286em")
-                .setIconPos("right")
-                .setCaption("PCB焊點接點確認")
-            );
-            
-            host.xui_ui_div910.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5636")
-                .setName("登錄編號")
-                .setDataBinder("crdb")
-                .setDataField("A3#4")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("38.095238095238095em")
-                .setTop("12.952380952380953em")
-                .setWidth("6.095238095238095em")
-                .setLabelCaption("2.線圈阻值：1-2")
-                .setMaxlength("20")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div911")
-                .setDock("top")
-                .setLeft("9.142857142857142em")
-                .setTop("9.142857142857142em")
-                .setHeight("2.5142857142857142em")
-            );
-            
-            host.xui_ui_div911.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5641")
-                .setName("登錄編號")
-                .setDataBinder("crdb")
-                .setDataField("A4#2")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(1)
-                .setDockStretch("fixed")
-                .setLeft("9.066666666666666em")
-                .setTop("-0.0761904761904762em")
-                .setWidth("12.495238095238095em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("6em")
-                .setLabelCaption("1.5KV   IR:")
-                .setLabelHAlign("left")
-                .setMaxlength("20")
-            );
-            
-            host.xui_ui_div911.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox811")
-                .setDataBinder("crdb")
-                .setDataField("A4#1")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(0)
-                .setDockStretch("fixed")
-                .setLeft("0.7619047619047619em")
-                .setTop("0em")
-                .setWidth("7.619047619047619em")
-                .setIconPos("right")
-                .setCaption("4.Hippo Test")
-            );
-            
-            host.xui_ui_div911.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5642")
-                .setName("登錄編號")
-                .setDataBinder("crdb")
-                .setDataField("A4#3")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(2)
-                .setDockStretch("fixed")
-                .setLeft("21.333333333333332em")
-                .setTop("-0.0761904761904762em")
-                .setWidth("9.676190476190476em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("3em")
-                .setLabelCaption("AC:")
-                .setMaxlength("20")
-            );
-            
-            host.xui_ui_div911.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label477")
-                .setDock("top")
-                .setDockOrder(3)
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 3,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
-                .setTop("0.45714285714285713em")
-                .setWidth("1.7523809523809524em")
-                .setCaption("mA")
-            );
-            
-            host.xui_ui_div911.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox812")
-                .setDataBinder("crdb")
-                .setDataField("A4#4")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(4)
-                .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
-                .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setCaption("PASS")
             );
             
             host.block1.append(
@@ -793,7 +655,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHeight("1.9333333333333333em")
                 .setLabelSize("9em")
                 .setLabelGap("0em")
-                .setLabelCaption("5.Motor Bearing：前")
+                .setLabelCaption("4.Motor Bearing：前")
                 .setLabelHAlign("left")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
@@ -876,7 +738,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHeight("1.9333333333333333em")
                 .setLabelSize("7em")
                 .setLabelGap("0em")
-                .setLabelCaption("6.Motor面板:  前")
+                .setLabelCaption("5.Motor面板:  前")
                 .setLabelHAlign("left")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
@@ -904,30 +766,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("26.438095238095237em")
                 .setTop("9.523809523809524em")
-                .setWidth("6.095238095238095em")
+                .setWidth("5em")
                 .setIconPos("right")
                 .setCaption("/ 剛套")
-            );
-            
-            host.xui_ui_div963.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox856")
-                .setDataBinder("crdb")
-                .setDataField("A6#3")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 5,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("27.2em")
-                .setTop("10.285714285714286em")
-                .setWidth("6.095238095238095em")
-                .setIconPos("right")
-                .setCaption("/ 壓痕")
             );
             
             host.xui_ui_div963.append(
@@ -948,10 +789,10 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("22.095238095238095em")
                 .setTop("-0.0761904761904762em")
-                .setWidth("9.676190476190476em")
+                .setWidth("22em")
                 .setHeight("1.7523809523809524em")
-                .setLabelSize("3em")
-                .setLabelCaption("內徑")
+                .setLabelSize("16em")
+                .setLabelCaption("/ Bearing座內徑(Spec-0+0.02mm)")
                 .setMaxlength("20")
             );
             
@@ -1037,30 +878,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("26.438095238095237em")
                 .setTop("9.523809523809524em")
-                .setWidth("6.095238095238095em")
+                .setWidth("5em")
                 .setIconPos("right")
                 .setCaption("/ 剛套")
-            );
-            
-            host.xui_ui_div971.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox869")
-                .setDataBinder("crdb")
-                .setDataField("A6#8")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 5,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("27.2em")
-                .setTop("10.285714285714286em")
-                .setWidth("6.095238095238095em")
-                .setIconPos("right")
-                .setCaption("/ 壓痕")
             );
             
             host.xui_ui_div971.append(
@@ -1081,10 +901,10 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("22.095238095238095em")
                 .setTop("-0.0761904761904762em")
-                .setWidth("9.676190476190476em")
+                .setWidth("22em")
                 .setHeight("1.7523809523809524em")
-                .setLabelSize("3em")
-                .setLabelCaption("內徑")
+                .setLabelSize("16em")
+                .setLabelCaption("/ Bearing座內徑(Spec-0+0.02mm)")
                 .setMaxlength("20")
             );
             
@@ -1125,9 +945,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("3.0476190476190474em")
                 .setTop("0.7619047619047619em")
-                .setWidth("9em")
+                .setWidth("11em")
                 .setHeight("1.7523809523809524em")
-                .setCaption("7.電源接頭 50 in-lb")
+                .setCaption("6.電源接頭焊點接點確認")
                 .setHAlign("left")
                 .setVAlign("middle")
             );
@@ -1155,9 +975,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
-                .setWidth("8em")
+                .setWidth("11em")
                 .setHeight("1.7523809523809524em")
-                .setCaption("/ 焊點接點確認")
+                .setCaption("/ 固定螺絲 30 in-lb鎖緊 ")
                 .setHAlign("left")
                 .setVAlign("middle")
             );
@@ -1198,7 +1018,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("10.742857142857142em")
                 .setWidth("14em")
                 .setLabelSize("9em")
-                .setLabelCaption("8.軸心Washer 片數")
+                .setLabelCaption("7.軸心Washer 片數")
                 .setLabelHAlign("left")
                 .setMaxlength("20")
             );
@@ -1301,7 +1121,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("0.7619047619047619em")
                 .setWidth("7em")
                 .setHeight("1.7523809523809524em")
-                .setCaption("9.螺桿 30 in-lb")
+                .setCaption("8.螺桿 30 in-lb")
                 .setHAlign("left")
                 .setVAlign("middle")
             );
@@ -1361,7 +1181,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setWidth("20em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("14em")
-                .setLabelCaption("10.軸心 Spring Push Test：1<sup>st</sup>   ")
+                .setLabelCaption("9.軸心 Spring Push Test：1<sup>st</sup>   ")
                 .setLabelHAlign("left")
                 .setMaxlength("20")
             );
@@ -1427,7 +1247,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHeight("2.5904761904761906em")
                 .setVAlign("middle")
                 .setIconPos("right")
-                .setCaption("11.充磁      ")
+                .setCaption("10.充磁      ")
             );
             
             host.xui_ui_div1099.append(
@@ -1543,7 +1363,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setWidth("22em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("16em")
-                .setLabelCaption("12軸心偏心值(標準值範圍0.24mm)")
+                .setLabelCaption("11.軸心偏心值(標準值範圍0.24mm)")
                 .setLabelHAlign("left")
                 .setMaxlength("20")
             );
@@ -1584,7 +1404,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("0.7619047619047619em")
                 .setWidth("11em")
                 .setHeight("1.7523809523809524em")
-                .setCaption("13.異音Test/聽診器確認")
+                .setCaption("12.異音Test/聽診器確認")
                 .setHAlign("left")
                 .setVAlign("middle")
             );
@@ -1629,30 +1449,45 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div119.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input133")
-                .setName("登錄編號")
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox242")
                 .setDataBinder("crdb")
-                .setDataField("B1#1")
-                .setDirtyMark(true)
+                .setDataField("B3#1")
+                .setItems([
+                    {
+                        "id" : "更換",
+                        "caption" : "更換",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "清潔",
+                        "caption" : "清潔",
+                        "imageClass" : ""
+                    }
+                ])
                 .setDock("top")
-                .setDockOrder(1)
                 .setDockStretch("fixed")
-                .setLeft("9.066666666666666em")
-                .setTop("-0.0761904761904762em")
-                .setWidth("20em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("14em")
-                .setLabelCaption("1.Driver Housing Bushing 孔徑 ")
+                .setLeft("3.0476190476190474em")
+                .setTop("18.057142857142857em")
+                .setWidth("19em")
+                .setHeight("1.9333333333333333em")
+                .setLabelSize("8em")
+                .setLabelGap("0em")
+                .setLabelCaption("1.Driver Bearing")
                 .setLabelHAlign("left")
-                .setMaxlength("20")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
             );
             
             host.xui_ui_div119.append(
                 xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label36")
-                .setDataBinder("crdb")
-                .setDataField("C1#1")
+                .setHost(host,"xui_ui_label253")
                 .setDock("top")
                 .setDockOrder(3)
                 .setDockMargin({
@@ -1662,24 +1497,65 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                     "bottom" : 0
                 })
                 .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
+                .setLeft("32.76190476190476em")
                 .setTop("0.45714285714285713em")
-                .setWidth("8em")
-                .setCaption(" / 80 lb推力測試")
+                .setWidth("5em")
+                .setHeight("1.6761904761904762em")
+                .setCaption("/  上膠固定")
+                .setVAlign("bottom")
             );
             
             host.xui_ui_div119.append(
                 xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox44")
+                .setHost(host,"xui_ui_checkbox329")
                 .setDataBinder("crdb")
-                .setDataField("B1#2")
+                .setDataField("B3#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
                 .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
+                .setLeft("37.02857142857143em")
                 .setTop("0em")
                 .setWidth("6.095238095238095em")
+                .setHeight("2.1333333333333333em")
+                .setVAlign("bottom")
+                .setCaption("PASS")
+            );
+            
+            host.xui_ui_div119.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label291")
+                .setDock("top")
+                .setDockOrder(5)
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 3,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setDockStretch("fixed")
+                .setLeft("33.523809523809526em")
+                .setTop("0.45714285714285713em")
+                .setWidth("7em")
+                .setHeight("1.6761904761904762em")
+                .setCaption("/  高度間距確認")
+                .setVAlign("bottom")
+            );
+            
+            host.xui_ui_div119.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox403")
+                .setDataBinder("crdb")
+                .setDataField("B3#2")
+                .setDirtyMark(true)
+                .setDock("top")
+                .setDockOrder(6)
+                .setDockStretch("fixed")
+                .setLeft("37.79047619047619em")
+                .setTop("0em")
+                .setWidth("6.095238095238095em")
+                .setHeight("2.1333333333333333em")
+                .setVAlign("bottom")
                 .setCaption("PASS")
             );
             
@@ -1693,55 +1569,40 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div186.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input285")
-                .setName("登錄編號")
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox329")
                 .setDataBinder("crdb")
-                .setDataField("B1#3")
-                .setDirtyMark(true)
+                .setDataField("B3#1")
+                .setItems([
+                    {
+                        "id" : "更換",
+                        "caption" : "更換",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "清潔",
+                        "caption" : "清潔",
+                        "imageClass" : ""
+                    }
+                ])
                 .setDock("top")
-                .setDockOrder(1)
                 .setDockStretch("fixed")
-                .setLeft("9.066666666666666em")
-                .setTop("-0.0761904761904762em")
+                .setLeft("3.0476190476190474em")
+                .setTop("18.057142857142857em")
                 .setWidth("20em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("14em")
-                .setLabelCaption("Valve Plate Bushing    孔徑")
-                .setMaxlength("20")
-            );
-            
-            host.xui_ui_div186.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label73")
-                .setDock("top")
-                .setDockOrder(3)
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 3,
-                    "right" : 0,
-                    "bottom" : 0
+                .setHeight("1.9333333333333333em")
+                .setLabelSize("8em")
+                .setLabelGap("0em")
+                .setLabelCaption("2.Bushing")
+                .setLabelHAlign("left")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
                 })
-                .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
-                .setTop("0.45714285714285713em")
-                .setWidth("8em")
-                .setCaption(" / 80 lb推力測試")
-            );
-            
-            host.xui_ui_div186.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox113")
-                .setDataBinder("crdb")
-                .setDataField("B1#4")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(4)
-                .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
-                .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setCaption("PASS")
             );
             
             host.block2.append(
@@ -1754,77 +1615,37 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div208.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox137")
-                .setDataBinder("crdb")
-                .setDataField("B2#1")
-                .setItems([
-                    {
-                        "id" : "更換",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "清潔",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    }
-                ])
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label359")
                 .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("2.2857142857142856em")
-                .setTop("17.295238095238094em")
-                .setWidth("24em")
-                .setHeight("1.9333333333333333em")
-                .setLabelSize("13em")
-                .setLabelGap("0em")
-                .setLabelCaption("2.Timing Valve Bearing：Inlet")
-                .setLabelHAlign("left")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
+                .setDockOrder(3)
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 3,
+                    "right" : 0,
+                    "bottom" : 0
                 })
+                .setDockStretch("fixed")
+                .setLeft("32em")
+                .setTop("0.45714285714285713em")
+                .setWidth("14em")
+                .setCaption("3.Top Cover 53 in-lbs")
+                .setHAlign("left")
             );
             
             host.xui_ui_div208.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox138")
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox471")
                 .setDataBinder("crdb")
-                .setDataField("B2#2")
-                .setItems([
-                    {
-                        "id" : "更換",
-                        "caption" : "更換",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "清潔",
-                        "caption" : "清潔",
-                        "imageClass" : ""
-                    }
-                ])
+                .setDataField("B5#1")
+                .setDirtyMark(true)
                 .setDock("top")
+                .setDockOrder(4)
                 .setDockStretch("fixed")
-                .setLeft("24.38095238095238em")
-                .setTop("17.295238095238094em")
-                .setWidth("16em")
-                .setHeight("1.9333333333333333em")
-                .setLabelSize("4em")
-                .setLabelGap("0em")
-                .setLabelCaption("/   Exhaust")
-                .setLabelHAlign("left")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setLeft("36.266666666666666em")
+                .setTop("0em")
+                .setWidth("5em")
+                .setCaption("PASS")
             );
             
             host.block2.append(
@@ -1861,7 +1682,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHeight("1.9333333333333333em")
                 .setLabelSize("8em")
                 .setLabelGap("0em")
-                .setLabelCaption("3.Driver Bearing")
+                .setLabelCaption("4.Rotary Valve")
                 .setLabelHAlign("left")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
@@ -1871,43 +1692,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.xui_ui_div227.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label107")
-                .setDock("top")
-                .setDockOrder(3)
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 3,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("32em")
-                .setTop("0.45714285714285713em")
-                .setWidth("8em")
-                .setHeight("1.6761904761904762em")
-                .setCaption("/  高度間距確認")
-                .setVAlign("bottom")
-            );
-            
-            host.xui_ui_div227.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox170")
-                .setDataBinder("crdb")
-                .setDataField("B3#2")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(4)
-                .setDockStretch("fixed")
-                .setLeft("36.266666666666666em")
-                .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("2.1333333333333333em")
-                .setVAlign("bottom")
-                .setCaption("PASS")
             );
             
             host.block2.append(
@@ -1920,37 +1704,40 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div271.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label121")
-                .setDock("top")
-                .setDockOrder(3)
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 3,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
-                .setTop("0.45714285714285713em")
-                .setWidth("18em")
-                .setCaption("4.Timing Valve Support Bracket 12 in-lb")
-                .setHAlign("left")
-            );
-            
-            host.xui_ui_div271.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox192")
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox332")
                 .setDataBinder("crdb")
-                .setDataField("B4#1")
-                .setDirtyMark(true)
+                .setDataField("B3#1")
+                .setItems([
+                    {
+                        "id" : "更換",
+                        "caption" : "更換",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "清潔",
+                        "caption" : "清潔",
+                        "imageClass" : ""
+                    }
+                ])
                 .setDock("top")
-                .setDockOrder(4)
                 .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
-                .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setCaption("PASS")
+                .setLeft("3.0476190476190474em")
+                .setTop("18.057142857142857em")
+                .setWidth("20em")
+                .setHeight("1.9333333333333333em")
+                .setLabelSize("8em")
+                .setLabelGap("0em")
+                .setLabelCaption("5.Valve Plate")
+                .setLabelHAlign("left")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
             );
             
             host.block2.append(
@@ -1963,54 +1750,34 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div312.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label146")
-                .setDock("top")
-                .setDockOrder(3)
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 3,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
-                .setTop("0.45714285714285713em")
-                .setWidth("15em")
-                .setCaption("5.Valve Body Inleakage Gas Test")
-                .setHAlign("left")
-            );
-            
-            host.xui_ui_div312.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox233")
-                .setDataBinder("crdb")
-                .setDataField("B5#1")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(4)
-                .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
-                .setTop("0em")
-                .setWidth("5em")
-                .setCaption("PASS")
-            );
-            
-            host.xui_ui_div312.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input496")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("B5#2")
                 .setDock("top")
-                .setDockOrder(5)
+                .setDockOrder(0)
                 .setDockStretch("fixed")
                 .setLeft("35.80952380952381em")
                 .setTop("-0.0761904761904762em")
-                .setWidth("8.380952380952381em")
-                .setLabelSize("1em")
-                .setLabelCaption(":")
+                .setWidth("20em")
+                .setLabelSize("12em")
+                .setLabelCaption("外徑尺寸(Bearing安裝處)")
                 .setMaxlength("20")
+            );
+            
+            host.xui_ui_div312.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label361")
+                .setDock("top")
+                .setDockOrder(2)
+                .setDockStretch("fixed")
+                .setLeft("22.095238095238095em")
+                .setTop("0em")
+                .setWidth("17em")
+                .setHeight("1.6761904761904762em")
+                .setCaption("mm   (Spec：≧44.97mm、≦44.98mm)")
+                .setVAlign("bottom")
             );
             
             host.block2.append(
@@ -2023,8 +1790,54 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div443.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox374")
+                .setDataBinder("crdb")
+                .setDataField("B3#1")
+                .setItems([
+                    {
+                        "id" : "更換",
+                        "caption" : "更換",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "清潔",
+                        "caption" : "清潔",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("3.8095238095238093em")
+                .setTop("18.81904761904762em")
+                .setWidth("20em")
+                .setHeight("1.9333333333333333em")
+                .setLabelSize("8em")
+                .setLabelGap("0em")
+                .setLabelCaption("6.Valve Bearing")
+                .setLabelHAlign("left")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.block2.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div727")
+                .setDock("top")
+                .setLeft("7.619047619047619em")
+                .setTop("12.952380952380953em")
+                .setHeight("2.5142857142857142em")
+            );
+            
+            host.xui_ui_div727.append(
                 xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label233")
+                .setHost(host,"xui_ui_label411")
                 .setDock("top")
                 .setDockOrder(3)
                 .setDockMargin({
@@ -2034,50 +1847,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                     "bottom" : 0
                 })
                 .setDockStretch("fixed")
-                .setLeft("31.238095238095237em")
+                .setLeft("32em")
                 .setTop("0.45714285714285713em")
-                .setWidth("11em")
-                .setCaption("6.Timing Valve校正工具")
+                .setWidth("14em")
+                .setCaption("7.Front Cover 53 in-lbs")
                 .setHAlign("left")
             );
             
-            host.xui_ui_div443.append(
+            host.xui_ui_div727.append(
                 xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox372")
+                .setHost(host,"xui_ui_checkbox533")
                 .setDataBinder("crdb")
-                .setDataField("B6#1")
-                .setDirtyMark(true)
-                .setDock("top")
-                .setDockOrder(4)
-                .setDockStretch("fixed")
-                .setLeft("35.50476190476191em")
-                .setTop("0em")
-                .setWidth("4em")
-                .setCaption("A / ")
-            );
-            
-            host.xui_ui_div443.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input718")
-                .setName("登錄編號")
-                .setDataBinder("crdb")
-                .setDataField("B6#3")
-                .setDock("top")
-                .setDockOrder(5)
-                .setDockStretch("fixed")
-                .setLeft("35.80952380952381em")
-                .setTop("-0.0761904761904762em")
-                .setWidth("8.380952380952381em")
-                .setLabelSize("1em")
-                .setLabelCaption(":")
-                .setMaxlength("20")
-            );
-            
-            host.xui_ui_div443.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox373")
-                .setDataBinder("crdb")
-                .setDataField("B6#2")
+                .setDataField("B5#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -2085,7 +1866,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setLeft("36.266666666666666em")
                 .setTop("0em")
                 .setWidth("5em")
-                .setCaption("Other")
+                .setCaption("PASS")
             );
             
             host.tabs1.append(
@@ -2126,8 +1907,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("31.238095238095237em")
                 .setTop("0.45714285714285713em")
-                .setWidth("22em")
-                .setCaption("1.Driver Housing & Valve Plate & Motor 60 in-lbs")
+                .setWidth("14em")
+                .setCaption("1.Housing & Motor 60 in-lbs")
                 .setHAlign("left")
             );
             
@@ -2234,17 +2015,17 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div1101")
+                .setHost(host,"xui_ui_div917")
                 .setDock("top")
                 .setDockOrder(10)
-                .setLeft("14.476190476190476em")
-                .setTop("14.476190476190476em")
+                .setLeft("13.714285714285714em")
+                .setTop("13.714285714285714em")
                 .setHeight("5.333333333333333em")
             );
             
-            host.xui_ui_div1101.append(
+            host.xui_ui_div917.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1578")
+                .setHost(host,"xui_ui_input1487")
                 .setName("C組裝簽名")
                 .setDataBinder("rdb")
                 .setDataField("C組裝簽名")
@@ -2256,9 +2037,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("32")
             );
             
-            host.xui_ui_div1101.append(
+            host.xui_ui_div917.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1579")
+                .setHost(host,"xui_ui_input1488")
                 .setName("C組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("C組長覆核")
@@ -2270,9 +2051,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("32")
             );
             
-            host.xui_ui_div1101.append(
+            host.xui_ui_div917.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput221")
+                .setHost(host,"xui_ui_comboinput211")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("C組裝日期")
@@ -2285,9 +2066,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("null")
             );
             
-            host.xui_ui_div1101.append(
+            host.xui_ui_div917.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput222")
+                .setHost(host,"xui_ui_comboinput212")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("C覆核日期")

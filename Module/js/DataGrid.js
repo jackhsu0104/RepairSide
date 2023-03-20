@@ -30,67 +30,28 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             );
             
             append(
-                xui.create("xui.UI.ToolBar")
-                .setHost(host,"toolbar")
-                .setItems([
-                    {
-                        "id" : "grp1",
-                        "sub" : [
-                            {
-                                "id" : "new",
-                                "caption" : "新增",
-                                "image" : "",
-                                "imageClass" : "xui-uicmd-add"
-                            },
-                            {
-                                "id" : "open",
-                                "caption" : "編輯",
-                                "image" : "",
-                                "imageClass" : "xui-uicmd-popbox",
-                                "disabled" : true
-                            },
-                            {
-                                "id" : "delete",
-                                "caption" : "刪除",
-                                "image" : "",
-                                "imageClass" : "xui-uicmd-close",
-                                "disabled" : true
-                            },
-                            {
-                                "id" : "selectAll",
-                                "caption" : "全選"
-                            },
-                            {
-                                "id" : "excel",
-                                "caption" : "Excel",
-                                "type" : "",
-                                "tips" : "儲存Excel檔案"
-                            },
-                            {
-                                "id" : "custom1",
-                                "caption" : "自定義1",
-                                "hidden" : true
-                            }
-                        ],
-                        "caption" : "grp1"
-                    }
-                ])
-                .setDockOrder(100)
-                .onClick("_toolbar_onclick")
+                xui.create("xui.UI.Block")
+                .setHost(host,"topBlock")
+                .setDock("top")
+                .setLeft("18.285714285714285em")
+                .setTop("0em")
+                .setHeight("2.2857142857142856em")
+                .setConDockPadding({
+                    "left" : 0,
+                    "top" : 2,
+                    "right" : 5,
+                    "bottom" : 0
+                })
+                .setConDockSpacing({
+                    "width" : 2,
+                    "height" : 0
+                })
             );
             
-            append(
-                xui.create("xui.UI.PageBar")
-                .setHost(host,"pagebar")
-                .setTop("0.22857142857142856em")
-                .setRight("3em")
-                .setCaption("")
-                .onPageSet("_pagebar_onpageset")
-            );
-            
-            append(
+            host.topBlock.append(
                 xui.create("xui.UI.Icon")
                 .setHost(host,"ctl_sbutton1")
+                .setDock("right")
                 .setTips("Refresh")
                 .setTop("0.5833333333333334em")
                 .setWidth("1.6666666666666667em")
@@ -105,12 +66,100 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 })
             );
             
-            append(
+            host.topBlock.append(
+                xui.create("xui.UI.PageBar")
+                .setHost(host,"pagebar")
+                .setDock("right")
+                .setTop("0.22857142857142856em")
+                .setRight("3em")
+                .setCaption("")
+                .onPageSet("_pagebar_onpageset")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"newBtn")
+                .setTag("new")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("5em")
+                .setHeight("2em")
+                .setCaption("新增")
+                .setImageClass("xui-uicmd-add")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"openBtn")
+                .setTag("open")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("5em")
+                .setHeight("2em")
+                .setCaption("編輯")
+                .setImageClass("xui-uicmd-helpinput")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"deleteBtn")
+                .setTag("delete")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("5em")
+                .setHeight("2em")
+                .setCaption("刪除")
+                .setImageClass("xui-icon-trash")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"selectAllBtn")
+                .setTag("selectAll")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("5em")
+                .setHeight("2em")
+                .setCaption("全選")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"excelBtn")
+                .setTag("excel")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("6em")
+                .setHeight("2em")
+                .setCaption("Excel")
+                .setImageClass("fa fa-lg fa-file-excel-o")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"pageLength")
-                .setLeft("23.61904761904762em")
+                .setDock("left")
+                .setDockOrder(10)
+                .setDockStretch("fixed")
+                .setLeft("33.523809523809526em")
                 .setTop("0.1523809523809524em")
                 .setWidth("8.838095238095239em")
+                .setHeight("2em")
                 .setLabelSize("5em")
                 .setLabelCaption("每頁列數")
                 .setType("number")
@@ -118,10 +167,32 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 .onChange("_pagelength_onchange")
             );
             
-            append(
-                xui.create("xui.MessageService")
-                .setHost(host,"xui_msgs1")
-                .onMessageReceived("_xui_msgs1_onmessagereceived")
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"custom1Btn")
+                .setTag("custom1")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("6.019047619047619em")
+                .setHeight("2em")
+                .setDisplay("none")
+                .setCaption("Custom1")
+                .onClick("_newbtn_onclick")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"filter")
+                .setShowDirtyMark(false)
+                .setDock("left")
+                .setLeft("48em")
+                .setTop("0.7619047619047619em")
+                .setDisplay("none")
+                .setLabelSize("4em")
+                .setLabelCaption("搜尋")
+                .afterUIValueSet("_filter_afteruivalueset")
             );
             
             return children;
@@ -133,21 +204,40 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 if('inMsgType' in prop) module.xui_msgs1.setRecipientType(prop.inMsgType);
             }
         },
+        prepareFilter: function(cond){
+          var ns = this, s = "";
+          if(typeof cond == "undefined")
+              cond = "";
+          var filter = ns.filter.getUIValue();  
+          if(filter == "")
+            return cond;  
+          var header = ns.grid.getHeader("value");
+          if(header.length == 0) 
+              return "";
+          for(var i=0; i<header.length; i++)
+              s += `[${header[i]}] LIKE '%${filter}%' OR `;
+          s = s.slice(0, -3);  //skip or   
+          s = `(${s})`;  
+          if(cond == "")
+              return s;
+          else 
+              return cond + " AND " + s;
+        },
         prepareCondition: function(){
             var ns = this;
             var cond = ns.fireEvent("onPrepareCondition",[]);        
             if(typeof cond != "undefined")
-              return cond;            
+              return ns.prepareFilter(cond);            
             
             cond = ns.properties["condition"];
             if(typeof cond == "undefined")
-                return "";
+                return ns.prepareFilter();
             if(cond == "" || cond.indexOf("{") == -1)
-                return cond;
+                return ns.prepareFilter(cond);
             var ns = this, prop = ns.properties;
             var dbs = ns.host.getDataBinders();
             if(dbs.length == 0)
-                return cond;
+                return ns.prepareFilter(cond);
             var db = dbs[0].boxing();
             if(prop.binder != "")
             {
@@ -162,7 +252,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 }    
             }
             if(typeof db == 'undefined')
-                return cond;
+                return ns.prepareFilter(cond);
             db.updateDataFromUI();
             var data = db.getData();
             
@@ -174,7 +264,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             };
             cond = cond.replace(/{[^{}]*}/g, cb);
             
-            return cond;
+            return ns.prepareFilter(cond);
         },
         loadFromCache: function(prop){
             if(typeof GridDataCache == "undefined")
@@ -265,6 +355,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             if(prop.orderby === "" && (typeof prop.pageLength != "undefined" && prop.pageLength != 0))
             {
                 prop.orderby = prop.keyid;  
+                if(prop.orderby.indexOf("[") == -1)
+                  prop.orderby = "[" + prop.orderby +"]";
             }    
             var condition = ns.prepareCondition();
             var fields = prop.displayFields;
@@ -276,7 +368,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
               {
                 var sql = prop.tableName;
                 if(condition != "")
-                    sql =  sql +  " AND " + condition; 
+                {
+                    if(sql.indexOf(" WHERE ") != -1)
+                      sql =  sql +  " AND " + condition;
+                    else 
+                      sql =  sql + " WHERE " + condition;  
+                }
                 utils.getPageQueryItems(sql,prop.orderby, page, prop.pageLength, cb);
               }
               else  
@@ -333,8 +430,13 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         },
         setDisabled: function(v){
           var ns = this;
-            ns.toolbar.setDisabled(v);  
-            ns.grid.setDisabled(v);  
+          var nodes = ns.topBlock.getChildren(true,true).get();
+          for(var i=0; i< nodes.length; i++)
+          {
+              let n = nodes[i].boxing();
+              n.setDisabled(v);
+          }
+          ns.grid.setDisabled(v);  
         },
         setFilter: function(filter){
           var ns=this, prop=ns.properties;
@@ -361,27 +463,27 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             ns.grid.setEditable(false);
             if(mode=="readonly"){
                 ns.grid.setSelMode("none").setRowHandler(true);
-                ns.toolbar.updateItem("new",{hidden:true});
-                ns.toolbar.updateItem("delete",{hidden:true});
+                ns.newBtn.hide();
+                ns.deleteBtn.hide();
             }else if(mode=="selection"){
                 ns.grid.setSelMode("none").setRowHandler(false);
-                ns.toolbar.updateItem("open",{hidden:true});
-                ns.toolbar.updateItem("delete",{hidden:true});
+                ns.openBtn.hide();
+                ns.deleteBtn.hide();
             }else if(mode=="editor"){
                 ns.grid.setEditable(true);
                 ns.grid.setHotRowMode("hidden");
                 ns.grid.setHotRowMode("after");
                 //ns.grid.setHotRowRequired(prop.keyid);
                 ns.grid.setSelMode("none").setRowHandler(false);
-                ns.toolbar.updateItem("new",{hidden:true});
-                ns.toolbar.updateItem("open",{hidden:true});
-                ns.toolbar.updateItem("delete",{hidden:true});
+                ns.newBtn.hide();
+                ns.openBtn.hide();
+                ns.deleteBtn.hide();
             }else if(mode == "normal") {
                 ns.grid.setHotRowMode("hidden");
                // ns.grid.setSelMode("multi").setRowHandler(true);             
-                ns.toolbar.updateItem("new",{hidden:false});
-                ns.toolbar.updateItem("open",{hidden:false});
-                ns.toolbar.updateItem("delete",{hidden:false});
+                ns.newBtn.show();
+                ns.openBtn.show();
+                ns.deleteBtn.show();
             }
         },
         // output
@@ -402,8 +504,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         deleteRows:function(ids){
             var ns=this;
             ns.grid.removeRows(ids);
-            ns.toolbar.updateItem("delete",{disabled:true});
-            ns.toolbar.updateItem("open",{disabled:true});
+            ns.deleteBtn.hide();
+            ns.openBtn.hide();
             xui.message(ids.length+" 紀錄已刪除!");
             xui.Dom.free();
         },
@@ -447,7 +549,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                   mod.setProperties("tableName",prop.tableName);
                 if(prop.formCaption && prop.formCaption != "")
                     mod.dialog.setCaption(prop.formCaption);
-                db.setData(fields).updateDataToUI().getUI().setDisabled(false);
+                db.setData(fields);
+                db.updateDataToUI();
                 if(mode == "edit")
                   utils.updateModuleTableBoxCaption(mod);
                 else  
@@ -635,57 +738,22 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     else
                         xui.message("請先選擇資料!");
         },
-        _toolbar_onclick:function (profile, item, group, e, src){
-            var ns = this,row;
-            switch(item.id){
-                case "new": 
-                    ns._openForm();
-                    break;
-                case "open": 
-                    if((row=ns.grid.getActiveRow())){
-                        ns._openForm(row.id, ns.getRowMap(row));
-                    }
-                    break;
-                case "delete": 
-                    var ids=ns.grid.getUIValue(true);
-                    if(ids&&ids.length){
-                        xui.confirm("Confirm", "確定要刪除"+ids.length+" 紀錄嗎?", function(){
-                            ns._delRecords(ids);
-                        });
-                    }else{
-                        xui.message("請先選擇資料!");
-                    }
-                    break;
-               case "custom1":
-                    if(row=ns.grid.getActiveRow()){
-                        ns.fireEvent("onCustom1Clicked", [ row.id, ns.getRowMap(row)]);
-                    }
-                    break;
-               case "excel":
-                    ns.downloadExcel();
-                    break;                     
-                case "selectAll":
-                    if(typeof ns.selectAllClickCount == "undefined")
-                        ns.selectAllClickCount = 0;
-                    if(ns.selectAllClickCount % 2 == 0)
-                    {
-                        var rows = ns.grid.getRows();
-                        var ids = [];
-                        for(var i=0; i<rows.length; i++)
-                            ids.push(rows[i].id);
-                        ns.grid.setUIValue(ids);
-                    }
-                    else 
-                        ns.grid.setUIValue([]);
-                    ns.selectAllClickCount++;
-                    break;                     
-            }
+        buttonClick:function (profile, item, group, e, src){
+
         },
         _grid_afterrowactive:function (profile, row){
-            this.toolbar.updateItem("open",{disabled:!row});
+            var ns = this;
+            if(row)
+              ns.openBtn.show();
+            else 
+              ns.openBtn.hide();               
         },
         _grid_afteruivalueset:function (profile, oldValue, newValue){
-            this.toolbar.updateItem("delete",{disabled:!newValue});
+            var ns = this;
+            if(newValue)
+              ns.deleteBtn.show();
+            else 
+              ns.deleteBtn.hide();  
         },
         _ctl_sbutton1_onclick:function (){
             var ns=this;
@@ -924,7 +992,80 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     else 
                         prop["pageLength"] = newValue;
                     ns.refreshGrid();    
-                }
+                },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _newbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing(), row;
+            var action = uictrl.getTag();
+            switch(action){
+                case "new": 
+                    ns._openForm();
+                    break;
+                case "open": 
+                    if((row=ns.grid.getActiveRow())){
+                        ns._openForm(row.id, ns.getRowMap(row));
+                    }
+                    break;
+                case "delete": 
+                    var ids=ns.grid.getUIValue(true);
+                    if(ids && ids.length != 0 && ids[0] != ""){
+                        xui.confirm("Confirm", "確定要刪除"+ids.length+" 紀錄嗎?", function(){
+                            ns._delRecords(ids);
+                        });
+                    }else{
+                        xui.message("請先選擇資料!");
+                    }
+                    break;
+               case "custom1":
+                    if(row=ns.grid.getActiveRow()){
+                        ns.fireEvent("onCustom1Clicked", [ row.id, ns.getRowMap(row)]);
+                    }
+                    break;
+               case "excel":
+                    var ids=ns.grid.getUIValue(true);
+                    if(ids && ids.length != 0 && ids[0] != "")
+                      ns.downloadExcel();
+                    else
+                      xui.message("請先選擇資料!");                    
+                    break;                     
+                case "selectAll":
+                    if(typeof ns.selectAllClickCount == "undefined")
+                        ns.selectAllClickCount = 0;
+                    if(ns.selectAllClickCount % 2 == 0)
+                    {
+                        var rows = ns.grid.getRows();
+                        var ids = [];
+                        for(var i=0; i<rows.length; i++)
+                            ids.push(rows[i].id);
+                        ns.grid.setUIValue(ids);
+                    }
+                    else 
+                        ns.grid.setUIValue([]);
+                    ns.selectAllClickCount++;
+                    break;                     
+            }
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.Input event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _filter_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.refreshGrid();
+        }
     },
     Static:{
         // export functions

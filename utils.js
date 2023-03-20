@@ -76,12 +76,16 @@
     setFieldValue : function(srcui, dstui){
 		if(srcui.updatingFieldValue)
 			return;
-		var value = srcui.getValue();
+		var value = srcui.getUIValue();
 		var config = utils.getTableFieldComboConfig("通用", srcui.getDataField());
 		var config2 = utils.getTableFieldComboConfig("通用", dstui.getDataField());
 		var tableName = config.tableName;
 		var key = config.keyid;
-		var col = config2.keyid;
+		if(config2)
+		  var col = config2.keyid;
+		else 
+		  var col = dstui.getDataField();
+			
 		var cb = function(data){
 			if(data)
 			{
@@ -127,7 +131,14 @@
     }, 
 	getItemValue: function(table, key, keyValue,  getField)
 	{
-		var query = `SELECT [${getField}] FROM [${table}] WHERE [${key}]='${keyValue}'`;
+		if(typeof getField == "undefined")
+			getField = "*";
+		if(table.startsWith("crm."))
+		{
+			table = table.substring(4);
+			table = `GDCRM.dbo.[${table}]`;
+		}
+		var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash,  null, true);
 		if(datas.rows.length > 0)
@@ -200,7 +211,7 @@
 			if(ondestroy)
 			{
 			  mod.setEvents("onDestroy",function(){
-                    ondestroy();
+                    ondestroy(mod);
                 });	
 			}				
         };
@@ -286,13 +297,16 @@
 		  config.displayWidths = s[4];
 	    return config;
 	},
-    saveForm: function(mod, ignoreFields, extDatas, onFinish){
+    saveForm: function(mod, ignoreFields, extDatas, onFinish, db){
             var prop = mod.properties;
-			var db = mod.getDataBinders();
-			if(db.length > 0)
+			if(typeof db == "undefined")
+			{
+			  db = mod.getDataBinders();
+			  if(db.length > 0)
 				db = db[0].boxing();
-			else
-				return falasae;
+			  else
+				return false;
+			}
                 
             if(db && db.updateDataFromUI() == false)
                 return false;
@@ -304,7 +318,7 @@
                   prop.mode = "edit";
 				  mod.saveBtn.setCaption("儲存");	
 				  if(onFinish)
-					onFinish();  
+					onFinish(data.item);  
                 }
             }
             var datas = db.getData();
@@ -433,8 +447,11 @@
                     module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
 				  });           
 				}		
-				else				
+				else
+				{
+                  ComboBoxCache[cachetitle].setProperties("uictrl", uictrl);
 				  ComboBoxCache[cachetitle].popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+				}
 		}		
         let popcb = function(profile, pos, e, src){
                 var ns = this, uictrl = profile.boxing();//, prop = uictrl.getPopCtrlProp();
@@ -565,8 +582,8 @@
                    s += 'xui.create("xui.UI.ComboInput").setType("spin").setIncrement(1).setPrecision(0)'; 
                 }
                 else if(type.includes("float") || type.includes("real")){
-                    input = xui.create("xui.UI.ComboInput").setType("number").setIncrement(1).setPrecision(1);
-                   s += 'xui.create("xui.UI.ComboInput").setType("number").setIncrement(1).setPrecision(1)'; 
+                    input = xui.create("xui.UI.ComboInput").setType("spin").setIncrement(1).setPrecision(1);
+                   s += 'xui.create("xui.UI.ComboInput").setType("spin").setIncrement(1).setPrecision(1)'; 
                 }
                 else if(type.includes("money")){
                    input = xui.create("xui.UI.ComboInput").setType("currency");
@@ -629,8 +646,12 @@
         var items = utils.getTableConfig(table);
         cb(items);
     },
-	
-     
+	today: function(){
+		return xui.Date.format(new Date(),"yyyy-mm-dd");
+	},
+	now: function(){
+		return xui.Date.format(new Date(),"yyyy-mm-dd hh:nn:ss");
+	},     
      
      
  };

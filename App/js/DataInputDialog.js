@@ -39,6 +39,7 @@ xui.Class('App.DataInputDialog', 'xui.Module',{
                 .setWidth("29.561904761904763em")
                 .setHeight("30.323809523809523em")
                 .setCaption("Dialog")
+                .setModal(true)
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
             );
