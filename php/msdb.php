@@ -1,5 +1,29 @@
 <?php
 
+function sql_debug($sql_string, array $params = null) {
+    if (!empty($params)) {
+        $indexed = $params == array_values($params);
+        foreach($params as $k=>$v) {
+            if (is_object($v)) {
+                if ($v instanceof \DateTime) $v = $v->format('Y-m-d H:i:s');
+                else continue;
+            }
+            elseif (is_string($v)) $v="'$v'";
+            elseif ($v === null) $v='NULL';
+            elseif (is_array($v)) $v = implode(',', $v);
+
+            if ($indexed) {
+                $sql_string = preg_replace('/\?/', $v, $sql_string, 1);
+            }
+            else {
+                if ($k[0] != ':') $k = ':'.$k; //add leading colon if it was left out
+                $sql_string = str_replace($k,$v,$sql_string);
+            }
+        }
+    }
+    return $sql_string;
+}
+
 function execsql($query)
 {
   global $db;
@@ -38,6 +62,9 @@ function insertTableItem($table, $item){
   $query = rtrim($query, ",");
   $valuestr = rtrim($valuestr, ",");
   $query = $query.")"."  ".$valuestr.")";
+  file_put_contents("log5.txt", $query);
+  file_put_contents("log5.txt", print_r($bindarray,true), FILE_APPEND);
+  
   $stmt=$db->prepare($query);
   for($i=0;$i<count($bindarray); $i++)
   {
@@ -78,7 +105,7 @@ function modifyTableItem($table, $primarykey, $item){
   array_push($bindarray,  $item->$primarykey);  
     
   $query = rtrim($query, ", ");
-  $query = $query." WHERE $primarykey = ?";
+  $query = $query." WHERE [$primarykey] = ?";
   file_put_contents("log2.txt", print_r($item, true).$query."\n".print_r($bindarray, true));
   $stmt=$db->prepare($query);
   for($i=0; $i<count($bindarray);$i++)
@@ -166,6 +193,8 @@ function getRowData(/*$rowidField,*/ $header, $datas){
 function DB() {
     try {
         $db = new PDO ( "sqlsrv:server=(local), 63937; database = BU3_System", "jack", "3f18681868" );
+//        $db = new PDO ( "sqlsrv:server=192.168.10.35, 1433; database = BU3_System", "cic_mis", "Cic52@5" );
+        
         //$db = new PDO ( "mysql:host=sql303.byethost31.com", "b31_20425913", "18681868" );        
         $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 //        $db->exec ( "CREATE DATABASE IF NOT EXISTS newelc" );
@@ -183,8 +212,30 @@ function DBCRM() {
     try {
         $db = new PDO ( "sqlsrv:server=(local), 63937; database = GDCRM", "jack", "3f18681868" );
         $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        $db->exec ( "use GDCRM" );
-        $db->exec("SET NAMES UTF8");       
+
+    } catch ( PDOException $e ) {
+         echo $e->getMessage();
+    }
+    return $db;
+}
+
+function DBHR() {
+    try {
+        $db = new PDO ( "sqlsrv:server=(local), 63937; database = CIC", "jack", "3f18681868" );
+       // $db = new PDO ( "sqlsrv:server=192.168.10.40, 1433; database = CIC", "cic_mis", "Cic52@5" );
+        $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+    } catch ( PDOException $e ) {
+         echo $e->getMessage();
+    }
+    return $db;
+}
+
+function DBWFERP() {
+    try {
+        $db = new PDO ( "sqlsrv:server=(local), 63937; database = CIC", "jack", "3f18681868" );
+       // $db = new PDO ( "sqlsrv:server=192.168.10.21, 1433; database = CICTEST", "cic_mis", "Cic52@5" );
+        $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     } catch ( PDOException $e ) {
          echo $e->getMessage();

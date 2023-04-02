@@ -5,6 +5,23 @@ if(!isset($req->cmd))
 {
     exit;
 }
+
+function str_contains($a, $b)
+{
+	return strpos($a,$b) !== false;
+}
+function str_between($str, $starting_word, $ending_word)
+{
+    $subtring_start = strpos($str, $starting_word);
+    //Adding the starting index of the starting word to
+    //its length would give its ending index
+    $subtring_start += strlen($starting_word); 
+    //Length of our required sub string
+    $size = strpos($str, $ending_word, $subtring_start) - $subtring_start; 
+    // Return the substring from the index substring_start of length size
+    return substr($str, $subtring_start, $size); 
+}
+
 function replace_between($str, $needle_start, $needle_end, $replacement) {
     $pos = strpos($str, $needle_start);
     $start = $pos === false ? 0 : $pos + strlen($needle_start);
@@ -19,16 +36,33 @@ function str_starts_with($s, $query)
 {
   return substr($s, 0, strlen($query)) === $query;
 }
+
+$erp = false;
 if(isset($req->table))
 {
+  if(str_contains($req->table,"erp."))
+  {
+    $req->table = str_replace("erp.","",$req->table);
+	$erp = true;
+  }
   $req->table = str_replace("crm.","GDCRM.dbo.",$req->table);
   if(str_starts_with($req->table,"GDCRM.dbo."))
   {
-     $name =  substr($req->table, 10);
-     $req->table = "GDCRM.dbo."."[$name]";  
+    $name =  substr($req->table, 10);
+    $req->table = "GDCRM.dbo."."[$name]";  
   }
   else if(!str_starts_with($req->table,"["))   
-     $req->table = "[$req->table]";  
+    $req->table = "[$req->table]";  
+}
+if(isset($req->query))
+{
+  if(str_contains($req->query,"erp."))
+  {
+    $req->query = str_replace("erp.","",$req->query);
+	$erp = true;
+  }
+  else	  
+    $req->query = str_replace("crm.","GDCRM.dbo.",$req->query);
 }
 if(isset($req->fields))
 {
@@ -45,7 +79,10 @@ if(isset($req->fields))
 
 $RES = new stdClass();
 
-$db = DB();
+if($erp)
+	$db = DBWFERP();
+else
+	$db = DB();
 
 //$adminuser =  $_SESSION ["adminuser"]; //true or false
 
@@ -115,6 +152,42 @@ function newCnNumber()
         return $value;    
 }
 
+function newOrderNumber()
+{
+        $q1 = "SELECT TOP 1 [訂單流水編號] FROM [訂單總資料庫]  ORDER BY [訂單流水編號] DESC";  
+        $items = execquery($q1);
+        if(count($items)  > 0)
+        {
+            $value = $items[0]["訂單流水編號"];
+			$prefix = $value[0];
+            $n = (int)substr($value,1, 3);
+            $n++;
+			if($n > 999)
+			{
+				$n = 0;
+				$prefix = chr(ord($prefix)+1);
+			}
+			$value = sprintf("%s%03d",$prefix,$n);
+        }     
+		else 
+		  $value = "0000";
+		return $value;
+}
+
+function afterInsertTable($table, $item)
+{
+    if($table == "[UnitServiceForm總表]")
+    {
+        $items = execquery("SELECT @@IDENTITY as k");
+        $item->總表單號 = $items[0]["k"];
+    }
+    else  if($table == "[UnitServiceForm子表]")
+    {
+        $items = execquery("SELECT @@IDENTITY as k");
+        $item->子表單號 = $items[0]["k"];
+    }    
+}
+
 function prepareTableKey($table, $item)
 {
     if($table == "[工號登錄總資料表]")
@@ -158,35 +231,115 @@ function prepareTableKey($table, $item)
         if(count($items)  > 0)
         {
             $value = $items[0]["登錄編號"];
-            $n = (int)substr($value,strlen()-3);
+            $n = (int)substr($value,strlen($value)-3);
             $n++;
         }        
         $value = sprintf("%s%03d",$h,$n);
         $item->登錄編號 = $value;
     }
+    else if($table == "[UU100_委外總資料庫]")
+    {
+        $n = 1;
+        $d=date_create();
+        $d = date_format($d,"Y");
+        $d = substr($d, 2);
+        $items = execquery("SELECT TOP 1  [委外單號] FROM [UU100_委外總資料庫] WHERE [委外單號] LIKE '$d%' ORDER BY [委外單號] DESC");
+        if(count($items)  > 0)
+        {
+            $value = $items[0]["委外單號"];
+            $n = (int)substr($value,strlen($value)-3);
+            $n++;
+        }        
+        $value = sprintf("%s%03d",$d,$n);
+        $item->委外單號 = $value;
+        
+    }
     else  if($table == "GDCRM.dbo.[Incident]")
-	{
-		$qry = "SELECT Seed FROM  KeyFieldDefine  WHERE TableName = 'Incident'";
-		$items = execquery($qry);
-		if(count($items) > 0)
-		{
-		  $seed = $items[0]["Seed"];
-		  $seed++;
-		  $item->IncidentID = sprintf("%08d",$seed);
-		}
-	}
-    else  if($table == "GDCRM.dbo.[ServicRecord]")
-	{
-		$qry = "SELECT Seed FROM  KeyFieldDefine  WHERE TableName = 'ServicRecord'";
-		$items = execquery($qry);
-		if(count($items) > 0)
-		{
-		  $seed = $items[0]["Seed"];
-		  $seed++;
-		  $item->ServiceRecordID = sprintf("%08d",$seed);
-		}
-	}
-
+    {
+        $qry = "SELECT Seed FROM  GDCRM.dbo.KeyFieldDefine  WHERE TableName = 'Incident'";
+        $items = execquery($qry);
+        if(count($items) > 0)
+        {
+          $seed = $items[0]["Seed"];
+          $seed++;
+          $item->IncidentID = sprintf("%08d",$seed);
+          $qry = "UPDATE GDCRM.dbo.KeyFieldDefine  Set Seed = $seed  WHERE　TableName = 'Incident'";
+          execsql($qry);
+          
+        }
+    }
+    else  if($table == "GDCRM.dbo.[ServiceRecord]")
+    {
+        $qry = "SELECT Seed FROM  GDCRM.dbo.KeyFieldDefine  WHERE TableName = 'ServiceRecord'";
+        $items = execquery($qry);
+        if(count($items) > 0)
+        {
+          $seed = $items[0]["Seed"];
+          $seed++;
+          $item->ServiceRecordID = sprintf("%08d",$seed);
+          $qry = "UPDATE GDCRM.dbo.KeyFieldDefine  Set Seed = $seed  WHERE　TableName = 'ServiceRecord'";
+          execsql($qry);
+        }
+    }
+    else  if($table == "[UnitServiceForm總表]")
+    {
+        unset($item->總表單號);
+    }
+    else  if($table == "[UnitServiceForm子表]")
+    {
+        unset($item->子表單號);
+    }
+    else  if($table == "[估價單明細(NT)]")
+    {
+        unset($item->rowid);
+    }
+    else  if($table == "[訂單總資料庫]")
+    {
+		$item->訂單流水編號 = newOrderNumber();
+    }
+    else  if($table == "[估價單總表(NT)]")
+    {
+        $key = "Quotation no#";
+        if($item->$key != "")
+        {
+          $no = $item->$key;  
+          $v = (int)substr($no, -1)+1;
+          while(true)
+          {
+              $v1 = substr_replace($no,strval($v),-1);; 
+              $qry = "SELECT [Quotation no#] FROM  [估價單總表(NT)]  WHERE [Quotation no#] = '$v1'";
+              $items = execquery($qry);
+              if(count($items) == 0)
+                  break;
+              $v++;;  
+          }
+          $item->$key = $v1;
+        }
+        else
+        {
+            $h2 =  $item->type; //'Robot' or 'Special' or 'NotRobot' 辨別用，不儲存
+            unset($item->type);
+            $d=date_create();
+            $d = date_format($d,"Ymd");
+            $d = substr($d, 2);
+            if($h2 == 'Robot')
+              $v = 'S0';
+            else if($h2 == 'Special')
+              $v = 'W';
+            else
+              $v = 'A';
+            while(true)
+            {
+              $v1 = $d.$v."0"; 
+              $qry = "SELECT [Quotation no#] FROM  [估價單總表(NT)]  WHERE [Quotation no#] = '$v1'";
+              $items = execquery($qry);
+              if(count($items) == 0)
+                  break;
+              $v = chr(ord($v)+1);  
+            }
+            $item->$key = $v1;
+        }
+    }
 }
 
 
@@ -241,14 +394,20 @@ if($req->cmd == "getTableItems")
 else  if($req->cmd == "getQueryItems")
 {
     $query = $req->query;
-    
-    $countQuery = replace_between($query, 'SELECT ', ' FROM', 'count(1)'); //SQL for rowcount
-    
+    $fields = str_between($query, 'SELECT ', ' FROM');
+	if(stripos($fields,"DISTINCT ") !== false)
+	  $countFields = "count($fields)";
+    else 
+	  $countFields = "count(1)";	
+    $countQuery = replace_between($query, 'SELECT ', ' FROM', $countFields); //SQL for rowcount
+    $index = stripos($countQuery,"ORDER BY ");
+    if($index != false)
+        $countQuery = substr($countQuery, 0, $index);
     if(isset($req->orderby))
-	{
+    {
       $orderby = $req->orderby;
       $query = $query." ORDER BY $orderby ";
-	}
+    }
     if(isset($req->pagelen))
         $pagelen = $req->pagelen;
     else
@@ -258,8 +417,8 @@ else  if($req->cmd == "getQueryItems")
       $offset = strval($req->pageno * $pagelen);  
       $query = $query." OFFSET $offset ROWS FETCH NEXT $pagelen ROWS ONLY";
     }
-    //file_put_contents("log4.txt", $query."\n\n");   
-    //file_put_contents("log4.txt", $countQuery, FILE_APPEND);   
+    file_put_contents("log4.txt", $query."\n\n");   
+    file_put_contents("log4.txt", $countQuery, FILE_APPEND);   
     $stmt=$db->prepare($query);
     $stmt->execute();
     $R = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -282,8 +441,8 @@ else  if($req->cmd == "modifyTableItem")
     $table = $req->table;
     $item = json_decode($req->item);
 
-	if($table == "[CTI Control Number總資料庫]")
-	  unset($item->type);  //no use	
+    if($table == "[CTI Control Number總資料庫]")
+      unset($item->type);  //no use    
     $res = modifyTableItem($table, $key, $item);
     $RES->result = "OK";
 }
@@ -294,6 +453,7 @@ else if($req->cmd == "insertTableItem")
     prepareTableKey($table,$item);
     //print_r($item);
     $res = insertTableItem($table,$item);
+    afterInsertTable($table,$item);
     $RES->result = "OK";
     $RES->item = $item;
     

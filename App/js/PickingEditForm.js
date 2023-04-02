@@ -186,7 +186,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 5,
-                    "cols" : 3,
+                    "cols" : 4,
                     "rowSetting" : {
                         "1" : {
                             "manualHeight" : 30
@@ -219,6 +219,12 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                         },
                         "C1" : {
                             "value" : "數量",
+                            "style" : {
+                                "textAlign" : "center"
+                            }
+                        },
+                        "D1" : {
+                            "value" : "庫存",
                             "style" : {
                                 "textAlign" : "center"
                             }

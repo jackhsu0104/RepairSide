@@ -45,40 +45,40 @@ xui.Class('App', 'xui.Module',{
                     {
                         "id" : "掃碼入站",
                         "caption" : "掃碼入站",
-                        "imageClass" : "xui-icon-number1"
+                        "imageClass" : ""
                     },
                     {
                         "id" : "維修工單",
                         "caption" : "維修工單",
-                        "imageClass" : "xui-icon-number2"
+                        "imageClass" : ""
                     },
                     {
-                        "id" : "維修領料",
-                        "caption" : "維修領料",
-                        "imageClass" : "xui-icon-number3"
-                    },
-                    {
-                        "id" : "Module測試",
-                        "caption" : "Module測試",
-                        "imageClass" : "xui-icon-number4"
+                        "id" : "維修前測試",
+                        "caption" : "維修前測試",
+                        "imageClass" : ""
                     },
                     {
                         "id" : "領料報工",
                         "caption" : "領料報工",
-                        "imageClass" : "xui-icon-number5"
+                        "imageClass" : ""
                     },
                     {
                         "id" : "廠內領料報工",
                         "caption" : "廠內領料報工",
-                        "imageClass" : "xui-icon-number6"
+                        "imageClass" : ""
                     },
                     {
                         "id" : "Test",
                         "caption" : "Test",
-                        "imageClass" : "xui-icon-number1",
+                        "imageClass" : "",
                         "closeBtn" : false,
                         "optBtn" : false,
-                        "popBtn" : false
+                        "popBtn" : false,
+                        "hidden" : true
+                    },
+                    {
+                        "id" : "修復入庫",
+                        "caption" : "修復入庫"
                     }
                 ])
                 .setLeft("0em")
@@ -86,7 +86,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修工單")
+                .setValue("維修前測試")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -96,7 +96,7 @@ xui.Class('App', 'xui.Module',{
                 .setDock("top")
                 .setLeft("11.428571428571429em")
                 .setTop("12.19047619047619em")
-                .setHeight("6.933333333333334em"),
+                .setHeight("8.380952380952381em"),
                 "掃碼入站"
             );
             
@@ -132,29 +132,24 @@ xui.Class('App', 'xui.Module',{
             );
             
             host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"scanRepairNo")
-                .setLeft("28.952380952380953em")
-                .setTop("0.7619047619047619em")
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input29")
+                .setLeft("0.7619047619047619em")
+                .setTop("5.333333333333333em")
                 .setWidth("18em")
-                .setHeight("2.361904761904762em")
                 .setLabelSize("8em")
-                .setLabelCaption("維修工單")
-                .setLabelVAlign("middle")
-                .setType("button")
+                .setLabelCaption("登錄編號")
             );
             
             host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput142")
-                .setLeft("48em")
-                .setTop("0.7619047619047619em")
-                .setWidth("18em")
-                .setHeight("2.361904761904762em")
-                .setLabelSize("8em")
-                .setLabelCaption("維修領料單")
-                .setLabelVAlign("middle")
-                .setType("button")
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button45")
+                .setLeft("21.333333333333332em")
+                .setTop("5.0285714285714285em")
+                .setWidth("7.542857142857143em")
+                .setHeight("2.2857142857142856em")
+                .setCaption("入站")
+                .onClick("_startcamerabtn_onclick")
             );
             
             host.mainPage.append(
@@ -206,7 +201,9 @@ xui.Class('App', 'xui.Module',{
                 .setTop("4.723809523809524em")
                 .setWidth("20.419047619047618em")
                 .setHeight("16.60952380952381em")
-                .setCaption("登入"),
+                .setCaption("登入")
+                .setMaxBtn(false)
+                .setCloseBtn(false),
                 "a"
             );
             
@@ -252,21 +249,33 @@ xui.Class('App', 'xui.Module',{
                         "imageClass" : ""
                     },
                     {
+                        "id" : "ShiCryopump",
+                        "caption" : "Shi Cryopump維修工單"
+                    },
+                    {
                         "id" : "Crosshead",
                         "caption" : "Crosshead維修工單"
+                    },
+                    {
+                        "id" : "ShiCrosshead",
+                        "caption" : "Shi Crosshead維修工單"
                     },
                     {
                         "id" : "Compressor",
                         "caption" : "Compressor維修工單"
                     },
                     {
-                        "id" : "WarrantyTest",
-                        "caption" : "維修前測試單"
+                        "id" : "3phControler",
+                        "caption" : "3ph Controler維修工單"
+                    },
+                    {
+                        "id" : "ModuleTest",
+                        "caption" : "Module測試單"
                     }
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Cryopump"),
+                .setValue("ModuleTest"),
                 "維修工單"
             );
             
@@ -293,32 +302,6 @@ xui.Class('App', 'xui.Module',{
             );
             
             host.rtopblock1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput165")
-                .setDataBinder("repairdb1")
-                .setDataField("查詢開始日期")
-                .setLeft("23.61904761904762em")
-                .setTop("1.5238095238095237em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("查詢開始日期")
-                .setType("date")
-            );
-            
-            host.rtopblock1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput166")
-                .setDataBinder("repairdb1")
-                .setDataField("查詢截止日期")
-                .setLeft("23.61904761904762em")
-                .setTop("3.7333333333333334em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("查詢截止日期")
-                .setType("date")
-            );
-            
-            host.rtopblock1.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"rsearchBtn1")
                 .setLeft("46.476190476190474em")
@@ -341,7 +324,7 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"repairGrid1")
                 .setProperties({
-                    "tableName" : "Cryopump維修工單",
+                    "tableName" : "ShiCryopump維修工單",
                     "insertTableName" : "",
                     "displayFields" : "",
                     "condition" : "",
@@ -350,7 +333,7 @@ xui.Class('App', 'xui.Module',{
                     "fieldCaptions" : null,
                     "pageLength" : 100,
                     "keyid" : "登錄編號",
-                    "openPageName" : "RepairEditForm",
+                    "openPageName" : "ShiCryopumpEditForm",
                     "mode" : "normal",
                     "formCaption" : "",
                     "newDatas" : null,
@@ -445,20 +428,14 @@ xui.Class('App', 'xui.Module',{
                                         "type" : "input",
                                         "width" : "16em"
                                     }
-                                ],
-                                "tagCmds" : [
-                                    {
-                                        "id" : "領料單",
-                                        "type" : "button",
-                                        "caption" : "領料單"
-                                    }
                                 ]
                             }
                         }
                     }
                 })
                 .setEvents({
-                    "onCmdClick" : "_repairgrid1_oncmdclick"
+                    "onCmdClick" : "_repairgrid1_oncmdclick",
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
                 })
             );
             
@@ -482,32 +459,6 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("登錄編號")
-            );
-            
-            host.rtopblock2.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput224")
-                .setDataBinder("repairdb2")
-                .setDataField("查詢開始日期")
-                .setLeft("24.38095238095238em")
-                .setTop("2.2857142857142856em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("查詢開始日期")
-                .setType("date")
-            );
-            
-            host.rtopblock2.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput225")
-                .setDataBinder("repairdb2")
-                .setDataField("查詢截止日期")
-                .setLeft("24.38095238095238em")
-                .setTop("4.495238095238095em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("查詢截止日期")
-                .setType("date")
             );
             
             host.rtopblock2.append(
@@ -543,7 +494,7 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block109.append(
                 xui.create("Module.DataGrid", "xui.Module")
-                .setHost(host,"repairGrid2")
+                .setHost(host,"repairGrid3")
                 .setProperties({
                     "tableName" : "Crosshead維修工單",
                     "insertTableName" : "",
@@ -653,6 +604,423 @@ xui.Class('App', 'xui.Module',{
                             }
                         }
                     }
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block454")
+                .setDock("top")
+                .setLeft("14.476190476190476em")
+                .setTop("15.238095238095237em")
+                .setHeight("8.60952380952381em"),
+                "ShiCryopump"
+            );
+            
+            host.xui_ui_block454.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1452")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block454.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button685")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"rblock2")
+                .setDock("fill")
+                .setLeft("22.095238095238095em")
+                .setTop("19.047619047619047em"),
+                "ShiCryopump"
+            );
+            
+            host.rblock2.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"repairGrid2")
+                .setProperties({
+                    "tableName" : "",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block460")
+                .setDock("top")
+                .setLeft("15.238095238095237em")
+                .setTop("16em")
+                .setHeight("8.60952380952381em"),
+                "ShiCrosshead"
+            );
+            
+            host.xui_ui_block460.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1458")
+                .setDataBinder("repairdb2")
+                .setDataField("登錄編號")
+                .setLeft("0.7619047619047619em")
+                .setTop("2.2095238095238097em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block460.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button694")
+                .setLeft("47.23809523809524em")
+                .setTop("2.2857142857142856em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.xui_ui_block460.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1459")
+                .setDataBinder("repairdb2")
+                .setDataField("Crosshead編號")
+                .setLeft("0.7619047619047619em")
+                .setTop("4.495238095238095em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("Crosshead編號")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"rblock4")
+                .setDock("fill")
+                .setLeft("16em")
+                .setTop("24.38095238095238em"),
+                "ShiCrosshead"
+            );
+            
+            host.rblock4.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"repairGrid4")
+                .setProperties({
+                    "tableName" : "",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block466")
+                .setDock("top")
+                .setLeft("14.476190476190476em")
+                .setTop("15.238095238095237em")
+                .setHeight("8.60952380952381em"),
+                "Compressor"
+            );
+            
+            host.xui_ui_block466.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1463")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block466.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button703")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"rblock5")
+                .setDock("fill")
+                .setLeft("15.238095238095237em")
+                .setTop("28.952380952380953em"),
+                "Compressor"
+            );
+            
+            host.rblock5.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"repairGrid5")
+                .setProperties({
+                    "tableName" : "",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block469")
+                .setDock("top")
+                .setLeft("14.476190476190476em")
+                .setTop("15.238095238095237em")
+                .setHeight("8.60952380952381em"),
+                "3phControler"
+            );
+            
+            host.xui_ui_block469.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1465")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block469.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button710")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"rblock6")
+                .setDock("fill")
+                .setLeft("10.666666666666666em")
+                .setTop("26.666666666666668em"),
+                "3phControler"
+            );
+            
+            host.rblock6.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"repairGrid6")
+                .setProperties({
+                    "tableName" : "",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block539")
+                .setDock("top")
+                .setLeft("15.238095238095237em")
+                .setTop("16em")
+                .setHeight("8.60952380952381em"),
+                "ModuleTest"
+            );
+            
+            host.xui_ui_block539.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input461")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block539.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button1173")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block540")
+                .setDock("fill")
+                .setLeft("20.571428571428573em")
+                .setTop("27.428571428571427em"),
+                "ModuleTest"
+            );
+            
+            host.xui_ui_block540.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"reapirGrid7")
+                .setProperties({
+                    "tableName" : "",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
+                })
+            );
+            
+            host.mainPage.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block277")
+                .setDock("top")
+                .setLeft("14.476190476190476em")
+                .setTop("15.238095238095237em")
+                .setHeight("8.60952380952381em"),
+                "維修前測試"
+            );
+            
+            host.xui_ui_block277.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input854")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block277.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button377")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.mainPage.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"blockTest1")
+                .setDock("fill")
+                .setLeft("21.333333333333332em")
+                .setTop("27.428571428571427em"),
+                "維修前測試"
+            );
+            
+            host.blockTest1.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"testGrid1")
+                .setProperties({
+                    "tableName" : "CryopumpWarranty原因分析表",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "",
+                    "openPageName" : "CryopumpWarrantyEditForm",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
+                })
+                .setEvents({
+                    "onPrepareCondition" : "_repairgrid1_onpreparecondition"
                 })
             );
             
@@ -799,6 +1167,25 @@ xui.Class('App', 'xui.Module',{
                         "background-color" : "transparent"
                     }
                 })
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"siteName")
+                .setDock("left")
+                .setDockMargin({
+                    "left" : 20,
+                    "top" : 0,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("9.904761904761905em")
+                .setTop("0.7619047619047619em")
+                .setCaption("xxx")
+                .setVAlign("middle")
+                .setFontColor("#FF4500")
+                .setFontSize("18px")
+                .setFontWeight("bold")
             );
             
             return children;
@@ -1005,7 +1392,30 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     console.error(err)
                 })        
         },
-        
+        updateRepairSiteTabs: function(){
+            var ns=this;
+                ns.repairTabs.updateItem("Cryopump",{"hidden": true});        
+                ns.repairTabs.updateItem("ShiCryopump",{"hidden": true});        
+                ns.repairTabs.updateItem("Crosshead",{"hidden": true});        
+                ns.repairTabs.updateItem("ShiCrosshead",{"hidden": true});        
+                ns.repairTabs.updateItem("Compressor",{"hidden": true});        
+                ns.repairTabs.updateItem("3phControler",{"hidden": true});        
+            if(SiteName.includes("Vacumm") || SiteName.includes("Helium"))
+            {
+                ns.repairTabs.updateItem("Cryopump",{"hidden": false});        
+                ns.repairTabs.updateItem("ShiCryopump",{"hidden": false});        
+            }
+            else if(SiteName.includes("Crosshead"))
+            {
+                ns.repairTabs.updateItem("Crosshead",{"hidden": false});        
+                ns.repairTabs.updateItem("ShiCrosshead",{"hidden": false});        
+            }            
+            else if(SiteName.includes("Compressor"))
+            {
+                ns.repairTabs.updateItem("Compressor",{"hidden": false});        
+                ns.repairTabs.updateItem("3phControler",{"hidden": false});        
+            }            
+        },
             _xui_ui_button62_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.popmenu1.popUp(uictrl);
@@ -1020,6 +1430,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
     
                     utils.installModuleTableBoxHooks(ns);
                     xui.setLang("tw");
+                    ns.siteName.setCaption(SiteName);
+                    ns.updateRepairSiteTabs();
 
                 },
         onUserLogined: function(){
@@ -1028,6 +1440,10 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
           ns.labelUserTitle.setCaption("職稱：" + LoginUser.JobTitle);  
           var value = utils.getItemValue("BU3員工資料表","員工代號", LoginUser.EmplID, "權限");
           LoginUser["Privilege"] = value;  
+          if(value.indexOf("主管") != -1)
+          {
+              ns.mainPage.updateItem("掃碼入站", {"hidden":"hidden"});        
+          }
         },        /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -1105,8 +1521,24 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             }
 
         },
-
-
+        getSiteRepairNoList: function(){
+            var condition = `所在站名 = '${SiteName}'`; 
+            var s = "";
+            var data = utils.getTableItems({"tableName":"維修站總資料表","fields":"登錄編號","condition":condition}, null, true);//wait  
+            for(var i=0; i<data.rows.length; i++)
+            {
+              var item = data.rows[i];  
+              s += `${items[0]}`;
+              if(i != data.rows.length-1)
+                  s += ",";
+            }
+            return s;
+        },
+        _repairgrid1_onpreparecondition:function(){
+            var ns = this;
+            var values = ns.getSiteRepairNoList();
+            return `登錄編號 IN (${values})`;
+        },
 
         /*,
         // To determine how properties affects this module

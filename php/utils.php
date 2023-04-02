@@ -31,14 +31,14 @@ function xui_getRequestData() {
     // 1.1. form post( a=b$c=d )
     if (count ( $_POST ) > 0) {
         foreach ( $_POST as $k => $v )
-            $inputData->$k = get_magic_quotes_gpc () ? stripslashes ( $v ) : $v;
+            $inputData->$k = false ? stripslashes ( $v ) : $v;
         // 1.2. form post( {a:'b',c:'d'} ) or xmlhttp post
     } else {
         $request = file_get_contents ( 'php://input' );
         if ($request) {
             $request = json_decode ( $request );
             foreach ( $request as $k => $v )
-                $inputData->$k = is_string ( $v ) ? get_magic_quotes_gpc () ? stripslashes ( $v ) : $v : $v;
+                $inputData->$k = is_string ( $v ) ? false ? stripslashes ( $v ) : $v : $v;
         }
     }
     
@@ -48,12 +48,12 @@ function xui_getRequestData() {
     if ($request) {
         if (strstr ( $request, '=' ) !== false) {
             foreach ( $_GET as $k => $v )
-                $inputData->$k = get_magic_quotes_gpc () ? stripslashes ( $v ) : $v;
+                $inputData->$k = false ? stripslashes ( $v ) : $v;
             // 2.2. get ?{a:'b',c:'d'}
         } else {
             $request = json_decode ( rawurldecode ( $request ) );
             foreach ( $request as $k => $v )
-                $inputData->$k = is_string ( $v ) ? get_magic_quotes_gpc () ? stripslashes ( $v ) : $v : $v;
+                $inputData->$k = is_string ( $v ) ? false ? stripslashes ( $v ) : $v : $v;
         }
     }
     return $inputData;
