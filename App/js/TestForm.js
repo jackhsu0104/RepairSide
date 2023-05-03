@@ -171,6 +171,7 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .setTop("6em")
                 .setWidth("18em")
                 .setCaption("Repair")
+                .onChange("_xui_ui_checkbox6_onchange")
             );
             
             host.form.append(
@@ -236,297 +237,6 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .setLabelCaption("上次登錄時間")
                 .setType("date")
                 .setMaxlength("null")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput218")
-                .setName("保固期")
-                .setDataBinder("db")
-                .setDataField("保固期")
-                .setLeft("2em")
-                .setTop("12em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("保固期")
-                .setType("date")
-                .setMaxlength("null")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input36")
-                .setName("上次故障原因")
-                .setDataBinder("db")
-                .setDataField("上次故障原因")
-                .setLeft("22em")
-                .setTop("12em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("上次故障原因")
-                .setMaxlength("200")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input37")
-                .setName("進廠原因")
-                .setDataBinder("db")
-                .setDataField("進廠原因")
-                .setLeft("2em")
-                .setTop("14em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("進廠原因")
-                .setMaxlength("200")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input38")
-                .setName("Pump P/N")
-                .setDataBinder("db")
-                .setDataField("Pump P/N")
-                .setLeft("22em")
-                .setTop("14em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump P/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input39")
-                .setName("Pump S/N")
-                .setDataBinder("db")
-                .setDataField("Pump S/N")
-                .setLeft("2em")
-                .setTop("16em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input40")
-                .setName("Module1 P/N")
-                .setDataBinder("db")
-                .setDataField("Module1 P/N")
-                .setLeft("22em")
-                .setTop("16em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module1 P/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input41")
-                .setName("Module1 S/N")
-                .setDataBinder("db")
-                .setDataField("Module1 S/N")
-                .setLeft("2em")
-                .setTop("18em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module1 S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input42")
-                .setName("Module2 P/N")
-                .setDataBinder("db")
-                .setDataField("Module2 P/N")
-                .setLeft("22em")
-                .setTop("18em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module2 P/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input43")
-                .setName("Module2 S/N")
-                .setDataBinder("db")
-                .setDataField("Module2 S/N")
-                .setLeft("2em")
-                .setTop("20em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module2 S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input44")
-                .setName("Module1 Name")
-                .setDataBinder("db")
-                .setDataField("Module1 Name")
-                .setLeft("22em")
-                .setTop("20em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module1 Name")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input45")
-                .setName("Module2 Name")
-                .setDataBinder("db")
-                .setDataField("Module2 Name")
-                .setLeft("2em")
-                .setTop("22em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Module2 Name")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input46")
-                .setName("Pump/Module ETM")
-                .setDataBinder("db")
-                .setDataField("Pump/Module ETM")
-                .setLeft("22em")
-                .setTop("22em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump/Module ETM")
-                .setMaxlength("200")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input47")
-                .setName("Pump與Module是否相符")
-                .setDataBinder("db")
-                .setDataField("Pump與Module是否相符")
-                .setLeft("2em")
-                .setTop("24em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump與Module是否相符")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input48")
-                .setName("配件是否齊全")
-                .setDataBinder("db")
-                .setDataField("配件是否齊全")
-                .setLeft("22em")
-                .setTop("24em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("配件是否齊全")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input49")
-                .setName("特殊零件")
-                .setDataBinder("db")
-                .setDataField("特殊零件")
-                .setLeft("2em")
-                .setTop("26em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("特殊零件")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput219")
-                .setName("上次Diode Line更換日期")
-                .setDataBinder("db")
-                .setDataField("上次Diode Line更換日期")
-                .setLeft("22em")
-                .setTop("26em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("上次Diode Line更換日期")
-                .setType("date")
-                .setMaxlength("null")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input50")
-                .setName("上次維修有無更換Diode Lin")
-                .setDataBinder("db")
-                .setDataField("上次維修有無更換Diode Lin")
-                .setLeft("2em")
-                .setTop("28em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("上次維修有無更換Diode Lin")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput220")
-                .setName("Diode 1st")
-                .setDataBinder("db")
-                .setDataField("Diode 1st")
-                .setLeft("22em")
-                .setTop("28em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Diode 1st")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput221")
-                .setName("Diode 1st#1")
-                .setDataBinder("db")
-                .setDataField("Diode 1st#1")
-                .setLeft("2em")
-                .setTop("30em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Diode 1st#1")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput222")
-                .setName("Diode 1st#2")
-                .setDataBinder("db")
-                .setDataField("Diode 1st#2")
-                .setLeft("22em")
-                .setTop("30em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Diode 1st#2")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.form.append(
@@ -750,420 +460,6 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput232")
-                .setName("Motor#3")
-                .setDataBinder("db")
-                .setDataField("Motor#3")
-                .setLeft("2em")
-                .setTop("46em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Motor#3")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput233")
-                .setName("Motor#4")
-                .setDataBinder("db")
-                .setDataField("Motor#4")
-                .setLeft("22em")
-                .setTop("46em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Motor#4")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input56")
-                .setName("Motor#5 Y/N")
-                .setDataBinder("db")
-                .setDataField("Motor#5 Y/N")
-                .setLeft("2em")
-                .setTop("48em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Motor#5 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input57")
-                .setName("Rough Valve")
-                .setDataBinder("db")
-                .setDataField("Rough Valve")
-                .setLeft("22em")
-                .setTop("48em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Rough Valve")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox10")
-                .setName("Rough Valve#1清潔/更換")
-                .setDataBinder("db")
-                .setDataField("Rough Valve#1清潔/更換")
-                .setLeft("2em")
-                .setTop("50em")
-                .setWidth("18em")
-                .setCaption("Rough Valve#1清潔/更換")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input58")
-                .setName("Rough Valve#2 Y/N")
-                .setDataBinder("db")
-                .setDataField("Rough Valve#2 Y/N")
-                .setLeft("22em")
-                .setTop("50em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Rough Valve#2 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input59")
-                .setName("Rough Valve 上座旋緊 / 鎖緊 確認 Y/N")
-                .setDataBinder("db")
-                .setDataField("Rough Valve 上座旋緊 / 鎖緊 確認 Y/N")
-                .setLeft("2em")
-                .setTop("52em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Rough Valve 上座旋緊 / 鎖緊 確認 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input60")
-                .setName("Purge Valve")
-                .setDataBinder("db")
-                .setDataField("Purge Valve")
-                .setLeft("22em")
-                .setTop("52em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Purge Valve")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox11")
-                .setName("Purge Valve#1")
-                .setDataBinder("db")
-                .setDataField("Purge Valve#1")
-                .setLeft("2em")
-                .setTop("54em")
-                .setWidth("18em")
-                .setCaption("Purge Valve#1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input61")
-                .setName("Purge Valve#2 Y/N")
-                .setDataBinder("db")
-                .setDataField("Purge Valve#2 Y/N")
-                .setLeft("22em")
-                .setTop("54em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Purge Valve#2 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input62")
-                .setName("Exhaust Valve")
-                .setDataBinder("db")
-                .setDataField("Exhaust Valve")
-                .setLeft("2em")
-                .setTop("56em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Exhaust Valve")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox12")
-                .setName("Exhaust Valve#1清潔/更換")
-                .setDataBinder("db")
-                .setDataField("Exhaust Valve#1清潔/更換")
-                .setLeft("22em")
-                .setTop("56em")
-                .setWidth("18em")
-                .setCaption("Exhaust Valve#1清潔/更換")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input63")
-                .setName("Exhaust Valve#2 Y/N")
-                .setDataBinder("db")
-                .setDataField("Exhaust Valve#2 Y/N")
-                .setLeft("2em")
-                .setTop("58em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Exhaust Valve#2 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input64")
-                .setName("更換Purge Valve O-ring Coil軸心鎖緊")
-                .setDataBinder("db")
-                .setDataField("更換Purge Valve O-ring Coil軸心鎖緊")
-                .setLeft("22em")
-                .setTop("58em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("更換Purge Valve O-ring Coil軸心鎖緊")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input65")
-                .setName("Xhead原S/N")
-                .setDataBinder("db")
-                .setDataField("Xhead原S/N")
-                .setLeft("2em")
-                .setTop("60em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Xhead原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox13")
-                .setName("Xhead原S/N清潔更換")
-                .setDataBinder("db")
-                .setDataField("Xhead原S/N清潔更換")
-                .setLeft("22em")
-                .setTop("60em")
-                .setWidth("18em")
-                .setCaption("Xhead原S/N清潔更換")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input66")
-                .setName("1st Displacer原S/N")
-                .setDataBinder("db")
-                .setDataField("1st Displacer原S/N")
-                .setLeft("2em")
-                .setTop("62em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("1st Displacer原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox14")
-                .setName("1st Displacer原S/N清潔更換")
-                .setDataBinder("db")
-                .setDataField("1st Displacer原S/N清潔更換")
-                .setLeft("22em")
-                .setTop("62em")
-                .setWidth("18em")
-                .setCaption("1st Displacer原S/N清潔更換")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input67")
-                .setName("2nd Displacer原S/N")
-                .setDataBinder("db")
-                .setDataField("2nd Displacer原S/N")
-                .setLeft("2em")
-                .setTop("64em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("2nd Displacer原S/N")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox15")
-                .setName("2nd Displacer原S/N清潔更換")
-                .setDataBinder("db")
-                .setDataField("2nd Displacer原S/N清潔更換")
-                .setLeft("22em")
-                .setTop("64em")
-                .setWidth("18em")
-                .setCaption("2nd Displacer原S/N清潔更換")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input68")
-                .setName("故障原因主要")
-                .setDataBinder("db")
-                .setDataField("故障原因主要")
-                .setLeft("2em")
-                .setTop("66em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("故障原因主要")
-                .setMaxlength("200")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input69")
-                .setName("故障原因次要")
-                .setDataBinder("db")
-                .setDataField("故障原因次要")
-                .setLeft("22em")
-                .setTop("66em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("故障原因次要")
-                .setMaxlength("200")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input70")
-                .setName("Pump清洗(非原廠貼紙清除) Y/N")
-                .setDataBinder("db")
-                .setDataField("Pump清洗(非原廠貼紙清除) Y/N")
-                .setLeft("2em")
-                .setTop("68em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump清洗(非原廠貼紙清除) Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input71")
-                .setName("Pump清洗(非原廠貼紙清除) 送洗 Y/N")
-                .setDataBinder("db")
-                .setDataField("Pump清洗(非原廠貼紙清除) 送洗 Y/N")
-                .setLeft("22em")
-                .setTop("68em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump清洗(非原廠貼紙清除) 送洗 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input72")
-                .setName("Pump配件掛牌(P/N：、S/N：)入烤箱 Y/N")
-                .setDataBinder("db")
-                .setDataField("Pump配件掛牌(P/N：、S/N：)入烤箱 Y/N")
-                .setLeft("2em")
-                .setTop("70em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump配件掛牌(P/N：、S/N：)入烤箱 Y/N")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input73")
-                .setName("A組裝簽名")
-                .setDataBinder("db")
-                .setDataField("A組裝簽名")
-                .setLeft("22em")
-                .setTop("70em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("A組裝簽名")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input74")
-                .setName("A組長覆核")
-                .setDataBinder("db")
-                .setDataField("A組長覆核")
-                .setLeft("2em")
-                .setTop("72em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("A組長覆核")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input75")
-                .setName("B. Vacuum Side 組裝")
-                .setDataBinder("db")
-                .setDataField("B. Vacuum Side 組裝")
-                .setLeft("22em")
-                .setTop("72em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("B. Vacuum Side 組裝")
-                .setMaxlength("100")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input76")
-                .setName("Check表單與Pump配件相符")
-                .setDataBinder("db")
-                .setDataField("Check表單與Pump配件相符")
-                .setLeft("2em")
-                .setTop("74em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Check表單與Pump配件相符")
-                .setMaxlength("1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input77")
-                .setName("Heater & Cylinder New Y/N")
-                .setDataBinder("db")
-                .setDataField("Heater & Cylinder New Y/N")
-                .setLeft("22em")
-                .setTop("74em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Heater & Cylinder New Y/N")
-                .setMaxlength("1")
             );
             
             host.form.append(
@@ -3305,6 +2601,49 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .setMaxlength("32")
             );
             
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"btn1")
+                .setLeft("11.333333333333334em")
+                .setTop("6.666666666666667em")
+                .setWidth("7.266666666666667em")
+                .setCaption("Button")
+                .onClick("_btn1_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"combo5")
+                .setDataBinder("db")
+                .setDataField("combo5")
+                .setLeft("9.533333333333333em")
+                .setTop("17em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("test")
+                .setItems([
+                    {
+                        "id" : "a",
+                        "caption" : "item1"
+                    },
+                    {
+                        "id" : "b",
+                        "caption" : "item2"
+                    },
+                    {
+                        "id" : "c",
+                        "caption" : "item3"
+                    },
+                    {
+                        "id" : "d",
+                        "caption" : "item4"
+                    }
+                ])
+                .onValueChange("_combo5_onvaluechange")
+                .afterUIValueSet("_combo5_afteruivalueset")
+                .onChange("_combo5_onchange")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -3348,6 +2687,15 @@ xui.Class('App.TestForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+ /*           var check = xui.create("xui.UI.CheckBox")
+                .setHost(ns)
+                .setName("A1")
+                .setHAlign("center")
+                .setVAlign("middle")
+                .onChange("_xui_ui_checkbox371_onchange")
+                .setCaption("");
+            ns.layout.append(check, "A1");
+            */
         },
             /**
          * Fired when user click it
@@ -3360,7 +2708,95 @@ xui.Class('App.TestForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _btn1_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                   // ns.db.setData("combo5", "item1");
+                   ns.db.updateDataFromUI();
+                   // ns.combo5.setValue("item6");
+                    var newitem = {"登錄編號2": "1234567", "Test100": "100"}; 
+                    ns.db.setData("登錄編號2", "1234567");
+                    ns.db.setData("Test100", "100");
+                    //ns.db.setData(newitem);
+                    console.log(ns.db.getData());
+                },
+                    /**
+         * Fired when control's UI value is changed!
+         * @method onChange [xui.UI.CheckBox event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+                    _xui_ui_checkbox6_onchange:function(profile, oldValue, newValue, force, tag, tagVar){
+                        var ns = this, uictrl = profile.boxing();
+                        console.log("changed");
+                    },
+        /**
+         * Fired when control's UI value is changed!
+         * @method onChange [xui.UI.CheckBox event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _xui_ui_checkbox371_onchange:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            console.log("!")
+        },
+            /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+            _combo5_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+                var ns = this, uictrl = profile.boxing();
+                console.log("UI Value Set");
+            },
+        /**
+         * Fired when control's UI value is changed!
+         * @method onChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _combo5_onchange:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            console.log("OnChange");
+        },
+        /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+        _combo5_onvaluechange:function(profile, oldValue, newValue, force, tag){
+            var ns = this, uictrl = profile.boxing();
+              console.log("OnValueChange");
+      }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

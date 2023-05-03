@@ -38,7 +38,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setTop("1.5238095238095237em")
                 .setWidth("58.51428571428571em")
                 .setHeight("48.76190476190476em")
-                .setCaption("Crosshead維修工單")
+                .setCaption("SHI Crosshead維修工單")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
             );
@@ -157,17 +157,19 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div868.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5459")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("登錄編號")
                 .setLeft("43.42857142857143em")
                 .setTop("0.7333333333333333em")
-                .setWidth("11.2em")
+                .setWidth("13.266666666666667em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("popbox")
                 .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
             );
             
             host.xui_ui_div868.append(
@@ -224,8 +226,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("維修方式")
                 .setItems([
                     {
-                        "id" : "Overhau",
-                        "caption" : "Overhau",
+                        "id" : "Overhaul",
+                        "caption" : "Overhaul",
                         "imageClass" : ""
                     },
                     {
@@ -301,7 +303,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("Remark")
                 .setLeft("15.238095238095237em")
                 .setTop("7.847619047619047em")
-                .setWidth("39.923809523809524em")
+                .setWidth("41.4em")
                 .setLabelSize("4em")
                 .setLabelCaption("Remark")
                 .setMaxlength("20")
@@ -312,10 +314,10 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input247")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("S/N")
-                .setLeft("33.523809523809526em")
+                .setDataField("Crosshead編號")
+                .setLeft("38.4em")
                 .setTop("3.276190476190476em")
-                .setWidth("20.876190476190477em")
+                .setWidth("18.266666666666666em")
                 .setLabelSize("10em")
                 .setLabelCaption("Crosshead 編號：XH")
                 .setMaxlength("20")
@@ -341,7 +343,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -535,7 +537,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox803")
                 .setDataBinder("rdb")
-                .setDataField("Report")
+                .setDataField("A2#5")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("37.333333333333336em")
@@ -550,7 +552,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5630")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A2#5")
+                .setDataField("A2#6")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("43.50476190476191em")
@@ -634,7 +636,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1745")
                 .setDataBinder("crdb")
-                .setDataField("A5#1")
+                .setDataField("A4#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -671,7 +673,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1746")
                 .setDataBinder("crdb")
-                .setDataField("A5#2")
+                .setDataField("A4#2")
                 .setItems([
                     {
                         "id" : "更換",
@@ -717,7 +719,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1803")
                 .setDataBinder("crdb")
-                .setDataField("A6#1")
+                .setDataField("A5#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -754,7 +756,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox855")
                 .setDataBinder("crdb")
-                .setDataField("A6#2")
+                .setDataField("A5#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockMargin({
@@ -776,7 +778,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5789")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A6#4")
+                .setDataField("A5#3")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -800,7 +802,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox859")
                 .setDataBinder("crdb")
-                .setDataField("A6#5")
+                .setDataField("A5#4")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -830,7 +832,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1813")
                 .setDataBinder("crdb")
-                .setDataField("A6#6")
+                .setDataField("A6#5")
                 .setItems([
                     {
                         "id" : "更換",
@@ -866,7 +868,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox868")
                 .setDataBinder("crdb")
-                .setDataField("A6#7")
+                .setDataField("A5#6")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockMargin({
@@ -888,7 +890,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5809")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A6#9")
+                .setDataField("A5#7")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -912,7 +914,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox870")
                 .setDataBinder("crdb")
-                .setDataField("A6#10")
+                .setDataField("A5#8")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -956,7 +958,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox884")
                 .setDataBinder("crdb")
-                .setDataField("A7#1")
+                .setDataField("A6#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -986,7 +988,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox909")
                 .setDataBinder("crdb")
-                .setDataField("A7#2")
+                .setDataField("A6#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(5)
@@ -1011,7 +1013,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5916")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#1")
+                .setDataField("A7#1")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("0.7619047619047619em")
@@ -1028,7 +1030,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5917")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#2")
+                .setDataField("A7#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("15.238095238095237em")
@@ -1044,7 +1046,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5918")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#3")
+                .setDataField("A7#3")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("22.01904761904762em")
@@ -1060,7 +1062,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5969")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#4")
+                .setDataField("A7#4")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("22.78095238095238em")
@@ -1076,7 +1078,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5970")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#5")
+                .setDataField("A7#5")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("23.542857142857144em")
@@ -1092,7 +1094,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5971")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A8#6")
+                .setDataField("A7#6")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("24.304761904761904em")
@@ -1130,7 +1132,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox967")
                 .setDataBinder("crdb")
-                .setDataField("A9#1")
+                .setDataField("A8#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1146,7 +1148,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input5974")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A9#2")
+                .setDataField("A8#2")
                 .setDock("top")
                 .setDockOrder(3)
                 .setDockStretch("fixed")
@@ -1171,7 +1173,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6053")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A10#1")
+                .setDataField("A9#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(1)
@@ -1191,7 +1193,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6054")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A10#2")
+                .setDataField("A9#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1236,7 +1238,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox1043")
                 .setDataBinder("crdb")
-                .setDataField("A11#1")
+                .setDataField("A10#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1270,7 +1272,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6113")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A11#2")
+                .setDataField("A10#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1294,7 +1296,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6114")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A11#3")
+                .setDataField("A10#3")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1319,7 +1321,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6115")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A11#4")
+                .setDataField("A10#4")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1353,7 +1355,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input6116")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
-                .setDataField("A12#1")
+                .setDataField("A11#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(1)
@@ -1413,7 +1415,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox1060")
                 .setDataBinder("crdb")
-                .setDataField("A13#1")
+                .setDataField("A12#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(2)
@@ -1452,7 +1454,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox242")
                 .setDataBinder("crdb")
-                .setDataField("B3#1")
+                .setDataField("B1#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -1509,7 +1511,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox329")
                 .setDataBinder("crdb")
-                .setDataField("B3#2")
+                .setDataField("B1#2")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -1546,7 +1548,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox403")
                 .setDataBinder("crdb")
-                .setDataField("B3#2")
+                .setDataField("B1#3")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(6)
@@ -1572,7 +1574,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox329")
                 .setDataBinder("crdb")
-                .setDataField("B3#1")
+                .setDataField("B2#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -1637,7 +1639,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox471")
                 .setDataBinder("crdb")
-                .setDataField("B5#1")
+                .setDataField("B3#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -1661,7 +1663,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox150")
                 .setDataBinder("crdb")
-                .setDataField("B3#1")
+                .setDataField("B4#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -1707,7 +1709,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox332")
                 .setDataBinder("crdb")
-                .setDataField("B3#1")
+                .setDataField("B5#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -1793,7 +1795,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox374")
                 .setDataBinder("crdb")
-                .setDataField("B3#1")
+                .setDataField("B6#1")
                 .setItems([
                     {
                         "id" : "更換",
@@ -1858,7 +1860,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox533")
                 .setDataBinder("crdb")
-                .setDataField("B5#1")
+                .setDataField("B7#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -1915,8 +1917,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
             host.xui_ui_div492.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox422")
-                .setDataBinder("rdb")
-                .setDataField("Report")
+                .setDataBinder("crdb")
+                .setDataField("C1#1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -2028,7 +2030,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1487")
                 .setName("C組裝簽名")
                 .setDataBinder("rdb")
-                .setDataField("C組裝簽名")
+                .setDataField("組裝簽名C")
                 .setLeft("7.466666666666667em")
                 .setTop("0.6857142857142857em")
                 .setWidth("17.333333333333332em")
@@ -2042,7 +2044,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1488")
                 .setName("C組長覆核")
                 .setDataBinder("rdb")
-                .setDataField("C組長覆核")
+                .setDataField("組長覆核C")
                 .setLeft("7.466666666666667em")
                 .setTop("2.6666666666666665em")
                 .setWidth("17.333333333333332em")
@@ -2056,7 +2058,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput211")
                 .setName("日期")
                 .setDataBinder("rdb")
-                .setDataField("C組裝日期")
+                .setDataField("組裝日期C")
                 .setLeft("26.133333333333333em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15em")
@@ -2071,7 +2073,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput212")
                 .setName("日期")
                 .setDataBinder("rdb")
-                .setDataField("C覆核日期")
+                .setDataField("覆核日期C")
                 .setLeft("26.133333333333333em")
                 .setTop("2.9714285714285715em")
                 .setWidth("15em")
@@ -2098,7 +2100,7 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 })
                 .setLeft("9.142857142857142em")
                 .setTop("8.304761904761905em")
-                .setWidth("53.56190476190476em")
+                .setWidth("54.13333333333333em")
                 .setHeight("17.066666666666666em")
                 .setLayoutData({
                     "rows" : 7,
@@ -2391,8 +2393,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div619")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("17.447619047619046em")
-                .setHeight("15.619047619047619em"),
+                .setWidth("16.666666666666668em")
+                .setHeight("13.666666666666666em"),
                 "A1"
             );
             
@@ -2418,8 +2420,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div620")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("17.523809523809526em")
-                .setHeight("15.619047619047619em"),
+                .setWidth("16.733333333333334em")
+                .setHeight("13.666666666666666em"),
                 "E1"
             );
             
@@ -2448,8 +2450,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J2"
             );
@@ -2462,8 +2464,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J4"
             );
@@ -2476,8 +2478,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K2"
             );
@@ -2490,8 +2492,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#4")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K4"
             );
@@ -2504,8 +2506,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J6"
             );
@@ -2518,8 +2520,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#6")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K6"
             );
@@ -2565,7 +2567,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
-           // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
+             console.log(utils.createDDL(ns.dialog,"SHI Crosshead維修工單"));
+          // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
             /**
@@ -2579,7 +2582,20 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+                _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+                    var ns = this, uictrl = profile.boxing();
+                    utils.updateNewWorkSheetValue(ns.crdb, newValue);
+                }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

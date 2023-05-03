@@ -27,15 +27,15 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"db")
-                .setName("db")
+                .setHost(host,"rdb")
+                .setName("rdb")
             );
             
             append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("9.904761904761905em")
-                .setTop("4.571428571428571em")
+                .setLeft("6em")
+                .setTop("2em")
                 .setWidth("67.80952380952381em")
                 .setHeight("42.666666666666664em")
                 .setCaption("Compressor Heater Fail/ Motor Fail零件更換表(維修工單附件)")
@@ -149,8 +149,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("19.80952380952381em")
                 .setTop("11.428571428571429em")
-                .setWidth("65.14285714285714em")
-                .setHeight("31.085714285714285em")
+                .setWidth("65.4em")
+                .setHeight("31.066666666666666em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 11,
@@ -363,13 +363,356 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div935")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("10.666666666666666em")
+                .setHeight("15.6em"),
+                "E3"
+            );
+            
+            host.xui_ui_div935.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button598")
+                .setDataBinder("rdb")
+                .setDataField("Bench簽名D")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 80,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("Bench簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_div935.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button599")
+                .setDataBinder("rdb")
+                .setDataField("秘書簽名D")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("秘書簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div936")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B2"
+            );
+            
+            host.xui_ui_div936.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button561")
+                .setDataBinder("rdb")
+                .setDataField("D1")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div937")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B3"
+            );
+            
+            host.xui_ui_div937.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button562")
+                .setDataBinder("rdb")
+                .setDataField("D2")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div938")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B4"
+            );
+            
+            host.xui_ui_div938.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button563")
+                .setDataBinder("rdb")
+                .setDataField("D3")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div939")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B5"
+            );
+            
+            host.xui_ui_div939.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button564")
+                .setDataBinder("rdb")
+                .setDataField("D4")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div940")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B6"
+            );
+            
+            host.xui_ui_div940.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button565")
+                .setDataBinder("rdb")
+                .setDataField("D5")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div941")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B7"
+            );
+            
+            host.xui_ui_div941.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button566")
+                .setDataBinder("rdb")
+                .setDataField("D6")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div942")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B8"
+            );
+            
+            host.xui_ui_div942.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button567")
+                .setDataBinder("rdb")
+                .setDataField("D7")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div943")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B9"
+            );
+            
+            host.xui_ui_div943.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button568")
+                .setDataBinder("rdb")
+                .setDataField("D8")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div944")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B10"
+            );
+            
+            host.xui_ui_div944.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button569")
+                .setDataBinder("rdb")
+                .setDataField("D9")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout33.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1297")
                 .setName("B11")
+                .setDataBinder("rdb")
+                .setDataField("其他附註D")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("56.76190476190476em")
-                .setHeight("9.752380952380953em")
+                .setWidth("58em")
+                .setHeight("8.533333333333333em")
                 .setLabelPos("none")
                 .setMultiLines(true),
                 "B11"
@@ -390,8 +733,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("19.80952380952381em")
                 .setTop("11.428571428571429em")
-                .setWidth("65.14285714285714em")
-                .setHeight("31.085714285714285em")
+                .setWidth("65.4em")
+                .setHeight("31.066666666666666em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 8,
@@ -465,9 +808,6 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                             }
                         },
                         "D1" : {
-                            "value" : "9600 Heater Fail (僅更換heater exchanger估價金額NT$137,000.-)"
-                        },
-                        "E1" : {
                             "value" : "9600 Heater Fail (僅更換heater exchanger估價金額NT$137,000.-)"
                         },
                         "A2" : {
@@ -559,13 +899,263 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div928")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B2"
+            );
+            
+            host.xui_ui_div928.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button555")
+                .setDataBinder("rdb")
+                .setDataField("C1")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div929")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B3"
+            );
+            
+            host.xui_ui_div929.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button556")
+                .setDataBinder("rdb")
+                .setDataField("C2")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div930")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B4"
+            );
+            
+            host.xui_ui_div930.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button557")
+                .setDataBinder("rdb")
+                .setDataField("C3")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div931")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B5"
+            );
+            
+            host.xui_ui_div931.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button558")
+                .setDataBinder("rdb")
+                .setDataField("C4")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div932")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B6"
+            );
+            
+            host.xui_ui_div932.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button559")
+                .setDataBinder("rdb")
+                .setDataField("C5")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div933")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.6em")
+                .setHeight("1.8666666666666667em"),
+                "B7"
+            );
+            
+            host.xui_ui_div933.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button560")
+                .setDataBinder("rdb")
+                .setDataField("C6")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div934")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("10.933333333333334em")
+                .setHeight("9.733333333333333em"),
+                "E3"
+            );
+            
+            host.xui_ui_div934.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button602")
+                .setDataBinder("rdb")
+                .setDataField("Bench簽名C")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 20,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("Bench簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_div934.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button603")
+                .setDataBinder("rdb")
+                .setDataField("秘書簽名C")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("秘書簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout28.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1261")
                 .setName("B9")
+                .setDataBinder("rdb")
+                .setDataField("其他附註C")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("57.75238095238095em")
-                .setHeight("9.752380952380953em")
+                .setWidth("57.86666666666667em")
+                .setHeight("8.533333333333333em")
                 .setLabelPos("none")
                 .setMultiLines(true),
                 "B8"
@@ -586,8 +1176,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("19.047619047619047em")
                 .setTop("10.666666666666666em")
-                .setWidth("65.14285714285714em")
-                .setHeight("31.085714285714285em")
+                .setWidth("65.4em")
+                .setHeight("31.066666666666666em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 8,
@@ -661,9 +1251,6 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                             }
                         },
                         "D1" : {
-                            "value" : "8500/8510 Heater Fail (僅更換heater exchanger估價金額NT$175,800.-)"
-                        },
-                        "E1" : {
                             "value" : "8500/8510 Heater Fail (僅更換heater exchanger估價金額NT$175,800.-)"
                         },
                         "A2" : {
@@ -754,6 +1341,268 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 })
             );
             
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div922")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B2"
+            );
+            
+            host.xui_ui_div922.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button547")
+                .setDataBinder("rdb")
+                .setDataField("B1")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div923")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B3"
+            );
+            
+            host.xui_ui_div923.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button550")
+                .setDataBinder("rdb")
+                .setDataField("B2")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div924")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B4"
+            );
+            
+            host.xui_ui_div924.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button551")
+                .setDataBinder("rdb")
+                .setDataField("B3")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div925")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B5"
+            );
+            
+            host.xui_ui_div925.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button552")
+                .setDataBinder("rdb")
+                .setDataField("B4")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div926")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B6"
+            );
+            
+            host.xui_ui_div926.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button553")
+                .setDataBinder("rdb")
+                .setDataField("B5")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div927")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.4em")
+                .setHeight("1.8666666666666667em"),
+                "B7"
+            );
+            
+            host.xui_ui_div927.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button554")
+                .setDataBinder("rdb")
+                .setDataField("B6")
+                .setDock("fill")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                        "background-color" : "#D2E3EF"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div970")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("10.666666666666666em")
+                .setHeight("9.733333333333333em"),
+                "E3"
+            );
+            
+            host.xui_ui_div970.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button600")
+                .setDataBinder("rdb")
+                .setDataField("Bench簽名")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 20,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("Bench簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_div970.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button601")
+                .setDataBinder("rdb")
+                .setDataField("秘書簽名")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("8.133333333333333em")
+                .setHeight("1.8666666666666667em")
+                .setCaption("秘書簽名")
+                .setCustomStyle({
+                    "BACKGROUND" : {
+                        "background-color" : "transparent"
+                    },
+                    "KEY" : {
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout24.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1175")
+                .setName("B8")
+                .setDataBinder("rdb")
+                .setDataField("其他附註")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("58em")
+                .setHeight("8.533333333333333em")
+                .setLabelPos("none"),
+                "B8"
+            );
+            
             host.xui_ui_tabs25.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block1")
@@ -796,7 +1645,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1230")
                 .setName("客戶名稱")
                 .setDataBinder("rdb")
-                .setDataField("客戶名稱")
+                .setDataField("ATTN")
                 .setLeft("18.285714285714285em")
                 .setTop("0.6em")
                 .setWidth("12.666666666666666em")
@@ -810,7 +1659,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1231")
                 .setName("客戶名稱")
                 .setDataBinder("rdb")
-                .setDataField("客戶名稱")
+                .setDataField("Model")
                 .setLeft("3.7333333333333334em")
                 .setTop("3.7333333333333334em")
                 .setWidth("12.666666666666666em")
@@ -824,7 +1673,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1232")
                 .setName("客戶名稱")
                 .setDataBinder("rdb")
-                .setDataField("客戶名稱")
+                .setDataField("S/N")
                 .setLeft("18.285714285714285em")
                 .setTop("3.7333333333333334em")
                 .setWidth("12.666666666666666em")
@@ -838,7 +1687,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1233")
                 .setName("客戶名稱")
                 .setDataBinder("rdb")
-                .setDataField("客戶名稱")
+                .setDataField("ETM")
                 .setLeft("32.76190476190476em")
                 .setTop("3.7333333333333334em")
                 .setWidth("14.476190476190476em")
@@ -850,6 +1699,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.block1.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1234")
+                .setDataBinder("rdb")
+                .setDataField("故障問題簡述")
                 .setLeft("0.7619047619047619em")
                 .setTop("6.780952380952381em")
                 .setWidth("30.4em")
@@ -864,7 +1715,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input1235")
                 .setName("客戶名稱")
                 .setDataBinder("rdb")
-                .setDataField("客戶名稱")
+                .setDataField("預估金額")
                 .setLeft("32.76190476190476em")
                 .setTop("6.780952380952381em")
                 .setWidth("14.476190476190476em")
@@ -924,6 +1775,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            console.log(utils.createDDL(ns.dialog,"Compressor Heater Fail/ Motor Fail零件更換表"))
         },
             /**
          * Fired when user click it

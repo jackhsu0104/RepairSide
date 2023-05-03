@@ -1,5 +1,7 @@
- utils = {
-	getRowMap: function(data){
+/*20230404*/
+ConditionDatas = {};
+utils = {
+    getRowMap: function(data){
                     var rows=[];
                     // maybe need to collect rowsMap
                     if(data.rows && data.columns){
@@ -15,11 +17,11 @@
                             rows.push(row);
                         });
                     }
-					return rows;
-	}, 
+                    return rows;
+    }, 
     setGridData : function(data, grid){
-				var rows = utils.getRowMap(data); 
-				grid.fieldNames = data.columns;
+                var rows = utils.getRowMap(data); 
+                grid.fieldNames = data.columns;
                 grid.removeAllRows().setRows(rows);
     },
     sendLoginCmd : function(hash, onFinish, wait){
@@ -74,39 +76,39 @@
         utils.sendDataCmd(hash,  onFinish);
     }, 
     setFieldValue : function(srcui, dstui){
-		if(srcui.updatingFieldValue)
-			return;
-		var value = srcui.getUIValue();
-		var config = utils.getTableFieldComboConfig("通用", srcui.getDataField());
-		var config2 = utils.getTableFieldComboConfig("通用", dstui.getDataField());
-		var tableName = config.tableName;
-		var key = config.keyid;
-		if(config2)
-		  var col = config2.keyid;
-		else 
-		  var col = dstui.getDataField();
-			
-		var cb = function(data){
-			if(data)
-			{
-				if(data.rows.length  > 0)
-				{
-					dstui.updatingFieldValue = true;
-					dstui.setValue(data.rows[0]);
-					dstui.updatingFieldValue =  false;
-				}
-			}
-		}	
-		var condition =  `[${key}] = '${value}'`;
-		utils.getTableItems({"tableName":tableName, "fields": col, "condition":condition}, cb);
-	},	
+        if(srcui.updatingFieldValue)
+            return;
+        var value = srcui.getUIValue();
+        var config = utils.getTableFieldComboConfig("通用", srcui.getDataField());
+        var config2 = utils.getTableFieldComboConfig("通用", dstui.getDataField());
+        var tableName = config.tableName;
+        var key = config.keyid;
+        if(config2)
+          var col = config2.keyid;
+        else 
+          var col = dstui.getDataField();
+            
+        var cb = function(data){
+            if(data)
+            {
+                if(data.rows.length  > 0)
+                {
+                    dstui.updatingFieldValue = true;
+                    dstui.setValue(data.rows[0]);
+                    dstui.updatingFieldValue =  false;
+                }
+            }
+        }    
+        var condition =  `[${key}] = '${value}'`;
+        utils.getTableItems({"tableName":tableName, "fields": col, "condition":condition}, cb);
+    },    
     getTableItems : function(prop, onFinish, wait){
         var hash={"cmd":"getTableItems","table":prop.tableName};
         if(prop.condition)
             hash.condition = prop.condition;
         if(prop.orderby)
             hash.orderby = prop.orderby;
-		
+        
         if(prop.fields  && prop.fields != "*" && prop.fields != "")
         {
             var fields = prop.fields.split(",");
@@ -119,53 +121,109 @@
             fields = fields.join(",");
             hash.fields = fields;
         }
-        utils.sendDataCmd(hash, onFinish, wait);
+        
+        return utils.sendDataCmd(hash, onFinish, wait);
     }, 
     getPageQueryItems : function(query, orderby, pageno, pagelen, onFinish,  wait){
         var hash={"cmd":"getQueryItems","query":query,"pageno":pageno, "pagelen":pagelen, "orderby":orderby};
-        utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish, wait);
     }, 
     getQueryItems : function(query,onFinish, wait){
         var hash={"cmd":"getQueryItems","query":query};
-        utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish, wait);
     }, 
-	getItemValue: function(table, key, keyValue,  getField)
-	{
-		if(typeof getField == "undefined")
-			getField = "*";
-		if(table.startsWith("crm."))
-		{
-			table = table.substring(4);
-			table = `GDCRM.dbo.[${table}]`;
-		}
-		var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
+    getItemValueByCondition: function(table, condition,  getField)
+    {
+        if(typeof getField == "undefined")
+            getField = "*";
+        table = utils.getProperTableName(table);
+
+        var query = `SELECT ${getField} FROM ${table} WHERE ${condition}`;
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash,  null, true);
-		if(datas.rows.length > 0)
-		{
-		  if(getField != "*"  && getField.indexOf(",") == -1)	
-		    return datas.rows[0][0];
-		  else
-		  {	
-			var rows = utils.getRowMap(datas);
-			return rows[0];
-		  }			
-		}
-	    else 
-		  return "";    
-	},
-	checkItemExists: function(table, field, value)
-	{
-		var query = `SELECT ${field} FROM ${table} WHERE ${field}='${value}'`;
+        if(datas.rows.length > 0)
+        {
+          if(getField != "*"  && getField.indexOf(",") == -1)    
+            return datas.rows[0][0];
+          else
+          {    
+            var rows = utils.getRowMap(datas);
+            return rows[0];
+          }            
+        }
+        else 
+          return "";    
+    },
+    getProperFields: function(fields){
+        if(fields == '*')
+            return fields;
+        var items = fields.split(',');
+        var R= "";
+        for(var i=0; i<items.length; i++)
+        {
+            var it = items[i].trim();
+            if(it.startsWith("["))
+                R += it;
+            else
+                R += ("[" + it + "]");
+            if(i != items.length-1)
+              R += ","
+        }
+        return R;
+    },
+    getProperTableName :function(table){
+        if(table.startsWith("crm."))
+        {
+            table = table.substring(4);
+            if(!table.startsWith("["))
+              table = `[${table}]`;
+            table = `GDCRM.dbo.[${table}]`;
+        }
+        else
+        {
+            if(!table.startsWith("["))
+              table = `[${table}]`;
+        }
+        return table;
+    },
+    getItemValue: function(table, key, keyValue,  getField, allRows = false)
+    {
+        if(typeof getField == "undefined")
+            getField = "*";
+        getField = utils.getProperFields(getField);
+        key = utils.getProperFields(key);
+        table = utils.getProperTableName(table);
+        var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash,  null, true);
-		if(datas.totalRowCount > 0)
-			return true;
-		else
-			return false;
-	},
+        if(datas.rows.length > 0)
+        {
+          if(getField != "*"  && getField.indexOf(",") == -1)    
+            return datas.rows[0][0];
+          else 
+          {    
+            var rows = utils.getRowMap(datas);
+            if(allRows)
+                return rows;
+            else
+                return rows[0];
+          }            
+        }
+        else 
+          return "";    
+    },
+    checkItemExists: function(table, field, value)
+    {
+        var query = `SELECT ${field} FROM ${table} WHERE ${field}='${value}'`;
+        var hash={"cmd":"getQueryItems","query":query};
+        var datas = utils.sendDataCmd(hash,  null, true);
+        if(datas.totalRowCount > 0)
+            return true;
+        else
+            return false;
+    },
     modifyTableItem : function(table, key, datas, onFinish,  wait){
-		key = utils.removeBracket(key);
+        key = utils.removeBracket(key);
         var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":datas};
         utils.sendDataCmd(hash,  onFinish, wait);
     }, 
@@ -173,54 +231,74 @@
         var hash={"cmd":"insertTableItem","table":table, "item":datas};
         utils.sendDataCmd(hash,  onFinish,wait);
     }, 
-    removeTableItem : function(table, keys, onFinish,wait){
-        var hash={"cmd":"deleteTableItem","table":table, "key":keys};
+    removeTableItem : function(table, keys, value, onFinish,wait){
+        var hash={"cmd":"deleteTableItem","table":table, "key":keys, "value":value};
         utils.sendDataCmd(hash,  onFinish,wait);
     }, 
-	showDataGrid: function(prop){
-		var cb = function(mod){
-			mod.dialog.setCaption(prop.tableName);
-			mod.modGrid.properties = prop;
-		};    
+    showDataGrid: function(prop){
+        var cb = function(mod){
+            mod.dialog.setCaption(prop.tableName);
+            mod.modGrid.properties = prop;
+        };    
         xui.showModule("App.DataGridForm", cb);
-	},
-	removeBracket: function(str){
-		str = str.replace("[","");
-		str = str.replace("]","");
-		return str;
-	},
+    },
+    newCnNumber : function(repairno,onFinish){
+        var hash={"cmd":"newCnNumber","value": repairno};
+        return utils.sendDataCmd(hash,  onFinish);
+    }, 
+    removeBracket: function(str){
+        str = str.replace("[","");
+        str = str.replace("]","");
+        return str;
+    },
+    hasSavePrivilege: function(item){
+        var chkeys = ["登錄人","Sponser"];
+        var pri = LoginUser.Privilege;
+        return true;
+    },
+    showItemPage : function(table, key, value, pagename, mode = "edit", onload = null,  ondestroy = null){
+            if( value && value != "")
+            {
+              var item = utils.getItemValue(table,key,value,"*");
+              if(item != "")
+                utils.showDataPage(pagename, item, mode, onload, ondestroy);        
+            }
+    },
     showDataPage : function(pagename, item, mode, onload,  ondestroy){
         var cb2 = function(mod){
-			var db = mod.getDataBinders();
-			if(db.length > 0)
-			  db = db[0].boxing();
-			else
-			  return;	
-			if(mode == "edit")
-				mod.saveBtn.setCaption("儲存");
-			else
-				mod.saveBtn.setCaption("新增");
-				
-			mod.properties.mode = mode;  
+            var db = mod.getDataBinders();
+            if(db.length > 0)
+              db = db[0].boxing();
+            else
+              return;    
+            if(mode.includes("edit"))
+                mod.saveBtn.setCaption("儲存");
+            else
+                mod.saveBtn.setCaption("新增");
+                
+            mod.properties.mode = mode;  
             utils.installDataBinderHooks(mod);  
-			utils.installModuleTableBoxHooks(mod);
-			db.setData(item).updateDataToUI();
+            utils.installModuleTableBoxHooks(mod);
+            if(mod.saveBtn && utils.hasSavePrivilege(item) == false)
+              mod.saveBtn.setDisabled(true);
+                
+            db.setData(item).updateDataToUI();
             utils.updateModuleTableBoxCaption(mod);
             if(onload)
               onload(mod);
-			if(ondestroy)
-			{
-			  mod.setEvents("onDestroy",function(){
+            if(ondestroy)
+            {
+              mod.setEvents("onDestroy",function(){
                     ondestroy(mod);
-                });	
-			}				
+                });    
+            }                
         };
         xui.showModule("App." + pagename, cb2);
     }, 
     showPage : function(pagename,  cb){
         var cb2 = function(mod){
             utils.installDataBinderHooks(mod);  
-			utils.installModuleTableBoxHooks(mod);
+            utils.installModuleTableBoxHooks(mod);
             if(cb)
               cb(mod);  
         };
@@ -243,70 +321,74 @@
             mod.loadGridData();
         });
     },
-	getCompareString: function(comp,value){
-		var R=" ";
-		value1 = "'"+ value + "'"
-		value2 = "'%"+ value + "%'"
-		value3 = "'%"+ value + "'"
-		value4 = "'"+ value + "%'"
-		if(comp == ">")
-			R += " > " + value1;
-		else if(comp == ">=")
-			R += " >= " + value1;
-		else if(comp == "<")
-			R += " < " + value1;
-		else if(comp == "<=")
-			R += " <= " + value1;
-		else if(comp == "==")
-			R += " = " + value1;
-		else if(comp == "!=")
-			R += " != " + value1;
-		else if(comp == "contains")
-			R += " LIKE" + value2;
-		else if(comp == "startsWith")
-			R += " LIKE " + value3;
-		else if(comp == "endsWith")
-			R += " LIKE " + value4;
-		return R;
-	},
-	
-	getTableFieldComboConfig: function(tableName,  col){
-		if(!TableComboConfigs.hasOwnProperty(tableName) || !TableComboConfigs[tableName].hasOwnProperty(col))
-		{
-			if(!TableComboConfigs["通用"].hasOwnProperty(col))
-			  return null;
-			else
-			  tableName = "通用";	
-		}
-		var config={};
-		var s = TableComboConfigs[tableName][col];
-		s = s.split(":");
-		config.tableName = s[0];
-		config.keyid = s[1];
-		if(typeof s[2] == "undefined"  || s[2] == "")
-		  config.displayFields = config.keyid;
-		else 
-		  config.displayFields = s[2];
-		if(typeof s[3] == "undefined"  || s[3] == "")
-		  config.displayCaptions = config.displayFields;
-		else 
-		  config.displayCaptions = s[3];
-		if(typeof s[4] == "undefined"  || s[4] == "")
-		  config.displayWidths = "";
-		else 
-		  config.displayWidths = s[4];
-	    return config;
-	},
+    getCompareString: function(comp,value){
+        var R=" ";
+        value1 = "'"+ value + "'"
+        value2 = "'%"+ value + "%'"
+        value3 = "'%"+ value + "'"
+        value4 = "'"+ value + "%'"
+        if(comp == ">")
+            R += " > " + value1;
+        else if(comp == ">=")
+            R += " >= " + value1;
+        else if(comp == "<")
+            R += " < " + value1;
+        else if(comp == "<=")
+            R += " <= " + value1;
+        else if(comp == "==")
+            R += " = " + value1;
+        else if(comp == "!=")
+            R += " != " + value1;
+        else if(comp == "contains")
+            R += " LIKE" + value2;
+        else if(comp == "startsWith")
+            R += " LIKE " + value3;
+        else if(comp == "endsWith")
+            R += " LIKE " + value4;
+        return R;
+    },
+    
+    getTableFieldComboConfig: function(tableName,  col){
+        if(!TableComboConfigs.hasOwnProperty(tableName) || !TableComboConfigs[tableName].hasOwnProperty(col))
+        {
+            if(!TableComboConfigs["通用"].hasOwnProperty(col))
+              return null;
+            else
+              tableName = "通用";    
+        }
+        var config={};
+        var s = TableComboConfigs[tableName][col];
+        s = s.split(":");
+        config.tableName = s[0];
+        config.keyid = s[1];
+        if(typeof s[2] == "undefined"  || s[2] == "")
+          config.displayFields = config.keyid;
+        else 
+          config.displayFields = s[2];
+        if(typeof s[3] == "undefined"  || s[3] == "")
+          config.displayCaptions = config.displayFields;
+        else 
+          config.displayCaptions = s[3];
+        if(typeof s[4] == "undefined"  || s[4] == "")
+          config.displayWidths = "";
+        else 
+          config.displayWidths = s[4];
+        if(typeof s[5] == "undefined"  || s[5] == "")
+          config.condition = "";
+        else 
+          config.condition = s[5];
+        return config;
+    },
     saveForm: function(mod, ignoreFields, extDatas, onFinish, db){
             var prop = mod.properties;
-			if(typeof db == "undefined")
-			{
-			  db = mod.getDataBinders();
-			  if(db.length > 0)
-				db = db[0].boxing();
-			  else
-				return false;
-			}
+            if(typeof db == "undefined")
+            {
+              db = mod.getDataBinders();
+              if(db.length > 0)
+                db = db[0].boxing();
+              else
+                return false;
+            }
                 
             if(db && db.updateDataFromUI() == false)
                 return false;
@@ -316,9 +398,9 @@
                   var item = data.item;  
                   db.setData(item).updateDataToUI();
                   prop.mode = "edit";
-				  mod.saveBtn.setCaption("儲存");	
-				  if(onFinish)
-					onFinish(data.item);  
+                  mod.saveBtn.setCaption("儲存");    
+                  if(onFinish)
+                    onFinish(data.item);  
                 }
             }
             var datas = db.getData();
@@ -332,30 +414,39 @@
                if(typeof datas["其他相關資料"] != "undefined")
                  delete datas["其他相關資料"];
             }
-			if(ignoreFields)
-			{	
-			  for(let i=0; i<ignoreFields.length; i++)
-			  {
+            if(ignoreFields)
+            {    
+              for(let i=0; i<ignoreFields.length; i++)
+              {
                 if(typeof datas[ignoreFields[i]] != "undefined")
                   delete datas[ignoreFields[i]];
-			  }
-			}
-			if(extDatas)
-			{	
-			  let keys = Object.keys(extDatas); 	
-			  for(let i=0; i<keys.length; i++)
-			  {
-				let key = keys[i];  
+              }
+            }
+            //remove unused field
+            var fields = utils.getTableFieldNames(prop.tableName);
+            var keys = Object.keys(datas);     
+            for(let i=0; i<keys.length; i++)
+            {
+                if(fields.indexOf(keys[i]) == -1)
+                  delete datas[keys[i]];
+            }
+        
+            if(extDatas)
+            {    
+              let keys = Object.keys(extDatas);     
+              for(let i=0; i<keys.length; i++)
+              {
+                let key = keys[i];  
                 datas[key] = extDatas[key];
-			  }
-			}
+              }
+            }
             if(prop.mode.indexOf("new") != -1)
             {
               utils.insertTableItem(prop.tableName,  datas, newcb);  
             }
             else
             {
-               utils.modifyTableItem(prop.tableName, prop.keyid, datas);
+               utils.modifyTableItem(prop.tableName, prop.keyid, datas, null, true);
                mod.dialog.close();
             }    
             return true;
@@ -400,16 +491,16 @@
                         dataFromUI[i] = xui.Date.format(o,"yyyy-mm-dd hh:nn:ss");
                       });
         }
-		// console.log("nodes:",nodes); 
+        // console.log("nodes:",nodes); 
          for(var i=0; i< nodes.length; i++)
          {
             let n = nodes[i].boxing();;
             n.afterUpdateDataFromUI("_db_afterupdatedatafromui");
-		 } 
+         } 
     }, 
     installModuleTableBoxHooks : function(mod){
-		var root = mod.getRoot();
-		console.log("root:", root);
+        var root = mod.getRoot();
+        console.log("root:", root);
         if(mod.form)
            var nodes = mod.form.getChildren(true,true).get();
         else if(mod.mainPage)
@@ -418,23 +509,24 @@
            var nodes = mod.dialog.getChildren(true,true).get();
         var formTableName = mod.properties.tableName;   
 
-		var showCombo = function(uictrl, condition){
-				var tableName  = formTableName;
-				if(typeof tableName == "undefined")  //get from db tagvar
-				{
-				  tableName = "通用";
-				}
-				var field  = uictrl.getDataField();
-				var condition = "";
-				if(uictrl.getType == "popbox")
-                  condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
-				var prop = utils.getTableFieldComboConfig(tableName, field);
-				var cachetitle = `${prop.tableName}:${prop.displayFields}:${prop.displayCaptions}`;
-				if(typeof ComboBoxCache == "undefined")
-					ComboBoxCache = {};
-				if(typeof ComboBoxCache[cachetitle] == "undefined")
-				{
-				  xui.newModule("App.DataListForm", function(err,module){
+        var showCombo = function(uictrl, condition){
+                var tableName  = formTableName;
+                if(typeof tableName == "undefined")  //get from db tagvar
+                {
+                  tableName = "通用";
+                }
+                var field  = uictrl.getDataField();
+                var condition = "";
+                //if(uictrl.getType == "popbox")
+                //  condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
+                var prop = utils.getTableFieldComboConfig(tableName, field);
+                condition = utils.formatString(prop.condition, ComboDatas);
+                var cachetitle = `${prop.tableName}:${prop.displayFields}:${prop.displayCaptions}`;
+                if(typeof ComboBoxCache == "undefined")
+                    ComboBoxCache = {};
+                if(typeof ComboBoxCache[cachetitle] == "undefined")
+                {
+                  xui.newModule("App.DataListForm", function(err,module){
                     module.setProperties("tableName", prop.tableName);
                     module.setProperties("keyid", prop.keyid);
                     module.setProperties("displayFields", prop.displayFields);
@@ -443,28 +535,28 @@
                     module.setProperties("fieldCaptions", prop.displayCaptions);
                     module.setProperties("condition", condition);
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-INPUT"]);
-					ComboBoxCache[cachetitle] = module;
+                    //ComboBoxCache[cachetitle] = module;
                     module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
-				  });           
-				}		
-				else
-				{
+                  });           
+                }        
+                else
+                {
                   ComboBoxCache[cachetitle].setProperties("uictrl", uictrl);
-				  ComboBoxCache[cachetitle].popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
-				}
-		}		
+                  ComboBoxCache[cachetitle].popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+                }
+        }        
         let popcb = function(profile, pos, e, src){
                 var ns = this, uictrl = profile.boxing();//, prop = uictrl.getPopCtrlProp();
-				showCombo(uictrl);
+                showCombo(uictrl);
         }; 
         let popcb2 = function(profile, pos, e, src){
                 var ns = this, uictrl = profile.boxing();
-				var tableName  = formTableName;
-				if(typeof tableName == "undefined")  //get from db tagvar
-				{
-				  tableName = "通用";
-				}
-				var prop = utils.getTableFieldComboConfig(tableName, field);
+                var tableName  = formTableName;
+                if(typeof tableName == "undefined")  //get from db tagvar
+                {
+                  tableName = "通用";
+                }
+                var prop = utils.getTableFieldComboConfig(tableName, field);
                 condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
                 utils.getTableItems({"tableName":prop.tableName, "fields": prop.displayFields, "condition":condition},function(data){
                     var items = [];
@@ -487,10 +579,10 @@
                 if(n.getType() == "cmdbox")
                    n.beforeComboPop("tableBox_beforecombopop");
                 else if(n.getType() == "popbox")
-				{
-				   //console.log("popbo:",n.getDataField());	
+                {
+                   //console.log("popbo:",n.getDataField());    
                    n.beforeComboPop("tableBox_beforecombopop");
-				}
+                }
                 //else if(n.getType() == "combobox")
                 //   n.beforeComboPop("tableBox_beforecombopop2");
             }
@@ -539,21 +631,30 @@
         }
         return TableConfigs[table];
     }, 
+    getTableFieldNames: function(table){
+        var fields = [];
+        var cols = utils.getTableConfig(table);
+        for(var i=0; i<cols.length; i++)
+        {
+            fields.push(cols[i].COLUMN_NAME);
+        }
+        return fields;
+    },
     getTableFieldConfig : function(table,  field){
-		var cols = utils.getTableConfig(table);
-		for(var i=0; i<cols.length; i++)
-		{
-			if(cols[i].COLUMN_NAME == field)
-				return cols[i];
-		}
+        var cols = utils.getTableConfig(table);
+        for(var i=0; i<cols.length; i++)
+        {
+            if(cols[i].COLUMN_NAME == field)
+                return cols[i];
+        }
         return null;
     }, 
-	askData: function(config, cb){
+    askData: function(config, cb){
         xui.newModule("App.AskDataDialog", function(err,mod){
-			utils.installDataBinderHooks(mod);
-			mod.askData(config, cb);
-        });		
-	},
+            utils.installDataBinderHooks(mod);
+            mod.askData(config, cb);
+        });        
+    },
     createTableControls : function(table, key, thepage, onFinish){
         var form = thepage.form;
         var cb = function(items){
@@ -646,12 +747,88 @@
         var items = utils.getTableConfig(table);
         cb(items);
     },
-	today: function(){
-		return xui.Date.format(new Date(),"yyyy-mm-dd");
-	},
-	now: function(){
-		return xui.Date.format(new Date(),"yyyy-mm-dd hh:nn:ss");
-	},     
-     
+    today: function(){
+        return xui.Date.format(new Date(),"yyyy-mm-dd");
+    },
+    now: function(){
+        return xui.Date.format(new Date(),"yyyy-mm-dd hh:nn:ss");
+    },     
+    formatString: function(fmt, item, quoteFlag = true){
+        var cb = function(match,offset,str)
+        {
+                if(typeof item == "undefined")
+                    return "";
+                var key = match;
+                key = key.substring(1,key.length-1);
+                if(item.hasOwnProperty(key))
+                {
+                    if(quoteFlag)  
+                      return "'" + item[key] +"'";
+                    else 
+                      return item[key];  
+                }
+                else
+                  return "";    
+        };
+        return fmt.replace(/{[^{}]*}/g, cb);    
+    },       
+    createDDL: function(form, tableName){
+        var nodes = form.getChildren(true,true).get();
+        var s = `CREATE TABLE [${tableName}] (\n`;
+        for(var i=0; i< nodes.length; i++)
+        {
+            let n = nodes[i].boxing();;
+            if(n.KEY == 'xui.UI.ComboInput' || n.KEY == 'xui.UI.Input' || n.KEY == 'xui.UI.Button' || n.KEY == 'xui.UI.RadioBox' || n.KEY == 'xui.UI.CheckBox')
+            {
+                if(n.getAlias() == 'saveBtn' || n.getAlias() == 'cancelBtn')
+                    continue;
+                var field = n.getDataField();
+                if(field == "")
+                    continue;
+                if(n.KEY == 'xui.UI.ComboInput' && n.getType().includes('date'))
+                  s += `[${field}] datetime NULL,\n`;
+                else if(n.KEY == 'xui.UI.CheckBox')
+                  s += `[${field}] BIT Default 0,\n`;
+                else    
+                  s += `[${field}] varchar(32) Default '',\n`;
+            }
+       }     
+        s += ')\n';
+        return s;
+    },
+    textToBase64Barcode: function (text){
+        var canvas = document.createElement("canvas");
+        JsBarcode(canvas, text, {format: "CODE128",width:2});
+        return canvas.toDataURL("image/png");
+    },
+    showRepairOptionForm: function(db){
+                    db.updateDataFromUI();
+                    var data = ns.comdb.getData();
+                    var id = data["登錄編號"];
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Option零件更換表","登錄編號",id,"*");
+                    if(item == "")
+                      utils.showDataPage("RepairOptionForm",{"委託單號":id,"Model":data["Pump"],"S/N":data["Pump S/N"]}, "new");        
+                    else
+                      utils.showDataPage("RepairOptionForm", item, "edit")  ;      
+
+    },
+    updateNewWorkSheetValue: function(db, rno){
+        db.updateDataFromUI();
+        var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno,"*");
+        if(item == "")
+          return;    
+        var newitem = {"登錄編號":item["登錄編號"], "Model":item["In Model"], "P/N":item["In P/N"], "S/N": item["In S/N"],"客戶名稱": item["客戶名稱"], "日期":utils.today(),
+                       "保固期":item["保固期"],"上次登錄編號":item["上次登錄編號"], "上次登錄時間":item["上次登錄時間"],"上次故障原因":item["上次故障原因"],
+                      "Pump": item["In Model"], "Pump P/N": item["In P/N"],  "Pump S/N": item["In S/N"], "Report":item["SL是否需維修報告"]}; 
+        var keys = Object.keys(newitem);
+        for(var i=0; i<keys.length;i++)
+          db.setData(keys[i], newitem[keys[i]]);  
+        db.updateDataToUI();  
+    },    
      
  };

@@ -11,10 +11,10 @@
     Expand:'展開',
     noFlash:'No Flash PlugIn!',
     transparent:'透明',
-    required:'有必須字段',
-    required2:'有必須字段沒有填寫',
-    invalid:'无效字段',
-    invalid2:'有无效字段'
+    required:'有必須欄位',
+    required2:'有必須欄位沒有填寫',
+    invalid:'無效欄位',
+    invalid2:'有無效欄位'
 };
 xui.Locale.tw.date={
     WEEKS:{
@@ -59,6 +59,7 @@ xui.Locale.tw.date={
     Y:'年',
     DE:'十年',
     C:'世紀',
+	
     HN:function(n,a,b){return a+'點'+b+'分'},
     DHN:function(n,a,b,c){return a+'日'+b+'點'+c+'分'},
     MDHN:function(n,a,b,c,d){return a+'月'+b+'日'+c+'點'+d+'分'},
@@ -66,12 +67,12 @@ xui.Locale.tw.date={
     HNSMS:function(n,a,b,c,d){return a+'點'+b+'分'+c+'秒'+d+'毫秒'},
     YM:function(n,a,b){return a+'年'+b+'月'},
     YQ:function(n,a,b){return a+'年'+b+'季'},
-    YMD:function(n,a,b,c){return a+'年'+b+'月'+c+'日'},
-    YMD2:function(n,a,b,c){return a+'年'+b+'月'+c+'日'},
+    YMD:function(n,a,b,c){return a+'-'+(b.length==1?'0':'')+b+'-'+(c.length==1?'0':'')+c},
+    YMD2:function(n,a,b,c){return a+'-'+(b.length==1?'0':'')+b+'-'+(c.length==1?'0':'')+c},
     MD:function(n,b,c){return b+'月'+c+'日'},
     YMDH:function(n,a,b,c,d){return a+'年'+b+'月'+c+'日'+d+'點'},
-    YMDHN:function(n,a,b,c,d,e){return a+'年'+b+'月'+c+'日'+d+'點'+e+'分'},
-    YMDHNS:function(n,a,b,c,d,e,f){return a+'年'+b+'月'+c+'日'+d+'點'+e+'分'+f+'秒'},
+    YMDHN:function(n,a,b,c,d,e){return a+'-'+(b.length==1?'0':'')+b+'-'+(c.length==1?'0':'')+c + ' ' +(d.length==1?'0':'')+d+":"+(e.length==1?'0':'')+e},
+    YMDHNS:function(n,a,b,c,d,e,f){return a+'-'+(b.length==1?'0':'')+b+'-'+(c.length==1?'0':'')+c + ' ' +(d.length==1?'0':'')+d+":"+(e.length==1?'0':'')+e+":"+(f.length==1?'0':'')+f},
     ALL:function(n,a,b,c,d,e,f,g){return a+'年'+b+'月'+c+'日'+d+'點'+e+'分'+f+'秒' + " " +g+'毫秒'},
 
     /*

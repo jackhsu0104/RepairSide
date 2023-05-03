@@ -32,17 +32,11 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             );
             
             append(
-                xui.create("xui.DataBinder")
-                .setHost(host,"pdb2")
-                .setName("pdb2")
-            );
-            
-            append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("16em")
-                .setTop("1.5238095238095237em")
-                .setWidth("37.333333333333336em")
+                .setLeft("9.266666666666667em")
+                .setTop("1.9333333333333333em")
+                .setWidth("56.06666666666667em")
                 .setHeight("44.19047619047619em")
                 .setCaption("維修用料明細表")
                 .setConLayoutColumns(null)
@@ -113,100 +107,68 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             host.form.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"block1")
-                .setDock("top")
+                .setDock("fill")
                 .setLeft("6.857142857142857em")
                 .setTop("2.2857142857142856em")
-                .setHeight("6.095238095238095em")
+                .setHeight("2.8em")
             );
             
             host.block1.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"model")
-                .setDataBinder("pdb")
-                .setDataField("Model")
-                .setLeft("3.0476190476190474em")
-                .setTop("0.7619047619047619em")
-                .setCaption("M530")
-                .setFontSize("22px")
-                .setFontWeight("bold")
+                xui.create("xui.UI.Tabs")
+                .setHost(host,"modelTabs")
+                .setItems([
+                    {
+                        "id" : "Model1",
+                        "caption" : "Model1"
+                    },
+                    {
+                        "id" : "Model2",
+                        "caption" : "Model2"
+                    },
+                    {
+                        "id" : "Model3",
+                        "caption" : "Model3"
+                    }
+                ])
+                .setLeft("0em")
+                .setTop("0em")
+                .setHeight("3em")
+                .setSandboxTheme("classic")
+                .setValue("Model1")
+                .onItemSelected("_sitetabs_onitemselected")
             );
             
-            host.block1.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"repairSide")
-                .setDataBinder("pdb")
-                .setDataField("維修站名")
-                .setLeft("16em")
-                .setTop("0.7619047619047619em")
-                .setCaption("Vacuum Side")
-                .setFontSize("22px")
-                .setFontWeight("bold")
+            host.modelTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"block")
+                .setDock("fill")
+                .setLeft("8.666666666666666em")
+                .setTop("18.666666666666668em"),
+                "Model1"
             );
             
-            host.block1.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input316")
-                .setDataBinder("pdb")
-                .setDataField("領用人名稱")
-                .setLeft("2.2857142857142856em")
-                .setTop("3.0476190476190474em")
-                .setWidth("12.19047619047619em")
-                .setLabelSize("4em")
-                .setLabelCaption("領用人")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput196")
-                .setDataBinder("pdb")
-                .setDataField("領用時間")
-                .setLeft("15.238095238095237em")
-                .setTop("3.0476190476190474em")
-                .setWidth("13.714285714285714em")
-                .setLabelSize("5em")
-                .setLabelCaption("領用時間")
-                .setType("date")
-            );
-            
-            host.form.append(
+            host.block.append(
                 xui.create("xui.UI.FormLayout")
-                .setHost(host,"layout")
-                .setDock("top")
+                .setHost(host,"xui_ui_formlayout214")
+                .setDock("fill")
                 .setDockMargin({
                     "left" : 20,
                     "top" : 0,
                     "right" : 0,
                     "bottom" : 0
                 })
-                .setLeft("13.714285714285714em")
-                .setTop("20.571428571428573em")
-                .setWidth("33.2952380952381em")
-                .setHeight("16.228571428571428em")
+                .setLeft("14.476190476190476em")
+                .setTop("21.333333333333332em")
+                .setWidth("52.333333333333336em")
+                .setHeight("34em")
                 .setDefaultColumnSize(2)
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 5,
                     "cols" : 4,
-                    "rowSetting" : {
-                        "1" : {
-                            "manualHeight" : 30
-                        },
-                        "2" : {
-                            "manualHeight" : 30
-                        },
-                        "3" : {
-                            "manualHeight" : 30
-                        },
-                        "4" : {
-                            "manualHeight" : 30
-                        },
-                        "5" : {
-                            "manualHeight" : 30
-                        }
-                    },
                     "cells" : {
                         "A1" : {
-                            "value" : "P/N",
+                            "value" : "品號",
                             "style" : {
                                 "textAlign" : "center"
                             }
@@ -218,13 +180,13 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                             }
                         },
                         "C1" : {
-                            "value" : "數量",
+                            "value" : "庫存",
                             "style" : {
                                 "textAlign" : "center"
                             }
                         },
                         "D1" : {
-                            "value" : "庫存",
+                            "value" : "領用數量",
                             "style" : {
                                 "textAlign" : "center"
                             }
@@ -253,7 +215,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
 
 
         },
-        /**
+       /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
          * @param {xui.UIProfile.} profile  The current control's profile object
@@ -263,13 +225,24 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            utils.saveForm(ns);
+           // utils.saveForm(ns);
+            var data = ns.getControlData();  //will do updateDataFromUI
+            console.log(data);
+            var pdata = ns.pdb.getData();
+            var id = pdata["領料報工單號"];
+            utils.removeTableItem("領料報工單子表","領料報工單號", id); //remove all subrecords
+            for(var i=0; i<data.length;i++)
+            {
+                utils.insertTableItem("領料報工單子表",data[i]);
+            }
         },
-        createControls: function(rows){
+        addLayout: function(block,rows){
             var ns = this;
+            if(rows.length > 0)
+                var model = rows[0]["型號"];
             var cells = {   
                         "A1" : {
-                            "value" : "P/N",
+                            "value" : "型號",
                             "style" : {
                                 "textAlign" : "center"
                             }
@@ -281,7 +254,13 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                             }
                         },
                         "C1" : {
-                            "value" : "數量",
+                            "value" : "庫存",
+                            "style" : {
+                                "textAlign" : "center"
+                            }
+                        },
+                        "D1" : {
+                            "value" : "領用數量",
                             "style" : {
                                 "textAlign" : "center"
                             }
@@ -290,40 +269,130 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             for(var i=0; i<rows.length; i++)
             {
                 var data = rows[i];
-                cells["A"+(i+2)] = {"value": data[2], "style":{"textAlign":"right"}}; //P/N
-                cells["B"+(i+2)] = {"value": data[3], "style":{"textAlign":"right"}};  //品名
-                var input = xui.create("xui.UI.ComboInput").setType("spin").setIncrement(1).setPrecision(0);
-                input.setDock("none")
-                 .setLeft(x +"em")
-                 .setTop(h+"em")
-                 .setWidth("18em")
-                 .setName(data[2])
-                 .setDataBinder("pdb2")
-                 .setDataField(data[2]);
-                ns.layout.append(input,"C"+(i+2));
+                cells["A"+(i+2)] = {"value": data["品號"], "style":{"textAlign":"left"}}; //品號
+                cells["B"+(i+2)] = {"value": data["品名"], "style":{"textAlign":"left"}};  //品名
             }
             var layoutdata = {
-                    "rows" : items.length+1,
-                    "cols" : 3,
+                    "rows" : rows.length+1,
+                    "cols" : 4,
+                    "colSetting":{
+                        "A":{"manualWidth":150},
+                        "B":{"manualWidth":250}
+                    },
                     "cells" : cells
             };    
-            ns.layout.setLayoutData(layoutdata);
+            var layout = xui.create("xui.UI.FormLayout")
+                .setHost(ns)
+                .setDock("fill")
+                .setDefaultRowHeight(30);
+            layout.setLayoutData(layoutdata);
+            for(var i=0; i<rows.length;i++)
+            {
+                var data = rows[i];
+                var input = xui.create("xui.UI.ComboInput").setHost(ns).setType("spin").setIncrement(1).setPrecision(0);
+                 input.setName(model + "." + data["品號"])
+                 .setDataBinder("pdb")
+                 .setDataField(model + "." + data["品號"]);
+                layout.append(input,"D"+(i+2));
+            }
+            block.append(layout);
+        },
+        getModels: function(items){
+            var models = [];
+            var current = "";
+            for(var i=0; i<items.length;i++)
+            {
+              if(items[i]["型號"] != current)
+              {
+                current = items[i]["型號"];
+                models.push(current);  
+              }      
+                
+            }
+            return models;
+        },
+        getModelItems: function(model, items){
+          var rows = [];
+          for(var i=0; i<items.length; i++)
+          {
+            if(items[i]["型號"] == model)
+                rows.push(items[i]);
+          }
+          return rows;  
         },
         loadControls: function(){
             var ns=this, prop=ns.properties;
             var data = ns.pdb.getData();
-            ns.model.setCaption(data.Model);
-            ns.repairSide.setCaption(data["維修站名"]);
-            var condition = `Model = '${data.Model}' AND 維修站名 = '${data["維修站名"]}'`;
+            var condition = `站別 = '${SiteName}'`;
             var cb = function(data){
-              ns.createControls(data.rows);  
-              if(prop["mode"] == "edit")
+              var items = utils.getRowMap(data); 
+              var models = ns.getModels(items);
+              var hdata = [];
+              for(var i=0; i<models.length; i++)
               {
-                ns.pdb2.setData(data["領用材料列表"]);
-                ns.pdb2.updateDataToUI();
+                  var o = {"id":models[i], "caption":models[i]};
+                  hdata.push(o);
+              }
+              ns.modelTabs.setItems(hdata);
+                
+              for(var i=0; i<models.length; i++)
+              {
+                var block = xui.create("xui.UI.Block")
+                .setHost(ns)
+                .setDock("fill")
+                ns.modelTabs.append(block, models[i]);
+                ns.addLayout(block, ns.getModelItems(models[i],items));
+              }
+              if(models.length > 0)
+                  ns.modelTabs.setValue(models[0]);
+
+            }
+            utils.getTableItems({"tableName":"Bench領用料副資料表", "condition":condition, "orderby":"型號,品號"}, cb);
+        },
+        updateControls: function(){
+          var ns = this;
+          var data = ns.pdb.getData();  
+          var id = data["領料報工單號"];  
+          var pdata = utils.getItemValue("領料報工單子表","領料報工單號",id,"*",true); 
+          for(var i=0; i<pdata.length; i++)
+          {
+            var key = pdata[i]["型號"]+ "." + pdata[i]["品號"];
+            var value = pdata[i]["領料數量"];  
+            ns.pdb.setData(key, value);  
+          }
+          ns.pdb.updateDataToUI();  
+        },
+        getControlData:function(){
+          var rows = [];  
+          var ns = this;  
+          ns.pdb.updateDataFromUI();
+          var data = ns.pdb.getData();
+          var models = ns.modelTabs.getItems();  
+          for(var i=0; i<models.length;i++)
+          {
+            var model = models[i].id;
+            var values = data[model];
+            //console.log(model, values);
+            if(typeof values == "undefined")
+                continue;
+            var keys = Object.keys(values); 
+            for(var j=0; j<keys.length; j++)  
+            {
+              var pn = keys[j];
+              var value = values[pn];
+              if(value != null && value != 0)
+              {
+                let item = {"型號":model, "品號":pn, "領料數量":value};
+                rows.push(item);  
               }
             }
-            utils.getTableItems({"table":"維修領料副資料表", "condition":condition}, cb);
+          }
+          return rows;  
+        },
+        loadPickingData: function(site){
+          var ns = this;
+          ns.pickingData = utils.getItemValue("Bench領用料副資料表","站別",site,"*",true);  
+            
         },
         /**
          * Fires when the dialog shows
@@ -332,6 +401,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         */
         _dialog_onshow:function(profile){
             var ns = this, prop=ns.properties;
+            ns.block.destroy();
             ns.loadControls();
 // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -347,7 +417,20 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+        /**
+         * Fired when a tab is selected
+         * @method onItemSelected [xui.UI.Tabs event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {}  
+        */
+        _sitetabs_onitemselected:function(profile, item, e, src, n){
+            var ns = this, uictrl = profile.boxing();
+
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

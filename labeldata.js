@@ -61,7 +61,7 @@ LabelData = {
 <div style="width:10cm">
 <div style="font-size:16px;text-align:center;width:100%">Bench維修掛牌</div>
 <div style="width:50%;float:left">
-<span style="font-size:16px">進廠日:{進廠日}</span><br>
+<span style="font-size:16px">進廠日:{Date Received}</span><br>
 <span style="font-size:16px">客戶名稱:{客戶名稱}</span><br>
 <span style="font-size:16px">Model:{In Model}</span><br>
 <span style="font-size:16px">P/N:{In P/N}</span>
@@ -76,7 +76,7 @@ LabelData = {
 	"L30410":`
 <div style="width:10cm">
 <div>
-<span style="font-size:20px">Date:{進廠日}</span><br>
+<span style="font-size:20px">Date:{Date Received}</span><br>
 <span style="font-size:20px">Customer:{客戶名稱}</span><br>
 <span style="font-size:20px">RMA:{登錄編號}</span><br>
 <span style="font-size:20px">Model:{In Model}</span><br>
@@ -165,6 +165,30 @@ LabelData = {
     </div>
       
     </div>`,
+	"估價單B":`
+<div style="width:21cm; background-color:white">
+<div style="font-size:16px;text-align:center">Quotation</div>
+
+<p style="margin-top:0.25pt; margin-bottom:0pt;"><span style="width:4.5pt; display:inline-block;">&nbsp;</span><em><span style="font-size:10pt;">佳霖科技股份有限公司</span></em></p>
+<p style="margin-top:0pt; margin-bottom:1.05pt;"><span style="width:4.5pt; display:inline-block;">&nbsp;</span><em><span style="font-family:新細明體; font-size:10pt;">Challentech International Corporation</span></em></p>
+<p style="margin-top:1.05pt; margin-bottom:0pt;"><span style="width:4.5pt; display:inline-block;">&nbsp;</span><em><span style="font-size:10pt;">新竹縣竹北市泰和路21號</span></em></p>
+<p style="margin-top:0pt; margin-bottom:0pt;"><span style="width:4.5pt; display:inline-block;">&nbsp;</span><em><span style="font-family:新細明體; font-size:10pt;">No.21, Taihe Rd., Zhubei City, Hsinchu County, Taiwan</span></em></p>
+<p style="margin-top:0pt; margin-bottom:6.7pt;"><span style="width:4.5pt; display:inline-block;">&nbsp;</span><em><span style="font-family:新細明體; font-size:10pt;">TEL: 03-553-6525</span></em><em><span style="font-family:新細明體; font-size:10pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></em><em><span style="font-family:新細明體; font-size:10pt;">FAX: 03-553-6515</span></em><span style="width:182.84pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體">Quotation no#:</span></em></strong><span style="width:5.8pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體;">{Quotation no#}</span></em></strong></p>
+<p style="margin-top:6.7pt; margin-bottom:7.7pt;"><span style="width:11.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; width:4cm; display:inline-block;">Customer:</span></em></strong><span style="font-family:新細明體; font-size:10pt;width:4cm; display:inline-block;">{Customer}</span><strong><em><span style="font-family:新細明體;">Date:</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp;&nbsp;</span></em></strong>{Date}</p>
+<p style="margin-top:7.7pt; margin-bottom:7.65pt;"><span style="width:11.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; width:4cm; display:inline-block;">Name:</span></em></strong><span style="width:4cm; display:inline-block;">{Name}</span><strong><em><span style="font-family:新細明體;">E-mail:</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp; &nbsp; &nbsp;</span></em></strong><strong><em><span style="font-family:新細明體;">{E-mail}</span></em></strong></p>
+<p style="margin-top:7.65pt; margin-bottom:7.4pt;"><span style="width:11.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; width:4cm; display:inline-block;">TEL:</span></em></strong><strong><em></em></strong><strong><em><span style="font-family:新細明體;width:4cm; display:inline-block;">{TEL}</span></em></strong><strong><em><span style="font-family:新細明體;">Ext / Mobile: &nbsp; {Ext}</span></em></strong></p>
+<p style="margin-top:7.4pt; margin-bottom:7.65pt;"><span style="width:11.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; width:4cm; display:inline-block;">PAYMENT:</span></em></strong><strong><em></em></strong><strong><em><span style="font-family:新細明體;width:4cm; display:inline-block;">{PAYMENT}</span></em></strong><strong><em><span style="font-family:新細明體;">Currency:&nbsp;</span></em></strong><span style="width:15.04pt; display:inline-block;">&nbsp;</span>{Currency}</p>
+<p style="margin-top:7.65pt; margin-bottom:13.35pt;"><span style="width:11.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; width:4cm; display:inline-block;">DELIVERY:</span></em></strong><strong><em></em></strong><strong><em><span style="font-family:新細明體;width:4cm; display:inline-block;">{DELIVERY}</span></em></strong><strong><em><span style="font-family:新細明體;">Issue by:</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp; &nbsp; &nbsp;</span></em></strong><strong><em><span style="font-family:新細明體;">{Issue by}</span></em></strong></p>
+<p style="margin-top:13.35pt; margin-bottom:0.25pt;"><strong><em><span style="font-family:新細明體; font-size:11pt;">Item#</span></em></strong><span style="width:15.63pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; font-size:10pt;width:50%; display:inline-block;">CIC P/N</span></em></strong><strong><em><span style="font-family:新細明體; font-size:11pt;">Unit price</span></em></strong><span style="width:11.5pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; font-size:11pt;">Qty</span></em></strong><span style="width:26.96pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; font-size:11pt;">Sub total</span></em></strong></p>
+<p style="margin-top:0.25pt; margin-bottom:6.75pt;"><span style="width:39.65pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體; font-size:10pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></em></strong><strong><em><span style="font-family:新細明體; font-size:10pt;">Description&nbsp;</span></em></strong></p>
+{SubItems}
+<p style="margin-top:3.8pt; margin-bottom:9.45pt;">&nbsp;</p>
+<p style="margin-top:9.45pt; margin-bottom:16.55pt;"><span style="width:349.11pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體;">Total Price(</span></em></strong><strong><em>未稅</em></strong><strong><em><span style="font-family:新細明體;">):</span></em></strong>{TotalPrice}</p>
+<p style="margin-top:16.55pt; margin-bottom:2pt;"><span style="width:8.5pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體;">Remarks:</span></em></strong></p>
+<p style="margin-top:2pt; margin-bottom:122pt;"><span style="width:8.5pt; display:inline-block;">&nbsp;</span>{Remarks}</p>
+<p style="margin-top:122pt; margin-bottom:122pt;"><span style="width:28.3pt; display:inline-block;">&nbsp;</span><strong><em><span style="font-family:新細明體;">Signature:</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp; &nbsp; &nbsp;&nbsp;</span></em></strong><strong><em><span style="font-family:新細明體;">_______________</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></em></strong><strong><em><span style="font-family:新細明體;">_______________</span></em></strong><strong><em><span style="font-family:新細明體;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></em></strong><strong><em><span style="font-family:新細明體;">_______________</span></em></strong></p>
+</div>
+	`,
 	getLabel: function(name, item){
 		var ns = this;
 		var html = ns[name];
@@ -181,5 +205,26 @@ LabelData = {
         };
         html = html.replace(/{[^{}]*}/g, cb);	
 		return html;
-	}
+	},
+    printLabel: function(grid, item, label){
+              var html = this.getLabel(label, item);      
+              printJS({
+                  printable: html,
+                  type: "raw-html",
+                  style: [
+                        "@page { size: 10cm; margin: 0mm;} body {margin: 0;} h4 {margin:0}",
+                        ],
+                  targetStyles: ["*"]
+                });    
+            
+        },	
+    printPage: function(grid, item, label){
+              var html = this.getLabel(label, item);      
+              printJS({
+                  printable: html,
+                  type: "raw-html",
+                  targetStyles: ["*"]
+                });    
+            
+        },	
 };

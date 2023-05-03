@@ -27,8 +27,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"db")
-                .setName("db")
+                .setHost(host,"comdb")
+                .setName("comdb")
             );
             
             append(
@@ -104,14 +104,14 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("10.133333333333333em")
                 .setTop("3.4285714285714284em")
-                .setHeight("3.933333333333333em")
+                .setHeight("5.933333333333334em")
             );
             
             host.xui_ui_div571.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input463")
                 .setName("客戶名稱")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("客戶名稱")
                 .setLeft("0.6666666666666666em")
                 .setTop("0.6em")
@@ -124,14 +124,14 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div571.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input464")
-                .setName("Pump")
-                .setDataBinder("rdb")
-                .setDataField("Pump")
+                .setName("Model")
+                .setDataBinder("comdb")
+                .setDataField("Model")
                 .setLeft("26em")
                 .setTop("0.6em")
                 .setWidth("10.666666666666666em")
                 .setLabelSize("3em")
-                .setLabelCaption("Pump")
+                .setLabelCaption("型號")
                 .setMaxlength("20")
             );
             
@@ -139,7 +139,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput513")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("日期")
                 .setLeft("13.333333333333334em")
                 .setTop("0.7333333333333333em")
@@ -151,28 +151,62 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div571.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input465")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
                 .setName("登錄編號")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("登錄編號")
                 .setLeft("37.2em")
                 .setTop("0.7333333333333333em")
                 .setWidth("14.533333333333333em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("popbox")
                 .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
             );
             
             host.xui_ui_div571.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox117")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("Report")
                 .setLeft("53.333333333333336em")
                 .setTop("0.7619047619047619em")
                 .setWidth("6.780952380952381em")
                 .setCaption("Report")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"overhaulBtn")
+                .setLeft("2.1333333333333333em")
+                .setTop("2.6666666666666665em")
+                .setWidth("15.333333333333334em")
+                .setHeight("3.066666666666667em")
+                .setCaption("Compressor Standard Overhaul<br>零件更換表")
+                .onClick("_overhaulbtn_onclick")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"failBtn")
+                .setLeft("18.057142857142857em")
+                .setTop("2.6666666666666665em")
+                .setWidth("16.666666666666668em")
+                .setCaption("Compressor Heater Fail/ Motor Fail<br>零件更換表")
+                .onClick("_failbtn_onclick")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"quotationBtn")
+                .setLeft("35.93333333333333em")
+                .setTop("2.6em")
+                .setWidth("17.333333333333332em")
+                .setHeight("3.3333333333333335em")
+                .setCaption("Compressor Repair Quotation Sheet")
+                .onClick("_quotationbtn_onclick")
             );
             
             host.form.append(
@@ -212,58 +246,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block246.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox127")
-                .setName("Repair")
-                .setDataBinder("rdb")
-                .setDataField("Repair")
-                .setLeft("0.6666666666666666em")
-                .setTop("0.6666666666666666em")
-                .setWidth("5em")
-                .setCaption("Repair")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox128")
-                .setName("CIC/W")
-                .setDataBinder("rdb")
-                .setDataField("CIC/W")
-                .setLeft("6em")
-                .setTop("0.6666666666666666em")
-                .setWidth("5em")
-                .setCaption("CIC/W")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox129")
-                .setName("OT")
-                .setDataBinder("rdb")
-                .setDataField("OT")
-                .setLeft("12em")
-                .setTop("0.7333333333333333em")
-                .setWidth("7.085714285714285em")
-                .setCaption("Test/Other")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox130")
-                .setName("Exchange")
-                .setDataBinder("rdb")
-                .setDataField("Exchange")
-                .setLeft("19.885714285714286em")
-                .setTop("0.7333333333333333em")
-                .setWidth("8em")
-                .setCaption("Exchange")
-            );
-            
-            host.xui_ui_block246.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input495")
                 .setName("上次登錄編號")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("上次登錄編號")
                 .setLeft("1.3333333333333333em")
                 .setTop("3.3333333333333335em")
@@ -277,7 +263,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput534")
                 .setName("上次登錄時間")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("上次登錄時間")
                 .setLeft("21.333333333333332em")
                 .setTop("3.3333333333333335em")
@@ -292,7 +278,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input497")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("上次故障原因")
                 .setLeft("1.3333333333333333em")
                 .setTop("5.333333333333333em")
@@ -306,11 +292,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input498")
                 .setName("進廠原因")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("進廠原因")
-                .setLeft("21.333333333333332em")
-                .setTop("5.333333333333333em")
-                .setWidth("18em")
+                .setLeft("1.2em")
+                .setTop("11.933333333333334em")
+                .setWidth("38em")
                 .setLabelSize("8em")
                 .setLabelCaption("進廠原因")
                 .setMaxlength("200")
@@ -319,9 +305,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_block246.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input499")
-                .setName("Pump P/N")
-                .setDataBinder("rdb")
-                .setDataField("Pump P/N")
+                .setName("Compressor P/N")
+                .setDataBinder("comdb")
+                .setDataField("Compressor P/N")
                 .setLeft("-2.8em")
                 .setTop("7.542857142857143em")
                 .setWidth("22.133333333333333em")
@@ -333,11 +319,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_block246.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input500")
-                .setName("Pump S/N")
-                .setDataBinder("rdb")
-                .setDataField("Pump S/N")
+                .setName("Compressor S/N")
+                .setDataBinder("comdb")
+                .setDataField("Compressor S/N")
                 .setLeft("21.333333333333332em")
-                .setTop("7.542857142857143em")
+                .setTop("5.266666666666667em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("Compressor S/N")
@@ -348,8 +334,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input508")
                 .setName("Pump/Module ETM")
-                .setDataBinder("rdb")
-                .setDataField("Pump/Module ETM")
+                .setDataBinder("comdb")
+                .setDataField("Compressor ETM")
                 .setLeft("-2.8190476190476192em")
                 .setTop("9.82857142857143em")
                 .setWidth("22.323809523809523em")
@@ -362,10 +348,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input509")
                 .setName("特殊零件")
-                .setDataBinder("rdb")
+                .setDataBinder("comdb")
                 .setDataField("特殊零件")
                 .setLeft("21.333333333333332em")
-                .setTop("12.114285714285714em")
+                .setTop("9.866666666666667em")
                 .setWidth("17.98095238095238em")
                 .setLabelSize("8em")
                 .setLabelCaption("特殊零件")
@@ -376,14 +362,52 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input511")
                 .setName("Pump S/N")
-                .setDataBinder("rdb")
-                .setDataField("Pump S/N")
+                .setDataBinder("comdb")
+                .setDataField("附屬配件")
                 .setLeft("21.333333333333332em")
-                .setTop("9.82857142857143em")
+                .setTop("7.533333333333333em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("附屬配件")
                 .setMaxlength("32")
+            );
+            
+            host.xui_ui_block246.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox270")
+                .setDataBinder("comdb")
+                .setDataField("Type")
+                .setItems([
+                    {
+                        "id" : "Repair",
+                        "caption" : "Repair",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "CIC/W",
+                        "caption" : "CIC/W",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Exchange",
+                        "caption" : "Exchange",
+                        "imageClass" : "",
+                        "disabled" : false
+                    },
+                    {
+                        "id" : "OT",
+                        "caption" : "Test/Other",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDockStretch("fixed")
+                .setLeft("1.9333333333333333em")
+                .setTop("0.6em")
+                .setWidth("30.2em")
+                .setHeight("2.6666666666666665em")
+                .setLabelPos("top")
+                .setLabelHAlign("left")
+                .setValue("a")
             );
             
             host.xui_ui_tabs14.append(
@@ -399,8 +423,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input545")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A1#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("1.0666666666666667em")
                 .setWidth("16.666666666666668em")
@@ -412,8 +436,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox144")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A1#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -447,8 +471,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input571")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A2#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("3.3523809523809525em")
                 .setWidth("16.666666666666668em")
@@ -460,8 +484,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox147")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A2#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -487,8 +511,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input572")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A3#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("5.485714285714286em")
                 .setWidth("16.666666666666668em")
@@ -500,8 +524,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox148")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A3#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -527,8 +551,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input573")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A4#1")
                 .setLeft("1.8285714285714285em")
                 .setTop("7.771428571428571em")
                 .setWidth("18.666666666666668em")
@@ -540,8 +564,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox149")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A4#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -567,8 +591,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input574")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A5#1")
                 .setLeft("1.8285714285714285em")
                 .setTop("10.057142857142857em")
                 .setWidth("18.666666666666668em")
@@ -580,8 +604,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox151")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A5#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -607,8 +631,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input575")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A6#1")
                 .setLeft("1.8285714285714285em")
                 .setTop("12.342857142857143em")
                 .setWidth("8.685714285714285em")
@@ -620,8 +644,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox152")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A6#4")
                 .setItems([
                     {
                         "id" : "Y",
@@ -647,8 +671,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input576")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A6#2")
                 .setLeft("10.742857142857142em")
                 .setTop("12.342857142857143em")
                 .setWidth("4.647619047619048em")
@@ -661,8 +685,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input577")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A6#3")
                 .setLeft("15.695238095238095em")
                 .setTop("12.342857142857143em")
                 .setWidth("4.8em")
@@ -675,8 +699,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input579")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A7#1")
                 .setLeft("3.0476190476190474em")
                 .setTop("15.161904761904761em")
                 .setWidth("17.523809523809526em")
@@ -688,8 +712,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox153")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A7#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -723,8 +747,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input580")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A8#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("17.82857142857143em")
                 .setWidth("16.666666666666668em")
@@ -736,8 +760,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox154")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A8#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -771,8 +795,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input581")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A9#1")
                 .setLeft("1.8285714285714285em")
                 .setTop("20.495238095238093em")
                 .setWidth("18.742857142857144em")
@@ -784,8 +808,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox155")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A9#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -819,8 +843,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input604")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A9#3")
                 .setLeft("3.8095238095238093em")
                 .setTop("22.78095238095238em")
                 .setWidth("16.666666666666668em")
@@ -842,8 +866,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input605")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A9#4")
                 .setLeft("20.419047619047618em")
                 .setTop("22.78095238095238em")
                 .setWidth("8.380952380952381em")
@@ -856,8 +880,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input606")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A10#1")
                 .setLeft("1.7523809523809524em")
                 .setTop("25.066666666666666em")
                 .setWidth("15.238095238095237em")
@@ -870,8 +894,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input607")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A10#2")
                 .setLeft("16.761904761904763em")
                 .setTop("25.066666666666666em")
                 .setWidth("5.333333333333333em")
@@ -892,8 +916,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox165")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A10#3")
                 .setItems([
                     {
                         "id" : "Y",
@@ -919,8 +943,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input608")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A11#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("27.35238095238095em")
                 .setWidth("13.104761904761904em")
@@ -933,8 +957,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input609")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A11#2")
                 .setLeft("16.761904761904763em")
                 .setTop("27.35238095238095em")
                 .setWidth("5.333333333333333em")
@@ -955,8 +979,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox166")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A11#3")
                 .setItems([
                     {
                         "id" : "Y",
@@ -982,8 +1006,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input610")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A12#1")
                 .setLeft("34.285714285714285em")
                 .setTop("0.9142857142857143em")
                 .setWidth("13.104761904761904em")
@@ -996,8 +1020,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input611")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A12#2")
                 .setLeft("47.23809523809524em")
                 .setTop("0.9142857142857143em")
                 .setWidth("5.333333333333333em")
@@ -1019,8 +1043,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input612")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("A13#1")
                 .setLeft("34.285714285714285em")
                 .setTop("2.9714285714285715em")
                 .setWidth("16.666666666666668em")
@@ -1032,8 +1056,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox168")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A13#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1068,7 +1092,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input629")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("A13#3")
                 .setLeft("35.80952380952381em")
                 .setTop("6.780952380952381em")
                 .setWidth("6.857142857142857em")
@@ -1078,8 +1103,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input630")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("A13#4")
                 .setLeft("42.666666666666664em")
                 .setTop("6.780952380952381em")
                 .setWidth("6.857142857142857em")
@@ -1090,8 +1115,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input631")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("A13#5")
                 .setLeft("49.523809523809526em")
                 .setTop("6.780952380952381em")
                 .setWidth("6.857142857142857em")
@@ -1102,8 +1127,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input633")
-                .setDataBinder("db")
-                .setDataField("14.OB Heater 電壓")
+                .setDataBinder("comdb")
+                .setDataField("A14#1")
                 .setLeft("33.523809523809526em")
                 .setTop("9.523809523809524em")
                 .setWidth("18em")
@@ -1125,8 +1150,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox141")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A14#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1152,8 +1177,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input634")
-                .setDataBinder("db")
-                .setDataField("15.OB Module 電壓")
+                .setDataBinder("comdb")
+                .setDataField("A15#1")
                 .setLeft("33.523809523809526em")
                 .setTop("11.504761904761905em")
                 .setWidth("18em")
@@ -1175,8 +1200,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox142")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A15#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1230,8 +1255,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input635")
-                .setDataBinder("db")
-                .setDataField("故障原因")
+                .setDataBinder("comdb")
+                .setDataField("A15#3")
                 .setLeft("35.50476190476191em")
                 .setTop("13.485714285714286em")
                 .setWidth("25.447619047619046em")
@@ -1244,8 +1269,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input673")
-                .setDataBinder("db")
-                .setDataField("故障原因")
+                .setDataBinder("comdb")
+                .setDataField("A16#1")
                 .setLeft("35.58095238095238em")
                 .setTop("18.742857142857144em")
                 .setWidth("25.37142857142857em")
@@ -1258,8 +1283,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input674")
-                .setDataBinder("db")
-                .setDataField("故障原因")
+                .setDataBinder("comdb")
+                .setDataField("A17#2")
                 .setLeft("35.65714285714286em")
                 .setTop("26.81904761904762em")
                 .setWidth("17.676190476190477em")
@@ -1271,8 +1296,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox161")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("A17#3")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1298,8 +1323,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2380")
-                .setDataBinder("db")
-                .setDataField("故障原因")
+                .setDataBinder("comdb")
+                .setDataField("A17#1")
                 .setLeft("35.80952380952381em")
                 .setTop("22.78095238095238em")
                 .setWidth("25.37142857142857em")
@@ -1312,8 +1337,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2493")
-                .setDataBinder("db")
-                .setDataField("檢測時間 起")
+                .setDataBinder("comdb")
+                .setDataField("檢測時間起A")
                 .setLeft("28.952380952380953em")
                 .setTop("30.01904761904762em")
                 .setWidth("13.714285714285714em")
@@ -1324,8 +1349,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2494")
-                .setDataBinder("db")
-                .setDataField("訖")
+                .setDataBinder("comdb")
+                .setDataField("訖A")
                 .setLeft("44.19047619047619em")
                 .setTop("30.01904761904762em")
                 .setWidth("7.314285714285714em")
@@ -1336,8 +1361,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2495")
-                .setDataBinder("db")
-                .setDataField("計")
+                .setDataBinder("comdb")
+                .setDataField("計A")
                 .setLeft("53.333333333333336em")
                 .setTop("30.01904761904762em")
                 .setWidth("7.771428571428571em")
@@ -1348,8 +1373,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2496")
-                .setDataBinder("db")
-                .setDataField("簽名")
+                .setDataBinder("comdb")
+                .setDataField("簽名A")
                 .setLeft("33.82857142857143em")
                 .setTop("32.076190476190476em")
                 .setWidth("9.333333333333334em")
@@ -1358,15 +1383,16 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block2.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input2497")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("檢測日期A")
                 .setLeft("42.819047619047616em")
                 .setTop("32.076190476190476em")
                 .setWidth("8.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.xui_ui_tabs14.append(
@@ -1392,8 +1418,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox227")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B1#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1419,8 +1445,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input784")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("B1#2")
                 .setLeft("22.247619047619047em")
                 .setTop("0.6857142857142857em")
                 .setWidth("10.666666666666666em")
@@ -1442,8 +1468,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox228")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B2#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1469,7 +1495,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input785")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B2#2")
                 .setLeft("22.857142857142858em")
                 .setTop("2.9714285714285715em")
                 .setWidth("10.133333333333333em")
@@ -1489,8 +1516,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox229")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B3#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1516,7 +1543,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input786")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B3#2")
                 .setLeft("22.857142857142858em")
                 .setTop("5.180952380952381em")
                 .setWidth("9.980952380952381em")
@@ -1536,8 +1564,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox230")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B4#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1563,7 +1591,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input787")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B4#2")
                 .setLeft("22.857142857142858em")
                 .setTop("7.542857142857143em")
                 .setWidth("9.904761904761905em")
@@ -1583,8 +1612,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox231")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B5#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1610,7 +1639,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input788")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B5#2")
                 .setLeft("22.857142857142858em")
                 .setTop("9.82857142857143em")
                 .setWidth("9.904761904761905em")
@@ -1630,8 +1660,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox232")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B6#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1657,7 +1687,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input789")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B6#2")
                 .setLeft("22.857142857142858em")
                 .setTop("12.114285714285714em")
                 .setWidth("9.904761904761905em")
@@ -1677,8 +1708,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox233")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B7#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1704,7 +1735,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input790")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B7#2")
                 .setLeft("22.857142857142858em")
                 .setTop("14.4em")
                 .setWidth("9.904761904761905em")
@@ -1724,8 +1756,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox234")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B8#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1751,7 +1783,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input791")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B8#2")
                 .setLeft("22.857142857142858em")
                 .setTop("16.761904761904763em")
                 .setWidth("9.904761904761905em")
@@ -1771,8 +1804,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox235")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B9#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1798,7 +1831,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input792")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B9#2")
                 .setLeft("22.857142857142858em")
                 .setTop("18.97142857142857em")
                 .setWidth("9.904761904761905em")
@@ -1818,8 +1852,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox236")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B10#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1845,7 +1879,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input793")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B10#2")
                 .setLeft("22.857142857142858em")
                 .setTop("21.257142857142856em")
                 .setWidth("9.904761904761905em")
@@ -1865,8 +1900,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox237")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B11#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1892,8 +1927,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input794")
-                .setDataBinder("db")
-                .setDataField("△-P")
+                .setDataBinder("comdb")
+                .setDataField("B11#2")
                 .setLeft("22.857142857142858em")
                 .setTop("23.466666666666665em")
                 .setWidth("9.980952380952381em")
@@ -1926,8 +1961,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox238")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B12#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -1953,7 +1988,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input796")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B12#2")
                 .setLeft("22.857142857142858em")
                 .setTop("25.752380952380953em")
                 .setWidth("9.980952380952381em")
@@ -1995,8 +2031,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox239")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B13#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -2022,7 +2058,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input797")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
                 .setLeft("23.085714285714285em")
                 .setTop("32.60952380952381em")
                 .setWidth("0em")
@@ -2031,7 +2067,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input798")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B13#2")
                 .setLeft("23.085714285714285em")
                 .setTop("33.2952380952381em")
                 .setWidth("9.752380952380953em")
@@ -2062,8 +2099,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox240")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B14#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -2089,7 +2126,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input799")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B14#2")
                 .setLeft("23.085714285714285em")
                 .setTop("40.53333333333333em")
                 .setWidth("9.752380952380953em")
@@ -2109,8 +2147,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox241")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B15#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -2136,8 +2174,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input800")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("B15#2")
                 .setLeft("22.552380952380954em")
                 .setTop("43.27619047619048em")
                 .setWidth("10.285714285714286em")
@@ -2270,8 +2308,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2274")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
-                .setDataField("靜態壓")
+                .setDataBinder("comdb")
+                .setDataField("B16#1")
                 .setLeft("5.333333333333333em")
                 .setTop("45.714285714285715em")
                 .setWidth("16.666666666666668em")
@@ -2283,8 +2321,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1022")
-                .setDataBinder("rdb")
-                .setDataField("Rough Valve#2 Y/N")
+                .setDataBinder("comdb")
+                .setDataField("B16#2")
                 .setItems([
                     {
                         "id" : "Y",
@@ -2319,7 +2357,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2275")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B16#3")
                 .setLeft("6.857142857142857em")
                 .setTop("49.523809523809526em")
                 .setWidth("6.857142857142857em")
@@ -2329,8 +2368,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2276")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#4")
                 .setLeft("13.714285714285714em")
                 .setTop("49.523809523809526em")
                 .setWidth("6.857142857142857em")
@@ -2341,8 +2380,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2277")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#5")
                 .setLeft("20.571428571428573em")
                 .setTop("49.523809523809526em")
                 .setWidth("6.857142857142857em")
@@ -2381,7 +2420,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2278")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B16#6")
                 .setLeft("6.857142857142857em")
                 .setTop("52.03809523809524em")
                 .setWidth("6.857142857142857em")
@@ -2391,8 +2431,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2279")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#7")
                 .setLeft("13.714285714285714em")
                 .setTop("52.03809523809524em")
                 .setWidth("6.857142857142857em")
@@ -2403,8 +2443,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2280")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#8")
                 .setLeft("20.571428571428573em")
                 .setTop("52.03809523809524em")
                 .setWidth("6.857142857142857em")
@@ -2423,7 +2463,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2281")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("B16#9")
                 .setLeft("6.857142857142857em")
                 .setTop("54.4em")
                 .setWidth("6.857142857142857em")
@@ -2433,8 +2474,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2282")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#10")
                 .setLeft("13.714285714285714em")
                 .setTop("54.4em")
                 .setWidth("6.857142857142857em")
@@ -2445,8 +2486,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2283")
-                .setDataBinder("db")
-                .setDataField("V")
+                .setDataBinder("comdb")
+                .setDataField("B16#11")
                 .setLeft("20.571428571428573em")
                 .setTop("54.4em")
                 .setWidth("6.857142857142857em")
@@ -2465,8 +2506,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2610")
-                .setDataBinder("db")
-                .setDataField("檢測時間 起")
+                .setDataBinder("comdb")
+                .setDataField("維修時間起")
                 .setLeft("29.714285714285715em")
                 .setTop("57.67619047619048em")
                 .setWidth("13.714285714285714em")
@@ -2477,8 +2518,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2611")
-                .setDataBinder("db")
-                .setDataField("訖")
+                .setDataBinder("comdb")
+                .setDataField("訖B")
                 .setLeft("44.95238095238095em")
                 .setTop("57.67619047619048em")
                 .setWidth("7.314285714285714em")
@@ -2489,8 +2530,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2612")
-                .setDataBinder("db")
-                .setDataField("計")
+                .setDataBinder("comdb")
+                .setDataField("計B")
                 .setLeft("54.095238095238095em")
                 .setTop("57.67619047619048em")
                 .setWidth("7.771428571428571em")
@@ -2501,8 +2542,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2613")
-                .setDataBinder("db")
-                .setDataField("簽名")
+                .setDataBinder("comdb")
+                .setDataField("簽名B")
                 .setLeft("34.59047619047619em")
                 .setTop("59.733333333333334em")
                 .setWidth("9.333333333333334em")
@@ -2511,15 +2552,16 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block3.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input2614")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("日期B")
                 .setLeft("43.58095238095238em")
                 .setTop("59.733333333333334em")
                 .setWidth("8.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.xui_ui_tabs14.append(
@@ -2647,8 +2689,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div219.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox698")
-                .setDataBinder("rdb")
-                .setDataField("Room Temp (Diode or Gauge) Pass")
+                .setDataBinder("comdb")
+                .setDataField("C6#2")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -2708,8 +2750,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div220.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox701")
-                .setDataBinder("rdb")
-                .setDataField("Room Temp (Diode or Gauge) Pass")
+                .setDataBinder("comdb")
+                .setDataField("C6#4")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -2769,8 +2811,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div221.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox702")
-                .setDataBinder("rdb")
-                .setDataField("Room Temp (Diode or Gauge) Pass")
+                .setDataBinder("comdb")
+                .setDataField("C6#7")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -2830,8 +2872,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div222.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox703")
-                .setDataBinder("rdb")
-                .setDataField("Room Temp (Diode or Gauge) Pass")
+                .setDataBinder("comdb")
+                .setDataField("C6#10")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -2891,8 +2933,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div223.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox695")
-                .setDataBinder("rdb")
-                .setDataField("Room Temp (Diode or Gauge) Pass")
+                .setDataBinder("comdb")
+                .setDataField("C6#11")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -2952,6 +2994,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div224.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1569")
+                .setDataBinder("comdb")
+                .setDataField("C6#12")
                 .setDock("fill")
                 .setLeft("5.333333333333333em")
                 .setTop("1.5238095238095237em")
@@ -2977,6 +3021,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div233.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1646")
+                .setDataBinder("comdb")
+                .setDataField("C6#1")
                 .setDock("fill")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
@@ -3000,6 +3046,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div234.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1816")
+                .setDataBinder("comdb")
+                .setDataField("C6#3")
                 .setDock("fill")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
@@ -3023,6 +3071,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div235.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1817")
+                .setDataBinder("comdb")
+                .setDataField("C6#5")
                 .setDock("fill")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
@@ -3045,6 +3095,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div236.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1818")
+                .setDataBinder("comdb")
+                .setDataField("C6#8")
                 .setDock("fill")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
@@ -3067,6 +3119,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div275.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1903")
+                .setDataBinder("comdb")
+                .setDataField("C6#6")
                 .setDock("fill")
                 .setLeft("5.333333333333333em")
                 .setTop("0.7619047619047619em")
@@ -3089,6 +3143,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_div276.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1904")
+                .setDataBinder("comdb")
+                .setDataField("C6#9")
                 .setDock("fill")
                 .setLeft("5.333333333333333em")
                 .setTop("0.7619047619047619em")
@@ -3101,8 +3157,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input884")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("日期C")
                 .setLeft("4.647619047619048em")
                 .setTop("0.6857142857142857em")
                 .setWidth("9.333333333333334em")
@@ -3113,8 +3169,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input885")
-                .setDataBinder("db")
-                .setDataField("Model")
+                .setDataBinder("comdb")
+                .setDataField("ModelC")
                 .setLeft("13.942857142857143em")
                 .setTop("0.6857142857142857em")
                 .setWidth("11.333333333333334em")
@@ -3125,8 +3181,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input886")
-                .setDataBinder("db")
-                .setDataField("1.Supply Pressure")
+                .setDataBinder("comdb")
+                .setDataField("C1#1")
                 .setLeft("1.7523809523809524em")
                 .setTop("2.9714285714285715em")
                 .setWidth("18.666666666666668em")
@@ -3137,8 +3193,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input887")
-                .setDataBinder("db")
-                .setDataField("psi/油霧分離器Pressure")
+                .setDataBinder("comdb")
+                .setDataField("C1#2")
                 .setLeft("20.266666666666666em")
                 .setTop("3.0476190476190474em")
                 .setWidth("17.333333333333332em")
@@ -3149,8 +3205,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input888")
-                .setDataBinder("db")
-                .setDataField("psi△-P")
+                .setDataBinder("comdb")
+                .setDataField("C1#3")
                 .setLeft("37.40952380952381em")
                 .setTop("3.123809523809524em")
                 .setWidth("7.333333333333333em")
@@ -3173,8 +3229,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input889")
-                .setDataBinder("db")
-                .setDataField("Return Pressure")
+                .setDataBinder("comdb")
+                .setDataField("C1#4")
                 .setLeft("3.276190476190476em")
                 .setTop("5.257142857142857em")
                 .setWidth("17.066666666666666em")
@@ -3197,8 +3253,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input890")
-                .setDataBinder("db")
-                .setDataField("△-P")
+                .setDataBinder("comdb")
+                .setDataField("C1#5")
                 .setLeft("10.133333333333333em")
                 .setTop("7.542857142857143em")
                 .setWidth("10.209523809523809em")
@@ -3287,8 +3343,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1163")
-                .setDataBinder("db")
-                .setDataField("2.循環水Flow")
+                .setDataBinder("comdb")
+                .setDataField("C2#1")
                 .setLeft("6.095238095238095em")
                 .setTop("15.161904761904761em")
                 .setWidth("14em")
@@ -3311,8 +3367,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1164")
-                .setDataBinder("db")
-                .setDataField("3.TS1")
+                .setDataBinder("comdb")
+                .setDataField("C2#2")
                 .setLeft("9.904761904761905em")
                 .setTop("17.21904761904762em")
                 .setWidth("8.666666666666666em")
@@ -3323,8 +3379,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1165")
-                .setDataBinder("db")
-                .setDataField("°C")
+                .setDataBinder("comdb")
+                .setDataField("C2#3")
                 .setLeft("19.2em")
                 .setTop("17.21904761904762em")
                 .setWidth("5.333333333333333em")
@@ -3335,8 +3391,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1166")
-                .setDataBinder("db")
-                .setDataField("°F  TS2")
+                .setDataBinder("comdb")
+                .setDataField("C2#4")
                 .setLeft("24.533333333333335em")
                 .setTop("17.21904761904762em")
                 .setLabelSize("4.666666666666667em")
@@ -3346,8 +3402,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1167")
-                .setDataBinder("db")
-                .setDataField("°C")
+                .setDataBinder("comdb")
+                .setDataField("C2#5")
                 .setLeft("34.89523809523809em")
                 .setTop("17.21904761904762em")
                 .setWidth("6em")
@@ -3370,8 +3426,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox511")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("C2#")
                 .setItems([
                     {
                         "id" : "Y",
@@ -3397,8 +3453,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1168")
-                .setDataBinder("db")
-                .setDataField("Water In Temp")
+                .setDataBinder("comdb")
+                .setDataField("C2#7")
                 .setLeft("4.571428571428571em")
                 .setTop("19.2em")
                 .setWidth("14em")
@@ -3409,8 +3465,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1169")
-                .setDataBinder("db")
-                .setDataField("°C")
+                .setDataBinder("comdb")
+                .setDataField("C2#8")
                 .setLeft("19.276190476190475em")
                 .setTop("19.2em")
                 .setWidth("5.333333333333333em")
@@ -3433,8 +3489,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1252")
-                .setDataBinder("db")
-                .setDataField("4.Running Current 電流")
+                .setDataBinder("comdb")
+                .setDataField("C4#1")
                 .setLeft("0em")
                 .setTop("22.01904761904762em")
                 .setWidth("20.666666666666668em")
@@ -3445,8 +3501,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1253")
-                .setDataBinder("db")
-                .setDataField("A /")
+                .setDataBinder("comdb")
+                .setDataField("C4#2")
                 .setLeft("20.64761904761905em")
                 .setTop("22.01904761904762em")
                 .setWidth("7.333333333333333em")
@@ -3457,8 +3513,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1254")
-                .setDataBinder("db")
-                .setDataField("A /")
+                .setDataBinder("comdb")
+                .setDataField("C4#3")
                 .setLeft("28.64761904761905em")
                 .setTop("22.01904761904762em")
                 .setWidth("7.333333333333333em")
@@ -3481,8 +3537,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox545")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("C4#4")
                 .setItems([
                     {
                         "id" : "Y",
@@ -3563,8 +3619,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1405")
-                .setDataBinder("db")
-                .setDataField("5.Crosshaed Voltage")
+                .setDataBinder("comdb")
+                .setDataField("C5#1")
                 .setLeft("0.7619047619047619em")
                 .setTop("29.104761904761904em")
                 .setWidth("20em")
@@ -3575,8 +3631,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1406")
-                .setDataBinder("db")
-                .setDataField("V /")
+                .setDataBinder("comdb")
+                .setDataField("C5#2")
                 .setLeft("21.02857142857143em")
                 .setTop("29.104761904761904em")
                 .setWidth("7.333333333333333em")
@@ -3587,8 +3643,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1407")
-                .setDataBinder("db")
-                .setDataField("V /")
+                .setDataBinder("comdb")
+                .setDataField("C5#3")
                 .setLeft("28.34285714285714em")
                 .setTop("29.104761904761904em")
                 .setWidth("7.333333333333333em")
@@ -3611,8 +3667,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox615")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("C5#4")
                 .setItems([
                     {
                         "id" : "Y",
@@ -3660,8 +3716,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox977")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("C7#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -3687,7 +3743,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2176")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("C7#2")
                 .setLeft("18.285714285714285em")
                 .setTop("61.56190476190476em")
                 .setWidth("10.742857142857142em")
@@ -3708,8 +3765,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox978")
-                .setDataBinder("db")
-                .setDataField("Y/N")
+                .setDataBinder("comdb")
+                .setDataField("C8#1")
                 .setItems([
                     {
                         "id" : "Y",
@@ -3735,7 +3792,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2177")
-                .setDataBinder("db")
+                .setDataBinder("comdb")
+                .setDataField("C8#2")
                 .setLeft("18.285714285714285em")
                 .setTop("63.84761904761905em")
                 .setWidth("10.742857142857142em")
@@ -3745,8 +3803,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2178")
-                .setDataBinder("db")
-                .setDataField("簽名")
+                .setDataBinder("comdb")
+                .setDataField("簽名C")
                 .setLeft("2.1333333333333333em")
                 .setTop("67.58095238095238em")
                 .setWidth("9.333333333333334em")
@@ -3755,15 +3813,16 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input2179")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("comdb")
+                .setDataField("日期C#2")
                 .setLeft("13.714285714285714em")
                 .setTop("67.58095238095238em")
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
+                .setType("date")
             );
             
             return children;
@@ -3807,6 +3866,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
+            console.log(utils.createDDL(ns.dialog,"Compressor維修工單"));
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -3821,7 +3881,92 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _overhaulbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                    ns.comdb.updateDataFromUI();
+                    var data = ns.comdb.getData();
+                    var id = data["登錄編號"];
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Compressor Standard Overhaul","登錄編號",id,"*");
+                    if(item == "")
+                      utils.showDataPage("CompressorOverhaulEditForm",{"登錄編號":id, "Model":data["Model"], "S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
+                    else
+                      utils.showDataPage("CompressorOverhaulEditForm", item, "edit")  ;      
+                },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _failbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+                    ns.comdb.updateDataFromUI();
+                    var data = ns.comdb.getData();
+                    var id = data["登錄編號"];
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Compressor Heater Fail/ Motor Fail零件更換表","登錄編號",id,"*");
+                    if(item == "")
+                      utils.showDataPage("CompressorSpecialPriceEditForm",{"登錄編號":id,"Model":data["Model"],"S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
+                    else
+                      utils.showDataPage("CompressorSpecialPriceEditForm", item, "edit")  ;      
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _quotationbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+                    ns.comdb.updateDataFromUI();
+                    var data = ns.comdb.getData();
+                    var id = data["登錄編號"];
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Compressor Repair Quotation Sheet","登錄編號",id,"*");
+                    if(item == "")
+                      utils.showDataPage("CompressorRepairQuotationSheet",{"登錄編號":id,"Compressor Model":data["Model"],"P/N":data["Compressor P/N"], "S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
+                    else
+                      utils.showDataPage("CompressorRepairQuotationSheet", item, "edit")  ;      
+        },
+            /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+            _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+                var ns = this, uictrl = profile.boxing();
+              utils.updateNewWorkSheetValue(ns.comdb, newValue);
+          }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

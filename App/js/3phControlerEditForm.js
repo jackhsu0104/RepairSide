@@ -27,8 +27,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"db")
-                .setName("db")
+                .setHost(host,"rdb")
+                .setName("rdb")
             );
             
             append(
@@ -132,7 +132,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input463")
                 .setName("Pump")
                 .setDataBinder("rdb")
-                .setDataField("Pump")
+                .setDataField("P/N")
                 .setLeft("2.8190476190476192em")
                 .setTop("3.0476190476190474em")
                 .setWidth("10.666666666666666em")
@@ -157,8 +157,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div165.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input464")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
                 .setName("登錄編號")
                 .setDataBinder("rdb")
                 .setDataField("登錄編號")
@@ -167,7 +167,9 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setWidth("14.533333333333333em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("popbox")
                 .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
             );
             
             host.xui_ui_div165.append(
@@ -186,7 +188,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input465")
                 .setName("Pump")
                 .setDataBinder("rdb")
-                .setDataField("Pump")
+                .setDataField("S/N")
                 .setLeft("14.476190476190476em")
                 .setTop("3.0476190476190474em")
                 .setWidth("10.666666666666666em")
@@ -215,7 +217,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("a")
             );
             
             host.xui_ui_tabs6.append(
@@ -240,6 +242,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div168.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox104")
+                .setDataBinder("rdb")
+                .setDataField("Type")
                 .setItems([
                     {
                         "id" : "Repair",
@@ -277,7 +281,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div168.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input476")
-                .setName("Pump")
+                .setName("Remark")
                 .setDataBinder("rdb")
                 .setDataField("Pump")
                 .setDock("top")
@@ -432,7 +436,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input690")
                 .setName("上次故障原因")
                 .setDataBinder("rdb")
-                .setDataField("上次故障原因")
+                .setDataField("配件是否齊全#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("2.895238095238095em")
@@ -445,7 +449,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input691")
                 .setName("上次故障原因")
                 .setDataBinder("rdb")
-                .setDataField("上次故障原因")
+                .setDataField("Software")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("3.657142857142857em")
@@ -495,7 +499,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input713")
                 .setName("進廠原因")
                 .setDataBinder("rdb")
-                .setDataField("進廠原因")
+                .setDataField("故障原因")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("22.095238095238095em")
@@ -535,8 +539,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div328.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input863")
-                .setDataBinder("db")
-                .setDataField("檢測時間 起")
+                .setDataBinder("rdb")
+                .setDataField("檢測時間起#1")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("30.476190476190474em")
@@ -549,8 +553,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div328.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input864")
-                .setDataBinder("db")
-                .setDataField("訖")
+                .setDataBinder("rdb")
+                .setDataField("訖#1")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("45.714285714285715em")
@@ -563,8 +567,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div328.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input865")
-                .setDataBinder("db")
-                .setDataField("計")
+                .setDataBinder("rdb")
+                .setDataField("計#1")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("54.857142857142854em")
@@ -587,7 +591,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div329.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input870")
-                .setDataBinder("db")
+                .setDataBinder("rdb")
                 .setDataField("簽名")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -599,17 +603,18 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div329.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input871")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("rdb")
+                .setDataField("簽名日期")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("44.34285714285714em")
                 .setTop("60.49523809523809em")
-                .setWidth("8.666666666666666em")
+                .setWidth("12em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.block2.append(
@@ -618,8 +623,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("11.428571428571429em")
                 .setTop("4.571428571428571em")
-                .setWidth("59.65714285714286em")
-                .setHeight("8.076190476190476em")
+                .setWidth("59.93333333333333em")
+                .setHeight("8.066666666666666em")
                 .setLayoutData({
                     "rows" : 3,
                     "cols" : 7,
@@ -698,8 +703,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div299")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.304761904761905em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.733333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "G2"
             );
             
@@ -759,8 +764,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div300")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.304761904761905em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.733333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "G3"
             );
             
@@ -768,7 +773,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox209")
                 .setDataBinder("rdb")
-                .setDataField("Test Data Pass")
+                .setDataField("Test Data Pass#2")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -819,10 +824,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input714")
                 .setName("B2")
+                .setDataBinder("rdb")
+                .setDataField("B1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B2"
             );
@@ -831,10 +838,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input715")
                 .setName("C2")
+                .setDataBinder("rdb")
+                .setDataField("B2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C2"
             );
@@ -843,10 +852,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input716")
                 .setName("D2")
+                .setDataBinder("rdb")
+                .setDataField("B3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D2"
             );
@@ -855,10 +866,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input717")
                 .setName("E2")
+                .setDataBinder("rdb")
+                .setDataField("B4")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E2"
             );
@@ -867,10 +880,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input719")
                 .setName("F2")
+                .setDataBinder("rdb")
+                .setDataField("B5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F2"
             );
@@ -879,10 +894,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input720")
                 .setName("B3")
+                .setDataBinder("rdb")
+                .setDataField("B6")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B3"
             );
@@ -891,10 +908,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input721")
                 .setName("C3")
+                .setDataBinder("rdb")
+                .setDataField("B7")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C3"
             );
@@ -903,10 +922,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input722")
                 .setName("D3")
+                .setDataBinder("rdb")
+                .setDataField("B8")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D3"
             );
@@ -915,10 +936,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input723")
                 .setName("E3")
+                .setDataBinder("rdb")
+                .setDataField("B9")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E3"
             );
@@ -927,10 +950,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input724")
                 .setName("F3")
+                .setDataBinder("rdb")
+                .setDataField("B10")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.628571428571429em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("6.333333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F3"
             );
@@ -938,6 +963,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input746")
+                .setDataBinder("rdb")
+                .setDataField("處理方法")
                 .setDock("top")
                 .setLeft("12.19047619047619em")
                 .setTop("12.952380952380953em")
@@ -976,8 +1003,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div411.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1161")
-                .setDataBinder("db")
-                .setDataField("檢測時間 起")
+                .setDataBinder("rdb")
+                .setDataField("檢測時間起#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("30.476190476190474em")
@@ -990,8 +1017,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div411.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1162")
-                .setDataBinder("db")
-                .setDataField("訖")
+                .setDataBinder("rdb")
+                .setDataField("訖#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("45.714285714285715em")
@@ -1004,8 +1031,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div411.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1170")
-                .setDataBinder("db")
-                .setDataField("計")
+                .setDataBinder("rdb")
+                .setDataField("計#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("54.857142857142854em")
@@ -1028,8 +1055,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div412.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1171")
-                .setDataBinder("db")
-                .setDataField("簽名")
+                .setDataBinder("rdb")
+                .setDataField("簽名#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
@@ -1040,17 +1067,18 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div412.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input1172")
-                .setDataBinder("db")
-                .setDataField("日期")
+                .setDataBinder("rdb")
+                .setDataField("簽名日期#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("44.34285714285714em")
                 .setTop("60.49523809523809em")
-                .setWidth("8.666666666666666em")
+                .setWidth("12em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.block3.append(
@@ -1059,8 +1087,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("12.19047619047619em")
                 .setTop("5.333333333333333em")
-                .setWidth("59.65714285714286em")
-                .setHeight("29.63809523809524em")
+                .setWidth("59.93333333333333em")
+                .setHeight("29.666666666666668em")
                 .setLayoutData({
                     "rows" : 8,
                     "cols" : 7,
@@ -1284,14 +1312,16 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div349")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("59.352380952380955em")
-                .setHeight("7.466666666666667em"),
+                .setWidth("59.8em")
+                .setHeight("6.533333333333333em"),
                 "A4"
             );
             
             host.xui_ui_div349.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input953")
+                .setDataBinder("rdb")
+                .setDataField("Remark")
                 .setDock("fill")
                 .setLeft("6.857142857142857em")
                 .setTop("2.2857142857142856em")
@@ -1307,14 +1337,16 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div350")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("59.352380952380955em")
-                .setHeight("7.466666666666667em"),
+                .setWidth("59.8em")
+                .setHeight("6.533333333333333em"),
                 "A8"
             );
             
             host.xui_ui_div350.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input960")
+                .setDataBinder("rdb")
+                .setDataField("Remark#2")
                 .setDock("fill")
                 .setLeft("7.619047619047619em")
                 .setTop("3.0476190476190474em")
@@ -1329,10 +1361,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input927")
                 .setName("C2")
+                .setDataBinder("rdb")
+                .setDataField("C1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C2"
             );
@@ -1341,10 +1375,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input928")
                 .setName("D2")
+                .setDataBinder("rdb")
+                .setDataField("C2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D2"
             );
@@ -1353,10 +1389,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input929")
                 .setName("E2")
+                .setDataBinder("rdb")
+                .setDataField("C3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E2"
             );
@@ -1365,10 +1403,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input932")
                 .setName("C3")
+                .setDataBinder("rdb")
+                .setDataField("C4")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C3"
             );
@@ -1377,10 +1417,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input933")
                 .setName("D3")
+                .setDataBinder("rdb")
+                .setDataField("C5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D3"
             );
@@ -1389,10 +1431,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input934")
                 .setName("E3")
+                .setDataBinder("rdb")
+                .setDataField("C6")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E3"
             );
@@ -1401,10 +1445,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input936")
                 .setName("C6")
+                .setDataBinder("rdb")
+                .setDataField("C7")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C6"
             );
@@ -1413,10 +1459,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input937")
                 .setName("C7")
+                .setDataBinder("rdb")
+                .setDataField("C12")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C7"
             );
@@ -1425,10 +1473,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input938")
                 .setName("D6")
+                .setDataBinder("rdb")
+                .setDataField("C8")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D6"
             );
@@ -1437,10 +1487,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input939")
                 .setName("D7")
+                .setDataBinder("rdb")
+                .setDataField("C13")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D7"
             );
@@ -1449,10 +1501,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input942")
                 .setName("E6")
+                .setDataBinder("rdb")
+                .setDataField("C9")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E6"
             );
@@ -1461,10 +1515,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input943")
                 .setName("E7")
+                .setDataBinder("rdb")
+                .setDataField("C14")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E7"
             );
@@ -1473,10 +1529,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input944")
                 .setName("F6")
+                .setDataBinder("rdb")
+                .setDataField("C10")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F6"
             );
@@ -1485,10 +1543,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input945")
                 .setName("F7")
+                .setDataBinder("rdb")
+                .setDataField("C15")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.923809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.8em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F7"
             );
@@ -1497,10 +1557,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input946")
                 .setName("G6")
+                .setDataBinder("rdb")
+                .setDataField("C11")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.933333333333334em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G6"
             );
@@ -1509,10 +1571,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input951")
                 .setName("G7")
+                .setDataBinder("rdb")
+                .setDataField("C16")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("7.933333333333334em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G7"
             );
@@ -1558,6 +1622,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
+            var cmd = utils.createDDL(ns.dialog, "3phControler維修工單");
+            console.log(cmd);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -1572,7 +1638,20 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+                _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+                    var ns = this, uictrl = profile.boxing();
+                    utils.updateNewWorkSheetValue(ns.rdb, newValue);
+                }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

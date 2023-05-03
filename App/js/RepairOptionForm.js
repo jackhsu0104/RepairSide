@@ -204,7 +204,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("a")
             );
             
             host.xui_ui_tabs19.append(

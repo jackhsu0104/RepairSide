@@ -157,17 +157,19 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div868.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5459")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
                 .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("登錄編號")
                 .setLeft("43.42857142857143em")
                 .setTop("0.7333333333333333em")
-                .setWidth("11.2em")
+                .setWidth("13.266666666666667em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("popbox")
                 .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
             );
             
             host.xui_ui_div868.append(
@@ -250,8 +252,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("維修方式")
                 .setItems([
                     {
-                        "id" : "Overhau",
-                        "caption" : "Overhau",
+                        "id" : "Overhaul",
+                        "caption" : "Overhaul",
                         "imageClass" : ""
                     },
                     {
@@ -353,7 +355,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -2317,7 +2319,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
                 .setLeft("9.142857142857142em")
                 .setTop("8.304761904761905em")
-                .setWidth("53.56190476190476em")
+                .setWidth("54.13333333333333em")
                 .setHeight("17.066666666666666em")
                 .setLayoutData({
                     "rows" : 7,
@@ -2610,8 +2612,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div619")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("17.447619047619046em")
-                .setHeight("15.619047619047619em"),
+                .setWidth("16.666666666666668em")
+                .setHeight("13.666666666666666em"),
                 "A1"
             );
             
@@ -2637,8 +2639,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div620")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("17.523809523809526em")
-                .setHeight("15.619047619047619em"),
+                .setWidth("16.733333333333334em")
+                .setHeight("13.666666666666666em"),
                 "E1"
             );
             
@@ -2667,8 +2669,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J2"
             );
@@ -2681,8 +2683,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J4"
             );
@@ -2695,8 +2697,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K2"
             );
@@ -2709,8 +2711,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#4")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K4"
             );
@@ -2723,8 +2725,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.095238095238095em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.733333333333333em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "J6"
             );
@@ -2737,8 +2739,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("面板#6")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("5.942857142857143em")
-                .setHeight("4.419047619047619em")
+                .setWidth("6.866666666666666em")
+                .setHeight("3.8666666666666667em")
                 .setLabelPos("none"),
                 "K6"
             );
@@ -2798,7 +2800,20 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+                _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+                    var ns = this, uictrl = profile.boxing();
+                    utils.updateNewWorkSheetValue(ns.crdb, newValue);
+                }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

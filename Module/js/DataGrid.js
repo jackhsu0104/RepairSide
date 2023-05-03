@@ -1,3 +1,4 @@
+/*20230404*/
 xui.Class('Module.DataGrid', 'xui.Module',{
     Instance:{
         // To initialize internal components (mostly UI controls)
@@ -224,17 +225,13 @@ xui.Class('Module.DataGrid', 'xui.Module',{
               return cond + " AND " + s;
         },
         prepareCondition: function(){
-            var ns = this;
+            var ns = this, prop = ns.properties;
+            var cond2 = ns.properties["condition2"];
+			if(typeof cond2 == "undefined")
+				cond2 = "";
             var cond = ns.fireEvent("onPrepareCondition",[]);        
             if(typeof cond != "undefined")
               return ns.prepareFilter(cond);            
-            
-            cond = ns.properties["condition"];
-            if(typeof cond == "undefined")
-                return ns.prepareFilter();
-            if(cond == "" || cond.indexOf("{") == -1)
-                return ns.prepareFilter(cond);
-            var ns = this, prop = ns.properties;
             var dbs = ns.host.getDataBinders();
             if(dbs.length == 0)
                 return ns.prepareFilter(cond);
@@ -255,15 +252,18 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 return ns.prepareFilter(cond);
             db.updateDataFromUI();
             var data = db.getData();
-            
-            var cb = function(match,offset,str)
-            {
-                var key = match;
-                key = key.substring(1,key.length-1);
-                return "'" + data[key] + "'";
-            };
-            cond = cond.replace(/{[^{}]*}/g, cb);
-            
+			
+  
+            cond = ns.properties["condition"];
+            if(typeof cond == "undefined")
+                cond = "";
+
+            if(cond == "")
+                cond = cond2;
+            else if(cond2 != "")
+                cond = cond + " AND " + cond2;
+                
+            cond = utils.formatString(cond, data);
             return ns.prepareFilter(cond);
         },
         loadFromCache: function(prop){
@@ -517,14 +517,20 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 ns.addRow.apply(ns,arguments);
             };
             if(xui.isSet(recordId)){
-                ns.fireEvent("onOpenRecord",[recordId,fields,updateRow]);
-               // ns.xui_msgs1.broadcast(ns.properties.outMsgType, "open",  recordId, fields, updateRow);
                 mode = "edit"; 
+                var r = ns.fireEvent("onOpenRecord",[recordId,fields,updateRow]);
+				if(r)
+				{
+				  if(r == "noop")
+					return;
+				  if(r != "")
+					mode = r;
+				}
             }
             else{
+                mode = "new";
                 ns.fireEvent("onCreateRecords",[addRow, updateRow]);
                 fields = ns.prepareNewDatas();
-                mode = "new";
             }
             var pagename = prop.openPageName; 
             if(pagename == "")
@@ -539,7 +545,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     utils.installDataBinderHooks(mod);
                     
                 if(pagename == "DataInputDialog")
+				{
                     utils.createTableControls(prop.tableName, prop.keyid, mod);
+					mod.dialog.setCaption(prop.tableName);
+				}
                 mod.setProperties("mode",mode);
                 mod.setProperties("datas",fields);
                 mod.setProperties("keyid",prop.keyid);
@@ -551,7 +560,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     mod.dialog.setCaption(prop.formCaption);
                 db.setData(fields);
                 db.updateDataToUI();
-                if(mode == "edit")
+                if(mode && mode.includes("edit"))
                   utils.updateModuleTableBoxCaption(mod);
                 else  
                   mod.saveBtn.setCaption("新增");  
@@ -584,15 +593,21 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             };
             xui.Dom.busy(null, "刪除資料中 ...");
             console.log(ns.grid.getRowMap(ids[0]));
+            var r = ns.fireEvent("onDeleteRecords", [ ids, cb]);
+			if(typeof r != "undefined" && r == true)  //已經處理完畢
+			{
+                xui.Dom.free();
+                ns.refreshGrid();
+				return;
+			}
             for(var i=0; i<ids.length; i++)
             {
               var row = ns.grid.getRowMap(ids[i]); 
-              utils.removeTableItem(prop.tableName, row[prop.keyid]);  
+              utils.removeTableItem(prop.tableName, prop.keyid, row[prop.keyid]);  
             }
             xui.Dom.free();
             ns.refreshGrid();
 
-            //ns.fireEvent("onDeleteRecords", [ ids, cb]);
             //ns.xui_msgs1.broadcast(ns.properties.outMsgType, "delete",  ids, '', cb);
         },
         refreshGrid : function(){
@@ -772,6 +787,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             "insertTableName" : "",
             "displayFields" : "",
             "condition" : "",
+            "condition2" : "",
             "orderby" : "",
             "fieldWidths" : null,
             "fieldCaptions" : null,
@@ -936,7 +952,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         module.setProperties("fieldCaptions", config.displayCaptions);
                         module.setProperties("grid",ns.grid);
                         module.setProperties("cell",cell);
-                        ComboBoxCache[cachetitle] = module;
+                      //  ComboBoxCache[cachetitle] = module;
                         module.popUp(proEditor);
                     });
                 }
@@ -1101,10 +1117,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                                              */
                                    ){},
             onDeleteRecords:function(ids/*Array, target record ids*/, 
-                                    deleteCallback/*Function, function(ids){},callback to delete rows*/){},
+                                    deleteCallback/*Function, function(ids){},callback to delete rows*/){  return false;},
             onOpenRecord:function(id/*String, the record id*/, 
                                    fields/*Hash, record fields*/, 
-                                   updateCallback/*Function, function(id, fields){}, callback to update row*/){},
+                                   updateCallback/*Function, function(id, fields){}, callback to update row*/){  return "";},
             onCreateRecords:function(
                                    createCallback/*Function, function(id, fields){}, callback to add new row*/,
                                    updateCallback/*Function, function(id, fields){}, callback to update row*/
@@ -1123,3 +1139,4 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         }
     }    
 });
+

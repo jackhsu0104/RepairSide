@@ -1,6 +1,6 @@
 // The default code is a module class (inherited from xui.Module)
 // Ensure that all the value of "key/value pair" does not refer to external variables
-xui.Class('App.CryopumpTestForm', 'xui.Module',{
+xui.Class('App.UnitServiceForm', 'xui.Module',{
     Instance:{
         // Dependency classes
         Dependencies:[],
@@ -33,18 +33,18 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"testdb")
-                .setName("testdb")
+                .setHost(host,"unitdb")
+                .setName("unitdb")
             );
             
             append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("8.6em")
-                .setTop("1.9333333333333333em")
+                .setLeft("16em")
+                .setTop("1.5238095238095237em")
                 .setWidth("62.476190476190474em")
                 .setHeight("38.095238095238095em")
-                .setCaption("Cryopump Test Form")
+                .setCaption("Unit Service  Form")
                 .setModal(true)
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
@@ -114,43 +114,57 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairNo")
-                .setDataBinder("testdb")
-                .setDataField("登錄編號")
+                .setHost(host,"xui_ui_comboinput192")
+                .setDataBinder("unitdb")
+                .setDataField("日期")
+                .setRequired(true)
+                .setLeft("0.7619047619047619em")
+                .setTop("3.3523809523809525em")
+                .setWidth("18.285714285714285em")
+                .setLabelSize("8em")
+                .setLabelCaption("日期")
+                .setType("date")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"id")
+                .setDataBinder("unitdb")
+                .setDataField("總表單號")
+                .setReadonly(true)
                 .setLeft("3.8095238095238093em")
                 .setTop("1.0666666666666667em")
                 .setWidth("15.238095238095237em")
+                .setPlaceholder("儲存後產生")
                 .setLabelSize("5em")
-                .setLabelCaption("登錄編號")
+                .setLabelCaption("單號")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput141")
+                .setDataBinder("unitdb")
+                .setDataField("業務ID")
+                .setRequired(true)
+                .setLeft("0.7619047619047619em")
+                .setTop("5.942857142857143em")
+                .setWidth("18.285714285714285em")
+                .setLabelSize("8em")
+                .setLabelCaption("業務ID")
                 .setType("popbox")
             );
             
             host.form.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"type")
-                .setDataBinder("testdb")
-                .setDataField("Type")
-                .setReadonly(true)
-                .setItems([
-                    {
-                        "id" : "維修前測試",
-                        "caption" : "維修前測試",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "一般維修測試",
-                        "caption" : "一般維修測試",
-                        "imageClass" : ""
-                    }
-                ])
-                .setDockStretch("fixed")
-                .setLeft("3.6666666666666665em")
-                .setTop("3.4em")
-                .setWidth("30.2em")
-                .setHeight("2.6666666666666665em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setValue("維修前測試")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput148")
+                .setDataBinder("unitdb")
+                .setDataField("業務名稱")
+                .setLeft("0.7619047619047619em")
+                .setTop("8.380952380952381em")
+                .setWidth("18.285714285714285em")
+                .setLabelSize("8em")
+                .setLabelCaption("業務名稱")
+                .setType("popbox")
             );
             
             host.dialog.append(
@@ -193,17 +207,16 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"modGrid")
                 .setProperties({
-                    "tableName" : "CryopumpTestForm",
+                    "tableName" : "UnitServiceForm子表",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "登錄編號 = {登錄編號}",
-                    "condition2" : "",
-                    "orderby" : "登錄編號",
+                    "condition" : "",
+                    "orderby" : "子表單號",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
                     "pageLength" : 0,
-                    "keyid" : "rowid",
-                    "openPageName" : "CryopumpTestSubForm",
+                    "keyid" : "子表單號",
+                    "openPageName" : "SubUnitServiceForm",
                     "mode" : "normal",
                     "formCaption" : "",
                     "newDatas" : null,
@@ -217,31 +230,45 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                                 "dirtyMark" : true,
                                 "header" : [
                                     {
-                                        "id" : "登錄編號",
-                                        "caption" : "登錄編號",
-                                        "required" : false,
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "Pump",
-                                        "caption" : "Pump",
-                                        "required" : false,
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "required" : true,
                                         "type" : "input",
                                         "width" : "8em"
                                     },
                                     {
                                         "id" : "P/N",
                                         "caption" : "P/N",
-                                        "required" : false,
+                                        "required" : true,
                                         "type" : "input",
                                         "width" : "8em"
                                     },
                                     {
                                         "id" : "S/N",
                                         "caption" : "S/N",
-                                        "required" : false,
+                                        "required" : true,
                                         "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "公司編號",
+                                        "caption" : "公司編號",
+                                        "required" : true,
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "公司名稱",
+                                        "caption" : "公司名稱",
+                                        "required" : true,
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "工號",
+                                        "caption" : "工號",
+                                        "required" : true,
+                                        "type" : "button",
                                         "width" : "8em"
                                     }
                                 ]
@@ -296,7 +323,7 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                 })
                 .setEvents({
                     "onInitNewData" : "_modgrid_oninitnewdata",
-                    "onPrepareCondition" : null
+                    "onPrepareCondition" : "_modgrid_onpreparecondition"
                 })
             );
             
@@ -373,7 +400,7 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
         */
             _timer1_ontime:function(profile, threadId){
                 var ns = this, uictrl = profile.boxing();
-                if(ns.repairNo.getUIValue() == "")
+                if(ns.id.getValue() == "")
                     ns.modGrid.setDisabled(true);
                 else 
                     ns.modGrid.setDisabled(false);
@@ -381,14 +408,14 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             },
         _modgrid_oninitnewdata:function(){
             var ns = this;
-            var id = ns.repairNo.getValue();
-            var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號",id,"*");
-            if(item != "")
-              return {"登錄編號": id, "Type":ns.type.getUIValue(), "P/N":item["In P/N"], "S/N": item["In S/N"],"Pump":item["In Model"]};
-            else    
-              return {"登錄編號": id, "Type":ns.type.getUIValue()};
+            var nbr = ns.id.getValue();
+            return {"總表單號": nbr};
 
         },
+            _modgrid_onpreparecondition:function(){
+                var ns = this;
+                return `總表單號 = '${ns.id.getUIValue()}'`;
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

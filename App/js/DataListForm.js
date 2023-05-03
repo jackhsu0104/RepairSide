@@ -32,7 +32,8 @@ xui.Class('App.DataListForm', 'xui.Module',{
                 .setHost(host,"form")
                 .setLeft("9.142857142857142em")
                 .setTop("4.571428571428571em")
-                .setWidth("16.076190476190476em")
+                .setWidth("16em")
+                .setHeight("19.047619047619047em")
             );
             
             host.form.append(
@@ -54,6 +55,8 @@ xui.Class('App.DataListForm', 'xui.Module',{
                     "newDatas" : null,
                     "binder" : "",
                     "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : "",
                     "fields" : "",
                     "rowLength" : 20,
                     "conditions" : "",
@@ -69,55 +72,73 @@ xui.Class('App.DataListForm', 'xui.Module',{
                                 "colMovable" : false
                             }
                         },
-                        "toolbar" : {
+                        "topBlock" : {
                             "properties" : {
-                                "items" : [
-                                    {
-                                        "id" : "grp1",
-                                        "sub" : [
-                                            {
-                                                "id" : "new",
-                                                "caption" : "新增",
-                                                "image" : "",
-                                                "imageClass" : "xui-uicmd-add",
-                                                "hidden" : true
-                                            },
-                                            {
-                                                "id" : "open",
-                                                "caption" : "編輯資料",
-                                                "image" : "",
-                                                "imageClass" : "xui-uicmd-popbox",
-                                                "disabled" : false
-                                            },
-                                            {
-                                                "id" : "delete",
-                                                "caption" : "刪除",
-                                                "image" : "",
-                                                "imageClass" : "xui-uicmd-close",
-                                                "disabled" : false,
-                                                "hidden" : true
-                                            },
-                                            {
-                                                "id" : "custom1",
-                                                "caption" : "自定義1",
-                                                "hidden" : true
-                                            }
-                                        ],
-                                        "caption" : "grp1"
-                                    }
-                                ],
-                                "display" : "none"
-                            }
-                        },
-                        "pagebar" : {
-                            "properties" : {
-                                "visibility" : "hidden"
+                                "height" : "3.8095238095238093em",
+                                "overflow" : "hidden"
                             }
                         },
                         "ctl_sbutton1" : {
                             "properties" : {
                                 "visibility" : "hidden",
                                 "zIndex" : 1
+                            }
+                        },
+                        "pagebar" : {
+                            "properties" : {
+                                "dock" : "top",
+                                "width" : "12em",
+                                "visibility" : "visible"
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "dock" : "bottom",
+                                "width" : "6em",
+                                "display" : "block",
+                                "labelSize" : "3em"
                             }
                         }
                     }
@@ -150,7 +171,7 @@ xui.Class('App.DataListForm', 'xui.Module',{
             modgrid.setProperties("tableName", prop["tableName"]);
             modgrid.setProperties("condition", prop["condition"]);
             modgrid.setProperties("keyid", prop["keyid"]);
-            modgrid.setProperties("pageLength", 0);
+            //modgrid.setProperties("pageLength", 0);
            // modgrid.setProperties("orderby", "["+prop["keyid"]+"]");
             modgrid.setProperties("mode", "selection");
             modgrid.setProperties("displayFields", prop["displayFields"]);
@@ -161,7 +182,7 @@ xui.Class('App.DataListForm', 'xui.Module',{
         },
         _modgrid_onselectrecord:function(value/*String, value*/,caption/*String, caption */,fields/*Hash, record fields map*/){
             var ns = this, prop = ns.properties, uictrl = prop.uictrl, disp = prop.displayFields;
-            //console.log("fields", fields);
+//            console.log("fields", fields);
             var  value = fields[prop.keyid]; 
             disp = disp.split(',');
             var tips = "";
@@ -174,11 +195,11 @@ xui.Class('App.DataListForm', 'xui.Module',{
             }   
             else
             {
+              uictrl.setTips(tips);//call first to work
               uictrl.setValue(value);
               uictrl.setCaption(value);
-              uictrl.setTips(tips);
             }
-            ns.form.hide();
+            ns.form.destroy();
         },
         _modgrid_ongriddataloaded:function(){
             var ns=this, grid = ns.modgrid.grid;
@@ -189,6 +210,8 @@ xui.Class('App.DataListForm', 'xui.Module',{
               w  += w1;  
             }
             w+=2;
+            if(w < 12)
+                w = 12;
             ns.form.setWidth(w + "em");
         },
         /*,
