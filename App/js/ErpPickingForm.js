@@ -9,8 +9,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "領料報工單號",
+            "tableName" : "領料報工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -34,8 +34,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("16em")
-                .setTop("1.5238095238095237em")
+                .setLeft("9.933333333333334em")
+                .setTop("1.9333333333333333em")
                 .setWidth("61.714285714285715em")
                 .setHeight("37.333333333333336em")
                 .setCaption("領料報工單")
@@ -182,7 +182,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataBinder("pdb")
                 .setDataField("產品品號")
                 .setLeft("17.523809523809526em")
-                .setTop("0.7619047619047619em")
+                .setTop("3.2666666666666666em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
                 .setLabelCaption("產品品號")
@@ -194,7 +194,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataBinder("pdb")
                 .setDataField("產品品名")
                 .setLeft("17.523809523809526em")
-                .setTop("3.0476190476190474em")
+                .setTop("5.6em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
                 .setLabelCaption("產品品名")
@@ -206,7 +206,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataBinder("pdb")
                 .setDataField("產品序號")
                 .setLeft("17.523809523809526em")
-                .setTop("5.333333333333333em")
+                .setTop("7.866666666666666em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
                 .setLabelCaption("產品序號")
@@ -218,7 +218,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataBinder("pdb")
                 .setDataField("客戶簡稱")
                 .setLeft("17.523809523809526em")
-                .setTop("7.619047619047619em")
+                .setTop("10.066666666666666em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
                 .setLabelCaption("客戶簡稱")
@@ -231,7 +231,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataField("發票地址一")
                 .setLeft("32em")
                 .setTop("0.7619047619047619em")
-                .setWidth("26.895238095238096em")
+                .setWidth("27.8em")
                 .setLabelSize("6em")
                 .setLabelCaption("發票地址一")
             );
@@ -243,7 +243,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setDataField("發票地址二")
                 .setLeft("32em")
                 .setTop("3.0476190476190474em")
-                .setWidth("26.895238095238096em")
+                .setWidth("27.8em")
                 .setLabelSize("6em")
                 .setLabelCaption("發票地址二")
             );
@@ -253,7 +253,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput397")
                 .setDataBinder("pdb")
                 .setDataField("課稅別")
-                .setLeft("32em")
+                .setLeft("45.333333333333336em")
                 .setTop("5.333333333333333em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
@@ -266,7 +266,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setHost(host,"xui_ui_comboinput399")
                 .setDataBinder("pdb")
                 .setDataField("營業稅率")
-                .setLeft("32em")
+                .setLeft("45.333333333333336em")
                 .setTop("7.619047619047619em")
                 .setWidth("14.4em")
                 .setLabelSize("6em")
@@ -291,15 +291,54 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             
             host.xui_ui_block638.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input6490")
+                .setHost(host,"id")
                 .setDataBinder("pdb")
                 .setDataField("領料報工單號")
-                .setLeft("15.6em")
+                .setLeft("47.333333333333336em")
                 .setTop("10.066666666666666em")
-                .setWidth("16.4em")
+                .setWidth("12.4em")
                 .setPlaceholder("儲存後自動產生")
-                .setLabelSize("8em")
-                .setLabelCaption("領料報工單號")
+                .setLabelSize("4em")
+                .setLabelCaption("單號")
+            );
+            
+            host.xui_ui_block638.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
+                .setDataBinder("pdb")
+                .setDataField("登錄編號")
+                .setRequired(true)
+                .setLeft("32em")
+                .setTop("5.266666666666667em")
+                .setWidth("14.4em")
+                .setLabelSize("6em")
+                .setLabelCaption("登錄編號")
+                .setType("popbox")
+                .onValueChange("_repairno_onvaluechange")
+            );
+            
+            host.xui_ui_block638.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input136")
+                .setDataBinder("pdb")
+                .setDataField("客戶代號")
+                .setLeft("32em")
+                .setTop("9.933333333333334em")
+                .setWidth("14.4em")
+                .setLabelSize("6em")
+                .setLabelCaption("客戶代號")
+            );
+            
+            host.xui_ui_block638.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1933")
+                .setDataBinder("pdb")
+                .setDataField("型號")
+                .setLeft("17.6em")
+                .setTop("1em")
+                .setWidth("14.4em")
+                .setLabelSize("6em")
+                .setLabelCaption("型號")
             );
             
             host.form.append(
@@ -315,7 +354,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
                     "pageLength" : 100,
-                    "keyid" : "領料報工單號",
+                    "keyid" : "rowid",
                     "openPageName" : "PickingEditForm",
                     "mode" : "normal",
                     "formCaption" : "",
@@ -332,20 +371,20 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                                     {
                                         "id" : "領用庫別",
                                         "caption" : "領用庫別",
-                                        "width" : "8em",
-                                        "type" : "input"
+                                        "type" : "input",
+                                        "width" : "8em"
                                     },
                                     {
-                                        "id" : "材料品號",
-                                        "caption" : "材料品號",
-                                        "width" : "8em",
-                                        "type" : "input"
+                                        "id" : "品號",
+                                        "caption" : "品號",
+                                        "type" : "input",
+                                        "width" : "8em"
                                     },
                                     {
                                         "id" : "領料數量",
                                         "caption" : "領料數量",
-                                        "width" : "8em",
-                                        "type" : "input"
+                                        "type" : "input",
+                                        "width" : "8em"
                                     }
                                 ]
                             }
@@ -392,6 +431,9 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                         }
                     }
                 })
+                .setEvents({
+                    "onInitNewData" : "_mgrid_oninitnewdata"
+                })
             );
             
             return children;
@@ -427,7 +469,31 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
         },
-
+        prepareNewData: function(rno){
+          var data = utils.getITemValue("CTI Control Number總資料庫","登錄編號",rno);
+          if(data != "")
+          {   
+            var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
+                        "登錄編號":rno, "Creator": LoginUser.EmplID};
+            var data2 = utils.getITemValue("erp.領料報工表單查詢","登錄編號",rno); 
+            if(data2 != "")
+            {
+              item["客戶簡稱"] = data2["客戶簡稱"];      
+              item["客戶代號"] = data2["客戶代號"];      
+              item["發票地址一"] = data2["發票地址一"];      
+              item["發票地址二"] = data2["發票地址二"];      
+              item["課稅別"] = data2["課稅別"];      
+              item["營業稅率"] = data2["營業稅率"];      
+              item["叫修單別"] = data2["叫修單別"];      
+              item["叫修單號"] = data2["叫修單號"];      
+            }
+            return item;
+          }
+          else 
+            return {"維修單別":"B200","維修站別":"902", "Creator": LoginUser.EmplID};
+              
+              
+        },
         /**
          * Fires when the dialog shows
          * @method onShow [xui.UI.Dialog event]
@@ -438,6 +504,12 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            var data = ns.pdb.getData();
+            if(data["已上傳"] == true)
+            {
+              ns.uploadBtn.setCaption("已上傳"); 
+              ns.uploadBtn.setDisabled(true);  
+            }
         },
             /**
          * Fired when user click it
@@ -453,7 +525,87 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             },
         _page_onready:function(e,i){
             var ns = this;
+        },
+        uploadPickingData: function(edata){
+                var ns = this;
+                var wait = true;
+                if(onFinish)
+                    wait = false;
+                var result = null;
+                xui.Ajax("http://192.168.10.21/WEBAPI_W3R027/INSERTRMAMI13",edata,function(rsp){
+                    var data =rsp;
+                    if(!data)    alert("no data");
+                    else
+                    {
+                        result = data;
+                        if(onFinish)
+                          onFinish(data);  
+                    }
+                },null,null,{"reqType":"json","asy": !wait}).start();
+                return result;
+        },
+        prepareErpHeader: function(){
+            var ns = this;
+            var hdata = utils.getItemValue("erp.領料報工表單查詢", "登錄編號",ns.repairNo.getUIValue());
+            if(hdata == "")
+                return "";
+            ns.pdb.updateDataFromUI();
+            var d1 = ns.pdb.getData(); 
+            var head = {    "RMATC001": d1["維修單別"],                  
+                            "RMATC017": d1["維修部門"],                  
+                            "RMATC035": "902",                  
+                            "RMATC003": d1["單據日期"],                  
+                            "RMATC224": d1["登錄編號"],                
+                            "RMATC005": hdata["叫修單別"],                  
+                            "RMATC006": hdata["叫修單號"],                 
+                            "RMATC007": d1["客戶代號"],                 
+                            "RMATC008": d1["產品品號"],                
+                            "RMATC026": d1["工時"],                
+                            "RMATC220": StoreNameList[SiteName],                  
+                            "CREATOR":  d1["Creator"]
+                       };
+            var dat = {"DoAction":1, "LoginID":LoginUser.EmplID, "CompanyID":"CICTEST", "head":head};   
 
+            return dat;
+        },
+        pad: function(num, size) {
+            var s = "000000000" + num;
+            return s.substr(s.length-size);
+        },
+        uploadErpPickingData: function(){
+            var ns = this;
+            var id = ns.id.getUIValue();
+            if(id == "")
+            {
+              xui.alert("請先取得單號!");
+              return;  
+            }
+            var edata = ns.prepareErpHeader();
+            if(edata == "")
+            {
+              xui.alert("查無叫修單資料!");
+              return;  
+            }
+            var datas = utils.getItemValue("領料報工單子表","領料報工單子表",id,"*",true);
+            if(datas != "")
+            {
+              edata["DoAction"] = 2; //picking & workhour
+              var hdr = edata.head.RMATC005 + "-" + edata.head.RMATC006 + "-";  
+              var body = [];  
+              for(var i=0; i<datas.length; i++)
+              {
+                let item = datas[i];
+                let condition = `MG001='${ edata.head.RMATC005}' AND MG002='${item["品號"]}'`;  
+                let customerpn = utils.getItemValueByCondition("erp.COPMG",condition, "MG003");  
+                let d2 = {"RMATD003": hdr + ns.pad(i+1, 4), "RMATD004": item["品號"], "RMATD008": item["領用庫別"],"RMATD009":item["領用數量"],"RMATD014":item["批號"],
+                         "RMATD200": customerpn, "RMATD201":pad(i+1,4)};
+                body.push(d2);  
+              }
+            }
+            else 
+               var body = [{}];
+            edata.body = body;
+            ns.uploadPickingData(edata);
         },
         /**
          * Fired when user click it
@@ -465,8 +617,58 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
         */
         _uploadbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-             console.log(utils.createDDL(ns.form, "領料報工單"));
-       }
+             //console.log(utils.createDDL(ns.form, "領料報工單"));
+              ns.uploadBtn.setCaption("已上傳"); 
+              ns.uploadBtn.setDisabled(true);  
+        },
+        /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+        _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+            var ns = this, uictrl = profile.boxing();
+            var rno = newValue;
+            if(rno != "")
+            {
+              var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+              if(data != "")
+              {   
+                var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
+                        "登錄編號":rno, "Creator": LoginUser.EmplID,"型號":data["In Model"]};
+                var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
+                if(data2 != "")
+                {
+                  item["客戶簡稱"] = data2["客戶簡稱"];      
+                  item["客戶代號"] = data2["客戶代號"];      
+                  item["發票地址一"] = data2["發票地址一"];      
+                  item["發票地址二"] = data2["發票地址二"];      
+                  item["課稅別"] = data2["課稅別"];      
+                  item["營業稅率"] = data2["營業稅率"];      
+                  item["叫修單別"] = data2["叫修單別"];      
+                  item["叫修單號"] = data2["叫修單號"];      
+                }
+                var keys = Object.keys(item);  
+                for(var i=0; i<keys.length; i++)
+                {
+                    var k = keys[i];
+                    ns.pdb.setData(k, item[k]);        
+                }
+                ns.pdb.updateDataToUI();  
+              }                   
+            }
+        },
+        _mgrid_oninitnewdata:function(){
+            var ns = this;
+            ns.pdb.updateDataFromUI();
+            var data = ns.pdb.getData();
+            return {"型號": data["型號"], "領料報工單號":data["領料報工單號"],"維修站別": SiteName};
+
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

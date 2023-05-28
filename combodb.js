@@ -6,6 +6,7 @@ TableComboConfigs = {
         "維修部門":"SELECT  ME001, ME002  FROM  erp.CMSME WHERE  (ME001 LIKE N'90%'):ME001:維修部門",
         "維修站別":"SELECT  MA001, MA002  FROM  erp.RMAMA WHERE  (MA001 LIKE N'90%'):MA001",
         "登錄編號":"新增非Crosshead維修工單查詢:登錄編號",
+        "領用品號":"erp.領料庫存查詢:品號:站別,品號,庫別,庫存數量",
        /*       
        "OEM機台型號":"OEM機台副資料庫:System model::機台型號",        //tableName:valueField:displayFfields:displayCaptions:displayWidths , 如果不指定 displayFields, 自動以valueField當顯示欄位,不指定displayCaptions則以displayFields當表頭
        "群呈Sponser":"群呈Sponser:群呈Sponser",
@@ -65,9 +66,7 @@ TableComboConfigs = {
    "Crosshead維修工單": {
         "登錄編號":"新增Crosshead維修工單查詢:登錄編號",
    },
-   "crm.ServiceRecord":{
-
+   "領料報工單": {
+        "登錄編號":"站內資料表查詢:登錄編號",
    },
-   "crm.Incident":{
-   }
 };

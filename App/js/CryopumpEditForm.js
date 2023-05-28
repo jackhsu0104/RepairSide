@@ -9,8 +9,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Cryopump維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -193,6 +193,16 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .onClick("_optionbtn_onclick")
             );
             
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("53.333333333333336em")
+                .setTop("2.6em")
+                .setWidth("9.266666666666667em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"xui_ui_tabs18")
@@ -228,7 +238,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("a")
             );
             
             host.xui_ui_tabs18.append(
@@ -5754,7 +5764,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
                 _optionbtn_onclick:function(profile, e, src, value){
                     var ns = this, uictrl = profile.boxing();
-                    utils.showRepairOtionForm(ns.rdb);
+                    utils.showRepairOptionForm(ns.rdb);
                 },
         /**
          * Fired when control's UI value is changed!
@@ -5782,6 +5792,19 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             utils.updateNewWorkSheetValue(ns.rdb, newValue);
         },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _lastworksheetbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                 utils.showLastWorkSheet(ns,"CryopumpEditForm", "Cryopump維修工單", 'Pump S/N');
+            },
+        autoDestroy:true,
 
         /*,
         // To determine how properties affects this module

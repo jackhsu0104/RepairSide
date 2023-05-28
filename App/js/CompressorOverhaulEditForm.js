@@ -9,8 +9,8 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Compressor Standard Overhaul",
             "datas" : null,
             "mode" : "new"
         },
@@ -82,6 +82,48 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setWidth("5.561904761904762em")
                 .setCaption("儲存")
                 .onClick("_savebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm1")
+                .setDataBinder("rdb")
+                .setDataField("組長確認")
+                .setReadonly(true)
+                .setLeft("-0.0761904761904762em")
+                .setTop("0.6857142857142857em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長確認")
+                .setType("getter")
+                .onClick("_confirm1_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm2")
+                .setDataBinder("rdb")
+                .setDataField("秘書確認")
+                .setReadonly(true)
+                .setLeft("11.352380952380953em")
+                .setTop("0.6857142857142857em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("秘書確認")
+                .setType("getter")
+                .onClick("_confirm2_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"confirmBtn")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setLeft("23.542857142857144em")
+                .setTop("0.6857142857142857em")
+                .setWidth("9.142857142857142em")
+                .setCaption("通知秘書確認")
+                .onClick("_confirmbtn_onclick")
             );
             
             host.dialog.append(
@@ -247,12 +289,6 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                         "D2" : {
                             "value" : "COIL SOLENOID 24V VALVE @5500"
                         },
-                        "E2" : {
-                            "value" : "Bench及秘書簽名",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
                         "A3" : {
                             "value" : "1",
                             "style" : {
@@ -354,6 +390,11 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                             "style" : {
                                 "textAlign" : "center"
                             }
+                        },
+                        "E2" : {
+                            "style" : {
+                                "textAlign" : "center"
+                            }
                         }
                     }
                 })
@@ -364,61 +405,9 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div509")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("10.666666666666666em")
+                .setWidth("4.733333333333333em")
                 .setHeight("15.6em"),
                 "E3"
-            );
-            
-            host.xui_ui_div509.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button136")
-                .setDataBinder("rdb")
-                .setDataField("Bench簽名D")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 70,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("Bench簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
-            );
-            
-            host.xui_ui_div509.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button137")
-                .setDataBinder("rdb")
-                .setDataField("秘書簽名D")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 10,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("秘書簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
             );
             
             host.xui_ui_formlayout33.append(
@@ -426,20 +415,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div514")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B2"
             );
             
             host.xui_ui_div514.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button169")
                 .setDataBinder("rdb")
                 .setDataField("D1")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -456,20 +447,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div515")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B3"
             );
             
             host.xui_ui_div515.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button172")
                 .setDataBinder("rdb")
                 .setDataField("D2")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -486,20 +479,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div516")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B4"
             );
             
             host.xui_ui_div516.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button173")
                 .setDataBinder("rdb")
                 .setDataField("D3")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -516,20 +511,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div517")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B5"
             );
             
             host.xui_ui_div517.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button174")
                 .setDataBinder("rdb")
                 .setDataField("D4")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -546,20 +543,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div518")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B6"
             );
             
             host.xui_ui_div518.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button175")
                 .setDataBinder("rdb")
                 .setDataField("D5")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -576,20 +575,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div519")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B7"
             );
             
             host.xui_ui_div519.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button176")
                 .setDataBinder("rdb")
                 .setDataField("D6")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -606,20 +607,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div520")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B8"
             );
             
             host.xui_ui_div520.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button177")
                 .setDataBinder("rdb")
                 .setDataField("D7")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -636,20 +639,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div521")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B9"
             );
             
             host.xui_ui_div521.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button178")
                 .setDataBinder("rdb")
                 .setDataField("D8")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -666,20 +671,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div522")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B10"
             );
             
             host.xui_ui_div522.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button179")
                 .setDataBinder("rdb")
                 .setDataField("D9")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -694,12 +701,12 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
             host.xui_ui_formlayout33.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1297")
-                .setName("B11")
+                .setName("其他附註D")
                 .setDataBinder("rdb")
                 .setDataField("其他附註D")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("58em")
+                .setWidth("57.333333333333336em")
                 .setHeight("8.533333333333333em")
                 .setLabelPos("none")
                 .setMultiLines(true),
@@ -813,12 +820,6 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                         "D2" : {
                             "value" : "COIL SOLENOID 24V VALVE @5500"
                         },
-                        "E2" : {
-                            "value" : "Bench及秘書簽名",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
                         "A3" : {
                             "value" : "1",
                             "style" : {
@@ -896,6 +897,11 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                             "style" : {
                                 "textAlign" : "center"
                             }
+                        },
+                        "E2" : {
+                            "style" : {
+                                "textAlign" : "center"
+                            }
                         }
                     }
                 })
@@ -906,20 +912,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div501")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B2"
             );
             
             host.xui_ui_div501.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button121")
                 .setDataBinder("rdb")
                 .setDataField("C1")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -936,20 +944,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div502")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B3"
             );
             
             host.xui_ui_div502.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button124")
                 .setDataBinder("rdb")
                 .setDataField("C2")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -966,20 +976,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div503")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B4"
             );
             
             host.xui_ui_div503.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button125")
                 .setDataBinder("rdb")
                 .setDataField("C3")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -996,20 +1008,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div504")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B5"
             );
             
             host.xui_ui_div504.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button126")
                 .setDataBinder("rdb")
                 .setDataField("C4")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1026,20 +1040,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div505")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B6"
             );
             
             host.xui_ui_div505.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button127")
                 .setDataBinder("rdb")
                 .setDataField("C5")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1056,20 +1072,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div506")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B7"
             );
             
             host.xui_ui_div506.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button128")
                 .setDataBinder("rdb")
                 .setDataField("C6")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1086,20 +1104,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div507")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.333333333333334em")
+                .setWidth("9.266666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "B8"
             );
             
             host.xui_ui_div507.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button129")
                 .setDataBinder("rdb")
                 .setDataField("C7")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1116,72 +1136,20 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div508")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("10.666666666666666em")
+                .setWidth("4.733333333333333em")
                 .setHeight("11.666666666666666em"),
                 "E3"
-            );
-            
-            host.xui_ui_div508.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button134")
-                .setDataBinder("rdb")
-                .setDataField("Bench簽名C")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 60,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("Bench簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
-            );
-            
-            host.xui_ui_div508.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button135")
-                .setDataBinder("rdb")
-                .setDataField("秘書簽名C")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 10,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("秘書簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
             );
             
             host.xui_ui_formlayout28.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1261")
-                .setName("B9")
+                .setName("其他附註C")
                 .setDataBinder("rdb")
                 .setDataField("其他附註C")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("58em")
+                .setWidth("57.333333333333336em")
                 .setHeight("8.533333333333333em")
                 .setLabelPos("none")
                 .setMultiLines(true),
@@ -1307,12 +1275,6 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                         "D2" : {
                             "value" : "CKT BRKR 250V 3A SP PNL MT-PB @400"
                         },
-                        "E2" : {
-                            "value" : "Bench及秘書簽名",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
                         "A3" : {
                             "value" : "4",
                             "style" : {
@@ -1435,6 +1397,11 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                         },
                         "A13" : {
                             "value" : "其他附註"
+                        },
+                        "E2" : {
+                            "style" : {
+                                "textAlign" : "center"
+                            }
                         }
                     }
                 })
@@ -1445,20 +1412,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div453")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B3"
             );
             
             host.xui_ui_div453.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button60")
                 .setDataBinder("rdb")
                 .setDataField("B2")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1475,20 +1444,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div454")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B4"
             );
             
             host.xui_ui_div454.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button61")
                 .setDataBinder("rdb")
                 .setDataField("B3")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1505,20 +1476,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div455")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B5"
             );
             
             host.xui_ui_div455.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button62")
                 .setDataBinder("rdb")
                 .setDataField("B4")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1535,20 +1508,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div456")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B6"
             );
             
             host.xui_ui_div456.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button63")
                 .setDataBinder("rdb")
                 .setDataField("B5")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1565,20 +1540,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div457")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B7"
             );
             
             host.xui_ui_div457.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button64")
                 .setDataBinder("rdb")
                 .setDataField("B6")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1595,20 +1572,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div458")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B8"
             );
             
             host.xui_ui_div458.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button65")
                 .setDataBinder("rdb")
                 .setDataField("B7")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1625,20 +1604,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div459")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B9"
             );
             
             host.xui_ui_div459.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button66")
                 .setDataBinder("rdb")
                 .setDataField("B8")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1655,20 +1636,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div460")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B10"
             );
             
             host.xui_ui_div460.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button67")
                 .setDataBinder("rdb")
                 .setDataField("B9")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1685,20 +1668,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div461")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B11"
             );
             
             host.xui_ui_div461.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button68")
                 .setDataBinder("rdb")
                 .setDataField("B10")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1715,20 +1700,22 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div462")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B12"
             );
             
             host.xui_ui_div462.append(
-                xui.create("xui.UI.Button")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_button69")
                 .setDataBinder("rdb")
                 .setDataField("B11")
+                .setDock("fill")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("8.133333333333333em")
                 .setHeight("1.8666666666666667em")
+                .setType("getter")
                 .setCaption("")
                 .setCustomStyle({
                     "BACKGROUND" : {
@@ -1745,72 +1732,20 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div465")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("10.333333333333334em")
+                .setWidth("4.533333333333333em")
                 .setHeight("19.466666666666665em"),
                 "E3"
-            );
-            
-            host.xui_ui_div465.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button70")
-                .setDataBinder("rdb")
-                .setDataField("Bench簽名")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 120,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("Bench簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
-            );
-            
-            host.xui_ui_div465.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button72")
-                .setDataBinder("rdb")
-                .setDataField("秘書簽名")
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 0,
-                    "top" : 10,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("8.133333333333333em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("秘書簽名")
-                .setCustomStyle({
-                    "BACKGROUND" : {
-                        "background-color" : "transparent"
-                    },
-                    "KEY" : {
-                    }
-                })
             );
             
             host.xui_ui_formlayout24.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1257")
-                .setName("B13")
+                .setName("其他附註")
                 .setDataBinder("rdb")
                 .setDataField("其他附註")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("57.06666666666667em")
+                .setWidth("56.333333333333336em")
                 .setHeight("8.533333333333333em")
                 .setLabelPos("none")
                 .setMultiLines(true),
@@ -1818,15 +1753,19 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout24.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button49")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"b1")
+                .setName("B2")
                 .setDataBinder("rdb")
                 .setDataField("B1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.133333333333333em")
+                .setWidth("9.066666666666666em")
                 .setHeight("1.8666666666666667em")
+                .setLabelPos("none")
+                .setType("getter")
                 .setCaption("")
+                .onClick("_b1_onclick")
                 .setCustomStyle({
                     "BACKGROUND" : {
                         "background-color" : "transparent"
@@ -2014,6 +1953,9 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
             console.log(utils.createDDL(ns.tabs,"Compressor Standard Overhaul"));
+            utils.installConfirmNameButtonOnClick(ns);
+            utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+            ns.tabs.setValue('a');
         },
             /**
          * Fired when user click it
@@ -2026,7 +1968,55 @@ xui.Class('App.CompressorOverhaulEditForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+                _confirm1_onclick:function(profile, e, src, value, n){
+                    var ns = this, uictrl = profile.boxing();
+                     utils.confirmNameClick(ns, uictrl, "組長,主管");
+                },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.confirmNameClick(ns, uictrl, "秘書");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _confirmbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmBtnClick(ns, uictrl);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _b1_onclick:function(profile, e, src, value){
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

@@ -41,7 +41,8 @@ utils = {
                 return result;
     },
     sendDataCmd : function(hash, onFinish, wait){
-                if(typeof wait == "undefined")
+                var wait = true;
+                if(onFinish)
                     wait = false;
                 var result = null;
                 xui.Ajax("php/data.php",hash,function(rsp){
@@ -61,17 +62,7 @@ utils = {
         if(prop.condition)
             hash.condition = prop.condition;
         if(prop.fields && prop.fields != "*" && prop.fields != "")
-        {
-            var fields = prop.fields.split(",");
-            for(var i=0; i<fields.length; i++)
-            {
-              var s = fields[i];  
-              if(s.indexOf('[') == -1)
-                  fields[i] = "[" + s + "]";
-            }
-            fields = fields.join(",");
-            hash.fields = fields;
-        }
+            hash.fields = utils.getProperFields(prop.fields);
         
         utils.sendDataCmd(hash,  onFinish);
     }, 
@@ -102,7 +93,7 @@ utils = {
         var condition =  `[${key}] = '${value}'`;
         utils.getTableItems({"tableName":tableName, "fields": col, "condition":condition}, cb);
     },    
-    getTableItems : function(prop, onFinish, wait){
+    getTableItems : function(prop, onFinish = null){
         var hash={"cmd":"getTableItems","table":prop.tableName};
         if(prop.condition)
             hash.condition = prop.condition;
@@ -110,27 +101,17 @@ utils = {
             hash.orderby = prop.orderby;
         
         if(prop.fields  && prop.fields != "*" && prop.fields != "")
-        {
-            var fields = prop.fields.split(",");
-            for(var i=0; i<fields.length; i++)
-            {
-              var s = fields[i];  
-              if(s.indexOf('[') == -1)
-                  fields[i] = "[" + s + "]";
-            }
-            fields = fields.join(",");
-            hash.fields = fields;
-        }
+            hash.fields = utils.getProperFields(prop.fields);
         
-        return utils.sendDataCmd(hash, onFinish, wait);
+        return utils.sendDataCmd(hash, onFinish);
     }, 
-    getPageQueryItems : function(query, orderby, pageno, pagelen, onFinish,  wait){
+    getPageQueryItems : function(query, orderby, pageno, pagelen, onFinish){
         var hash={"cmd":"getQueryItems","query":query,"pageno":pageno, "pagelen":pagelen, "orderby":orderby};
-        return utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish);
     }, 
-    getQueryItems : function(query,onFinish, wait){
+    getQueryItems : function(query,onFinish){
         var hash={"cmd":"getQueryItems","query":query};
-        return utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish);
     }, 
     getItemValueByCondition: function(table, condition,  getField)
     {
@@ -140,7 +121,7 @@ utils = {
 
         var query = `SELECT ${getField} FROM ${table} WHERE ${condition}`;
         var hash={"cmd":"getQueryItems","query":query};
-        var datas = utils.sendDataCmd(hash,  null, true);
+        var datas = utils.sendDataCmd(hash);
         if(datas.rows.length > 0)
         {
           if(getField != "*"  && getField.indexOf(",") == -1)    
@@ -155,7 +136,7 @@ utils = {
           return "";    
     },
     getProperFields: function(fields){
-        if(fields == '*')
+        if(fields == '*' || fields == "count(*)")
             return fields;
         var items = fields.split(',');
         var R= "";
@@ -177,7 +158,7 @@ utils = {
             table = table.substring(4);
             if(!table.startsWith("["))
               table = `[${table}]`;
-            table = `GDCRM.dbo.[${table}]`;
+            table = `GDCRM.dbo.${table}`;
         }
         else
         {
@@ -195,7 +176,7 @@ utils = {
         table = utils.getProperTableName(table);
         var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
         var hash={"cmd":"getQueryItems","query":query};
-        var datas = utils.sendDataCmd(hash,  null, true);
+        var datas = utils.sendDataCmd(hash);
         if(datas.rows.length > 0)
         {
           if(getField != "*"  && getField.indexOf(",") == -1)    
@@ -229,7 +210,7 @@ utils = {
     }, 
     insertTableItem : function(table, datas, onFinish,wait){
         var hash={"cmd":"insertTableItem","table":table, "item":datas};
-        utils.sendDataCmd(hash,  onFinish,wait);
+        return utils.sendDataCmd(hash,  onFinish,wait);
     }, 
     removeTableItem : function(table, keys, value, onFinish,wait){
         var hash={"cmd":"deleteTableItem","table":table, "key":keys, "value":value};
@@ -273,8 +254,11 @@ utils = {
               return;    
             if(mode.includes("edit"))
                 mod.saveBtn.setCaption("儲存");
-            else
+            else if(mode.includes("new"))
                 mod.saveBtn.setCaption("新增");
+            else if(mode == "readonly")
+                mod.saveBtn.setDisabled(true);
+                
                 
             mod.properties.mode = mode;  
             utils.installDataBinderHooks(mod);  
@@ -293,7 +277,7 @@ utils = {
                 });    
             }                
         };
-        xui.showModule("App." + pagename, cb2);
+        xui.showModule("App." + pagename, cb2, null, null, false); //not cached
     }, 
     showPage : function(pagename,  cb){
         var cb2 = function(mod){
@@ -302,7 +286,7 @@ utils = {
             if(cb)
               cb(mod);  
         };
-        xui.showModule("App." + pagename, cb2);
+        xui.showModule("App." + pagename, cb2, null, null, false);
     }, 
     popupBox : function(pagename,  combo){
         xui.newModule("App."  +  pagename, function(err,mod){
@@ -414,6 +398,9 @@ utils = {
                if(typeof datas["其他相關資料"] != "undefined")
                  delete datas["其他相關資料"];
             }
+            if(prop.tableName == "領料報工單" && prop["mode"].includes("new")){
+                delete datas["領料報工單號"];
+            }
             if(ignoreFields)
             {    
               for(let i=0; i<ignoreFields.length; i++)
@@ -442,21 +429,27 @@ utils = {
             }
             if(prop.mode.indexOf("new") != -1)
             {
-              utils.insertTableItem(prop.tableName,  datas, newcb);  
+              var data = utils.insertTableItem(prop.tableName,  datas); //wait 
+              newcb(data);
             }
             else
             {
-               utils.modifyTableItem(prop.tableName, prop.keyid, datas, null, true);
+               utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
                mod.dialog.close();
             }    
             return true;
     },
     updateModuleTableBoxCaption : function(mod){
-        var nodes = mod.form.getChildren(true,true).get();
+        if(mod.dialog)
+          var nodes = mod.dialog.getChildren(true,true).get();
+        else if(mod.form)
+          var nodes = mod.form.getChildren(true,true).get();
+        else 
+          return;  
         for(var i=0; i< nodes.length; i++)
         {
             let n = nodes[i].boxing();
-            if(n.KEY == 'xui.UI.ComboInput' && n.getType() == "cmdbox")
+            if(n.KEY == 'xui.UI.ComboInput' && (n.getType() == "cmdbox" || n.getType() == "button"))
             {
                 
               let value = n.getValue(); 
@@ -803,7 +796,7 @@ utils = {
     },
     showRepairOptionForm: function(db){
                     db.updateDataFromUI();
-                    var data = ns.comdb.getData();
+                    var data = db.getData();
                     var id = data["登錄編號"];
                     if(id == "")
                     {
@@ -812,7 +805,7 @@ utils = {
                     }
                     var item = utils.getItemValue("Option零件更換表","登錄編號",id,"*");
                     if(item == "")
-                      utils.showDataPage("RepairOptionForm",{"委託單號":id,"Model":data["Pump"],"S/N":data["Pump S/N"]}, "new");        
+                      utils.showDataPage("RepairOptionForm",{"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName}, "new");        
                     else
                       utils.showDataPage("RepairOptionForm", item, "edit")  ;      
 
@@ -830,5 +823,184 @@ utils = {
           db.setData(keys[i], newitem[keys[i]]);  
         db.updateDataToUI();  
     },    
-     
+    getCompanyItem: function(companyID){
+        var item = this.getItemValue("crm.Company","CompanyID", companyID);
+        if(item == "")
+        {
+            var item2 = this.getItemValue("廠商公司資料表","公司代碼",companyID);
+            if(item2 == "")
+                return "";
+            item = {"CompanyID":companyID, "Address": item2["所在地址"], "ShipAddress": item2["所在地址"], "CoShortName":item2["中文簡稱"], "統一編號":item2["統一編號"], "PhoneNumber":item2["總機"]};
+        }
+        return item;
+    },
+    showLastWorkSheet: function(mod,pageName, table, keysn, keyDate = '日期'){
+        var db = mod.getDataBinders();
+        if(db.length > 0)
+           db = db[0].boxing();
+        else
+           return; 
+        db.updateDataFromUI();
+        var data = db.getData();
+        var keyValueSn = data[keysn];
+        var d = new Date(data[keyDate]);
+        d = xui.Date.format(d,"yyyy-mm-dd");
+        var condition = `[${keysn}] = '${keyValueSn}' AND 日期 < '${d}' ORDER BY 日期 DESC`;
+        var item = utils.getItemValueByCondition(table, condition);
+        if(item == "")
+        {
+          xui.alert("查無上次工單!");
+          return;  
+        }
+        var cb1 = function(mod){
+            mod.dialog.setSandboxTheme("army");
+        }
+
+        var cb2 = function(mod){
+           db.setData(data);
+           db.updateDataToUI(); 
+        }
+        utils.showDataPage(pageName, item, "readonly", cb1, cb2);
+        
+    },
+    updateConfirmBtnCaption(mod, uictrl){
+            var db = mod.getDataBinders();
+            if(db.length > 0)
+               db = db[0].boxing();
+            else
+               return; 
+            var data = db.getData();
+            var confirm = data["確認狀態"];
+            if(confirm == "待秘書確認")
+                  uictrl.setCaption("待秘書確認");
+            else if(confirm == "待組長確認")
+                  uictrl.setCaption("待組長確認");
+            else if(confirm == "秘書已確認，通知Bench")
+                uictrl.setCaption("秘書已確認,取消通知");
+            else if(confirm == "秘書已確認")
+                uictrl.setCaption("確認完成");
+            else if(data["組長確認"] == "")
+                uictrl.setCaption("通知組長確認");
+            else 
+                uictrl.setCaption("通知秘書確認");
+    },
+    confirmBtnClick: function(mod, uictrl, key = "登錄編號"){
+            var db = mod.getDataBinders();
+            if(db.length > 0)
+               db = db[0].boxing();
+            else
+               return; 
+            var prop = mod.properties;
+            if(prop["mode"].includes("new"))
+            {
+              xui.alert("請先按新增!");
+              return;  
+            }
+            var table = prop["tableName"];
+            var data = db.getData();
+            var id = data[key];
+            var confirm = uictrl.getCaption();
+            if(confirm == "通知秘書確認")
+            {
+              if(data["組長確認"] == "")  
+              {
+                xui.alert("請先通知組長確認!");   
+                return;        
+              }
+              utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"待秘書確認"});  
+              xui.alert("已通知秘書確認!");   
+              uictrl.setCaption("待秘書確認");
+            }
+            else if(confirm == "通知組長確認")
+            {
+              utils.modifyTableItem(table, key, {[key]:id, "確認狀態":"待組長確認"});  
+              xui.alert("已通知組長確認!");        
+              uictrl.setCaption("待組長確認");
+            }
+            else if(confirm == "秘書已確認,取消通知")
+            {
+              utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"秘書已確認"});  
+              xui.alert("已取消通知!");        
+              uictrl.setCaption("秘書已確認");
+            }               
+    },
+    confirmNameClick: function(mod, uictrl, pri, saveFlag=true){
+        var db = mod.getDataBinders();
+        if(db.length > 0)
+           db = db[0].boxing();
+        else
+           return; 
+        var data = db.getData();
+        var prop = mod.properties;
+        var table = prop["tableName"];
+        var name = uictrl.getValue();
+        var key = prop["keyid"];
+        var id = data[key];
+        if(name == "")
+        {
+          var priflag = false;  
+          var prilist = pri.split(",");
+          for(var i=0; i<prilist.length; i++)
+          {
+            if(LoginUser.Privilege.includes(prilist[i]))
+            {
+              priflag = true;
+              break;
+            }
+          }
+          if(priflag)
+          {
+            name = LoginUser.DisplayName;  
+            var confirmName =  pri + "確認";
+            if(pri.includes("組長"))
+                confirmName =  "組長確認";
+            uictrl.setValue(name);    
+            if(saveFlag){
+              utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name});
+            }
+            xui.alert("已確認!");  
+          }
+          else 
+            xui.alert("請 '"+ pri + "' 確認!");  
+        }
+    },
+    installConfirmNameButtonOnClick: function(mod){
+        var dialog = mod.dialog;
+        var nodes = dialog.getChildren(true,true).get();
+        var cb = function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            var name = uictrl.getValue(); 
+            if(name == "")
+              uictrl.setValue(LoginUser.DisplayName);
+            if(name == LoginUser.DisplayName)
+              uictrl.setValue("");  
+        }
+        mod._confirm_name_onclick = cb;
+        
+        var cbname = "_confirm_name_onclick";
+        for(var i=0; i< nodes.length; i++)
+        {
+            let n = nodes[i].boxing();;
+            if(n.KEY == 'xui.UI.ComboInput')
+            {
+                if(n.getType() == "button" || n.getType() == "getter")
+                {
+                  var c = n.getDataField()[0];  
+                  if(c == 'A' || c == 'B' || c== 'C' || c == 'D' || c == 'E')
+                      n.onClick(cbname);
+                }
+            }
+        }       
+    },
+    getCloseDate: function(){
+      if(typeof CloseDate == "undefined")
+      {
+        var d = utils.getItemValue("erp.MIS_AccountingCloseDate","Start", 1, "CloseDate");
+        if(d != "")
+          CloseDate = d;
+        else 
+          return "";  
+      }
+      return CloseDate;  
+    },
  };

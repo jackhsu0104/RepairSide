@@ -8,7 +8,7 @@ if(!isset($req->cmd))
 
 function str_contains($a, $b)
 {
-	return strpos($a,$b) !== false;
+    return strpos($a,$b) !== false;
 }
 function str_between($str, $starting_word, $ending_word)
 {
@@ -43,7 +43,7 @@ if(isset($req->table))
   if(str_contains($req->table,"erp."))
   {
     $req->table = str_replace("erp.","",$req->table);
-	$erp = true;
+    $erp = true;
   }
   $req->table = str_replace("crm.","GDCRM.dbo.",$req->table);
   if(str_starts_with($req->table,"GDCRM.dbo."))
@@ -59,9 +59,9 @@ if(isset($req->query))
   if(str_contains($req->query,"erp."))
   {
     $req->query = str_replace("erp.","",$req->query);
-	$erp = true;
+    $erp = true;
   }
-  else	  
+  else      
     $req->query = str_replace("crm.","GDCRM.dbo.",$req->query);
 }
 if(isset($req->fields))
@@ -70,7 +70,7 @@ if(isset($req->fields))
   for($i=0;$i<count($fields);$i++)
   {
     $v = trim($fields[$i], " ");
-    if(!str_starts_with($v, "["))
+    if(!str_starts_with($v, "[") && !str_contains($v, "count(*)"))
       $v = "[$v]";
     $fields[$i]=$v;  
   }  
@@ -80,10 +80,13 @@ if(isset($req->fields))
 $RES = new stdClass();
 
 if($erp)
-	$db = DBWFERP();
+    $db = DBWFERP();
 else
-	$db = DB();
-
+    $db = DB();
+if(isset($req->table) && str_contains($req->table, "MIS_AccountingCloseDate"))
+    execsql("USE DSCSYS");
+if(isset($req->query) && str_contains($req->query, "MIS_AccountingCloseDate"))
+    execsql("USE DSCSYS");
 //$adminuser =  $_SESSION ["adminuser"]; //true or false
 
 function IsCRM($value)
@@ -159,19 +162,19 @@ function newOrderNumber()
         if(count($items)  > 0)
         {
             $value = $items[0]["訂單流水編號"];
-			$prefix = $value[0];
+            $prefix = $value[0];
             $n = (int)substr($value,1, 3);
             $n++;
-			if($n > 999)
-			{
-				$n = 0;
-				$prefix = chr(ord($prefix)+1);
-			}
-			$value = sprintf("%s%03d",$prefix,$n);
+            if($n > 999)
+            {
+                $n = 0;
+                $prefix = chr(ord($prefix)+1);
+            }
+            $value = sprintf("%s%03d",$prefix,$n);
         }     
-		else 
-		  $value = "0000";
-		return $value;
+        else 
+          $value = "0000";
+        return $value;
 }
 
 function afterInsertTable($table, $item)
@@ -295,7 +298,7 @@ function prepareTableKey($table, $item)
     }
     else  if($table == "[訂單總資料庫]")
     {
-		$item->訂單流水編號 = newOrderNumber();
+        $item->訂單流水編號 = newOrderNumber();
     }
     else  if($table == "[估價單總表(NT)]")
     {
@@ -395,10 +398,10 @@ else  if($req->cmd == "getQueryItems")
 {
     $query = $req->query;
     $fields = str_between($query, 'SELECT ', ' FROM');
-	if(stripos($fields,"DISTINCT ") !== false)
-	  $countFields = "count($fields)";
+    if(stripos($fields,"DISTINCT ") !== false)
+      $countFields = "count($fields)";
     else 
-	  $countFields = "count(1)";	
+      $countFields = "count(1)";    
     $countQuery = replace_between($query, 'SELECT ', ' FROM', $countFields); //SQL for rowcount
     $index = stripos($countQuery,"ORDER BY ");
     if($index != false)
@@ -453,9 +456,10 @@ else if($req->cmd == "insertTableItem")
     prepareTableKey($table,$item);
     //print_r($item);
     $res = insertTableItem($table,$item);
-    afterInsertTable($table,$item);
+    //file_put_contents("log6.txt", print_r($res,true));
+    //afterInsertTable($table,$item);
     $RES->result = "OK";
-    $RES->item = $item;
+    $RES->item = $res[0];
     
 }
 else  if($req->cmd == "deleteTableItem")

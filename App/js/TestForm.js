@@ -2644,6 +2644,41 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .onChange("_combo5_onchange")
             );
             
+            host.form.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"type")
+                .setDataBinder("rdb")
+                .setDataField("Type")
+                .setItems([
+                    {
+                        "id" : "Repair",
+                        "caption" : "Repair",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Exchange",
+                        "caption" : "Exchange",
+                        "imageClass" : "",
+                        "disabled" : false
+                    },
+                    {
+                        "id" : "CIC/W",
+                        "caption" : "CIC/W",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDockStretch("fixed")
+                .setLeft("5.104761904761904em")
+                .setTop("19.333333333333332em")
+                .setWidth("26em")
+                .setHeight("2.6666666666666665em")
+                .setSelMode("multi")
+                .setLabelPos("top")
+                .setLabelHAlign("left")
+                .setCheckBox(true)
+                .setValue("")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -2719,14 +2754,7 @@ xui.Class('App.TestForm', 'xui.Module',{
         */
                 _btn1_onclick:function(profile, e, src, value){
                     var ns = this, uictrl = profile.boxing();
-                   // ns.db.setData("combo5", "item1");
-                   ns.db.updateDataFromUI();
-                   // ns.combo5.setValue("item6");
-                    var newitem = {"登錄編號2": "1234567", "Test100": "100"}; 
-                    ns.db.setData("登錄編號2", "1234567");
-                    ns.db.setData("Test100", "100");
-                    //ns.db.setData(newitem);
-                    console.log(ns.db.getData());
+                    xui.alert(ns.type.getValue());
                 },
                     /**
          * Fired when control's UI value is changed!

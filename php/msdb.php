@@ -61,7 +61,7 @@ function insertTableItem($table, $item){
   }
   $query = rtrim($query, ",");
   $valuestr = rtrim($valuestr, ",");
-  $query = $query.")"."  ".$valuestr.")";
+  $query = $query.") OUTPUT inserted.* "."  ".$valuestr.")";
   file_put_contents("log5.txt", $query);
   file_put_contents("log5.txt", print_r($bindarray,true), FILE_APPEND);
   
@@ -71,7 +71,9 @@ function insertTableItem($table, $item){
      $stmt->bindValue($i+1, $bindarray[$i]);
   }
  
-  return $stmt->execute();
+  $r = $stmt->execute();
+  if($r)  
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function insertTableItemPrefixId($table, $item, $field, $prefix){

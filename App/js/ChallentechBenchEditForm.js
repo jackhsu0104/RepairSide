@@ -214,10 +214,20 @@ xui.Class('App.ChallentechBenchEditForm', 'xui.Module',{
                 .setDataField("S/N")
                 .setLeft("28.666666666666668em")
                 .setTop("0.6em")
-                .setWidth("14.533333333333333em")
+                .setWidth("14em")
                 .setLabelSize("5em")
                 .setLabelCaption("S/N")
                 .setMaxlength("20")
+            );
+            
+            host.xui_ui_div2070.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("44.4em")
+                .setTop("0.26666666666666666em")
+                .setWidth("9.266666666666667em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
             );
             
             host.form.append(
@@ -741,7 +751,19 @@ xui.Class('App.ChallentechBenchEditForm', 'xui.Module',{
                 _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                     var ns = this, uictrl = profile.boxing();
                     utils.updateNewWorkSheetValue(ns.cdb, newValue);
-                }
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _lastworksheetbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                        utils.showLastWorkSheet(ns,"ChallentechBenchEditForm", "ChallentechBench維修工單", 'S/N');
+                    }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

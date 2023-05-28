@@ -9,8 +9,8 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "SHI CryoPump維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -191,6 +191,16 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 .setWidth("12em")
                 .setCaption("Option零件更換表")
                 .onClick("_optionbtn_onclick")
+            );
+            
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("42.333333333333336em")
+                .setTop("2.533333333333333em")
+                .setWidth("9.266666666666667em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
             );
             
             host.form.append(
@@ -3960,7 +3970,19 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                         var ns = this, uictrl = profile.boxing();
                         utils.updateNewWorkSheetValue(ns.rdb, newValue);
 
-                    }
+},
+    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+    _lastworksheetbtn_onclick:function(profile, e, src, value){
+        var ns = this, uictrl = profile.boxing();
+         utils.showLastWorkSheet(ns,"ShiCryopumpEditForm", "SHI CryoPump維修工單", 'Pump S/N');
+    }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

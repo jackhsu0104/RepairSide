@@ -9,8 +9,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Compressor維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -34,9 +34,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("11.428571428571429em")
+                .setLeft("3.3333333333333335em")
                 .setTop("3.0476190476190474em")
-                .setWidth("64.60952380952381em")
+                .setWidth("66.66666666666667em")
                 .setHeight("45.56190476190476em")
                 .setCaption("Compressor維修工單")
                 .setConLayoutColumns(null)
@@ -209,6 +209,17 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .onClick("_quotationbtn_onclick")
             );
             
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("54em")
+                .setTop("2.6em")
+                .setWidth("10em")
+                .setHeight("3.3333333333333335em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"xui_ui_tabs14")
@@ -233,7 +244,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("a")
             );
             
             host.xui_ui_tabs14.append(
@@ -3966,7 +3977,19 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                 var ns = this, uictrl = profile.boxing();
               utils.updateNewWorkSheetValue(ns.comdb, newValue);
-          }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _lastworksheetbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                    utils.showLastWorkSheet(ns,"CompressorEditForm", "Compressor維修工單", 'Compressor S/N');
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

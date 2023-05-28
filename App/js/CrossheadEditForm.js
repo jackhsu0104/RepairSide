@@ -9,8 +9,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Crosshead維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -335,6 +335,16 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("45.333333333333336em")
+                .setTop("7.666666666666667em")
+                .setWidth("9.266666666666667em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"tabs1")
@@ -355,7 +365,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("c")
             );
             
             host.tabs1.append(
@@ -2137,7 +2147,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox422")
                 .setDataBinder("rdb")
-                .setDataField("Report")
+                .setDataField("C1")
                 .setDirtyMark(true)
                 .setDock("top")
                 .setDockOrder(4)
@@ -2788,6 +2798,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            console.log(utils.createDDL(ns.dialog,"Crosshead維修工單"));
         },
             /**
          * Fired when user click it
@@ -2813,7 +2824,19 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                     var ns = this, uictrl = profile.boxing();
                     utils.updateNewWorkSheetValue(ns.crdb, newValue);
-                }
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _lastworksheetbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                        utils.showLastWorkSheet(ns,"CrossheadEditForm", "Crosshead維修工單", 'S/N');
+                    }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

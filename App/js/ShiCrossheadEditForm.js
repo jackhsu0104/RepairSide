@@ -9,8 +9,8 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "SHI Crosshead維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -321,6 +321,16 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 .setLabelSize("10em")
                 .setLabelCaption("Crosshead 編號：XH")
                 .setMaxlength("20")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"lastWorkSheetBtn")
+                .setLeft("47.333333333333336em")
+                .setTop("5.466666666666667em")
+                .setWidth("9.266666666666667em")
+                .setCaption("上次維修工單")
+                .onClick("_lastworksheetbtn_onclick")
             );
             
             host.form.append(
@@ -2595,7 +2605,19 @@ xui.Class('App.ShiCrossheadEditForm', 'xui.Module',{
                 _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                     var ns = this, uictrl = profile.boxing();
                     utils.updateNewWorkSheetValue(ns.crdb, newValue);
-                }
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _lastworksheetbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                        utils.showLastWorkSheet(ns,"ShiCrossheadEditForm", "SHI Crosshead維修工單", 'S/N');
+                    }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

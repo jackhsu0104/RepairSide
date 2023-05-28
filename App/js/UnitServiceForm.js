@@ -211,6 +211,7 @@ xui.Class('App.UnitServiceForm', 'xui.Module',{
                     "insertTableName" : "",
                     "displayFields" : "",
                     "condition" : "",
+                    "condition2" : "",
                     "orderby" : "子表單號",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -268,8 +269,15 @@ xui.Class('App.UnitServiceForm', 'xui.Module',{
                                         "id" : "工號",
                                         "caption" : "工號",
                                         "required" : true,
-                                        "type" : "button",
+                                        "type" : "input",
                                         "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "子表單號",
+                                        "caption" : "子表單號",
+                                        "hidden" : true,
+                                        "width" : "8em",
+                                        "type" : "input"
                                     }
                                 ]
                             }

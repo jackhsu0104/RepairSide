@@ -9,8 +9,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Option零件更換表",
             "datas" : null,
             "mode" : "new"
         },
@@ -36,8 +36,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("16em")
                 .setTop("1.5238095238095237em")
-                .setWidth("38.857142857142854em")
-                .setHeight("34.285714285714285em")
+                .setWidth("48em")
+                .setHeight("36.57142857142857em")
                 .setCaption(" 額外Option零件更換表")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
@@ -49,7 +49,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDock("bottom")
                 .setLeft("13.333333333333334em")
                 .setTop("20.723809523809525em")
-                .setHeight("3.8857142857142857em")
+                .setHeight("6.171428571428572em")
                 .setConDockPadding({
                     "left" : 0,
                     "top" : 10,
@@ -85,21 +85,58 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             );
             
             host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"benchBtn")
-                .setLeft("2.2857142857142856em")
+                xui.create("xui.UI.Input")
+                .setHost(host,"benchName")
+                .setDataBinder("opdb")
+                .setDataField("BenchName")
+                .setReadonly(true)
+                .setLeft("0.7619047619047619em")
                 .setTop("0.7619047619047619em")
-                .setWidth("5.485714285714286em")
-                .setCaption("Bench")
+                .setWidth("9.447619047619048em")
+                .setLabelSize("4em")
+                .setLabelCaption("填寫人")
             );
             
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"confirmBtn")
-                .setLeft("9.142857142857142em")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setLeft("1.5238095238095237em")
+                .setTop("3.0476190476190474em")
+                .setWidth("9.142857142857142em")
+                .setCaption("通知秘書確認")
+                .onClick("_confirmbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm1")
+                .setDataBinder("opdb")
+                .setDataField("組長確認")
+                .setReadonly(true)
+                .setLeft("9.904761904761905em")
                 .setTop("0.7619047619047619em")
-                .setWidth("5.485714285714286em")
-                .setCaption("秘書確認")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長確認")
+                .setType("getter")
+                .onClick("_confirm1_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm2")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setReadonly(true)
+                .setLeft("20.571428571428573em")
+                .setTop("0.7619047619047619em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("秘書確認")
+                .setType("getter")
+                .onClick("_confirm2_onclick")
             );
             
             host.dialog.append(
@@ -167,7 +204,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1393")
                 .setDataBinder("opdb")
-                .setDataField("委託單號")
+                .setDataField("登錄編號")
                 .setDock("top")
                 .setDockMargin({
                     "left" : 0,
@@ -180,7 +217,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setTop("0.7619047619047619em")
                 .setWidth("14em")
                 .setLabelSize("6em")
-                .setLabelCaption("委託單號")
+                .setLabelCaption("登錄編號")
             );
             
             host.form.append(
@@ -235,7 +272,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setLeft("1.5238095238095237em")
                 .setTop("2.9714285714285715em")
                 .setWidth("20.64761904761905em")
-                .setHeight("0.22857142857142856em")
+                .setHeight("1.5238095238095237em")
                 .setCaption("15K Cryopanel (15K Array)")
             );
             
@@ -569,7 +606,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
-           // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
+            utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
             /**
@@ -583,7 +621,45 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _confirmbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmBtnClick(ns, uictrl);
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm1_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmNameClick(ns, uictrl, "組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmNameClick(ns, uictrl, "秘書");
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

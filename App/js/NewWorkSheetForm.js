@@ -209,7 +209,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("維修工單")
+                .setValue("維修前測試單")
             );
             
             host.tabs.append(
@@ -323,9 +323,10 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
 
         },
         showWorkPage: function(){
+            var ns = this;
             var kind = ns.workKind.getValue();
-            var data = ns.newdb.getValue();
-            var item = utils.getItemValue("","登錄編號", data["登錄編號"],"*");
+            var data = ns.newdb.getData();
+            var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", data["登錄編號"],"*");
             var page = "";
             if(item != "")
             {
@@ -351,7 +352,23 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
             utils.showDataPage(page,newitem,"new");
         },
         showTestPage: function(){
+            var ns = this;
+            var kind = ns.testKind.getValue();
+            var data = ns.newdb.getData();
+            var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", data["登錄編號"],"*");
+            var page = "";
+            if(item != "")
+            {
+              if(kind == "Cryopump Test Form")        
+                  page = "CryopumpTestForm";
+              else if(kind == "Cryopump Warranty原因分析表")
+                  page = "CryopumpWarrantyEditForm";
+            }
+            var newitem = {"登錄編號":item["登錄編號"], "Model":item["In Model"], "P/N":item["In P/N"], "S/N": item["In S/N"],"客戶名稱": item["客戶名稱"], "日期":utils.today(),
+                           "保固期":item["保固期"],"上次登錄編號":item["上次登錄編號"], "上次登錄時間":item["上次登錄時間"],"上次故障原因":item["上次故障原因"],
+                          "Pump": item["In Model"], "Pump P/N": item["In P/N"],  "Pump S/N": item["In S/N"]}; 
             
+            utils.showDataPage(page,newitem,"new");
         },
         /**
          * Fired when user click it
@@ -379,8 +396,19 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
-           // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
-          //  xui.alert("onShowDialog");  
+            var data = ns.newdb.getData();
+/*            
+            if(data["維修前測試"] == "1")
+            {
+              ns.tabs.setValue("維修前測試單");
+              ns.updateItem("維修工單",{"hidden":true});  
+            }
+            else 
+            {
+              ns.tabs.setValue("維修工單");
+              ns.updateItem("維修前測試單",{"hidden":true});  
+            }
+*/            
         },
             /**
          * Fired when user click it

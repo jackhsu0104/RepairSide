@@ -9,8 +9,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "CryopumpTestForm",
             "datas" : null,
             "mode" : "new"
         },
@@ -305,7 +305,7 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
             host.xui_ui_div415.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox326")
-                .setDataBinder("rdb")
+                .setDataBinder("tdb")
                 .setDataField("Test Plate")
                 .setItems([
                     {
@@ -916,7 +916,7 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
             host.xui_ui_div463.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox342")
-                .setDataBinder("rdb")
+                .setDataBinder("tdb")
                 .setDataField("Warm Up Pass")
                 .setItems([
                     {

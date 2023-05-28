@@ -9,8 +9,8 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Compressor Repair Quotation Sheet",
             "datas" : null,
             "mode" : "new"
         },
@@ -36,7 +36,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("4.666666666666667em")
                 .setTop("1.5238095238095237em")
-                .setWidth("62em")
+                .setWidth("70.78095238095239em")
                 .setHeight("46.32380952380952em")
                 .setCaption("Compressor Repair Quotation Sheet")
                 .setModal(true)
@@ -85,6 +85,48 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                 .onClick("_savebtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"confirmBtn")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setLeft("24.304761904761904em")
+                .setTop("0.6857142857142857em")
+                .setWidth("9.142857142857142em")
+                .setCaption("通知秘書確認")
+                .onClick("_confirmbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm1")
+                .setDataBinder("qsdb")
+                .setDataField("組長確認")
+                .setReadonly(true)
+                .setLeft("-0.0761904761904762em")
+                .setTop("0.6857142857142857em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長確認")
+                .setType("getter")
+                .onClick("_confirm1_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm2")
+                .setDataBinder("qsdb")
+                .setDataField("秘書確認")
+                .setReadonly(true)
+                .setLeft("11.352380952380953em")
+                .setTop("0.6857142857142857em")
+                .setWidth("11.428571428571429em")
+                .setLabelSize("5em")
+                .setLabelCaption("秘書確認")
+                .setType("getter")
+                .onClick("_confirm2_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -107,7 +149,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.Tabs")
-                .setHost(host,"xui_ui_tabs5")
+                .setHost(host,"tabs")
                 .setItems([
                     {
                         "id" : "a",
@@ -121,10 +163,10 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("b")
             );
             
-            host.xui_ui_tabs5.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block1")
                 .setDock("fill")
@@ -346,7 +388,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                 .setType("date")
             );
             
-            host.xui_ui_tabs5.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block2")
                 .setDock("fill")
@@ -361,7 +403,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                 .setDock("fill")
                 .setLeft("9.904761904761905em")
                 .setTop("11.428571428571429em")
-                .setWidth("59.6em")
+                .setWidth("68.4em")
                 .setHeight("36.266666666666666em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
@@ -504,6 +546,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
             
         },
         getControlData: function(){
+            var ns = this;
             var datas = [];
             var sheet = ns.sheetData;
             for(var i=0; i<ns.checkboxList.length; i++)
@@ -523,11 +566,12 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
         },
         addLayoutButton: function(id,tag){
             var ns = this;
-            var btn = xui.create("xui.UI.Button")
+            var btn = xui.create("xui.UI.ComboInput")
                 .setHost(ns)
                 .setName(id)
                 .setTag(tag)
                 .onClick("_btn_onclick")
+                .setType('getter')
                 .setCaption("秘書確認");
             ns.layout.append(btn,id);
             //var box = btn.getProfile().boxing(); 
@@ -657,7 +701,10 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
             var d = data["選用材料列表"];
             if(d)
               ns.updateControls(JSON.parse(d));
-           // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
+            utils.installConfirmNameButtonOnClick(ns);
+             ns.tabs.setValue('a');
+             utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+         // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
             /**
@@ -682,6 +729,7 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
         */
         _btn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            utils.confirmNameClick(ns, uictrl, "秘書", false); //do not save
         },
         /**
          * Fired when control's UI value is changed!
@@ -706,6 +754,44 @@ xui.Class('App.CompressorRepairQuotationSheet', 'xui.Module',{
                     ns.buttonList[i].hide();
               }
             }
+        },
+            /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+            _confirm1_onclick:function(profile, e, src, value, n){
+                var ns = this, uictrl = profile.boxing();
+                     utils.confirmNameClick(ns, uictrl, "組長,主管");
+            },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+               utils.confirmNameClick(ns, uictrl, "秘書");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _confirmbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmBtnClick(ns, uictrl);
         }
         /*,
         // To determine how properties affects this module

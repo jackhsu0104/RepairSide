@@ -9,9 +9,9 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "總表單號",
+            "keyid" : "登錄編號",
             "keyvalue" : null,
-            "table" : "UnitServiceForm總表",
+            "table" : "CryopumpTestForm",
             "datas" : null
         },
 
@@ -89,6 +89,48 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                 .setWidth("5.561904761904762em")
                 .setCaption("儲存")
                 .onClick("_savebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm1")
+                .setDataBinder("testdb")
+                .setDataField("組長確認")
+                .setReadonly(true)
+                .setLeft("-0.0761904761904762em")
+                .setTop("0.6857142857142857em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長確認")
+                .setType("getter")
+                .onClick("_confirm1_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm2")
+                .setDataBinder("testdb")
+                .setDataField("秘書確認")
+                .setReadonly(true)
+                .setLeft("13.638095238095238em")
+                .setTop("0.6857142857142857em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("秘書確認")
+                .setType("getter")
+                .onClick("_confirm2_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"confirmBtn")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setLeft("25.82857142857143em")
+                .setTop("0.6857142857142857em")
+                .setWidth("9.142857142857142em")
+                .setCaption("通知秘書確認")
+                .onClick("_confirmbtn_onclick")
             );
             
             host.dialog.append(
@@ -347,6 +389,7 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
         },
             /**
          * Fired when user click it
@@ -388,6 +431,44 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             else    
               return {"登錄編號": id, "Type":ns.type.getUIValue()};
 
+        },
+            /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+            _confirm1_onclick:function(profile, e, src, value, n){
+                var ns = this, uictrl = profile.boxing();
+                utils.confirmNameClick(ns, uictrl, "組長,主管");
+            },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmNameClick(ns, uictrl, "秘書");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _confirmbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+             utils.confirmBtnClick(ns, uictrl);
         },
         /*,
         // To determine how properties affects this module

@@ -27,6 +27,13 @@ xui.Class('App', 'xui.Module',{
             );
             
             append(
+                xui.create("xui.Timer")
+                .setHost(host,"timer2")
+                .setInterval(15000)
+                .onTime("_timer2_ontime")
+            );
+            
+            append(
                 xui.create("xui.DataBinder")
                 .setHost(host,"repairdb1")
                 .setName("repairdb1")
@@ -86,7 +93,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("修復入庫")
+                .setValue("領料報工")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -275,11 +282,15 @@ xui.Class('App', 'xui.Module',{
                     {
                         "id" : "ModuleTest",
                         "caption" : "Module測試單"
+                    },
+                    {
+                        "id" : "CylinderHeater",
+                        "caption" : "Cylinder/Heater維修工單"
                     }
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Cryopump"),
+                .setValue("CylinderHeater"),
                 "維修工單"
             );
             
@@ -1150,6 +1161,306 @@ xui.Class('App', 'xui.Module',{
                 })
             );
             
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block298")
+                .setDock("top")
+                .setLeft("15.238095238095237em")
+                .setTop("16em")
+                .setHeight("8.60952380952381em"),
+                "ChallentechBench"
+            );
+            
+            host.xui_ui_block298.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input983")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block298.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button363")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"blockChallentech")
+                .setDock("fill")
+                .setLeft("24.666666666666668em")
+                .setTop("24em"),
+                "ChallentechBench"
+            );
+            
+            host.blockChallentech.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"challentechGrid")
+                .setProperties({
+                    "tableName" : "ChallentechBench維修工單",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
+                    "condition2" : "",
+                    "orderby" : "登錄編號 DESC",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "登錄編號",
+                    "openPageName" : "ChallentechBenchEditForm",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : "",
+                    "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "品名",
+                                        "caption" : "品名",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "入廠原因",
+                                        "caption" : "入廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    }
+                                ]
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        }
+                    }
+                })
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block355")
+                .setDock("top")
+                .setLeft("14.476190476190476em")
+                .setTop("15.238095238095237em")
+                .setHeight("8.60952380952381em"),
+                "CylinderHeater"
+            );
+            
+            host.xui_ui_block355.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1027")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("0.8380952380952381em")
+                .setTop("1.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_block355.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button518")
+                .setLeft("46.476190476190474em")
+                .setTop("1.5238095238095237em")
+                .setWidth("10.666666666666666em")
+                .setCaption("查詢")
+            );
+            
+            host.repairTabs.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"blockHeater")
+                .setDock("fill")
+                .setLeft("24.666666666666668em")
+                .setTop("22em"),
+                "CylinderHeater"
+            );
+            
+            host.blockHeater.append(
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"heaterGrid")
+                .setProperties({
+                    "tableName" : "CylinderHeater維修工單",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
+                    "condition2" : "",
+                    "orderby" : "登錄編號 DESC",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "登錄編號",
+                    "openPageName" : "CylinderHeaterEditForm",
+                    "mode" : "normal",
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : "",
+                    "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Cylinder S/N",
+                                        "caption" : "Cylinder S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        }
+                    }
+                })
+            );
+            
             host.mainPage.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block392")
@@ -1197,13 +1508,13 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "領料報工單",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "",
+                    "condition" : "客戶代號 != '190026'",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
                     "pageLength" : 100,
-                    "keyid" : "登錄編號",
+                    "keyid" : "領料報工單號",
                     "openPageName" : "ErpPickingForm",
                     "mode" : "normal",
                     "formCaption" : "",
@@ -1262,13 +1573,13 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "領料報工單",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "",
+                    "condition" : "客戶代號 = '190026'",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
                     "pageLength" : 100,
-                    "keyid" : "登錄編號",
+                    "keyid" : "領料報工單號",
                     "openPageName" : "ErpPickingForm",
                     "mode" : "normal",
                     "formCaption" : "",
@@ -1277,6 +1588,9 @@ xui.Class('App', 'xui.Module',{
                     "useCache" : false,
                     "saveIgnoreFields" : "",
                     "excelFileName" : ""
+                })
+                .setEvents({
+                    "onInitNewData" : "_pickinggrid2_oninitnewdata"
                 })
             );
             
@@ -1418,7 +1732,7 @@ xui.Class('App', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b"),
+                .setValue("a"),
                 "維修測試單"
             );
             
@@ -1472,7 +1786,7 @@ xui.Class('App', 'xui.Module',{
                     "displayFields" : "",
                     "condition" : "",
                     "condition2" : "",
-                    "orderby" : "rowid",
+                    "orderby" : "登錄編號",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
                     "pageLength" : 100,
@@ -1689,6 +2003,7 @@ xui.Class('App', 'xui.Module',{
                 .setBorderType("none")
                 .setIconOnly(true)
                 .setValue("a")
+                .onFlagClick("_message_onflagclick")
                 .setCustomStyle({
                     "ITEMS" : {
                         "background-color" : "transparent",
@@ -1746,7 +2061,7 @@ xui.Class('App', 'xui.Module',{
                         "caption" : "Vacuum站"
                     },
                     {
-                        "id" : "Helium Side",
+                        "id" : "Helium side",
                         "caption" : "Helium站"
                     },
                     {
@@ -2028,11 +2343,13 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
     
                     utils.installModuleTableBoxHooks(ns);
                     xui.setLang("tw");
+                    StoreNameList = {"拆解站":"1102-1","Vacuum side":"1102-3","Helium side":"1102-4","Compressor":"1102-7", "Crosshead":"1102-2","Module":"1102-5","測試站":"1102-6","Charcoal":"1102-8","Displacer":"1102-9"};
                     SiteName = "拆解站";
                     ns.siteTabs.setValue(SiteName);
                     ns.siteName.setCaption(SiteName);
                     ns.updateRepairSiteTabs();
                     ns.repairdb1["SiteName"] = SiteName;
+                    console.log("CloseDate:",utils.getCloseDate());
 
                 },
         onUserLogined: function(){
@@ -2175,6 +2492,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _sitetabs_onitemselected:function(profile, item, e, src, n){
             var ns = this, uictrl = profile.boxing();
             SiteName = item.id;
+            StoreName = StoreNameList[SiteName]; 
             ns.siteName.setCaption(SiteName);
             ns.repairdb1.setData("SiteName",SiteName);
             ns.updateRepairSiteTabs();
@@ -2200,6 +2518,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             ns.testGrid1.refreshGrid();    
         },
         processInsite: function(){
+          var ns = this;
+          var id = ns.scanRepairNo.getUIValue();
           var item = utils.getItemValue("維修站總資料表","登錄編號", id, "*");
           if(item == "") //新增維修單或測試單
           {
@@ -2211,14 +2531,16 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
               }
               var data = {"登錄編號":data1["登錄編號"],"客戶名稱":data1["客戶名稱"],"Model": data1["In Model"], "P/N":data1["In P/N"], "S/N":data1["In S/N"],
                           "維修站名":SiteName, "入站時間": utils.now(), "接收時間":utils.now()}
-              utils.insertTableITem("維修站總資料表", data, null, true);
+              utils.insertTableItem("維修站總資料表", data, null, true);
               data["保固期限"] = data1["保固期限"];
+              data["維修前測試"] = data1["SL是否要測試"];
               utils.showDataPage("NewWorkSheetForm",data, "new");
           }
           else
           {
              item["入站時間"] = utils.now();
              item["維修站名"] = SiteName;
+             delete item["rowid"]; 
              utils.modifyTableItem("維修站總資料表", "登錄編號", item);                
              xui.alert("已入站!");
          }
@@ -2248,7 +2570,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var uitem = utils.getItemValue("UnitServiceForm子表","登錄編號", id);   
                 if(uitem == "") //新增 Unit Service Form
                 {
-                  var ritem = utils.getITemValue("CTI Control Number總資料庫","登錄編號",id);
+                  var ritem = utils.getItemValue("CTI Control Number總資料庫","登錄編號",id);
                   if(ritem == "")
                   {
                     xui.alert("查無登錄編號...");
@@ -2256,25 +2578,82 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                   }
                   var workid = ritem["工號"];
                   var witem = utils.getItemValue("工號登錄總資料表","工號", workid);
-                  var mitem = utils.getItemValue("UnitServiceForm總表","工號", workid);
+                  var mitem = utils.getItemValue("UnitServiceForm子表","工號", workid);
                   if(mitem == "")  //新增unit service form 總表 
                   {
                       var data = {"業務名稱":ritem["Sponser"],"日期": utils.today()};
                       var mdata = utils.insertTableItem("UnitServiceForm總表", data, null, true);  
                       var mid = mdata.item["總表單號"];
                   }
+                  else 
+                      var mid = mitem["總表單號"];
                   var subitem = {"總表單號":mid, "登錄編號":id, "Model": item["Model"], "P/N":item["P/N"], "S/N":item["S/N"],"工號":workid,
-                                 "客戶名稱":witem["客戶名稱"]};
+                                 "公司名稱":witem["客戶名稱"]};
                   var data = utils.insertTableItem("UnitServiceForm子表", subitem, null, true);  
                   uitem = data.item;
                   xui.alert("Unit Service Form已產生!");
                 }
-                utils.showDataPage("SubUnitServiceForm",uitem,"edit");  
                 
-                utils.modifyTableItem("維修站總資料表", "登錄編號", {"登錄編號":id, "維修站名":"已入庫", "入庫時間":utils.now()});
-                xui.alert("已入庫!");
-                ns.outGrid.refreshGrid();
+                var cb = function(){
+                    utils.modifyTableItem("維修站總資料表", "登錄編號", {"登錄編號":id, "維修站名":"已入庫", "入庫時間":utils.now()});
+                    xui.alert("已入庫!");
+                    ns.outGrid.refreshGrid();
+                }
+                utils.showDataPage("SubUnitServiceForm",uitem,"edit", null, cb);  
+                
             }
+        },
+            /**
+         * When the timer is triggered regularly. If returns [false], the timer will end
+         * @method onTime [xui.Timer event]
+         * @param {xui} profile .Profile
+         * @param {} threadId  String
+        */
+            _timer2_ontime:function(profile, threadId){
+                var ns = this, uictrl = profile.boxing();
+             if(Logined != 2)
+                return;
+            var privilege = LoginUser["Privilege"];
+            if(typeof privilege != "undefined" && (privilege.includes("組長")||privilege.includes("主管")))
+            {
+                var count = 0;
+                count += ns.getMessageCount("Option零件更換表", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+                count += ns.getMessageCount("Compressor Repair Quotation Sheet", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+                count += ns.getMessageCount("Compressor Heater Fail/ Motor Fail零件更換表", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+                count += ns.getMessageCount("Compressor Standard Overhaul", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+                count += ns.getMessageCount("CryopumpWarranty原因分析表", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+                count += ns.getMessageCount("CryopumpTestForm", "確認狀態 = '秘書已確認' or 確認狀態 = '待組長確認'");
+
+
+                ns.message.setItems([
+                    {
+                        "id" : "a",
+                        "caption" : "message",
+                        "imageClass" : "fa fa-lg fa-bell",
+                        "flagText": count
+                    }
+                ]);
+            }
+            },
+        _message_onflagclick:function(e,t,i,o){
+            var ns = this, uictrl = profile.boxing();
+             if(Logined != 2)
+                return;
+            var privilege = LoginUser["Privilege"];
+            if(typeof privilege != "undefined" && (privilege.includes("組長")||privilege.includes("主管")))
+              utils.showPage("MessageDisplayForm");        
+
+        },
+
+        _pickinggrid2_oninitnewdata:function(){
+            var data = {"客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05};
+            /*var data2 = utils.getITemValue("erp.領料報工表單查詢","客戶代號", data["客戶代號"]); 
+            if(data2 != "")
+            {
+                    
+            }
+            */
+            return data;
         },
 
         /*,
