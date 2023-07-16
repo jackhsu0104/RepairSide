@@ -27,8 +27,8 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"rdb")
-                .setName("rdb")
+                .setHost(host,"rdb2")
+                .setName("rdb2")
             );
             
             append(
@@ -117,7 +117,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input175")
                 .setName("客戶名稱")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("客戶名稱")
                 .setLeft("0.6666666666666666em")
                 .setTop("0.6em")
@@ -131,7 +131,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input176")
                 .setName("Pump")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump")
                 .setLeft("26em")
                 .setTop("0.6em")
@@ -145,7 +145,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput285")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("日期")
                 .setLeft("13.333333333333334em")
                 .setTop("0.7333333333333333em")
@@ -160,7 +160,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairNo")
                 .setName("登錄編號")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("登錄編號")
                 .setLeft("37.2em")
                 .setTop("0.7333333333333333em")
@@ -175,7 +175,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div262.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox767")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Report")
                 .setLeft("53.333333333333336em")
                 .setTop("0.7619047619047619em")
@@ -238,7 +238,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("b")
             );
             
             host.xui_ui_tabs18.append(
@@ -254,7 +254,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input185")
                 .setName("上次登錄編號")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("上次登錄編號")
                 .setLeft("1.3333333333333333em")
                 .setTop("3.3333333333333335em")
@@ -268,7 +268,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput311")
                 .setName("上次登錄時間")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("上次登錄時間")
                 .setLeft("21.333333333333332em")
                 .setTop("3.3333333333333335em")
@@ -283,7 +283,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput312")
                 .setName("保固期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("保固期")
                 .setLeft("38.666666666666664em")
                 .setTop("3.3333333333333335em")
@@ -298,7 +298,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input186")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("上次故障原因")
                 .setLeft("1.3333333333333333em")
                 .setTop("5.333333333333333em")
@@ -312,7 +312,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input215")
                 .setName("進廠原因")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("進廠原因")
                 .setLeft("21.333333333333332em")
                 .setTop("5.333333333333333em")
@@ -326,7 +326,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input216")
                 .setName("Pump P/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump P/N")
                 .setLeft("-2.8em")
                 .setTop("8em")
@@ -340,7 +340,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input217")
                 .setName("Pump S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump S/N")
                 .setLeft("21.333333333333332em")
                 .setTop("8em")
@@ -354,7 +354,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input218")
                 .setName("Module1 P/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Module1 P/N")
                 .setLeft("17.333333333333332em")
                 .setTop("10.514285714285714em")
@@ -368,7 +368,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input219")
                 .setName("Module1 S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Module1 S/N")
                 .setLeft("41.93333333333333em")
                 .setTop("10.59047619047619em")
@@ -382,7 +382,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input222")
                 .setName("Module1 Name")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Module1 Name")
                 .setLeft("1.3333333333333333em")
                 .setTop("10.59047619047619em")
@@ -396,7 +396,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input224")
                 .setName("Pump/Module ETM")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump/Module ETM")
                 .setLeft("-2.6666666666666665em")
                 .setTop("13.638095238095238em")
@@ -410,7 +410,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input227")
                 .setName("特殊零件")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("特殊零件")
                 .setLeft("21.333333333333332em")
                 .setTop("13.638095238095238em")
@@ -423,7 +423,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block1.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1569")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("配件是否齊全")
                 .setItems([
                     {
@@ -458,7 +458,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input3562")
                 .setName("Module1 S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("配件是否齊全#2")
                 .setLeft("16.914285714285715em")
                 .setTop("16.99047619047619em")
@@ -469,7 +469,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block1.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox377")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Type")
                 .setItems([
                     {
@@ -511,7 +511,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput479")
                 .setName("Diode 1st")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Diode 1st")
                 .setLeft("2.6666666666666665em")
                 .setTop("0.6666666666666666em")
@@ -528,7 +528,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput481")
                 .setName("Diode 1st#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("RTD 1st#2")
                 .setLeft("16.761904761904763em")
                 .setTop("0.6666666666666666em")
@@ -546,7 +546,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput482")
                 .setName("Diode 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("1st S/N")
                 .setLeft("2.6666666666666665em")
                 .setTop("2.6666666666666665em")
@@ -563,7 +563,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput484")
                 .setName("Diode 2nd#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("1st#2")
                 .setLeft("19.047619047619047em")
                 .setTop("2.6666666666666665em")
@@ -580,7 +580,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input506")
                 .setName("Heater & Cylinder S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Heater & Cylinder S/N")
                 .setLeft("-1.3333333333333333em")
                 .setTop("7.542857142857143em")
@@ -594,7 +594,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput489")
                 .setName("Motor#1")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor#1")
                 .setLeft("2.742857142857143em")
                 .setTop("10.209523809523809em")
@@ -611,7 +611,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput490")
                 .setName("Motor#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor#2")
                 .setLeft("14.666666666666666em")
                 .setTop("10.209523809523809em")
@@ -628,7 +628,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput491")
                 .setName("Motor#3")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor#3")
                 .setLeft("20em")
                 .setTop("10.209523809523809em")
@@ -645,7 +645,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput492")
                 .setName("Motor#4")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor#4")
                 .setLeft("24.666666666666668em")
                 .setTop("10.209523809523809em")
@@ -662,7 +662,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input510")
                 .setName("Rough Valve")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Rough Valve")
                 .setLeft("2.6666666666666665em")
                 .setTop("12.571428571428571em")
@@ -676,7 +676,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input513")
                 .setName("Purge Valve")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Valve")
                 .setLeft("2.6666666666666665em")
                 .setTop("17.066666666666666em")
@@ -690,7 +690,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input518")
                 .setName("Xhead原S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Xhead原S/N")
                 .setLeft("2.742857142857143em")
                 .setTop("19.276190476190475em")
@@ -704,7 +704,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input519")
                 .setName("1st Displacer原S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("1st Displacer原S/N")
                 .setLeft("0.6666666666666666em")
                 .setTop("21.63809523809524em")
@@ -718,7 +718,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input520")
                 .setName("2nd Displacer原S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("2nd Displacer原S/N")
                 .setLeft("0.6666666666666666em")
                 .setTop("23.847619047619048em")
@@ -732,7 +732,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input521")
                 .setName("故障原因主要")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("故障原因主要")
                 .setLeft("2.742857142857143em")
                 .setTop("26.285714285714285em")
@@ -746,7 +746,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input522")
                 .setName("故障原因次要")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("故障原因次要")
                 .setLeft("2.6666666666666665em")
                 .setTop("28.876190476190477em")
@@ -760,7 +760,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input526")
                 .setName("A組裝簽名")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("A組裝簽名")
                 .setLeft("21.333333333333332em")
                 .setTop("44.733333333333334em")
@@ -774,7 +774,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input527")
                 .setName("A組長覆核")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("A組長覆核")
                 .setLeft("38em")
                 .setTop("44.6em")
@@ -787,7 +787,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox4")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("RTD 1st#3 Y/N")
                 .setItems([
                     {
@@ -813,7 +813,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox14")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor#5 Y/N")
                 .setItems([
                     {
@@ -839,7 +839,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox20")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Rough Valve#1清潔/更換")
                 .setItems([
                     {
@@ -866,7 +866,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox21")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Rough Valve#2 Y/N")
                 .setItems([
                     {
@@ -892,7 +892,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox30")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Valve#1")
                 .setItems([
                     {
@@ -919,7 +919,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox31")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Valve#2 Y/N")
                 .setItems([
                     {
@@ -945,7 +945,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox35")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Xhead原S/N清潔更換")
                 .setItems([
                     {
@@ -972,7 +972,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox36")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("1st Displacer原S/N清潔更換")
                 .setItems([
                     {
@@ -999,7 +999,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox37")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("2nd Displacer原S/N清潔更換")
                 .setItems([
                     {
@@ -1034,7 +1034,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox38")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump清洗(非原廠貼紙清除) Y/N")
                 .setItems([
                     {
@@ -1060,7 +1060,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox39")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump清洗(非原廠貼紙清除) 送洗 Y/N")
                 .setItems([
                     {
@@ -1102,7 +1102,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox40")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump配件掛牌(P/N：、S/N：)入烤箱 Y/N")
                 .setItems([
                     {
@@ -1129,7 +1129,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput735")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("A組裝日期")
                 .setLeft("23.61904761904762em")
                 .setTop("37.25714285714286em")
@@ -1144,7 +1144,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput809")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("A覆核日期")
                 .setLeft("40.22857142857143em")
                 .setTop("37.333333333333336em")
@@ -1167,7 +1167,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput194")
                 .setName("Diode 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("2nd S/N")
                 .setLeft("2.6666666666666665em")
                 .setTop("5.0285714285714285em")
@@ -1184,7 +1184,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput195")
                 .setName("Diode 2nd#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("2nd#2")
                 .setLeft("19.047619047619047em")
                 .setTop("5.0285714285714285em")
@@ -1209,7 +1209,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input570")
                 .setName("Vent Valve")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vent Valve")
                 .setLeft("2.6666666666666665em")
                 .setTop("14.780952380952382em")
@@ -1222,7 +1222,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox279")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vent Valve#1清潔/更換")
                 .setItems([
                     {
@@ -1249,7 +1249,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox280")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vent Valve#2 Y/N")
                 .setItems([
                     {
@@ -1285,7 +1285,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput941")
                 .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("RTD室溫#1")
                 .setLeft("12.666666666666666em")
                 .setTop("13.333333333333334em")
@@ -1302,7 +1302,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput942")
                 .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("RTD室溫#2")
                 .setLeft("22.666666666666668em")
                 .setTop("13.333333333333334em")
@@ -1319,7 +1319,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input947")
                 .setName("New Diode 1st S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("New RTD1st S/N")
                 .setLeft("4.666666666666667em")
                 .setTop("15.923809523809524em")
@@ -1333,7 +1333,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input948")
                 .setName("New Diode 1st V")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("New RTD1st V")
                 .setLeft("23.39047619047619em")
                 .setTop("15.923809523809524em")
@@ -1347,7 +1347,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input949")
                 .setName("New Diode 2nd S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("New RTD2nd S/N")
                 .setLeft("4.666666666666667em")
                 .setTop("17.904761904761905em")
@@ -1361,7 +1361,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input950")
                 .setName("New Diode 2nd V")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("New RTD 2nd V")
                 .setLeft("23.39047619047619em")
                 .setTop("17.904761904761905em")
@@ -1375,7 +1375,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input955")
                 .setName("Vacuum Side Leak Test：(5x10-9)")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vacuum Side Leak Test：(5x10-9)")
                 .setLeft("7.333333333333333em")
                 .setTop("22.323809523809523em")
@@ -1389,7 +1389,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input957")
                 .setName("80k Radiation Shield 安裝")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("80k Radiation Shield 安裝")
                 .setLeft("5.333333333333333em")
                 .setTop("20.19047619047619em")
@@ -1403,7 +1403,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input958")
                 .setName("B組裝簽名")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("B組裝簽名")
                 .setLeft("13.333333333333334em")
                 .setTop("25.82857142857143em")
@@ -1417,7 +1417,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input959")
                 .setName("B組長覆核")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("B組長覆核")
                 .setLeft("13.333333333333334em")
                 .setTop("28.495238095238093em")
@@ -1430,7 +1430,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox182")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Check表單與Pump配件相符")
                 .setItems([
                     {
@@ -1465,7 +1465,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput978")
                 .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Heater & Cylinder S/N2")
                 .setLeft("4.666666666666667em")
                 .setTop("2.6666666666666665em")
@@ -1481,7 +1481,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox204")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Heater & Cylinder New Y/N")
                 .setItems([
                     {
@@ -1515,7 +1515,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox320")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vacuum Side 組裝零件之連接面鋪設銦片")
                 .setItems([
                     {
@@ -1549,7 +1549,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox321")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Diode Connector Pin 接點阻值確認")
                 .setItems([
                     {
@@ -1583,7 +1583,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox322")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("RTD Line正確固定並保持彈性")
                 .setItems([
                     {
@@ -1627,7 +1627,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox323")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Diode室溫#3 Y/N")
                 .setItems([
                     {
@@ -1660,7 +1660,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox384")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Vacuum Side Leak Test：(5x10-9)Y/N")
                 .setItems([
                     {
@@ -1694,7 +1694,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1310")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("B覆核日期")
                 .setLeft("32.666666666666664em")
                 .setTop("28.495238095238093em")
@@ -1709,7 +1709,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1311")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("B組裝日期")
                 .setLeft("32.666666666666664em")
                 .setTop("25.82857142857143em")
@@ -1733,7 +1733,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1649")
                 .setName("”X” head S/N C")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("”X” head S/N C")
                 .setLeft("9.6em")
                 .setTop("2.4380952380952383em")
@@ -1747,7 +1747,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1509")
                 .setName("Motor：Ω#1")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor：Ω#1")
                 .setLeft("3.657142857142857em")
                 .setTop("4.495238095238095em")
@@ -1764,7 +1764,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1510")
                 .setName("Motor：Ω#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor：Ω#2")
                 .setLeft("14.933333333333334em")
                 .setTop("4.495238095238095em")
@@ -1781,7 +1781,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1511")
                 .setName("Motor：Ω#3")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor：Ω#3")
                 .setLeft("18.97142857142857em")
                 .setTop("4.495238095238095em")
@@ -1798,7 +1798,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1512")
                 .setName("Motor：Ω#4")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor：Ω#4")
                 .setLeft("24.076190476190476em")
                 .setTop("4.495238095238095em")
@@ -1815,7 +1815,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1653")
                 .setName("Displacer 1st S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 1st S/N")
                 .setLeft("3.657142857142857em")
                 .setTop("8.838095238095239em")
@@ -1829,7 +1829,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1517")
                 .setName("Displacer 1st Flow")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 1st Flow")
                 .setLeft("16.83809523809524em")
                 .setTop("8.838095238095239em")
@@ -1846,7 +1846,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1657")
                 .setName("Seal 1st")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 1st")
                 .setLeft("3.657142857142857em")
                 .setTop("13.485714285714286em")
@@ -1860,7 +1860,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1658")
                 .setName("Seal 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 2nd")
                 .setLeft("8.380952380952381em")
                 .setTop("16em")
@@ -1874,7 +1874,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1659")
                 .setName("Seal 推")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 推")
                 .setLeft("17.82857142857143em")
                 .setTop("13.485714285714286em")
@@ -1889,7 +1889,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1660")
                 .setName("Seal 拉")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 拉")
                 .setLeft("25.904761904761905em")
                 .setTop("13.485714285714286em")
@@ -1904,7 +1904,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1665")
                 .setName("Helium Side Leak Test：(5x10-6)")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Helium Side Leak Test：(5x10-6)")
                 .setLeft("2.2857142857142856em")
                 .setTop("23.771428571428572em")
@@ -1918,7 +1918,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1670")
                 .setName("C組裝簽名")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("C組裝簽名")
                 .setLeft("6.666666666666667em")
                 .setTop("38.78095238095238em")
@@ -1932,7 +1932,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1671")
                 .setName("C組長覆核")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("C組長覆核")
                 .setLeft("6.666666666666667em")
                 .setTop("40.76190476190476em")
@@ -1945,7 +1945,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox552")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Check表單與Pump配件相符C")
                 .setItems([
                     {
@@ -1979,7 +1979,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox553")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("”X” head S/N C#2 Y/N")
                 .setItems([
                     {
@@ -2013,7 +2013,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox589")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Motor：Ω# Y/N")
                 .setItems([
                     {
@@ -2055,7 +2055,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox627")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 1st New")
                 .setItems([
                     {
@@ -2090,7 +2090,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1791")
                 .setName("Displacer 1st S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 2nd S/N")
                 .setLeft("3.657142857142857em")
                 .setTop("10.971428571428572em")
@@ -2104,7 +2104,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1641")
                 .setName("Displacer 1st Flow")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 2nd Flow")
                 .setLeft("16.83809523809524em")
                 .setTop("10.971428571428572em")
@@ -2120,7 +2120,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox628")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Displacer 2nd New Y/N")
                 .setItems([
                     {
@@ -2154,7 +2154,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox630")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Helium Side Y/N")
                 .setItems([
                     {
@@ -2188,7 +2188,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox631")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Helium Side Leak Test：(5x10-6) Y/N")
                 .setItems([
                     {
@@ -2221,7 +2221,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox632")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Crosshead 螺絲安裝/畫線確認")
                 .setItems([
                     {
@@ -2255,7 +2255,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox633")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("15k Array間距調整(不可接觸)")
                 .setItems([
                     {
@@ -2289,7 +2289,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox634")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump各配件Cable確實接好固定")
                 .setItems([
                     {
@@ -2324,7 +2324,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1769")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("C組裝日期")
                 .setLeft("25.333333333333332em")
                 .setTop("38.78095238095238em")
@@ -2339,7 +2339,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1770")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("C覆核日期")
                 .setLeft("25.333333333333332em")
                 .setTop("40.99047619047619em")
@@ -2358,7 +2358,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1000")
                 .setName("Seal 推")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 推#2")
                 .setLeft("17.82857142857143em")
                 .setTop("16em")
@@ -2373,7 +2373,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1001")
                 .setName("Seal 拉")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Seal 拉#2")
                 .setLeft("25.904761904761905em")
                 .setTop("16em")
@@ -2387,7 +2387,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox541")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Helium Side#2")
                 .setItems([
                     {
@@ -2425,7 +2425,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block4.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox542")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Purge Helium Side#3")
                 .setItems([
                     {
@@ -2464,7 +2464,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1191")
                 .setName("Helium Side Leak Test：(5x10-6)")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("I/O Module安裝")
                 .setLeft("2.2857142857142856em")
                 .setTop("27.80952380952381em")
@@ -2488,7 +2488,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput2015")
                 .setName("Supply Pressure")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Supply Pressure")
                 .setLeft("0em")
                 .setTop("4.495238095238095em")
@@ -2505,7 +2505,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput2016")
                 .setName("Return Pressure")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Return Pressure")
                 .setLeft("22.666666666666668em")
                 .setTop("4.495238095238095em")
@@ -2522,7 +2522,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2093")
                 .setName("Ch")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Ch")
                 .setLeft("20.571428571428573em")
                 .setTop("6.552380952380952em")
@@ -2536,7 +2536,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2094")
                 .setName("Compressor Model")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Compressor Model")
                 .setLeft("0.1523809523809524em")
                 .setTop("6.552380952380952em")
@@ -2550,7 +2550,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2095")
                 .setName("Start Cooldown#1")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Start Cooldown#1")
                 .setLeft("2.2857142857142856em")
                 .setTop("8.533333333333333em")
@@ -2564,7 +2564,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2096")
                 .setName("Start Cooldown#2")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Start Cooldown#2")
                 .setLeft("15.00952380952381em")
                 .setTop("8.533333333333333em")
@@ -2578,7 +2578,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2097")
                 .setName("Start Cooldown#3")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Start Cooldown#3")
                 .setLeft("20.952380952380953em")
                 .setTop("8.533333333333333em")
@@ -2592,7 +2592,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2111")
                 .setName("測試人員簽名")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("測試人員簽名")
                 .setLeft("0em")
                 .setTop("20.64761904761905em")
@@ -2606,7 +2606,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2112")
                 .setName("測試組長覆核")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("測試組長覆核")
                 .setLeft("0em")
                 .setTop("22.704761904761906em")
@@ -2619,7 +2619,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox333")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("管線配接符合Pump要求")
                 .setLeft("-0.3047619047619048em")
                 .setTop("0.26666666666666666em")
@@ -2633,7 +2633,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox334")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("依Test標準參數設定")
                 .setLeft("-0.5333333333333333em")
                 .setTop("2.2857142857142856em")
@@ -2663,7 +2663,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox952")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test完成後Runtime 歸零 Y/N")
                 .setItems([
                     {
@@ -2697,7 +2697,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox348")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test完成後,Helium Side Purge Pass")
                 .setLeft("-1.2952380952380953em")
                 .setTop("10.438095238095238em")
@@ -2711,7 +2711,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox349")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("15k Array間距調整檢查(不可接觸)Pass")
                 .setLeft("0em")
                 .setTop("13.866666666666667em")
@@ -2725,7 +2725,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox364")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test完成後，Vacuum Side Leak Test")
                 .setLeft("0.38095238095238093em")
                 .setTop("15.847619047619048em")
@@ -2739,7 +2739,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox365")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Pump入庫前外觀檢查 Pass")
                 .setLeft("0.1523809523809524em")
                 .setTop("17.676190476190477em")
@@ -3065,7 +3065,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div747.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4318")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("TestDataDate")
                 .setLeft("-1.3333333333333333em")
                 .setTop("0em")
@@ -3079,7 +3079,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5226")
                 .setName("P/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("P/N")
                 .setLeft("13.533333333333333em")
                 .setTop("0em")
@@ -3093,7 +3093,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5227")
                 .setName("S/N")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("S/N")
                 .setLeft("28.2em")
                 .setTop("0em")
@@ -3124,7 +3124,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div748.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox732")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Assy OK")
                 .setLeft("39.333333333333336em")
                 .setTop("0.1523809523809524em")
@@ -3154,7 +3154,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div749.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1516")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Room Temp (Diode or Gauge) Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -3284,7 +3284,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div761.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5228")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Minutes to 20k/Spec=#1")
                 .setDock("fill")
                 .setLeft("3.0476190476190474em")
@@ -3307,7 +3307,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5237")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Spec= 100K±1k #1 1st")
                 .setDockMargin({
                     "left" : 0,
@@ -3327,7 +3327,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5238")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Spec= 100K±1k #1 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -3347,7 +3347,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5239")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Spec= 100K±1k #2 1st")
                 .setDockMargin({
                     "left" : 0,
@@ -3367,7 +3367,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div768.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5240")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Spec= 100K±1k #2 2nd")
                 .setDockMargin({
                     "left" : 0,
@@ -3397,7 +3397,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div771.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5249")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Reset Factory Regan Parameter Ext#1")
                 .setDockMargin({
                     "left" : 0,
@@ -3418,7 +3418,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4319")
                 .setName("B5")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Reset Factory Regan Parameter Ext#1 Time")
                 .setLeft("12.876190476190477em")
                 .setTop("0em")
@@ -3442,7 +3442,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div772.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5250")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Reset Factory Regan Parameter Ext#2")
                 .setDockMargin({
                     "left" : 0,
@@ -3463,7 +3463,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4320")
                 .setName("B5")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Reset Factory Regan Parameter Ext#2 Time")
                 .setLeft("12.876190476190477em")
                 .setTop("0em")
@@ -3477,7 +3477,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div773")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("55.06666666666667em")
@@ -3488,7 +3488,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div773.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1525")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test Data Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -3549,7 +3549,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div817.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1236")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test Data 處理情形")
                 .setDock("left")
                 .setDockOrder(1)
@@ -3566,7 +3566,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div817.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1237")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Test Data Fail原因")
                 .setDock("left")
                 .setDockOrder(0)
@@ -3593,7 +3593,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div973.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1297")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Spec= 100k±1k Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -3655,7 +3655,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2577")
                 .setName("B4")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Wamup Time")
                 .setLeft("0em")
                 .setTop("0em")
@@ -3678,7 +3678,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div1275.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox623")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Wamup Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -3739,7 +3739,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
             host.xui_ui_div1276.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox624")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("真空值Pass")
                 .setIsFormField(false)
                 .setItems([
@@ -3815,7 +3815,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5253")
                 .setName("B4")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Room Temp (Diode or Gauge) #1")
                 .setLeft("0em")
                 .setTop("0em")
@@ -3829,7 +3829,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput4321")
                 .setName("B5")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Start Time")
                 .setLeft("0em")
                 .setTop("0em")
@@ -3844,7 +3844,7 @@ xui.Class('App.ShiCryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5254")
                 .setName("C6")
-                .setDataBinder("rdb")
+                .setDataBinder("rdb2")
                 .setDataField("Minutes to 20k/Spec=#2")
                 .setLeft("0em")
                 .setTop("0em")

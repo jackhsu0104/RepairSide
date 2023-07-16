@@ -554,14 +554,14 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var head = {    "RMATC001": d1["維修單別"],                  
                             "RMATC017": d1["維修部門"],                  
                             "RMATC035": "902",                  
-                            "RMATC003": d1["單據日期"],                  
+                            "RMATC003": d1["單據日期"].replace("-",""),                  
                             "RMATC224": d1["登錄編號"],                
                             "RMATC005": hdata["叫修單別"],                  
                             "RMATC006": hdata["叫修單號"],                 
                             "RMATC007": d1["客戶代號"],                 
                             "RMATC008": d1["產品品號"],                
                             "RMATC026": d1["工時"],                
-                            "RMATC220": StoreNameList[SiteName],                  
+                            "RMATC226": StoreNameList[SiteName],                  
                             "CREATOR":  d1["Creator"]
                        };
             var dat = {"DoAction":1, "LoginID":LoginUser.EmplID, "CompanyID":"CICTEST", "head":head};   
@@ -572,7 +572,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var s = "000000000" + num;
             return s.substr(s.length-size);
         },
-        uploadErpPickingData: function(){
+        uploadErpData: function(){
             var ns = this;
             var id = ns.id.getUIValue();
             if(id == "")
@@ -618,8 +618,10 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
         _uploadbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
              //console.log(utils.createDDL(ns.form, "領料報工單"));
-              ns.uploadBtn.setCaption("已上傳"); 
-              ns.uploadBtn.setDisabled(true);  
+            var result = ns.uploadErpData();
+            xui.alert("訊息",result);
+            ns.uploadBtn.setCaption("已上傳"); 
+            ns.uploadBtn.setDisabled(true);  
         },
         /**
          * Fired when control's inner value is changed!

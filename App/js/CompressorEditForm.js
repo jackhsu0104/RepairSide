@@ -179,29 +179,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.xui_ui_div571.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"overhaulBtn")
-                .setLeft("2.1333333333333333em")
-                .setTop("2.6666666666666665em")
-                .setWidth("15.333333333333334em")
-                .setHeight("3.066666666666667em")
-                .setCaption("Compressor Standard Overhaul<br>零件更換表")
-                .onClick("_overhaulbtn_onclick")
-            );
-            
-            host.xui_ui_div571.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"failBtn")
-                .setLeft("18.057142857142857em")
-                .setTop("2.6666666666666665em")
-                .setWidth("16.666666666666668em")
-                .setCaption("Compressor Heater Fail/ Motor Fail<br>零件更換表")
-                .onClick("_failbtn_onclick")
-            );
-            
-            host.xui_ui_div571.append(
-                xui.create("xui.UI.Button")
                 .setHost(host,"quotationBtn")
-                .setLeft("35.93333333333333em")
+                .setLeft("1.3333333333333333em")
                 .setTop("2.6em")
                 .setWidth("17.333333333333332em")
                 .setHeight("3.3333333333333335em")
@@ -3937,7 +3916,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                     }
                     var item = utils.getItemValue("Compressor Heater Fail/ Motor Fail零件更換表","登錄編號",id,"*");
                     if(item == "")
-                      utils.showDataPage("CompressorSpecialPriceEditForm",{"登錄編號":id,"Model":data["Model"],"S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
+                      utils.showDataPage("CompressorSpecialPriceEditForm",{"登錄編號":id,"Model":data["Model"],"S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"], "保養內容":"[]"}, "new");        
                     else
                       utils.showDataPage("CompressorSpecialPriceEditForm", item, "edit")  ;      
         },
@@ -3959,11 +3938,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                       xui.alert("請先指定登錄編號!");
                       return;
                     }
-                    var item = utils.getItemValue("Compressor Repair Quotation Sheet","登錄編號",id,"*");
+                    var item = utils.getItemValue("Compressor零件更換表","登錄編號",id,"*");
                     if(item == "")
-                      utils.showDataPage("CompressorRepairQuotationSheet",{"登錄編號":id,"Compressor Model":data["Model"],"P/N":data["Compressor P/N"], "S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
+                      utils.showDataPage("CompressorSpecialPriceEditForm",{"登錄編號":id,"Compressor Model":data["Model"],"P/N":data["Compressor P/N"], "S/N":data["Compressor S/N"],"客戶名稱":data["客戶名稱"],"ETM":data["Compressor ETM"],"故障問題簡述":data["進廠原因"]}, "new");        
                     else
-                      utils.showDataPage("CompressorRepairQuotationSheet", item, "edit")  ;      
+                      utils.showDataPage("CompressorSpecialPriceEditForm", item, "edit")  ;      
         },
             /**
          * Fired when control's inner value is changed!

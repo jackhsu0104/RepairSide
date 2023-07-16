@@ -19,6 +19,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 .setTreeMode(false)
                 .setValue("")
                 .afterUIValueSet("_grid_afteruivalueset")
+                .onHotKeypress("_grid_onhotkeypress")
                 .beforeHotRowAdded("_grid_beforehotrowadded")
                 .onCmd("_grid_oncmd")
                 .afterRowActive("_grid_afterrowactive")
@@ -227,11 +228,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         prepareCondition: function(){
             var ns = this, prop = ns.properties;
             var cond2 = ns.properties["condition2"];
-			if(typeof cond2 == "undefined")
-				cond2 = "";
+            if(typeof cond2 == "undefined")
+                cond2 = "";
             var cond = ns.fireEvent("onPrepareCondition",[]);        
             if(typeof cond != "undefined")
-              return ns.prepareFilter(cond);            
+              return ns.prepareFilter(cond);  
+            cond = prop["condition"];    
             var dbs = ns.host.getDataBinders();
             if(dbs.length == 0)
                 return ns.prepareFilter(cond);
@@ -250,9 +252,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             }
             if(typeof db == 'undefined')
                 return ns.prepareFilter(cond);
-            db.updateDataFromUI();
-            var data = db.getData();
-			
+            var data = utils.getDataFromUI(db, false); //no check
+            
   
             cond = ns.properties["condition"];
             if(typeof cond == "undefined")
@@ -286,6 +287,11 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 size = 20;
             var ns=this, grid=ns.grid, prop = ns.properties;  
             var cb=function(data){
+					if(typeof data == "string") //error
+					{
+						xui.Dom.free();
+						return;
+					}
                     if(typeof prop.useCache != "undefined" && prop.useCache)
                         ns.writeToCache(prop, data);
                     var tableName = prop.tableName;
@@ -519,17 +525,19 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             if(xui.isSet(recordId)){
                 mode = "edit"; 
                 var r = ns.fireEvent("onOpenRecord",[recordId,fields,updateRow]);
-				if(r)
-				{
-				  if(r == "noop")
-					return;
-				  if(r != "")
-					mode = r;
-				}
+                if(r)
+                {
+                  if(r == "noop")
+                    return;
+                  if(r != "")
+                    mode = r;
+                }
             }
             else{
                 mode = "new";
-                ns.fireEvent("onCreateRecords",[addRow, updateRow]);
+                var r = ns.fireEvent("onCreateRecords",[addRow, updateRow]);
+				if(r == "noop")
+					return;
                 fields = ns.prepareNewDatas();
             }
             var pagename = prop.openPageName; 
@@ -545,10 +553,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     utils.installDataBinderHooks(mod);
                     
                 if(pagename == "DataInputDialog")
-				{
+                {
                     utils.createTableControls(prop.tableName, prop.keyid, mod);
-					mod.dialog.setCaption(prop.tableName);
-				}
+                    mod.dialog.setCaption(prop.tableName);
+                }
                 mod.setProperties("mode",mode);
                 mod.setProperties("datas",fields);
                 mod.setProperties("keyid",prop.keyid);
@@ -594,12 +602,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             xui.Dom.busy(null, "刪除資料中 ...");
             console.log(ns.grid.getRowMap(ids[0]));
             var r = ns.fireEvent("onDeleteRecords", [ ids, cb]);
-			if(typeof r != "undefined" && r == true)  //已經處理完畢
-			{
+            if(typeof r != "undefined" && r == true)  //已經處理完畢
+            {
                 xui.Dom.free();
                 ns.refreshGrid();
-				return;
-			}
+                return;
+            }
             for(var i=0; i<ids.length; i++)
             {
               var row = ns.grid.getRowMap(ids[i]); 
@@ -1081,6 +1089,23 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         _filter_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
             var ns = this, uictrl = profile.boxing();
             ns.refreshGrid();
+        },
+        /**
+         * Fired when keyboard is pressed
+         * @method onHotKeypress [xui.UI.TreeGrid event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} keyboard , keyboard object
+         * @param {Event} e , Dom event object
+         * @param {String} src , the event source DOM element's xid
+        */
+        _grid_onhotkeypress:function(profile, keyboard, e, src){
+            var ns = this, uictrl = profile.boxing(), row;
+            if(keyboard.key == "enter")
+            {
+                    if((row=ns.grid.getActiveRow())){
+                        ns._openForm(row.id, ns.getRowMap(row));
+                    }
+            }
         }
     },
     Static:{

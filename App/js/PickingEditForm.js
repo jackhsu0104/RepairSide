@@ -131,167 +131,112 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("b")
             );
             
             host.mainTabs.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"blocka")
-                .setDock("fill")
-                .setLeft("12em")
-                .setTop("18.666666666666668em"),
+                xui.create("xui.UI.TreeGrid")
+                .setHost(host,"grid1")
+                .setLeft("0em")
+                .setTop("0em")
+                .setRowNumbered(true)
+                .setEditable(true)
+                .setRowHandler(false)
+                .setHeader([
+                    {
+                        "id" : "品號",
+                        "caption" : "品號",
+                        "type" : "label",
+                        "width" : "8em"
+                    },
+                    {
+                        "id" : "品名",
+                        "caption" : "品名",
+                        "type" : "label",
+                        "width" : "16em"
+                    },
+                    {
+                        "id" : "批號",
+                        "caption" : "批號",
+                        "type" : "popbox",
+                        "width" : "8em"
+                    },
+                    {
+                        "id" : "庫存數量",
+                        "caption" : "庫存數量",
+                        "type" : "number",
+                        "width" : "8em",
+                        "readonly" : true
+                    },
+                    {
+                        "id" : "領料數量",
+                        "caption" : "領料數量",
+                        "type" : "counter",
+                        "width" : "8em",
+                        "min" : 0
+                    }
+                ])
+                .setTagCmds([
+                    {
+                        "id" : "clear",
+                        "type" : "button",
+                        "caption" : "清除"
+                    }
+                ])
+                .onCmd("_grid1_oncmd"),
                 "a"
             );
             
-            host.blocka.append(
-                xui.create("xui.UI.FormLayout")
-                .setHost(host,"modelLayout")
-                .setDock("fill")
-                .setDockMargin({
-                    "left" : 20,
-                    "top" : 0,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("15.238095238095237em")
-                .setTop("22.095238095238095em")
-                .setWidth("53.666666666666664em")
-                .setHeight("34.13333333333333em")
-                .setDefaultColumnSize(2)
-                .setDefaultRowHeight(30)
-                .setLayoutData({
-                    "rows" : 5,
-                    "cols" : 5,
-                    "rowSetting" : {
-                        "1" : {
-                            "manualHeight" : 30
-                        },
-                        "2" : {
-                            "manualHeight" : 30
-                        },
-                        "3" : {
-                            "manualHeight" : 30
-                        },
-                        "4" : {
-                            "manualHeight" : 30
-                        },
-                        "5" : {
-                            "manualHeight" : 30
-                        }
-                    },
-                    "cells" : {
-                        "A1" : {
-                            "value" : "品號",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "B1" : {
-                            "value" : "品名",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "C1" : {
-                            "value" : "庫存",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "D1" : {
-                            "value" : "領用數量",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "E1" : {
-                            "value" : "清除",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        }
-                    }
-                })
-            );
-            
             host.mainTabs.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"blockb")
-                .setDock("fill")
-                .setLeft("20em")
-                .setTop("19.333333333333332em"),
-                "b"
-            );
-            
-            host.blockb.append(
-                xui.create("xui.UI.FormLayout")
-                .setHost(host,"pickLayout")
-                .setDock("fill")
-                .setDockMargin({
-                    "left" : 20,
-                    "top" : 0,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("15.238095238095237em")
-                .setTop("22.095238095238095em")
-                .setWidth("53.666666666666664em")
-                .setHeight("34.13333333333333em")
-                .setDefaultColumnSize(2)
-                .setDefaultRowHeight(30)
-                .setLayoutData({
-                    "rows" : 5,
-                    "cols" : 5,
-                    "rowSetting" : {
-                        "1" : {
-                            "manualHeight" : 30
-                        },
-                        "2" : {
-                            "manualHeight" : 30
-                        },
-                        "3" : {
-                            "manualHeight" : 30
-                        },
-                        "4" : {
-                            "manualHeight" : 30
-                        },
-                        "5" : {
-                            "manualHeight" : 30
-                        }
+                xui.create("xui.UI.TreeGrid")
+                .setHost(host,"grid2")
+                .setLeft("0em")
+                .setTop("0em")
+                .setRowNumbered(true)
+                .setEditable(true)
+                .setRowHandler(false)
+                .setHeader([
+                    {
+                        "id" : "品號",
+                        "caption" : "品號",
+                        "type" : "label",
+                        "width" : "8em"
                     },
-                    "cells" : {
-                        "A1" : {
-                            "value" : "品號",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "B1" : {
-                            "value" : "品名",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "C1" : {
-                            "value" : "庫存",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "D1" : {
-                            "value" : "領用數量",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "E1" : {
-                            "value" : "清除",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        }
+                    {
+                        "id" : "品名",
+                        "caption" : "品名",
+                        "type" : "label",
+                        "width" : "16em"
+                    },
+                    {
+                        "id" : "批號",
+                        "caption" : "批號",
+                        "type" : "popbox",
+                        "width" : "8em"
+                    },
+                    {
+                        "id" : "庫存數量",
+                        "caption" : "庫存數量",
+                        "type" : "number",
+                        "width" : "8em",
+                        "readonly" : true
+                    },
+                    {
+                        "id" : "領料數量",
+                        "caption" : "領料數量",
+                        "type" : "counter",
+                        "width" : "8em",
+                        "min" : 0
                     }
-                })
+                ])
+                .setTagCmds([
+                    {
+                        "id" : "clear",
+                        "type" : "button",
+                        "caption" : "清除"
+                    }
+                ]),
+                "b"
             );
             
             return children;
@@ -330,8 +275,8 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
            // utils.saveForm(ns);
-            var data = ns.getControlData();  //will do updateDataFromUI
-           // console.log(data);
+            var data = ns.getGridData();  //will do updateDataFromUI
+            //console.log(data);
             var pd = ns.pdb2.getData();                
             utils.removeTableItem("領料報工單子表","領料報工單號", pd["領料報工單號"]); //remove all subrecords
             for(var i=0; i<data.length;i++)
@@ -414,6 +359,20 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 
             }
             return models;
+        },
+        getPnName: function(pn){
+          var ns = this;
+          if(typeof ns.pnNameMap == "undefined")
+          {
+              var items = utils.getItemValue("Bench領用料副資料表");
+              ns.pnNameMap = {};
+              for(var i=0; i<items.length; i++)
+              {
+                var item = items[i];
+                ns.pnNameMap[item["品號"]] = item["品名"];  
+              }
+          }
+          return ns.pnNameMap[pn];  
         },
         getModelItems: function(model, items){
           var rows = [];
@@ -518,32 +477,56 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 layout.append(btn,"E"+(i+2));
             }
         },
+        updateGridStoreCount: function(grid){
+            var ns = this;
+            grid.render();
+            var rows = grid.getRows();
+            for(var i=0; i<rows.length;i++)
+            {
+              var r = rows[i];
+              var scount = ns.getStoreItemCount(r["品號"]); 
+              var pcount =  r["領料數量"];
+              if(pcount >scount)
+                  pcount = scount;
+              grid.updateCellByRowCol(r.id, "庫存數量", {"value":scount});  
+              grid.updateCellByRowCol(r.id, "領料數量", {"max":scount, "value": pcount }); 
+            }
+            
+        },
         loadControls: function(){
             var ns=this, prop=ns.properties;
             var data = ns.pdb2.getData();
             var condition = `站別 = '${data["維修站別"]}' AND 型號 = '${data["型號"]}'`;
             var cb = function(datas){
               var items = utils.getRowMap(datas); 
-              var hdata = [];
               ns.mainTabs.updateItem('a',{"caption": data["型號"]});
                 
-              ns.setLayout(ns.modelLayout,items);
+              //ns.setLayout(ns.modelLayout,items);
+              for(var i=0; i<items.length; i++)
+              {
+                var item = items[i];
+                item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
+              }
+              ns.grid1.setRows(items);
+              ns.updateGridStoreCount(ns.grid1);
             }
             utils.getTableItems({"tableName":"Bench領用料副資料表", "condition":condition, "orderby":"型號,品號"}, cb);
             
             var condition2 = `庫別 = '${ns.storeName}'`;
             var cb2 = function(data){
               var items = utils.getRowMap(data); 
-              var hdata = [];
-               
+              
               for(var i=0; i<items.length; i++)
               {
                 var it = items[i];
                 it["數量"] = 1;
-                it["品名"] = "";  
+                it["品名"] = ns.getPnName(it["品號"]);  
                 it["型號"] = "其他";
+                it["領料數量"] = 0;
               }
-              ns.setLayout(ns.pickLayout,items);
+              //ns.setLayout(ns.pickLayout,items);
+              ns.grid2.setRows(items);  
+              ns.updateGridStoreCount(ns.grid2);
             }
             utils.getTableItems({"tableName":"erp.領料庫存查詢", "condition":condition2, "orderby":"品號"}, cb2);
             
@@ -560,6 +543,59 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             ns.pdb2.setData(key, value);  
           }
           ns.timer1.start(); //start once
+        },
+        updateGrid: function(){
+          var ns = this, grid = ns.grid2;
+          var data = ns.pdb2.getData();  
+          var id = data["領料報工單號"];  
+          var pdata = utils.getItemValue("領料報工單子表","領料報工單號",id);
+          if(pdata.length > 0)
+          {
+            var model = pdata[0]["型號"]  
+            if(model != "其他")
+            {
+                grid = ns.grid1;
+                grid.updateItem("a",{"caption": model});
+            }
+          }
+          var rows = grid.getRows();
+          for(var i=0; i<pdata.length; i++)
+          {
+            var item = pdata[i];
+            var pn = item["品號"];  
+            var n = item["領料數量"];
+            for(var j=0; j<rows.length; j++)
+            {
+              var r = rows[j];  
+              if(r["品號"] == pn)
+              {
+                  var cellid = r._cells["領料數量"];
+                  grid.updateCell(cellid, {"value":n});
+              }
+                
+            }
+          }
+        },
+        getGridData:function(){
+          var ns = this, model = "其他", grid = ns.grid2;  
+          var data = ns.pdb2.getData();
+          if(ns.mainTabs.getValue() == 'a')
+          {
+              model = data["型號"];
+              grid = ns.grid1;
+          }
+          var rows = grid.getRows("value");
+          var items = []; 
+          for(var i=0; i<rows.length; i++)
+          {
+              var r = rows[i];
+              if(r[4] > 0)
+              {    
+                let item = {"型號":model, "品號": r[0], "領料數量": r[4], "領料報工單號":data["領料報工單號"], "維修站別":data["維修站別"],"領用庫別":ns.storeName};
+                items.push(item);
+              }
+          }
+          return items;              
         },
         getControlData:function(){
           var rows = [];  
@@ -611,7 +647,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 var pitem = utils.getItemValue("領料報工單","領料報工單號", pno);
                 ns.pdb2.setData("型號", pitem["型號"]);  
                 ns.loadControls();
-                ns.updateControls();
+                //ns.updateControls();
             }
             else
               ns.loadControls();
@@ -666,6 +702,23 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             ns.pdb2.updateDataToUI();
             ns.timer1.suspend();
+        },
+        /**
+         * Fired when an inner command is clicked
+         * @method onCmd [xui.UI.TreeGrid event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {String} cmdKey , the command key
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+        */
+        _grid1_oncmd:function(profile, item, cmdKey, e, src){
+            var ns = this, uictrl = profile.boxing();
+            if(item && cmdKey == "clear")
+            {
+              console.log(item); 
+              uictrl.updateCell(item._cells["領料數量"], {"value":0});  
+            }
         }
         /*,
         // To determine how properties affects this module

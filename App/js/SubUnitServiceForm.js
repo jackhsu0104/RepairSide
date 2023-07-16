@@ -12,7 +12,6 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
             "keyid" : "子表單號",
             "tableName" : "UnitServiceForm子表",
             "datas" : null,
-            "mode" : "new"
         },
 
         // To initialize instance(e.g. properties)
@@ -36,7 +35,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("16em")
                 .setTop("1.5238095238095237em")
-                .setWidth("55.333333333333336em")
+                .setWidth("57.904761904761905em")
                 .setHeight("36.4em")
                 .setCaption("Unit Server Form項目")
                 .setConLayoutColumns(null)
@@ -96,6 +95,21 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .onClick("_confirmbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirmBtn2")
+                .setDataBinder("udb2")
+                .setDataField("秘書確認")
+                .setLeft("11.428571428571429em")
+                .setTop("0.7619047619047619em")
+                .setWidth("13.104761904761904em")
+                .setLabelSize("6em")
+                .setLabelCaption("秘書確認")
+                .setType("getter")
+                .setMaxlength("32")
+                .onClick("_confirmbtn2_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -129,7 +143,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"layout")
                 .setLeft("4em")
                 .setTop("14.6em")
-                .setWidth("41.2952380952381em")
+                .setWidth("48.53333333333333em")
                 .setHeight("37.02857142857143em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
@@ -263,7 +277,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1049")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.98095238095238em")
+                .setWidth("33.21904761904762em")
                 .setHeight("2.5904761904761906em")
                 .setOverflow("hidden"),
                 "C5"
@@ -322,7 +336,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1062")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.98095238095238em")
+                .setWidth("33.21904761904762em")
                 .setHeight("7.847619047619047em"),
                 "C2"
             );
@@ -395,36 +409,41 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1071")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("41.142857142857146em")
+                .setWidth("48.38095238095238em")
                 .setHeight("15.085714285714285em"),
                 "A6"
             );
             
             host.xui_ui_div1071.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input4779")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"idno")
                 .setName("S/N")
                 .setDataBinder("udb2")
                 .setDataField("ID#")
-                .setLeft("0em")
+                .setLeft("1.4476190476190476em")
                 .setTop("0.6em")
-                .setWidth("9.82857142857143em")
+                .setWidth("11.428571428571429em")
                 .setLabelSize("4em")
                 .setLabelCaption("ID#C")
+                .setType("popbox")
                 .setMaxlength("32")
+                .onValueChange("_idno_onvaluechange")
             );
             
             host.xui_ui_div1071.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input4780")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"robotno")
                 .setName("S/N")
                 .setDataBinder("udb2")
                 .setDataField("Robot#")
-                .setLeft("9.333333333333334em")
+                .setLeft("12.876190476190477em")
                 .setTop("0.6em")
+                .setWidth("12.19047619047619em")
                 .setLabelSize("5em")
                 .setLabelCaption("Robot#R")
+                .setType("popbox")
                 .setMaxlength("32")
+                .onValueChange("_robotno_onvaluechange")
             );
             
             host.xui_ui_div1071.append(
@@ -432,7 +451,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox553")
                 .setDataBinder("udb2")
                 .setDataField("CIC Warranty")
-                .setLeft("20em")
+                .setLeft("25.82857142857143em")
                 .setTop("0.6666666666666666em")
                 .setWidth("14.666666666666666em")
                 .setHeight("1.2666666666666666em")
@@ -445,7 +464,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setName("S/N")
                 .setDataBinder("udb2")
                 .setDataField("之前S/N")
-                .setLeft("34.666666666666664em")
+                .setLeft("41.06666666666667em")
                 .setTop("0.6em")
                 .setWidth("6em")
                 .setLabelCaption("Robot#R")
@@ -457,9 +476,9 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"repairNo")
                 .setDataBinder("udb2")
                 .setDataField("登錄編號")
-                .setLeft("-0.9904761904761905em")
+                .setLeft("0.45714285714285713em")
                 .setTop("2.6em")
-                .setWidth("15.466666666666667em")
+                .setWidth("12.41904761904762em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
                 .setType("getter")
@@ -485,7 +504,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                     }
                 ])
                 .setDockStretch("fixed")
-                .setLeft("15.923809523809524em")
+                .setLeft("12.876190476190477em")
                 .setTop("2.466666666666667em")
                 .setWidth("16.866666666666667em")
                 .setHeight("1.980952380952381em")
@@ -620,7 +639,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1072")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("41.142857142857146em")
+                .setWidth("48.38095238095238em")
                 .setHeight("5.942857142857143em"),
                 "A7"
             );
@@ -697,7 +716,8 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setTop("0em")
                 .setWidth("11.352380952380953em")
                 .setHeight("2.5904761904761906em")
-                .setLabelPos("none"),
+                .setLabelPos("none")
+                .onChange("_sn_onchange"),
                 "B5"
             );
             
@@ -862,20 +882,6 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input4825")
-                .setName("S/N")
-                .setDataBinder("udb2")
-                .setDataField("出貨單號")
-                .setLeft("0em")
-                .setTop("53.333333333333336em")
-                .setWidth("13.333333333333334em")
-                .setLabelSize("6em")
-                .setLabelCaption("出貨單NO")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput3013")
                 .setDataBinder("udb2")
@@ -946,9 +952,9 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setName("S/N")
                 .setDataBinder("udb2")
                 .setDataField("Prepare By")
-                .setLeft("12.666666666666666em")
+                .setLeft("12.41904761904762em")
                 .setTop("57.44761904761905em")
-                .setWidth("12em")
+                .setWidth("12.952380952380953em")
                 .setLabelSize("6em")
                 .setLabelCaption("Prepare By")
                 .setType("getter")
@@ -957,38 +963,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"confirm2")
-                .setDataBinder("udb2")
-                .setDataField("秘書確認")
-                .setLeft("25.333333333333332em")
-                .setTop("57.44761904761905em")
-                .setWidth("12em")
-                .setLabelSize("6em")
-                .setLabelCaption("Confirm By")
-                .setType("getter")
-                .setMaxlength("32")
-                .onClick("_confirm2_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input4845")
-                .setName("S/N")
-                .setDataBinder("udb2")
-                .setDataField("Invoiced By")
-                .setLeft("37.333333333333336em")
-                .setTop("57.44761904761905em")
-                .setWidth("11.333333333333334em")
-                .setLabelSize("6em")
-                .setLabelCaption("Invoiced By")
-                .setType("getter")
-                .setMaxlength("32")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
                 .setHost(host,"cn")
-                .setName("S/N")
                 .setDataBinder("udb2")
                 .setDataField("CN#")
                 .setLeft("4em")
@@ -1067,6 +1042,51 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                 .setMaxlength("32")
             );
             
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"deliveryNo")
+                .setDataBinder("udb2")
+                .setDataField("出貨單號")
+                .setLeft("0em")
+                .setTop("53.333333333333336em")
+                .setWidth("13.333333333333334em")
+                .setLabelSize("6em")
+                .setLabelCaption("出貨單NO")
+                .setType("getter")
+                .setMaxlength("32")
+                .onClick("_deliveryno_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_input4845")
+                .setName("S/N")
+                .setDataBinder("udb2")
+                .setDataField("Invoiced By")
+                .setLeft("37.333333333333336em")
+                .setTop("57.44761904761905em")
+                .setWidth("11.333333333333334em")
+                .setLabelSize("6em")
+                .setLabelCaption("Invoiced By")
+                .setType("popbox")
+                .setMaxlength("32")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm2")
+                .setDataBinder("udb2")
+                .setDataField("Confirm By")
+                .setLeft("25.333333333333332em")
+                .setTop("57.44761904761905em")
+                .setWidth("12em")
+                .setLabelSize("6em")
+                .setLabelCaption("Confirm By")
+                .setType("popbox")
+                .setMaxlength("32")
+                .onClick("_confirm2_onclick")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -1097,21 +1117,22 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
+            var mode = prop.mode;
             utils.saveForm(ns);
-            if(prop.mode.includes("new"))
-                ns.newWorkRepair();
+            if(mode.includes("new"))
+                ns.newWorkRepairDelivery();
         },
-        newWorkRepair: function(){
+        newWorkRepairDelivery: function(){
             var ns = this;
-            var item = {"客戶名稱":ns.companyName.getValue(),"CompanyID":ns.companyID.getValue(), "產品機型": ns.model.getValue(),"P/N":ns.pn.getValue(), "S/N":ns.sn.getValue(),
+            var companyid = ns.companyID.getValue();
+            var item = {"客戶名稱":ns.companyName.getValue(),"CompanyID": companyid, "產品機型": ns.model.getValue(),"P/N":ns.pn.getValue(), "S/N":ns.sn.getValue(),
                                    "登錄人":LoginUser.DisplayName, "工號日期":utils.today(), "ContactID":ns.contactID.getUIValue(), "連絡人":ns.userName.getUIValue()};
                        //utils.showDataPage("WorkEditForm",item,"newExchange",null, onclose);
             item = utils.insertTableItem("工號登錄總資料表",item);
-            item = item.item;
-            ns.workid.setValue(item["工號"]);
+            var workid = item["工號"];
+            ns.workid.setValue(workid);
             
-            
-            var ritem = {"In Model": ns.model.getValue(),"In P/N":ns.pn.getValue(), "In S/N":ns.sn.getValue(), "工號":item["工號"], "type":"E",
+            var ritem = {"型號(EX form)": ns.model.getValue(),"Out P/N":ns.pn.getValue(), "Out S/N":ns.sn.getValue(), "工號":workid, "type":"E",
                          "客戶名稱":item["客戶名稱"]};
             var lastR = utils.getItemValue("CTI Control Number總資料庫","Out S/N", ns.sn.getValue(), "*", true);
             if(lastR != "")
@@ -1124,14 +1145,16 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
             
             
             ritem = utils.insertTableItem("CTI Control Number總資料庫",ritem);
-            ritem = ritem.item;
-            ns.repairNo.setValue(ritem["登錄編號"]);
-            utils.modifyTableItem("UnitServiceForm子表","子表單號",{"子表單號":ns.id.getValue(),"工號":item["工號"], "登錄編號":ritem["登錄編號"]});
+            var repairno = ritem["登錄編號"];
+            ns.repairNo.setValue(repairno);
+            var cn = utils.newCnNumber(ritem["登錄編號"]);
+            ns.cn.setValue(cn);
+            //var ditem = utils.newDelivery(cn, repairno, companyid );
+            //utils.modifyTableItem("UnitServiceForm子表","子表單號",{"子表單號":ns.id.getValue(),"工號": workid, "登錄編號": repairno, "CN#":cn,"出貨單號":ditem["出貨單號"]});
+            //ns.deliveryNo.setValue(ditem["出貨單號"]);
+            utils.modifyTableItem("UnitServiceForm子表","子表單號",{"子表單號":ns.id.getValue(),"工號": workid, "登錄編號": repairno, "CN#":cn});
         },
-        newRepairNo: function(){
-            var ns = this;
-            
-        },
+
         /**
          * Fires when the dialog shows
          * @method onShow [xui.UI.Dialog event]
@@ -1204,7 +1227,8 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
         */
         _cn_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-                    if(ns.cn.getUIValue() == "")
+            var cn = ns.cn.getUIValue();
+                    if(cn == "")
                     {
                       var cb = function(data){
                         ns.cn.setValue(data["CN#"]);
@@ -1218,6 +1242,8 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                       else 
                         xui.alert("請輸入登錄編號!")  
                     }
+            else 
+                utils.showItemPage("CTI Control Number總資料庫","CN#", cn, "CnEditForm");
         },
         /**
          * Fired when user click it
@@ -1231,20 +1257,7 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             utils.confirmBtnClick(ns,uictrl);
         },
-        /**
-         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
-         * @method onClick [xui.UI.ComboInput event]
-         * @param {xui.UIProfile.} profile  The current control's profile object
-         * @param {Event} e , DOM event Object
-         * @param {String} src , the event source DOM element's xid
-         * @param {String} value , control's UI value
-         * @param {}  
-        */
-        _confirm2_onclick:function(profile, e, src, value, n){
-            var ns = this, uictrl = profile.boxing();
-             utils.confirmNameClick(ns, uictrl, "秘書");
-           
-        },
+
         /**
          * Fired when control's inner value is changed!
          * @method onValueChange [xui.UI.ComboInput event]
@@ -1256,7 +1269,8 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
         */
         _contract_onvaluechange:function(profile, oldValue, newValue, force, tag){
             var ns = this, uictrl = profile.boxing();
-            utils.setFieldValue(uictrl, ns.userName);            
+            var value = utils.getItemValue("crm.Contact","ContactID", newValue, "DisplayName");
+            ns.userName.setValue(value);            
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -1284,7 +1298,128 @@ xui.Class('App.SubUnitServiceForm', 'xui.Module',{
                        xui.alert("登錄編號不存在！");     
                     }
         },
-
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _deliveryno_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            if(n != "")
+              utils.showItemPage("L10300,出貨單總資料庫","出貨單號", n, "DeliveryEditForm");
+        },
+        updateLastPnSn: function(){
+              var ns = this;
+              var insn = ns.sn.getUIValue();
+              var logdate = utils.today();
+              if(insn == "")
+              {
+                  xui.alert("請先輸入 [S/N]");
+                  return;
+              }
+              else     
+              {
+                var condition = `[Out S/N] = '${insn}' AND [登錄編號] LIKE '%E%' AND [Log date] < '${logdate}' ORDER BY [Log date]`;  
+                var item1 = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
+                var condition2 = `[In S/N] = '${insn}' AND [登錄編號] LIKE '%R%' AND [Log date] < '${logdate}' ORDER BY [Log date]`;  
+                var item2 = utils.getItemValueByCondition("CTI Control Number總資料庫",condition2);
+                var item = "";
+                if(item1 == "")
+                  item = item2;
+                else if(item2 == "")
+                  item = item1;
+                else  //item1 and item2 both exist
+                {
+                    if(item1["Log date"] > item2["Log date"])
+                        item = item1;
+                    else 
+                        item = item2;
+                }
+                if(item != "")
+                {
+                    if(item["登錄編號"].includes["R"])
+                    {    
+                      ns.pn.setValue(item["In P/N"]);
+                      ns.model.setValue(item["In Model"]);
+                    }
+                    else 
+                    {
+                      ns.pn.setValue(item["Out P/N"]);
+                      ns.model.setValue(item["型號(EX form)"]);
+                    }
+                }    
+              }
+            
+        },
+        /**
+         * Fired before input value is changed!
+         * @method onChange [xui.UI.Input event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} value , the value
+         * @param {}  
+         * @param {}  
+         * @param {}  
+         * @param {}  
+        */
+        _sn_onchange:function(profile, value, o, t, a, r){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateLastPnSn();
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirmbtn2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.confirmNameClick(ns, uictrl, "秘書");
+        },
+        /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+        _idno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+            var ns = this, uictrl = profile.boxing();
+            var item = utils.getItemValue("erp.BU3_ID","ID",newValue);
+            if(item != "")
+            {
+                ns.model.setValue(item["產品品名"]);          
+                ns.pn.setValue(item["品號"]);          
+                ns.sn.setValue(item["產品序號"]);          
+            }
+        },
+        /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+        _robotno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+            var ns = this, uictrl = profile.boxing();
+            var item = utils.getItemValue("erp.BU3_ID","ID",newValue);
+            if(item != "")
+            {
+                ns.model.setValue(item["產品品名"]);          
+                ns.pn.setValue(item["品號"]);          
+                ns.sn.setValue(item["產品序號"]);          
+            }
+        },
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

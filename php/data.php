@@ -6,6 +6,23 @@ if(!isset($req->cmd))
     exit;
 }
 
+function httpRequest($api, $data_string) {
+
+  $ch = curl_init($api);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Content-Type: application/json',
+      'Content-Length: ' . strlen($data_string))
+  );
+  $result = curl_exec($ch);
+  curl_close($ch);
+
+  return json_decode($result, true);
+}
+
 function str_contains($a, $b)
 {
     return strpos($a,$b) !== false;
@@ -94,6 +111,12 @@ function IsCRM($value)
     return strpos($value,"GDCRM") !==  false;
 }
 
+function isDelFlag($table)
+{
+    $tableList = array("[CTI Control Number總資料庫]", "[工號登錄總資料表]");    
+    return in_array($table, $tableList);
+}
+
 function sendImageMail($from, $to, $title, $base64img)
 {
         $subject = "=?UTF-8?B?".base64_encode($title)."?="; 
@@ -148,7 +171,7 @@ function newCnNumber()
         if(count($items)  > 0)
         {
             $value = $items[0]["CN#"];
-            $n = (int)substr($value,strlen()-4);
+            $n = (int)substr($value,strlen($value)-4);
             $n++;
         }        
         $value = sprintf("%s%04d",$h,$n);
@@ -215,11 +238,11 @@ function prepareTableKey($table, $item)
     {
         $h1 = "A";  
         $wid  = $item->工號;  
-        $q1 = "SELECT ROBOT FROM [工號登錄總資料表]  WHERE [工號] = '$wid'";  
+        $q1 = "SELECT Robot FROM [工號登錄總資料表]  WHERE [工號] = '$wid'";  
         $items = execquery($q1);
         if(count($items)  > 0)
         {
-          if($items[0]["ROBOT"] == 0)
+          if($items[0]["Robot"] == 1)
             $h1 = "B";  
         }
         $h2 =  $item->type; //'R' or 'E' 辨別用，不儲存
@@ -255,6 +278,23 @@ function prepareTableKey($table, $item)
         }        
         $value = sprintf("%s%03d",$d,$n);
         $item->委外單號 = $value;
+        
+    }
+    else if($table == "[L10300,出貨單總資料庫]")
+    {
+        $n = 1;
+        $d=date_create();
+        $d = date_format($d,"Y");
+        $d = substr($d, 2);
+        $items = execquery("SELECT TOP 1  [出貨單號] FROM [L10300,出貨單總資料庫] WHERE [出貨單號] LIKE '$d%' ORDER BY [出貨單號] DESC");
+        if(count($items)  > 0)
+        {
+            $value = $items[0]["出貨單號"];
+            $n = (int)substr($value,strlen($value)-4);
+            $n++;
+        }        
+        $value = sprintf("%s%04d",$d,$n);
+        $item->出貨單號 = $value;
         
     }
     else  if($table == "GDCRM.dbo.[Incident]")
@@ -320,8 +360,7 @@ function prepareTableKey($table, $item)
         }
         else
         {
-            $h2 =  $item->type; //'Robot' or 'Special' or 'NotRobot' 辨別用，不儲存
-            unset($item->type);
+            $h2 =  $item->type; //'Robot' or 'Special' or 'NotRobot'
             $d=date_create();
             $d = date_format($d,"Ymd");
             $d = substr($d, 2);
@@ -329,7 +368,7 @@ function prepareTableKey($table, $item)
               $v = 'S0';
             else if($h2 == 'Special')
               $v = 'W';
-            else
+            else  //NotRobot
               $v = 'A';
             while(true)
             {
@@ -360,6 +399,13 @@ if($req->cmd == "getTableItems")
       $condition = $req->condition;
       $query = $query."WHERE $condition ";
     }
+    if(isDelFlag($table))
+    {
+        if(str_contains($query,"WHERE "))
+           $query = $query."AND DelFlag != 1 ";
+        else
+           $query = $query."WHERE DelFlag != 1 ";
+    }       
     $countQuery = replace_between($query, 'SELECT ', ' FROM', 'count(1)'); //SQL for rowcount
 
     if(isset($req->orderby))
@@ -455,11 +501,20 @@ else if($req->cmd == "insertTableItem")
     $item = json_decode($req->item);
     prepareTableKey($table,$item);
     //print_r($item);
-    $res = insertTableItem($table,$item);
+    if(str_contains($table,"[ServiceRecord]") || str_contains($table,"[Incident]"))
+    {
+      $res = insertTableItem2($table,$item); //no OUTPUT inserted.* or there is trigger error
+      $RES->result = "OK";
+      $RES->item = $item;
+    }
+    else
+    {
+      $res = insertTableItem($table,$item);
     //file_put_contents("log6.txt", print_r($res,true));
     //afterInsertTable($table,$item);
-    $RES->result = "OK";
-    $RES->item = $res[0];
+      $RES->result = "OK";
+      $RES->item = $res[0];
+    }
     
 }
 else  if($req->cmd == "deleteTableItem")
@@ -467,8 +522,16 @@ else  if($req->cmd == "deleteTableItem")
     $key = $req->key; 
     $value = $req->value; 
     $table = $req->table;
-
-    $res = deleteTableItem($table, $key, $value);
+    
+    if(isDelFlag($table))
+    {
+      $item = new stdClass;
+      $item->$key = $value;
+      $item->DelFlag = 1;  
+      $res = modifyTableItem($table, $key, $item);
+    }
+    else 
+      $res = deleteTableItem($table, $key, $value);
     $RES->result = "OK";
 }
 else if($req->cmd == "getTableFieldConfigs")
@@ -510,6 +573,25 @@ else if($req->cmd == "getTableNames")
     $items = execquery($qrystr);
 
     $RES->items = $items;    
+}
+else  if($req->cmd == "newCnNumber")
+{
+    $value = $req->value; 
+
+    $nbr = newCnNumber();
+    $key = "CN#";
+    $datas = new stdClass;
+    $datas->登錄編號 = $value;
+    $datas->$key = $nbr;
+    modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
+    $RES->$key = $nbr;
+    $RES->result = "OK";
+}
+else  if($req->cmd == "sendErpApi")
+{
+    $value = $req->value; 
+    $r = httpRequest("http://192.168.10.21/WEBAPI_W3R027/INSERTRMAMI13",$value);
+    $RES->result = $r;
 }
 else
 {

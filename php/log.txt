@@ -1,1 +1,1 @@
-SELECT * FROM [領料報工單]  ORDER BY [領料報工單號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT * FROM [Cryopump維修工單] WHERE 登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = 'Vacuum side')  ORDER BY 登錄編號 DESC  OFFSET 0 ROWS FETCH NEXT 104 ROWS ONLY

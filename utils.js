@@ -1,5 +1,6 @@
 /*20230404*/
 ConditionDatas = {};
+DataPageTheme = "";
 utils = {
     getRowMap: function(data){
                     var rows=[];
@@ -47,13 +48,16 @@ utils = {
                 var result = null;
                 xui.Ajax("php/data.php",hash,function(rsp){
                     var data =rsp;
-                    if(!data)    alert("no data");
-                    else
-                    {
-                        result = data;
-                        if(onFinish)
-                          onFinish(data);  
+                    if(!data){    alert("no data");
+                        result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
                     }
+                    else if(typeof data == "string") {
+                        result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
+                    }//alert("ERROR");
+                    else
+                        result = data;
+                    if(onFinish)
+                       onFinish(data);  
                 },null,null,{"asy": !wait}).start();
                 return result;
     },
@@ -73,6 +77,8 @@ utils = {
         var config = utils.getTableFieldComboConfig("通用", srcui.getDataField());
         var config2 = utils.getTableFieldComboConfig("通用", dstui.getDataField());
         var tableName = config.tableName;
+        if(tableName.includes("SELECT "))
+            tableName = utils.formatString(tableName, ComboDatas);
         var key = config.keyid;
         if(config2)
           var col = config2.keyid;
@@ -113,10 +119,8 @@ utils = {
         var hash={"cmd":"getQueryItems","query":query};
         return utils.sendDataCmd(hash,  onFinish);
     }, 
-    getItemValueByCondition: function(table, condition,  getField)
+    getItemValueByCondition: function(table, condition,  getField="*", allRows = false)
     {
-        if(typeof getField == "undefined")
-            getField = "*";
         table = utils.getProperTableName(table);
 
         var query = `SELECT ${getField} FROM ${table} WHERE ${condition}`;
@@ -126,16 +130,21 @@ utils = {
         {
           if(getField != "*"  && getField.indexOf(",") == -1)    
             return datas.rows[0][0];
-          else
+          else       
           {    
             var rows = utils.getRowMap(datas);
-            return rows[0];
+            if(allRows)
+              return rows;
+            else    
+              return rows[0];
           }            
         }
         else 
           return "";    
     },
     getProperFields: function(fields){
+        if(typeof fields == "undefined")
+            return "*";
         if(fields == '*' || fields == "count(*)")
             return fields;
         var items = fields.split(',');
@@ -172,9 +181,17 @@ utils = {
         if(typeof getField == "undefined")
             getField = "*";
         getField = utils.getProperFields(getField);
-        key = utils.getProperFields(key);
         table = utils.getProperTableName(table);
-        var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
+        if(typeof key == "undefined")
+        {
+          var query = `SELECT ${getField} FROM ${table}`;
+          allRows = true;  
+        }
+        else
+        {
+          key = utils.getProperFields(key);
+          var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
+        }
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash);
         if(datas.rows.length > 0)
@@ -208,9 +225,10 @@ utils = {
         var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":datas};
         utils.sendDataCmd(hash,  onFinish, wait);
     }, 
-    insertTableItem : function(table, datas, onFinish,wait){
+    insertTableItem : function(table, datas){
         var hash={"cmd":"insertTableItem","table":table, "item":datas};
-        return utils.sendDataCmd(hash,  onFinish,wait);
+        var res = utils.sendDataCmd(hash);
+        return res.item;
     }, 
     removeTableItem : function(table, keys, value, onFinish,wait){
         var hash={"cmd":"deleteTableItem","table":table, "key":keys, "value":value};
@@ -223,9 +241,17 @@ utils = {
         };    
         xui.showModule("App.DataGridForm", cb);
     },
-    newCnNumber : function(repairno,onFinish){
+    newCnNumber : function(repairno){
         var hash={"cmd":"newCnNumber","value": repairno};
-        return utils.sendDataCmd(hash,  onFinish);
+        var res = utils.sendDataCmd(hash);
+        return res["CN#"];
+    }, 
+    newDelivery : function(cn, repairno, companyid){
+        var datas = {"出貨單性質":"銷貨單", "公司代碼": companyid, "出貨單日期":  utils.today()};  
+        var item = utils.insertTableItem("L10300,出貨單總資料庫",  datas); //wait
+        var rdatas = {"登錄編號":repairno, "送貨單#": item["出貨單號"]};  
+        utils.modifyTableItem("CTI Control Number總資料庫", "登錄編號", rdatas); //wait
+        return item;
     }, 
     removeBracket: function(str){
         str = str.replace("[","");
@@ -273,9 +299,12 @@ utils = {
             if(ondestroy)
             {
               mod.setEvents("onDestroy",function(){
+                    DataPageTheme = "";
                     ondestroy(mod);
                 });    
             }                
+            if(DataPageTheme != "")
+                mod.dialog.setSandboxTheme(DataPageTheme);
         };
         xui.showModule("App." + pagename, cb2, null, null, false); //not cached
     }, 
@@ -376,16 +405,12 @@ utils = {
                 
             if(db && db.updateDataFromUI() == false)
                 return false;
-            var newcb = function(data){
-                if(typeof data != "undefined" && typeof data.item != "undefined" && db)
-                {
-                  var item = data.item;  
+            var newcb = function(item){
                   db.setData(item).updateDataToUI();
-                  prop.mode = "edit";
+                  prop.mode = prop.mode.replaceAll("new","edit");
                   mod.saveBtn.setCaption("儲存");    
                   if(onFinish)
-                    onFinish(data.item);  
-                }
+                    onFinish(item);  
             }
             var datas = db.getData();
                 
@@ -398,8 +423,23 @@ utils = {
                if(typeof datas["其他相關資料"] != "undefined")
                  delete datas["其他相關資料"];
             }
+            if(prop.tableName == "CTI Control Number總資料庫")
+            {
+               if(typeof datas["維修報告"] != "undefined")
+                 delete datas["維修報告"];
+            }
             if(prop.tableName == "領料報工單" && prop["mode"].includes("new")){
                 delete datas["領料報工單號"];
+            }
+            if(prop.tableName == "crm.Incident")
+            {
+                if(!datas["Remark"].includes("BU3系統轉入案件"))
+                    datas["Remark"] = "[BU3系統轉入案件]"+ datas["Remark"];
+            }
+            if(prop.tableName == "crm.ServiceRecord")
+            {
+                if(!datas["Remark"].includes("BU3系統轉入服務記錄"))
+                    datas["Remark"] = "[BU3系統轉入服務記錄]"+ datas["Remark"];
             }
             if(ignoreFields)
             {    
@@ -435,6 +475,8 @@ utils = {
             else
             {
                utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
+               if(onFinish)
+                 onFinish();  
                mod.dialog.close();
             }    
             return true;
@@ -501,8 +543,16 @@ utils = {
         else if(mod.dialog)
            var nodes = mod.dialog.getChildren(true,true).get();
         var formTableName = mod.properties.tableName;   
-
-        var showCombo = function(uictrl, condition){
+        var showCombo = function(uictrl){
+                var db = mod.getDataBinders();
+                if(db.length > 0)
+                {
+                   db = db[0].boxing();
+                   db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
+                   var comboDatas = db.getData(); 
+                }
+                else 
+                    var comboDatas = {}; 
                 var tableName  = formTableName;
                 if(typeof tableName == "undefined")  //get from db tagvar
                 {
@@ -513,14 +563,18 @@ utils = {
                 //if(uictrl.getType == "popbox")
                 //  condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
                 var prop = utils.getTableFieldComboConfig(tableName, field);
-                condition = utils.formatString(prop.condition, ComboDatas);
+                condition = utils.formatString(prop.condition, comboDatas);
                 var cachetitle = `${prop.tableName}:${prop.displayFields}:${prop.displayCaptions}`;
                 if(typeof ComboBoxCache == "undefined")
                     ComboBoxCache = {};
                 if(typeof ComboBoxCache[cachetitle] == "undefined")
                 {
                   xui.newModule("App.DataListForm", function(err,module){
-                    module.setProperties("tableName", prop.tableName);
+                    var tableName =  prop.tableName;
+                    if(tableName.includes("SELECT "))  
+                      tableName = utils.formatString(tableName, comboDatas);  //process SELECT
+                      
+                    module.setProperties("tableName", tableName);
                     module.setProperties("keyid", prop.keyid);
                     module.setProperties("displayFields", prop.displayFields);
                     module.setProperties("uictrl", uictrl);
@@ -529,7 +583,8 @@ utils = {
                     module.setProperties("condition", condition);
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-INPUT"]);
                     //ComboBoxCache[cachetitle] = module;
-                    module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+                    //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+                     utils.popUp(module, uictrl); 
                   });           
                 }        
                 else
@@ -765,8 +820,9 @@ utils = {
         };
         return fmt.replace(/{[^{}]*}/g, cb);    
     },       
-    createDDL: function(form, tableName){
+    createDDL: function(form, tableName, checkDup = false){
         var nodes = form.getChildren(true,true).get();
+        var fieldList = [];
         var s = `CREATE TABLE [${tableName}] (\n`;
         for(var i=0; i< nodes.length; i++)
         {
@@ -778,6 +834,10 @@ utils = {
                 var field = n.getDataField();
                 if(field == "")
                     continue;
+                if(checkDup && fieldList.includes(field))
+                    continue;
+                fieldList.push(field);    
+                
                 if(n.KEY == 'xui.UI.ComboInput' && n.getType().includes('date'))
                   s += `[${field}] datetime NULL,\n`;
                 else if(n.KEY == 'xui.UI.CheckBox')
@@ -871,14 +931,16 @@ utils = {
                return; 
             var data = db.getData();
             var confirm = data["確認狀態"];
+            if(typeof confirm == "undefined")
+                confirm = "";
             if(confirm == "待秘書確認")
                   uictrl.setCaption("待秘書確認");
             else if(confirm == "待組長確認")
                   uictrl.setCaption("待組長確認");
             else if(confirm == "秘書已確認，通知Bench")
                 uictrl.setCaption("秘書已確認,取消通知");
-            else if(confirm == "秘書已確認")
-                uictrl.setCaption("確認完成");
+            else if(confirm.includes("已確認"))
+                uictrl.setCaption(confirm);
             else if(data["組長確認"] == "")
                 uictrl.setCaption("通知組長確認");
             else 
@@ -952,16 +1014,25 @@ utils = {
           {
             name = LoginUser.DisplayName;  
             var confirmName =  pri + "確認";
+            var confirmState =  pri + "已確認";
+              
             if(pri.includes("組長"))
+            {
                 confirmName =  "組長確認";
+                confirmState = "組長已確認";
+            }
             uictrl.setValue(name);    
             if(saveFlag){
-              utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name});
+              utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
             }
-            xui.alert("已確認!");  
+            xui.alert("已確認!");
+            return true;
           }
-          else 
-            xui.alert("請 '"+ pri + "' 確認!");  
+          else
+          {
+            xui.alert("請 '"+ pri + "' 確認!");
+            return false;
+          }
         }
     },
     installConfirmNameButtonOnClick: function(mod){
@@ -999,8 +1070,88 @@ utils = {
         if(d != "")
           CloseDate = d;
         else 
-          return "";  
+          CloseDate = 26;  
       }
-      return CloseDate;  
+      var n = new Date();
+      var d = n.getDate();
+      if(d >= CloseDate)  
+      {
+          d.setMonth(d.getMonth()+1);
+          d.setDate(1);
+      }
+      return xui.Date.format(d,"yyyy-mm-dd");
     },
+    isEmpty: function(value){
+        if(value == null || value == "")
+            return true;
+        else 
+            return false;
+    },
+    getDataFromUI : function(db, check=true){
+        if(check)
+        {    
+            if(db.updateDataFromUI() == false)
+                return "";
+        }
+        else 
+        {
+            db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
+            return db.getData();
+        }            
+    },
+    setContainerDisabled:function(block, flag){
+        var nodes = block.getChildren(true,true).get();
+        for(var i=0; i<nodes.length; i++)
+        {
+          let n = nodes[i].boxing();
+          if(typeof n.setDisabled != "undefined")  
+            n.setDisabled(flag);           
+        }
+    },
+    popUp:function(menu, uictrl){
+        if(uictrl.n0.key == "xui.UI.ComboInput")
+            menu.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+        else 
+            menu.popUp(uictrl);
+    },
+    showTableCombo: function(uictrl){
+                var mod = uictrl.getHost();
+                var db = mod.getDataBinders();
+                if(db.length > 0)
+                {
+                   db = db[0].boxing();
+                   db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
+                   var comboDatas = db.getData(); 
+                }
+                else 
+                    var comboDatas = {};
+                var prop = mod.properties;
+                var tableName  = prop.tableName;
+                if(typeof tableName == "undefined")  //get from db tagvar
+                  tableName = "通用";
+                var field  = uictrl.getDataField();
+                var condition = "";
+                //if(uictrl.getType == "popbox")
+                //  condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
+                var prop = utils.getTableFieldComboConfig(tableName, field);
+                condition = utils.formatString(prop.condition, comboDatas);
+                  xui.newModule("App.DataListForm", function(err,module){
+                    var tableName =  prop.tableName;
+                    if(tableName.includes("SELECT "))  
+                      tableName = utils.formatString(tableName, comboDatas);  //process SELECT
+                      
+                    module.setProperties("tableName", tableName);
+                    module.setProperties("keyid", prop.keyid);
+                    module.setProperties("displayFields", prop.displayFields);
+                    module.setProperties("uictrl", uictrl);
+                    module.setProperties("fieldWidths", prop.displayWidths);
+                    module.setProperties("fieldCaptions", prop.displayCaptions);
+                    module.setProperties("condition", condition);
+                    //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-INPUT"]);
+                    //ComboBoxCache[cachetitle] = module;
+                    //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
+                     utils.popUp(module, uictrl); 
+                  });           
+        }           
+    
  };
