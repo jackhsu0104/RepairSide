@@ -38,7 +38,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setTop("1.5238095238095237em")
                 .setWidth("62.32380952380952em")
                 .setHeight("46.476190476190474em")
-                .setCaption("  3ph Controller 維修工單 ")
+                .setCaption("Controller 維修工單 ")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
             );
@@ -197,6 +197,16 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("26.6em")
+                .setTop("2.8666666666666667em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"xui_ui_tabs6")
@@ -217,7 +227,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("c")
             );
             
             host.xui_ui_tabs6.append(
@@ -589,8 +599,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div329.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input870")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"nameB")
                 .setDataBinder("rdb")
                 .setDataField("簽名")
                 .setDock("top")
@@ -600,13 +610,16 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
+                .setType("getter")
+                .onClick("_nameb_onclick")
             );
             
             host.xui_ui_div329.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input871")
+                .setHost(host,"dateB")
                 .setDataBinder("rdb")
                 .setDataField("簽名日期")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("44.34285714285714em")
@@ -1053,8 +1066,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div412.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1171")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"nameC")
                 .setDataBinder("rdb")
                 .setDataField("簽名#2")
                 .setDock("top")
@@ -1064,13 +1077,16 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
+                .setType("getter")
+                .onClick("_namec_onclick")
             );
             
             host.xui_ui_div412.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1172")
+                .setHost(host,"dateC")
                 .setDataBinder("rdb")
                 .setDataField("簽名日期#2")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("44.34285714285714em")
@@ -1612,6 +1628,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
         },
 
         /**
@@ -1651,7 +1668,45 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                     var ns = this, uictrl = profile.boxing();
                     utils.updateNewWorkSheetValue(ns.rdb, newValue);
-                }
+                },
+                    /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+                    _nameb_onclick:function(profile, e, src, value, n){
+                        var ns = this, uictrl = profile.boxing();
+                        utils.signNameClick(ns.dateB, uictrl, "維修");
+                    },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namec_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateC, uictrl, "維修");
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _repairbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

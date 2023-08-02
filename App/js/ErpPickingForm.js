@@ -371,20 +371,33 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                                     {
                                         "id" : "領用庫別",
                                         "caption" : "領用庫別",
-                                        "type" : "input",
+                                        "type" : "label",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "型號",
+                                        "caption" : "型號",
+                                        "type" : "label",
                                         "width" : "8em"
                                     },
                                     {
                                         "id" : "品號",
                                         "caption" : "品號",
-                                        "type" : "input",
+                                        "type" : "label",
                                         "width" : "8em"
                                     },
                                     {
                                         "id" : "領料數量",
                                         "caption" : "領料數量",
-                                        "type" : "input",
+                                        "type" : "number",
                                         "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "rowid",
+                                        "caption" : "rowid",
+                                        "hidden" : true,
+                                        "width" : "8em",
+                                        "type" : "input"
                                     }
                                 ]
                             }

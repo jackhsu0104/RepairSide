@@ -287,11 +287,6 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 size = 20;
             var ns=this, grid=ns.grid, prop = ns.properties;  
             var cb=function(data){
-					if(typeof data == "string") //error
-					{
-						xui.Dom.free();
-						return;
-					}
                     if(typeof prop.useCache != "undefined" && prop.useCache)
                         ns.writeToCache(prop, data);
                     var tableName = prop.tableName;
@@ -543,8 +538,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             var pagename = prop.openPageName; 
             if(pagename == "")
                 pagename = "DataInputDialog";
+			DataPageTheme = DataPageThemeNames[DataPageThemeIndex++];
             xui.showModule("App."+ pagename,function(mod){
-                var db = mod.getDataBinders();
+            if(DataPageTheme != "")
+                mod.dialog.setSandboxTheme(DataPageTheme);
+				mod.dialog.setModal(true);
+				var db = mod.getDataBinders();
                 if(db.length > 0)
                     db =  db[0].boxing();
                 else
@@ -575,6 +574,9 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 utils.installModuleTableBoxHooks(mod);
                 //mod.setProperties("keyvalue",fields[prop.keyid]);
                 mod.setEvents("onDestroy",function(){
+					DataPageThemeIndex--;
+					if(DataPageThemeIndex < 0)
+						DataPageThemeIndex = 0;
                     ns.refreshGrid();
                 });
                 

@@ -1,1 +1,1 @@
-SELECT * FROM [Cryopump維修工單] WHERE 登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = 'Vacuum side')  ORDER BY 登錄編號 DESC  OFFSET 0 ROWS FETCH NEXT 104 ROWS ONLY
+SELECT count(*) FROM [Cryopump維修工單] WHERE ([A組裝簽名] != '' AND [A組裝簽名] = '')  OR ([B組裝簽名] != '' AND [B組裝簽名] = '')  OR ([C組裝簽名] != '' AND [C組裝簽名] = '')  OR ([D測試人員簽名] != '' AND [D測試人員簽名] = '')  

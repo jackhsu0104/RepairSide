@@ -1250,8 +1250,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("6.095238095238095em")
                 .setTop("18.285714285714285em")
-                .setWidth("52.03809523809524em")
-                .setHeight("7.238095238095238em")
+                .setWidth("52.06666666666667em")
+                .setHeight("7.266666666666667em")
                 .setLayoutData({
                     "rows" : 3,
                     "cols" : 10,
@@ -1336,8 +1336,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#1")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.466666666666667em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("8.066666666666666em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "A2"
             );
@@ -1350,8 +1350,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B2"
             );
@@ -1364,8 +1364,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C2"
             );
@@ -1378,8 +1378,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#4")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D2"
             );
@@ -1392,8 +1392,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E2"
             );
@@ -1406,8 +1406,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#6")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F2"
             );
@@ -1420,8 +1420,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#7")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G2"
             );
@@ -1434,8 +1434,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#8")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "H2"
             );
@@ -1448,8 +1448,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#9")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "I2"
             );
@@ -1462,8 +1462,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#10")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.723809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("5.4em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "J2"
             );
@@ -1476,8 +1476,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#11")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.466666666666667em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("8.066666666666666em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "A3"
             );
@@ -1490,8 +1490,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#12")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B3"
             );
@@ -1504,8 +1504,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#13")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C3"
             );
@@ -1518,8 +1518,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#14")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D3"
             );
@@ -1532,8 +1532,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#15")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E3"
             );
@@ -1546,8 +1546,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#16")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F3"
             );
@@ -1560,8 +1560,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#17")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G3"
             );
@@ -1574,8 +1574,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#8")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "H3"
             );
@@ -1588,8 +1588,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#9")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "I3"
             );
@@ -1602,8 +1602,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#20")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.723809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("5.4em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "J3"
             );
@@ -1626,8 +1626,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("6.095238095238095em")
                 .setTop("18.285714285714285em")
-                .setWidth("52.03809523809524em")
-                .setHeight("7.238095238095238em")
+                .setWidth("52.06666666666667em")
+                .setHeight("7.266666666666667em")
                 .setLayoutData({
                     "rows" : 3,
                     "cols" : 10,
@@ -1712,8 +1712,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#21")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.466666666666667em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("8.066666666666666em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "A2"
             );
@@ -1726,8 +1726,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#22")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B2"
             );
@@ -1740,8 +1740,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#23")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C2"
             );
@@ -1754,8 +1754,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#24")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D2"
             );
@@ -1768,8 +1768,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#25")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E2"
             );
@@ -1782,8 +1782,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#26")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F2"
             );
@@ -1796,8 +1796,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#27")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G2"
             );
@@ -1810,8 +1810,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#28")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "H2"
             );
@@ -1824,8 +1824,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#29")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "I2"
             );
@@ -1838,8 +1838,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#30")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.723809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("5.4em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "J2"
             );
@@ -1852,8 +1852,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#31")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("7.466666666666667em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("8.066666666666666em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "A3"
             );
@@ -1866,8 +1866,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#32")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B3"
             );
@@ -1880,8 +1880,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#33")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C3"
             );
@@ -1894,8 +1894,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#34")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "D3"
             );
@@ -1908,8 +1908,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#35")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "E3"
             );
@@ -1922,8 +1922,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#36")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "F3"
             );
@@ -1936,8 +1936,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#37")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "G3"
             );
@@ -1950,8 +1950,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#38")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "H3"
             );
@@ -1964,8 +1964,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#39")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.876190476190477em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("4.733333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "I3"
             );
@@ -1978,8 +1978,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataField("#40")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.723809523809524em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("5.4em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "J3"
             );
@@ -1998,7 +1998,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1475")
                 .setDataBinder("mdb")
-                .setDataField("客戶")
+                .setDataField("客戶名稱")
                 .setLeft("0.7619047619047619em")
                 .setTop("0.7619047619047619em")
                 .setWidth("11.352380952380953em")
@@ -2021,7 +2021,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1476")
+                .setHost(host,"repairNo")
                 .setDataBinder("mdb")
                 .setDataField("登錄編號")
                 .setLeft("25.752380952380953em")
@@ -2217,6 +2217,16 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 })
             );
             
+            host.xui_ui_block305.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("40.6em")
+                .setTop("3em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -2248,6 +2258,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
         },
 
         /**
@@ -2272,7 +2283,19 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             _cancelbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
-            }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _repairbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                    utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+                }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

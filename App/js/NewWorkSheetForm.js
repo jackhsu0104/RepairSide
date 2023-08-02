@@ -38,7 +38,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 .setTop("1.5238095238095237em")
                 .setWidth("40em")
                 .setHeight("21.133333333333333em")
-                .setCaption("新增表單")
+                .setCaption("新增工單")
                 .setModal(true)
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
@@ -80,8 +80,8 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 .setDock("right")
                 .setLeft("23.923809523809524em")
                 .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
-                .setCaption("儲存")
+                .setWidth("7em")
+                .setCaption("新增工單")
                 .onClick("_savebtn_onclick")
             );
             
@@ -140,7 +140,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input14491")
                 .setDataBinder("newdb")
-                .setDataField("Model")
+                .setDataField("In Model")
                 .setReadonly(true)
                 .setLeft("12em")
                 .setTop("0.6em")
@@ -154,7 +154,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input14492")
                 .setDataBinder("newdb")
-                .setDataField("P/N")
+                .setDataField("In P/N")
                 .setReadonly(true)
                 .setLeft("12em")
                 .setTop("2.6em")
@@ -168,7 +168,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input14493")
                 .setDataBinder("newdb")
-                .setDataField("S/N")
+                .setDataField("In S/N")
                 .setReadonly(true)
                 .setLeft("24.666666666666668em")
                 .setTop("2.6em")
@@ -204,7 +204,8 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                     },
                     {
                         "id" : "維修前測試單",
-                        "caption" : "維修前測試單"
+                        "caption" : "維修前測試單",
+                        "hidden" : false
                     }
                 ])
                 .setLeft("0em")
@@ -234,31 +235,20 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                     {
                         "id" : "Cryopump維修工單",
                         "caption" : "Cryopump維修工單",
-                        "imageClass" : "xui-icon-number1"
-                    },
-                    {
-                        "id" : "SHI CryoPump維修工單",
-                        "caption" : "SHI CryoPump維修工單",
-                        "imageClass" : "xui-icon-number2"
+                        "imageClass" : ""
                     },
                     {
                         "id" : "Crosshead維修工單",
                         "caption" : "Crosshead維修工單",
-                        "imageClass" : "xui-icon-number3"
+                        "imageClass" : ""
                     },
                     {
-                        "id" : "SHI Crosshead維修工單",
-                        "caption" : "SHI Crosshead維修工單",
-                        "imageClass" : "xui-icon-number4",
-                        "disabled" : true
+                        "id" : "Compressor維修工單",
+                        "caption" : "Compressor維修工單"
                     },
                     {
-                        "id" : "3phControler維修工單",
-                        "caption" : "3phControler維修工單"
-                    },
-                    {
-                        "id" : "Challentech Bench維修工單",
-                        "caption" : " Challentech Bench維修工單"
+                        "id" : "Controler維修工單",
+                        "caption" : "Controler維修工單"
                     },
                     {
                         "id" : "Module功能測試表",
@@ -332,24 +322,22 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
             {
               if(kind == "Cryopump維修工單")        
                   page = "CryopumpEditForm";
-              else if(kind == "SHI CryoPump維修工單")
-                  page = "ShiCryopumpEditForm";
               else if(kind == "Crosshead維修工單")
                   page = "CrossheadEditForm";
-              else if(kind == "SHI Crosshead維修工單")
-                  page = "ShiCrossheadEditFor";
-              else if(kind == "3phControler維修工單")
+              else if(kind == "Controler維修工單")
                   page = "3phControlerEditForm";
-              else if(kind == "Challentech Bench維修工單")
-                  page = "ChallentechBenchEditForm";
               else if(kind == "Module功能測試表")
                   page = "ModuleTestForm";
+              else if(kind == "Compressor維修工單")
+                  page = "CompressorEditForm";
             }
             var newitem = {"登錄編號":item["登錄編號"], "Model":item["In Model"], "P/N":item["In P/N"], "S/N": item["In S/N"],"客戶名稱": item["客戶名稱"], "日期":utils.today(),
                            "保固期":item["保固期"],"上次登錄編號":item["上次登錄編號"], "上次登錄時間":item["上次登錄時間"],"上次故障原因":item["上次故障原因"],
                           "Pump": item["In Model"], "Pump P/N": item["In P/N"],  "Pump S/N": item["In S/N"]}; 
-            
-            utils.showDataPage(page,newitem,"new");
+            var descb = function(){
+                ns.destroy();
+            }
+            utils.showDataPage(page,newitem,"new", null, descb);
         },
         showTestPage: function(){
             var ns = this;
@@ -369,6 +357,7 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
                           "Pump": item["In Model"], "Pump P/N": item["In P/N"],  "Pump S/N": item["In S/N"]}; 
             
             utils.showDataPage(page,newitem,"new");
+            ns.destroy();
         },
         /**
          * Fired when user click it
@@ -394,9 +383,20 @@ xui.Class('App.NewWorkSheetForm', 'xui.Module',{
          * @param {xui} profile .UIProfile
         */
         _dialog_onshow:function(profile){
-            var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
-            var data = ns.newdb.getData();
+            if(prop.mode == "newRepair")
+            {
+              ns.tabs.updateItem("維修前測試單",{"hidden":true});
+              ns.tabs.setValue("維修工單");  
+              ns.saveBtn.setCaption("新增工單");
+            }
+            if(prop.mode == "newTest")
+            {
+              ns.tabs.updateItem("維修工單",{"hidden":true});
+              ns.tabs.setValue("維修前測試單");  
+              ns.saveBtn.setCaption("新增測試單");
+              ns.dialog.setCaption("新增測試單");
+            }
 /*            
             if(data["維修前測試"] == "1")
             {

@@ -1,7 +1,13 @@
 /*20230404*/
 ConditionDatas = {};
 DataPageTheme = "";
+DataPageThemeIndex = 0;
+DataPageThemeNames = ["army","webflat", "pink", "classic","electricity","red"];
+
 utils = {
+    alert: function(content, caption = "訊息"){
+        xui.alert(caption, content);
+    },
     getRowMap: function(data){
                     var rows=[];
                     // maybe need to collect rowsMap
@@ -221,12 +227,25 @@ utils = {
             return false;
     },
     modifyTableItem : function(table, key, datas, onFinish,  wait){
+        var data = utils.removeInvalidFields(table, datas);
         key = utils.removeBracket(key);
-        var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":datas};
+        var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":data};
         utils.sendDataCmd(hash,  onFinish, wait);
     }, 
+    removeInvalidFields: function(table, datas){
+        var data = Object.assign(datas);
+        var fields = utils.getTableFieldNames(table);
+        var keys = Object.keys(data);     
+        for(let i=0; i<keys.length; i++)
+        {
+           if(fields.indexOf(keys[i]) == -1)
+              delete data[keys[i]];
+        }
+        return data;
+    },
     insertTableItem : function(table, datas){
-        var hash={"cmd":"insertTableItem","table":table, "item":datas};
+        var data = utils.removeInvalidFields(table, datas);
+        var hash={"cmd":"insertTableItem","table":table, "item":data};
         var res = utils.sendDataCmd(hash);
         return res.item;
     }, 
@@ -296,16 +315,19 @@ utils = {
             utils.updateModuleTableBoxCaption(mod);
             if(onload)
               onload(mod);
-            if(ondestroy)
-            {
               mod.setEvents("onDestroy",function(){
-                    DataPageTheme = "";
-                    ondestroy(mod);
+                    //DataPageTheme = "";
+                    DataPageThemeIndex--;
+                    if(DataPageThemeIndex < 0)
+                        DataPageThemeIndex = 0;
+                    if(ondestroy)
+                      ondestroy(mod);
                 });    
-            }                
             if(DataPageTheme != "")
                 mod.dialog.setSandboxTheme(DataPageTheme);
+            mod.dialog.setModal(true);
         };
+        DataPageTheme = DataPageThemeNames[DataPageThemeIndex++];
         xui.showModule("App." + pagename, cb2, null, null, false); //not cached
     }, 
     showPage : function(pagename,  cb){
@@ -372,7 +394,25 @@ utils = {
         var config={};
         var s = TableComboConfigs[tableName][col];
         s = s.split(":");
+        config.orderby = "";
         config.tableName = s[0];
+        if(s[0].includes(",") &&(s[0].endsWith(" DESC") || s[0].endsWith(" ASC")))
+        {
+          var ss = s[0].split(",");
+          config.tableName = "";
+          for(var i=0; i<ss.length; i++)
+          {
+              if(i == ss.length-1)
+              {
+                 config.orderby = ss[i];
+                 config.tableName = config.tableName.slice(0, -1);
+              }
+              else   
+              {    
+                config.tableName += ss[i]+",";
+              }
+          }
+        }
         config.keyid = s[1];
         if(typeof s[2] == "undefined"  || s[2] == "")
           config.displayFields = config.keyid;
@@ -449,6 +489,7 @@ utils = {
                   delete datas[ignoreFields[i]];
               }
             }
+/*        
             //remove unused field
             var fields = utils.getTableFieldNames(prop.tableName);
             var keys = Object.keys(datas);     
@@ -457,7 +498,7 @@ utils = {
                 if(fields.indexOf(keys[i]) == -1)
                   delete datas[keys[i]];
             }
-        
+*/        
             if(extDatas)
             {    
               let keys = Object.keys(extDatas);     
@@ -581,6 +622,7 @@ utils = {
                     module.setProperties("fieldWidths", prop.displayWidths);
                     module.setProperties("fieldCaptions", prop.displayCaptions);
                     module.setProperties("condition", condition);
+                    module.setProperties("orderby", prop["orderby"]);
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-INPUT"]);
                     //ComboBoxCache[cachetitle] = module;
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
@@ -618,12 +660,13 @@ utils = {
                 });
         };                
         mod.tableBox_beforecombopop = popcb;  
-        mod.tableBox_beforecombopop2 = popcb2;
+       // mod.tableBox_beforecombopop2 = popcb2;
         for(var i=0; i< nodes.length; i++)
         {
             let n = nodes[i].boxing();;
             if(n.KEY == 'xui.UI.ComboInput')
             {
+                
                 if(n.getType() == "cmdbox")
                    n.beforeComboPop("tableBox_beforecombopop");
                 else if(n.getType() == "popbox")
@@ -810,7 +853,7 @@ utils = {
                 key = key.substring(1,key.length-1);
                 if(item.hasOwnProperty(key))
                 {
-                    if(quoteFlag)  
+                    if(quoteFlag && !item[key].startsWith("'"))  
                       return "'" + item[key] +"'";
                     else 
                       return item[key];  
@@ -870,6 +913,28 @@ utils = {
                       utils.showDataPage("RepairOptionForm", item, "edit")  ;      
 
     },
+    showRepairEditForm: function(id, readonly = false){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var cb = function(mod){
+                        if(readonly)
+                        {
+                          mod.saveBtn.setDisabled(true);    
+                          mod.messageBtn.setDisabled(true);
+                          mod.testMessageBtn.setDisabled(true);
+                          mod.confirmBtn.setDisabled(true);
+                          mod.serviceBtn.setDisabled(true);
+                          mod.incidentBtn.setDisabled(true);
+                        }
+                    }
+                    var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號",id);
+                    if(item != "")
+                      utils.showDataPage("RepairEditForm", item, "edit", cb)  ;      
+
+    },    
     updateNewWorkSheetValue: function(db, rno){
         db.updateDataFromUI();
         var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno,"*");
@@ -986,6 +1051,56 @@ utils = {
               uictrl.setCaption("秘書已確認");
             }               
     },
+    signNameClick: function(datectrl, uictrl, pri, saveFlag=true){
+        var mod = uictrl.getModule();
+        var dbname = uictrl.getDataBinder();
+        var db = xui.DataBinder.getFromName(dbname);
+        if(typeof db == "undefined")
+            return;
+        var data = db.getData();
+        var prop = mod.properties;
+        var table = prop["tableName"];
+        var name = uictrl.getValue();
+        var key = prop["keyid"];
+        var id = data[key];
+        if(name == "")
+        {
+          var priflag = false;  
+          var prilist = pri.split(",");
+          for(var i=0; i<prilist.length; i++)
+          {
+            if(LoginUser.Privilege.includes(prilist[i]))
+            {
+              priflag = true;
+              break;
+            }
+          }
+          if(priflag)
+          {
+            var field = uictrl.getDataField(); 
+            name = LoginUser.DisplayName;  
+            uictrl.setValue(name);    
+            if(datectrl)
+                datectrl.setValue(utils.today());
+            if(saveFlag){
+              if(datectrl)  
+              {
+                var dateField = datectrl.getDataField();  
+                utils.modifyTableItem(table, key, {[key]:id, [field]:name, [dateField]: utils.today()});
+              }
+              else
+                utils.modifyTableItem(table, key, {[key]:id, [field]:name});
+            }
+//            xui.alert("已確認!");
+            return true;
+          }
+          else
+          {
+            xui.alert("請 '"+ pri + "' 覆核!");
+            return false;
+          }
+        }
+    },
     confirmNameClick: function(mod, uictrl, pri, saveFlag=true){
         var db = mod.getDataBinders();
         if(db.length > 0)
@@ -1024,6 +1139,7 @@ utils = {
             uictrl.setValue(name);    
             if(saveFlag){
               utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
+              db.setData("確認狀態", confirmState); 
             }
             xui.alert("已確認!");
             return true;
@@ -1076,10 +1192,13 @@ utils = {
       var d = n.getDate();
       if(d >= CloseDate)  
       {
-          d.setMonth(d.getMonth()+1);
-          d.setDate(1);
+          n.setMonth(n.getMonth()+1);
+          n.setDate(1);
       }
-      return xui.Date.format(d,"yyyy-mm-dd");
+      else
+          n.setDate(CloseDate);
+            
+      return xui.Date.format(n,"yyyy-mm-dd");
     },
     isEmpty: function(value){
         if(value == null || value == "")
@@ -1147,11 +1266,27 @@ utils = {
                     module.setProperties("fieldWidths", prop.displayWidths);
                     module.setProperties("fieldCaptions", prop.displayCaptions);
                     module.setProperties("condition", condition);
+                    module.setProperties("orderby", prop.orderby);
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-INPUT"]);
                     //ComboBoxCache[cachetitle] = module;
                     //module.popUp(uictrl.n0.$_domid["xui.UI.ComboInput-BOX"]);
                      utils.popUp(module, uictrl); 
                   });           
-        }           
-    
+        },
+    updateWorkSheetRepairState:function(repairid, state){
+        utils.modifyTableItem("維修站總資料表", "登錄編號", {"登錄編號":repairid, "維修狀態":state});
+    },
+    toggleFullScreen:function(ename) {
+        var element = document.querySelector(ename);
+
+        element.requestFullscreen()
+        .then(function() {
+    // element has entered fullscreen mode successfully
+        })
+        .catch(function(error) {
+            // element could not enter fullscreen mode
+            // error message
+            console.log(error.message);
+        });
+    }
  };

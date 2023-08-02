@@ -40,8 +40,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             append(
                 xui.create("xui.UI.Dialog")
                 .setHost(host,"dialog")
-                .setLeft("16em")
-                .setTop("1.5238095238095237em")
+                .setLeft("10.6em")
+                .setTop("1.2666666666666666em")
                 .setWidth("60em")
                 .setHeight("48.76190476190476em")
                 .setCaption("Crosshead維修工單")
@@ -195,16 +195,26 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
                 .setItems([
                     {
-                        "id" : "Cryo Pump",
-                        "caption" : "Cryo Pump"
+                        "id" : "Crosshead",
+                        "caption" : "Crosshead"
                     },
                     {
-                        "id" : "SHI Cryo Pump",
-                        "caption" : "SHI Cryo Pump"
+                        "id" : "SHI Crosshead",
+                        "caption" : "SHI Crosshead"
                     }
                 ])
-                .setValue("SHI Cryo Pump")
+                .setValue("Crosshead")
                 .onValueChange("_sheettype_onvaluechange")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("16.733333333333334em")
+                .setTop("3.2em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
             );
             
             host.form.append(
@@ -232,7 +242,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("d")
             );
             
             host.tabs1.append(
@@ -2020,7 +2030,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             host.xui_ui_div492.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox422")
-                .setDataBinder("rdb")
+                .setDataBinder("crdb")
                 .setDataField("C1")
                 .setDirtyMark(true)
                 .setDock("top")
@@ -2130,40 +2140,43 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_div1101.append(
                 xui.create("xui.UI.ComboInput")
-                .setType("getter")
-                .setHost(host,"xui_ui_input1578")
+                .setHost(host,"nameC")
                 .setName("C組裝簽名")
-                .setDataBinder("rdb")
+                .setDataBinder("crdb")
                 .setDataField("C組裝簽名")
                 .setLeft("7.466666666666667em")
                 .setTop("0.6857142857142857em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("組裝簽名")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_namec_onclick")
             );
             
             host.xui_ui_div1101.append(
                 xui.create("xui.UI.ComboInput")
-                .setType("getter")
-                .setHost(host,"xui_ui_input1579")
+                .setHost(host,"leaderC")
                 .setName("C組長覆核")
-                .setDataBinder("rdb")
+                .setDataBinder("crdb")
                 .setDataField("C組長覆核")
                 .setLeft("7.466666666666667em")
                 .setTop("2.6666666666666665em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderc_onclick")
             );
             
             host.xui_ui_div1101.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput221")
+                .setHost(host,"dateC")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("crdb")
                 .setDataField("C組裝日期")
+                .setReadonly(true)
                 .setLeft("26.133333333333333em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15em")
@@ -2175,10 +2188,11 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_div1101.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput222")
+                .setHost(host,"dateLeaderC")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("crdb")
                 .setDataField("C覆核日期")
+                .setReadonly(true)
                 .setLeft("26.133333333333333em")
                 .setTop("2.9714285714285715em")
                 .setWidth("15em")
@@ -2643,7 +2657,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             host.xui_ui_block758.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox3491")
-                .setDataBinder("db")
+                .setDataBinder("crdb")
                 .setDataField("Model")
                 .setItems([
                     {
@@ -2842,7 +2856,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("d")
             );
             
             host.tabs2.append(
@@ -4526,40 +4540,43 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_div1073.append(
                 xui.create("xui.UI.ComboInput")
-                .setType("getter")
-                .setHost(host,"xui_ui_input2831")
+                .setHost(host,"nameC2")
                 .setName("C組裝簽名")
-                .setDataBinder("rdb")
-                .setDataField("組裝簽名C")
+                .setDataBinder("crdb2")
+                .setDataField("C組裝簽名")
                 .setLeft("7.466666666666667em")
                 .setTop("0.6857142857142857em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("組裝簽名")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_namec2_onclick")
             );
             
             host.xui_ui_div1073.append(
                 xui.create("xui.UI.ComboInput")
-                .setType("getter")
-                .setHost(host,"xui_ui_input2832")
+                .setHost(host,"leaderC2")
                 .setName("C組長覆核")
-                .setDataBinder("rdb")
-                .setDataField("組長覆核C")
+                .setDataBinder("crdb2")
+                .setDataField("C組長覆核")
                 .setLeft("7.466666666666667em")
                 .setTop("2.6666666666666665em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderc2_onclick")
             );
             
             host.xui_ui_div1073.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1576")
+                .setHost(host,"dateC2")
                 .setName("日期")
-                .setDataBinder("rdb")
-                .setDataField("組裝日期C")
+                .setDataBinder("crdb2")
+                .setDataField("C組裝日期")
+                .setReadonly(true)
                 .setLeft("26.133333333333333em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15em")
@@ -4571,10 +4588,11 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_div1073.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1577")
+                .setHost(host,"dateLeaderC2")
                 .setName("日期")
-                .setDataBinder("rdb")
-                .setDataField("覆核日期C")
+                .setDataBinder("crdb2")
+                .setDataField("C覆核日期")
+                .setReadonly(true)
                 .setLeft("26.133333333333333em")
                 .setTop("2.9714285714285715em")
                 .setWidth("15em")
@@ -5228,7 +5246,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             utils.saveForm(ns,"","",null, db);
-        },
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+       },
 
         /**
          * Fires when the dialog shows
@@ -5239,6 +5258,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            var data = ns.crdb.getData();
+            ns.crdb2.setData(data);
+            ns.crdb2.updateDataToUI();
             ns.updateSheetType(ns.sheetType.getUIValue());
             console.log(utils.createDDL(ns.dialog,"Crosshead維修工單", true));
         },
@@ -5306,7 +5328,71 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         _sheettype_onvaluechange:function(profile, oldValue, newValue, force, tag){
                             var ns = this, uictrl = profile.boxing();
                                 ns.updateSheetType(newValue);
-        }
+                        },
+                            /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+                            _namec_onclick:function(profile, e, src, value, n){
+                                var ns = this, uictrl = profile.boxing();
+                                utils.signNameClick(ns.dateC, uictrl,"維修");
+                            },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderc_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateLeaderC, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namec2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateC2, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderc2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateLeaderC2, uictrl,"組長,主管");
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _repairbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                     utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+   }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

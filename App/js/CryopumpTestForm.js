@@ -11,7 +11,7 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
         properties : {
             "keyid" : "登錄編號",
             "keyvalue" : null,
-            "table" : "CryopumpTestForm",
+            "tableName" : "CryopumpTestForm",
             "datas" : null
         },
 
@@ -195,6 +195,16 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                 .setValue("維修前測試")
             );
             
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("20.8em")
+                .setTop("0.9333333333333333em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block2")
@@ -285,6 +295,13 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                                         "required" : false,
                                         "type" : "input",
                                         "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "rowid",
+                                        "caption" : "rowid",
+                                        "hidden" : true,
+                                        "width" : "8em",
+                                        "type" : "input"
                                     }
                                 ]
                             }
@@ -374,6 +391,9 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
+            if(ns.modGrid.grid.getRows().length > 0)
+              utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
+            ns.destroy();
             //if(prop.mode == "edit")
              //   ns.modGrid.grid.setDisabled(false);
  
@@ -385,11 +405,22 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
          * @param {xui} profile .UIProfile
         */
         _dialog_onshow:function(profile){
-            var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
-           // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
+            prop.mode = "edit";
+            ns.saveBtn.setCaption("儲存");
+            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            
             utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+            if(ns.confirmBtn.getCaption() == "組長已確認")
+            {
+              var state = utils.getItemValue("維修站總資料表","登錄編號",ns.repairNo.getUIValue(),"維修狀態");
+              if(state == "開始測試")
+              {
+                  ns.confirmBtn.setCaption("通知秘書確認");
+              }
+             
+            }
         },
             /**
          * Fired when user click it
@@ -427,9 +458,15 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
             var id = ns.repairNo.getValue();
             var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號",id,"*");
             if(item != "")
-              return {"登錄編號": id, "Type":ns.type.getUIValue(), "P/N":item["In P/N"], "S/N": item["In S/N"],"Pump":item["In Model"]};
+              var data = {"登錄編號": id, "Type":ns.type.getUIValue(), "P/N":item["In P/N"], "S/N": item["In S/N"],"Pump":item["In Model"]};
             else    
-              return {"登錄編號": id, "Type":ns.type.getUIValue()};
+              var data = {"登錄編號": id, "Type":ns.type.getUIValue()};
+            ns.testdb.updateDataFromUI();
+            var tdata = ns.testdb.getData();
+            data["組長確認"] = tdata["組長確認"];
+            data["秘書確認"] = tdata["秘書確認"];
+            data["確認狀態"] = tdata["確認狀態"];
+            return data;
 
         },
             /**
@@ -469,6 +506,18 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
              utils.confirmBtnClick(ns, uictrl);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _repairbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
         },
         /*,
         // To determine how properties affects this module

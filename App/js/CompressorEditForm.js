@@ -199,6 +199,16 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .onClick("_lastworksheetbtn_onclick")
             );
             
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("20em")
+                .setTop("3.4285714285714284em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"xui_ui_tabs14")
@@ -223,7 +233,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("d")
             );
             
             host.xui_ui_tabs14.append(
@@ -1329,7 +1339,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input2493")
                 .setDataBinder("comdb")
                 .setDataField("檢測時間起A")
-                .setLeft("28.952380952380953em")
+                .setLeft("25.333333333333332em")
                 .setTop("30.01904761904762em")
                 .setWidth("13.714285714285714em")
                 .setLabelSize("8em")
@@ -1341,7 +1351,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input2494")
                 .setDataBinder("comdb")
                 .setDataField("訖A")
-                .setLeft("44.19047619047619em")
+                .setLeft("42.666666666666664em")
                 .setTop("30.01904761904762em")
                 .setWidth("7.314285714285714em")
                 .setLabelSize("1.5em")
@@ -1364,8 +1374,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2496")
                 .setDataBinder("comdb")
-                .setDataField("簽名A")
-                .setLeft("33.82857142857143em")
+                .setDataField("A簽名")
+                .setLeft("30.2em")
                 .setTop("32.076190476190476em")
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
@@ -1377,12 +1387,24 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input2497")
                 .setDataBinder("comdb")
                 .setDataField("檢測日期A")
-                .setLeft("42.819047619047616em")
+                .setLeft("52em")
                 .setTop("32.076190476190476em")
-                .setWidth("8.666666666666666em")
+                .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
+            );
+            
+            host.block2.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1064")
+                .setDataBinder("comdb")
+                .setDataField("A組長覆核")
+                .setLeft("39.333333333333336em")
+                .setTop("32.06666666666667em")
+                .setWidth("12em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長覆核")
             );
             
             host.xui_ui_tabs14.append(
@@ -2548,7 +2570,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("日期B")
                 .setLeft("43.58095238095238em")
                 .setTop("59.733333333333334em")
-                .setWidth("8.666666666666666em")
+                .setWidth("10.4em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
@@ -3791,28 +3813,44 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2178")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"name")
                 .setDataBinder("comdb")
-                .setDataField("簽名C")
+                .setDataField("C簽名")
                 .setLeft("2.1333333333333333em")
                 .setTop("67.58095238095238em")
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
+                .setType("getter")
+                .onClick("_name_onclick")
             );
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input2179")
+                .setHost(host,"dateLeader")
                 .setDataBinder("comdb")
                 .setDataField("日期C#2")
-                .setLeft("13.714285714285714em")
+                .setLeft("24.666666666666668em")
                 .setTop("67.58095238095238em")
-                .setWidth("9.333333333333334em")
+                .setWidth("10.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"leader")
+                .setDataBinder("comdb")
+                .setDataField("C組長覆核")
+                .setLeft("12em")
+                .setTop("67.6em")
+                .setWidth("12em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長覆核")
+                .setType("getter")
+                .onClick("_leader_onclick")
             );
             
             return children;
@@ -3846,6 +3884,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
         },
 
         /**
@@ -3968,7 +4007,45 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 _lastworksheetbtn_onclick:function(profile, e, src, value){
                     var ns = this, uictrl = profile.boxing();
                     utils.showLastWorkSheet(ns,"CompressorEditForm", "Compressor維修工單", 'Compressor S/N');
-        }
+                },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _name_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(null, uictrl, "維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leader_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateLeader, uictrl, "組長,主管");
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _repairbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                  utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+      }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

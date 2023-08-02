@@ -177,6 +177,7 @@ xui.Class('App.DataListForm', 'xui.Module',{
             modgrid.setProperties("displayFields", prop["displayFields"]);
             modgrid.setProperties("fieldWidths", prop["fieldWidths"]);
             modgrid.setProperties("fieldCaptions", prop["fieldCaptions"]);
+            modgrid.setProperties("orderby", prop["orderby"]);
             //if(prop["formWidth"])
             //    ns.form.setWidth(prop["formWidth"] +  "em");
         },

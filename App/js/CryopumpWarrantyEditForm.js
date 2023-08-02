@@ -152,7 +152,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("9.333333333333334em")
                 .setTop("2.6666666666666665em")
-                .setHeight("3.933333333333333em")
+                .setHeight("5.333333333333333em")
             );
             
             host.xui_ui_div262.append(
@@ -223,6 +223,16 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setTop("0.7619047619047619em")
                 .setWidth("6.780952380952381em")
                 .setCaption("Report")
+            );
+            
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("42.266666666666666em")
+                .setTop("2.6666666666666665em")
+                .setWidth("9.466666666666667em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
             );
             
             host.form.append(
@@ -2718,7 +2728,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLeft("7.466666666666667em")
                 .setTop("5.40952380952381em")
                 .setWidth("67.46666666666667em")
-                .setHeight("28.6em")
+                .setHeight("27.2em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 27,
@@ -4977,6 +4987,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.saveForm(ns);
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
         },
 
         /**
@@ -4991,6 +5002,15 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
             utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+            if(ns.confirmBtn.getCaption() == "組長已確認")
+            {
+              var state = utils.getItemValue("維修站總資料表","登錄編號",ns.repairNo.getUIValue(),"維修狀態");
+              if(state == "開始測試")
+              {
+                  ns.confirmBtn.setCaption("通知秘書確認");
+              }
+             
+            }
         },
             /**
          * Fired when user click it
@@ -5054,7 +5074,19 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
              utils.confirmBtnClick(ns, uictrl);
-        }
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _repairbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+            utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

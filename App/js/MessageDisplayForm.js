@@ -36,49 +36,49 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                 .setItems([
                     {
                         "id" : "a",
-                        "caption" : "額外Option零件確認通知 <font color=red>2</font>",
+                        "caption" : "維修工單確認",
                         "imageClass" : ""
                     },
                     {
                         "id" : "b",
-                        "caption" : "維修品檢測完成確認通知<font color=red>2</font>",
+                        "caption" : "CryoPumpTestForm確認",
                         "closeBtn" : false,
                         "optBtn" : false,
                         "popBtn" : false
                     },
                     {
                         "id" : "c",
-                        "caption" : "Compressor Repair Quotation Sheet確認通知<font color=red>2</font>"
-                    },
-                    {
-                        "id" : "d",
-                        "caption" : "Compressor Heater Fail/ Motor Fail零件更換表確認通知<font color=red>2</font>"
+                        "caption" : "待維修案件"
                     },
                     {
                         "id" : "e",
-                        "caption" : "Compressor Standard Overhaul確認通知<font color=red>2</font>"
+                        "caption" : "待測試案件"
+                    },
+                    {
+                        "id" : "d",
+                        "caption" : "Repair Quotation Sheet"
                     }
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("c")
             );
             
             host.stack.append(
                 xui.create("xui.UI.List")
-                .setHost(host,"optionList")
+                .setHost(host,"lista")
                 .setDock("fill")
                 .setLeft("4.571428571428571em")
                 .setTop("6.095238095238095em")
                 .setWidth("24.38095238095238em")
                 .setValue("a")
-                .onItemSelected("_optionlist_onitemselected"),
+                .onItemSelected("_lista_onitemselected"),
                 "a"
             );
             
             host.stack.append(
                 xui.create("xui.UI.List")
-                .setHost(host,"testFinishList")
+                .setHost(host,"listb")
                 .setDock("fill")
                 .setLeft("5.333333333333333em")
                 .setTop("6.857142857142857em")
@@ -90,37 +90,37 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
             
             host.stack.append(
                 xui.create("xui.UI.List")
-                .setHost(host,"heaterList")
+                .setHost(host,"listd")
                 .setDock("fill")
-                .setLeft("6.095238095238095em")
-                .setTop("7.619047619047619em")
+                .setLeft("5.333333333333333em")
+                .setTop("6.857142857142857em")
                 .setWidth("24.38095238095238em")
                 .setValue("a")
-                .onItemSelected("_heaterlist_onitemselected"),
+                .onItemSelected("_unitformlist_onitemselected"),
                 "d"
             );
             
             host.stack.append(
                 xui.create("xui.UI.List")
-                .setHost(host,"overhaulList")
+                .setHost(host,"listc")
                 .setDock("fill")
-                .setLeft("6.095238095238095em")
-                .setTop("7.619047619047619em")
+                .setLeft("5.333333333333333em")
+                .setTop("6.857142857142857em")
                 .setWidth("24.38095238095238em")
                 .setValue("a")
-                .onItemSelected("_overhaullist_onitemselected"),
-                "e"
+                .onItemSelected("_listc_onitemselected"),
+                "c"
             );
             
             host.stack.append(
                 xui.create("xui.UI.List")
-                .setHost(host,"quotationList")
+                .setHost(host,"liste")
                 .setDock("fill")
                 .setLeft("6.095238095238095em")
                 .setTop("7.619047619047619em")
                 .setWidth("24.38095238095238em")
                 .setValue("a")
-                .onItemSelected("_quotationlist_onitemselected"),
+                .onItemSelected("_liste_onitemselected"),
                 "e"
             );
             
@@ -129,16 +129,22 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         },
         updateAllList: function(){
           var ns = this;
-          ns.updateOptionList();
+          ns.updateRepairSheetList();
+          ns.updateTestFormConfirmList(); //測試完，待確認
+          ns.updateTestFormList();  //待測試
           ns.updateQuotationList();
-          ns.updateRepairFinishList();
-          ns.updateTestFinishList();
-          ns.updateUnitFormList();
-          ns.updateHeaterList();
-          ns.updateOverhaulList();
+          ns.updateNoRepairSheetList();
+            
+// ns.updateHeaterList();
+         // ns.updateOverhaulList();
            
         },
-        updateList: function(id, list, table, condition, fields, postfix=""){
+        updateCaptionCount: function(id, list, caption){
+            var ns = this;
+            var s = caption + "&emsp;<font color=red>" + list.getItems().length + "</font>";
+            ns.stack.updateItem(id, {"caption": s});
+        },
+        updateList: function(list, table, condition, fields, postfix=""){
           var ns = this;  
           var cb = function(data){
               var items = list.getItems();
@@ -153,54 +159,103 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
               }
               list.setItems(items);
               list.refresh();
-              var t = ns.captionList[id] + "<font color=red>" + data.rows.length + "</font>";
-              ns.stack.updateItem(id, {"caption":t});
           }  
-          utils.getTableItems({"tableName":table, "condition": condition, "fields": fields}, cb);
+          var condition2 = "";
+          var cpairs = condition.split(",");
+          for(var i=0; i<cpairs.length; i++)
+          {
+            var p2 = cpairs[i].split(":");
+            condition2 += `([${p2[0]}] != '' AND [${p2[0]}] = '') `;
+            if(i != cpairs.length-1)
+              condition2 += ' OR ';  
+          }
+          var data = utils.getTableItems({"tableName":table, "condition": condition2, "fields": fields});
+          cb(data);
         },
-        updateOptionList: function(){
+        updateList2: function(list, table, condition, fields, postfix=""){
           var ns = this;  
-          ns.updateList("a",ns.optionList,"Option零件更換表", "確認狀態 = '秘書已確認'", "登錄編號,公司名稱,CreateDate","已確認通知");
-          ns.updateList("a",ns.optionList,"Option零件更換表", "確認狀態 = '待組長確認'", "登錄編號,公司名稱,CreateDate","待確認");
+          var cb = function(data){
+              var items = list.getItems();
+              for(var i=0; i<data.rows.length; i++)
+              {
+                let d = data.rows[i];  
+                let caption = "";
+                for(var j=0; j<d.length; j++)
+                    caption += d[j] + "  ";
+                let it = {"id":d[0], "caption": caption + postfix};
+                items.push(it);  
+              }
+              list.setItems(items);
+              list.refresh();
+          }  
+          var data = utils.getTableItems({"tableName":table, "condition": condition, "fields": fields});
+          cb(data);
+        },
+        updateRepairSheetList: function(){
+          var ns = this;
+          var list = ns.lista;
+          list.clearItems();
+          ns.updateList(list,"Cryopump維修工單", "A組裝簽名:A組長覆核,B組裝簽名:B組長覆核,C組裝簽名:C組長覆核,D測試人員簽名:D測試組長覆核", "登錄編號,客戶名稱","-Cryopump維修工單");
+          ns.updateList(list,"Crosshead維修工單", "C組裝簽名:C組長覆核", "登錄編號,客戶名稱","-Crosshead維修工單");
+          ns.updateList(list,"Compressor維修工單", "A簽名:A組長覆核,C簽名:C組長覆核", "登錄編號,客戶名稱","-Compressor維修工單");
+          ns.updateCaptionCount("a", list, "維修工單確認");
         },
         updateQuotationList: function(){
           var ns = this;  
-            ns.updateList("c",ns.quotationList, "Compressor Repair Quotation Sheet", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,維修內容簡述","已確認通知");
-            ns.updateList("c",ns.quotationList, "Compressor Repair Quotation Sheet", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,維修內容簡述","待確認");
+          var list = ns.listd;
+          list.clearItems();
+          ns.updateList2(list, "Compressor Repair Quotation Sheet", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,維修內容簡述");
+          ns.updateCaptionCount("d", list, "Repair Quotation Sheet");
         },
-        updateRepairFinishList: function(){
+        updateNoRepairSheetList: function(){
           var ns = this;  
-          ns.updateList(ns.repairFinishList, "UnitServiceForm子表", "確認狀態 = '已修復待出貨'", "登錄編號,公司名稱,服務內容");
+          var list = ns.listc;
+          list.clearItems();
+          ns.updateList2(list, "維修站總資料表", "維修狀態='待維修'", "登錄編號,客戶名稱");
+          ns.updateCaptionCount("c", list, "待維修案件");
         },
         updateUnitFormList: function(){
           var ns = this;  
-          ns.updateList(ns.unitList, "UnitServiceForm子表", "確認狀態 = '待出貨'", "登錄編號,公司名稱,服務內容");
+          var list = ns.unitFormList;
+          list.clearItems();
+          ns.updateList(list, "UnitServiceForm子表", "確認狀態 = '待秘書確認'", "登錄編號,公司名稱,服務內容");
+          ns.updateCaptionCount("d", list, "Unit Service Form確認");
         },
         updateHeaterList: function(){
           var ns = this;  
-          ns.updateList("d",ns.heaterList, "Compressor Heater Fail/ Motor Fail零件更換表", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,故障問題簡述","已確認通知");
-          ns.updateList("d",ns.heaterList, "Compressor Heater Fail/ Motor Fail零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,故障問題簡述","待確認");
+          ns.updateList(ns.heaterList, "Compressor Heater Fail/ Motor Fail零件更換表", "確認狀態 = '待秘書確認'", "登錄編號,客戶名稱,故障問題簡述");
         },
         updateOverhaulList: function(){
           var ns = this;  
-          ns.updateList("e",ns.overhaulList, "Compressor Standard Overhaul", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,故障問題簡述","已確認通知");
-          ns.updateList("e",ns.overhaulList, "Compressor Standard Overhaul", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,故障問題簡述","待確認");
+          ns.updateList(ns.overhaulList, "Compressor Standard Overhaul", "確認狀態 = '待秘書確認'", "登錄編號,客戶名稱,故障問題簡述");
         },
-        updateTestFinishList: function(){
+        updateTestFormConfirmList: function(){
           var ns = this;  
-          ns.updateList("b",ns.testFinishList, "CryopumpWarranty原因分析表", "確認狀態 = '秘書已確認'", "登錄編號,日期,客戶名稱", "-保固已確認通知");
-          ns.updateList("b",ns.testFinishList, "CryopumpTestForm", "確認狀態 = '秘書已確認'", "登錄編號,TestDate", "-付費已確認通知");
-          ns.updateList("b",ns.testFinishList, "CryopumpWarranty原因分析表", "確認狀態 = '待組長確認'", "登錄編號,日期,客戶名稱", "-保固待確認");
-          ns.updateList("b",ns.testFinishList, "CryopumpTestForm", "確認狀態 = '待組長確認'", "登錄編號,TestDate", "-付費待確認");
-        },
+          var list = ns.listb;  
+          list.clearItems();
+          ns.updateList2(list, "CryopumpWarranty原因分析表", "確認狀態 = '待組長確認'", "登錄編號,日期,客戶名稱", "-保固");
+          ns.updateList2(list, "CryopumpTestForm", "確認狀態 = '待組長確認'", "登錄編號,TestDate", "-付費");
+          ns.updateCaptionCount("b", list, "CryoPumpTestForm確認");
+      },
+        updateTestFormList: function(){
+          var ns = this;  
+          var list = ns.liste;  
+          list.clearItems();
+          ns.updateList2(list, "維修站總資料表", "維修狀態='待測試'", "登錄編號,客戶名稱");
+          ns.updateCaptionCount("e", list, "待測試案件");
+      },
         // Give a chance to determine which UI controls will be appended to parent container
         customAppend : function(parent, subId, left, top){
             // "return false" will cause all the internal UI controls will be added to the parent panel
             return false;
         },
-        showDataPage:function(page, table, key, keyValue){
+        showPage:function(page, table, key, keyValue){
+            var ns = this;
+            var descb = function(){
+                ns.updateAllList();                
+            }
             var data = utils.getItemValue(table, key, keyValue); 
-            utils.showDataPage(page, data, "edit");
+            utils.showDataPage(page, data, "edit", null, descb);
         },
         /**
          * Fired when list item is selected
@@ -213,20 +268,15 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _optionlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("RepairOptionForm", "Option零件更換表","登錄編號", item.id);
+            ns.showPage("RepairOptionForm", "Option零件更換表","登錄編號", item.id);
             uictrl.setValue("");
         },
         events:{
-            "beforeShow" : "_page_beforeshow",
-            "onReady" : "_page_onready"
+            "beforeShow" : "_page_beforeshow"
         },
         _page_beforeshow:function(e,i){
             var ns = this;
-            ns.updateOptionList();
-            ns.updateQuotationList();
-            ns.updateTestFinishList();
-            ns.updateHeaterList();
-            ns.updateOverhaulLit();
+            ns.updateAllList();
 
         },
         /**
@@ -240,7 +290,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _overhaullist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("CompressorOverhaulEditForm", "Compressor Standard Overhaul","登錄編號", item.id);
+            ns.showPage("CompressorOverhaulEditForm", "Compressor Standard Overhaul","登錄編號", item.id);
              uictrl.setValue("");
        },
         /**
@@ -254,7 +304,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _heaterlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("CompressorSpecialPriceEditForm", "Compressor Heater Fail/ Motor Fail零件更換表","登錄編號", item.id);
+            ns.showPage("CompressorSpecialPriceEditForm", "Compressor Heater Fail/ Motor Fail零件更換表","登錄編號", item.id);
             uictrl.setValue("");
         },
         /**
@@ -268,7 +318,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _quotationlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("CompressorRepairQuotationSheet", "Compressor Repair Quotation Sheet","登錄編號", item.id);
+            ns.showPage("CompressorRepairQuotationSheet", "Compressor Repair Quotation Sheet","登錄編號", item.id);
              uictrl.setValue("");
        },
         /**
@@ -282,7 +332,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _unitformlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("SubUnitServiceForm", "UnitServiceForm子表","登錄編號", item.id);
+            ns.showPage("RepairOptionForm", "Option零件更換表","登錄編號", item.id);
             uictrl.setValue("");
         },
         /**
@@ -296,7 +346,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _repairfinishlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showDataPage("SubUnitServiceForm", "UnitServiceForm子表","登錄編號", item.id);
+            ns.showPage("SubUnitServiceForm", "UnitServiceForm子表","登錄編號", item.id);
             uictrl.setValue("");
         },
         /**
@@ -312,16 +362,84 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             var caption = item.caption;
             if(caption.includes("保固"))
-                ns.showDataPage("CryopumpWarrantyEditForm", "CryopumpWarranty原因分析表","登錄編號", item.id);
+                ns.showPage("CryopumpWarrantyEditForm", "CryopumpWarranty原因分析表","登錄編號", item.id);
             else if(caption.includes("付費"))
-                ns.showDataPage("CryopumpTestForm", "CryopumpTestForm","登錄編號", item.id);
+                ns.showPage("CryopumpTestForm", "CryopumpTestForm","登錄編號", item.id);
               uictrl.setValue("");
               
         },
-        _page_onready:function(e,i){
-            var ns = this;
-            ns.captionList = {"a":"額外Option零件確認通知","b":"維修品檢測完成確認通知","c":"Compressor Repair Quotation Sheet確認通知",
-                              "d":"Compressor Heater Fail/ Motor Fail零件更換表確認通知", "e":"Compressor Standard Overhaul確認通知"};
+        /**
+         * Fired when list item is selected
+         * @method onItemSelected [xui.UI.List event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {} type:Number,0:noaffacted;1:checked;-1  unchecked
+        */
+        _lista_onitemselected:function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            var rid = item.id;
+            var caption = item.caption;
+            if(caption.includes("Cryopump維修工單"))
+              ns.showPage("CryopumpEditForm", "Cryopump維修工單","登錄編號", rid);
+            if(caption.includes("Compressor維修工單"))
+              ns.showPage("CompressorEditForm", "Compressor維修工單","登錄編號", rid);
+            if(caption.includes("Crosshead維修工單"))
+              ns.showPage("CrossheadEditForm", "Crosshead維修工單","登錄編號", rid);
+            uictrl.setValue("");
+        },
+        /**
+         * Fired when list item is selected
+         * @method onItemSelected [xui.UI.List event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {} type:Number,0:noaffacted;1:checked;-1  unchecked
+        */
+        _listc_onitemselected:function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            var rid = item.id;
+            var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rid);
+            if(data != "")
+            {
+                MainPage.wrRepairNo.setValue(rid);
+                MainPage._wrrepairsearchbtn_onclick();
+                MainPage.mainPage.setValue("維修委託單/工單");
+                ns.destroy();
+                /*
+                var descb = function(){
+                    ns.updateAllList();                
+                }
+                utils.showDataPage("NewWorkSheetForm", data, "newRepair", null, descb);
+                */
+            }
+            else 
+              xui.alert("查無登錄編號!");  
+        },
+        /**
+         * Fired when list item is selected
+         * @method onItemSelected [xui.UI.List event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {} type:Number,0:noaffacted;1:checked;-1  unchecked
+        */
+        _liste_onitemselected:function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            var rid = item.id;
+            var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rid);
+            if(data != "")
+            {
+                var descb = function(){
+                    ns.destroy();
+                }
+              utils.showDataPage("NewWorkSheetForm", data, "newTest",null, descb);
+            }
+            else 
+              xui.alert("查無登錄編號!");  
         }
         /*,
         // To determine how properties affects this module

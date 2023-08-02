@@ -6,23 +6,27 @@ if(!isset($req->cmd))
     exit;
 }
 
-function httpRequest($api, $data_string) {
-
-  $ch = curl_init($api);
-  curl_setopt($ch, CURLOPT_POST, 1);
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-      'Content-Type: application/json',
-      'Content-Length: ' . strlen($data_string))
-  );
-  $result = curl_exec($ch);
-  curl_close($ch);
-
-  return json_decode($result, true);
+function myDeleteTableItem($table, $key, $value)
+{
+    if(isDelFlag($table))
+    {
+      $item = new stdClass;
+      $item->$key = $value;
+      $item->DelFlag = 1;  
+      $res = modifyTableItem($table, $key, $item);
+    }
+    else 
+      $res = deleteTableItem($table, $key, $value);
+    return $res;
 }
-
+function myGetTableItems($table, $key, $value)
+{
+  $query = "SELECT * FROM $table WHERE [$key] = '$value'";
+  $stmt=$db->prepare($query);
+  $R2 = $stmt->execute();
+  $R = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $R; 
+}
 function str_contains($a, $b)
 {
     return strpos($a,$b) !== false;
@@ -113,7 +117,7 @@ function IsCRM($value)
 
 function isDelFlag($table)
 {
-    $tableList = array("[CTI Control Number總資料庫]", "[工號登錄總資料表]");    
+    $tableList = array("[CTI Control Number總資料庫]", "[工號登錄總資料表]","[UnitServiceForm子表]");    
     return in_array($table, $tableList);
 }
 
@@ -522,16 +526,17 @@ else  if($req->cmd == "deleteTableItem")
     $key = $req->key; 
     $value = $req->value; 
     $table = $req->table;
-    
-    if(isDelFlag($table))
+    if($table == "[unitServiceForm子表]")
     {
-      $item = new stdClass;
-      $item->$key = $value;
-      $item->DelFlag = 1;  
-      $res = modifyTableItem($table, $key, $item);
+        $items = myGetTableItems("[unitServiceForm子表]", $key, $value);
+        $rid = "登錄編號";
+        if(count($items) > 0)
+        {
+          $it = $items[0];  
+          myDeleteTableItem("[CTI Control Number總資料庫]", $rid, $it[$rid]);  
+        }
     }
-    else 
-      $res = deleteTableItem($table, $key, $value);
+    $res = myDeleteTableItem($table, $key, $value);
     $RES->result = "OK";
 }
 else if($req->cmd == "getTableFieldConfigs")
@@ -586,12 +591,6 @@ else  if($req->cmd == "newCnNumber")
     modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
     $RES->$key = $nbr;
     $RES->result = "OK";
-}
-else  if($req->cmd == "sendErpApi")
-{
-    $value = $req->value; 
-    $r = httpRequest("http://192.168.10.21/WEBAPI_W3R027/INSERTRMAMI13",$value);
-    $RES->result = $r;
 }
 else
 {

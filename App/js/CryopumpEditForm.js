@@ -215,7 +215,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("工單類別")
                 .setLeft("0.6666666666666666em")
-                .setTop("2.6em")
+                .setTop("2.8666666666666667em")
                 .setWidth("15.533333333333333em")
                 .setLabelSize("5em")
                 .setLabelCaption("工單類別")
@@ -232,6 +232,16 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setValue("SHI Cryo Pump")
                 .onValueChange("_sheettype_onvaluechange")
+            );
+            
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("17.333333333333332em")
+                .setTop("2.6666666666666665em")
+                .setWidth("8.666666666666666em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
             );
             
             host.form.append(
@@ -270,7 +280,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -1024,22 +1034,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input526")
-                .setName("A組裝簽名")
-                .setDataBinder("rdb")
-                .setDataField("A組裝簽名")
-                .setLeft("21.333333333333332em")
-                .setTop("47.266666666666666em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("組裝簽名")
-                .setType("getter")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input527")
+                .setHost(host,"leaderA")
                 .setName("A組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("A組長覆核")
@@ -1050,6 +1045,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leadera_onclick")
             );
             
             host.xui_ui_block178.append(
@@ -1594,10 +1590,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput735")
+                .setHost(host,"dateA")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("A組裝日期")
+                .setReadonly(true)
                 .setLeft("24.333333333333332em")
                 .setTop("45.06666666666667em")
                 .setWidth("15em")
@@ -1609,10 +1606,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput809")
+                .setHost(host,"dateLeaderA")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("A覆核日期")
+                .setReadonly(true)
                 .setLeft("40.93333333333333em")
                 .setTop("45.13333333333333em")
                 .setWidth("15em")
@@ -1620,6 +1618,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("覆核日期")
                 .setType("date")
                 .setMaxlength("null")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput3970")
+                .setName("A組裝簽名")
+                .setDataBinder("rdb")
+                .setDataField("A組裝簽名")
+                .setLeft("21.333333333333332em")
+                .setTop("47.13333333333333em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("組裝簽名")
+                .setType("getter")
+                .setMaxlength("32")
+                .onClick("_namea_onclick")
             );
             
             host.tabs1.append(
@@ -1830,7 +1844,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input958")
+                .setHost(host,"nameB")
                 .setName("B組裝簽名")
                 .setDataBinder("rdb")
                 .setDataField("B組裝簽名")
@@ -1841,11 +1855,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組裝簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_nameb_onclick")
             );
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input959")
+                .setHost(host,"leaderB")
                 .setName("B組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("B組長覆核")
@@ -1856,6 +1871,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderb_onclick")
             );
             
             host.block3.append(
@@ -2326,10 +2342,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1310")
+                .setHost(host,"dateLeaderB")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("B覆核日期")
+                .setReadonly(true)
                 .setLeft("32.666666666666664em")
                 .setTop("42.666666666666664em")
                 .setWidth("15em")
@@ -2341,10 +2358,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1311")
+                .setHost(host,"dateB")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("B組裝日期")
+                .setReadonly(true)
                 .setLeft("32.666666666666664em")
                 .setTop("40em")
                 .setWidth("15em")
@@ -2747,7 +2765,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1670")
+                .setHost(host,"nameC")
                 .setName("C組裝簽名")
                 .setDataBinder("rdb")
                 .setDataField("C組裝簽名")
@@ -2758,11 +2776,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組裝簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_namec_onclick")
             );
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1671")
+                .setHost(host,"leaderC")
                 .setName("C組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("C組長覆核")
@@ -2773,6 +2792,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderc_onclick")
             );
             
             host.block4.append(
@@ -3254,10 +3274,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1769")
+                .setHost(host,"dateC")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("C組裝日期")
+                .setReadonly(true)
                 .setLeft("25.333333333333332em")
                 .setTop("43.266666666666666em")
                 .setWidth("15em")
@@ -3269,10 +3290,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput1770")
+                .setHost(host,"dateLeaderC")
                 .setName("日期")
                 .setDataBinder("rdb")
                 .setDataField("C覆核日期")
+                .setReadonly(true)
                 .setLeft("25.333333333333332em")
                 .setTop("45.46666666666667em")
                 .setWidth("15em")
@@ -3486,7 +3508,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block5.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input2111")
+                .setHost(host,"nameD")
                 .setName("測試人員簽名")
                 .setDataBinder("rdb")
                 .setDataField("D測試人員簽名")
@@ -3497,11 +3519,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("測試人員簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_named_onclick")
             );
             
             host.block5.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input2112")
+                .setHost(host,"leaderD")
                 .setName("測試組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("D測試組長覆核")
@@ -3512,6 +3535,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("測試組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderd_onclick")
             );
             
             host.block5.append(
@@ -5773,7 +5797,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("a")
             );
             
             host.tabs2.append(
@@ -6293,22 +6317,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block214.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1392")
-                .setName("A組裝簽名")
-                .setDataBinder("rdb2")
-                .setDataField("A組裝簽名")
-                .setLeft("20.666666666666668em")
-                .setTop("39.8em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("組裝簽名")
-                .setType("getter")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block214.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1393")
+                .setHost(host,"leaderA2")
                 .setName("A組長覆核")
                 .setDataBinder("rdb2")
                 .setDataField("A組長覆核")
@@ -6319,6 +6328,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leadera2_onclick")
             );
             
             host.xui_ui_block214.append(
@@ -6664,10 +6674,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block214.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput892")
+                .setHost(host,"dateA2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("A組裝日期")
+                .setReadonly(true)
                 .setLeft("23.61904761904762em")
                 .setTop("37.25714285714286em")
                 .setWidth("15em")
@@ -6679,10 +6690,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block214.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput893")
+                .setHost(host,"dateLeaderA2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("A覆核日期")
+                .setReadonly(true)
                 .setLeft("40.22857142857143em")
                 .setTop("37.333333333333336em")
                 .setWidth("15em")
@@ -6807,6 +6819,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelHAlign("left")
                 .setCheckBox(true)
                 .setValue("")
+            );
+            
+            host.xui_ui_block214.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"nameA2")
+                .setName("A組裝簽名")
+                .setDataBinder("rdb2")
+                .setDataField("A組裝簽名")
+                .setLeft("20.666666666666668em")
+                .setTop("39.8em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("組裝簽名")
+                .setType("getter")
+                .setMaxlength("32")
+                .onClick("_namea2_onclick")
             );
             
             host.tabs2.append(
@@ -6938,7 +6966,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block215.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1401")
+                .setHost(host,"nameB2")
                 .setName("B組裝簽名")
                 .setDataBinder("rdb2")
                 .setDataField("B組裝簽名")
@@ -6949,11 +6977,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組裝簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_nameb2_onclick")
             );
             
             host.xui_ui_block215.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1402")
+                .setHost(host,"leaderB2")
                 .setName("B組長覆核")
                 .setDataBinder("rdb2")
                 .setDataField("B組長覆核")
@@ -6964,6 +6993,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderb2_onclick")
             );
             
             host.xui_ui_block215.append(
@@ -7231,10 +7261,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block215.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput899")
+                .setHost(host,"dateLeaderB2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("B覆核日期")
+                .setReadonly(true)
                 .setLeft("32.666666666666664em")
                 .setTop("28.495238095238093em")
                 .setWidth("15em")
@@ -7246,10 +7277,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block215.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput900")
+                .setHost(host,"dateB2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("B組裝日期")
+                .setReadonly(true)
                 .setLeft("32.666666666666664em")
                 .setTop("25.82857142857143em")
                 .setWidth("15em")
@@ -7455,7 +7487,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block216.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1410")
+                .setHost(host,"nameC2")
                 .setName("C組裝簽名")
                 .setDataBinder("rdb2")
                 .setDataField("C組裝簽名")
@@ -7466,11 +7498,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組裝簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_namec2_onclick")
             );
             
             host.xui_ui_block216.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1411")
+                .setHost(host,"leaderC2")
                 .setName("C組長覆核")
                 .setDataBinder("rdb2")
                 .setDataField("C組長覆核")
@@ -7863,10 +7896,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block216.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput907")
+                .setHost(host,"dateC2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("C組裝日期")
+                .setReadonly(true)
                 .setLeft("25.333333333333332em")
                 .setTop("38.78095238095238em")
                 .setWidth("15em")
@@ -7878,10 +7912,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block216.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput908")
+                .setHost(host,"dateLeaderC2")
                 .setName("日期")
                 .setDataBinder("rdb2")
                 .setDataField("C覆核日期")
+                .setReadonly(true)
                 .setLeft("25.333333333333332em")
                 .setTop("40.99047619047619em")
                 .setWidth("15em")
@@ -7889,6 +7924,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("覆核日期")
                 .setType("date")
                 .setMaxlength("null")
+                .onClick("_dateleaderc2_onclick")
                 .setCustomStyle({
                     "KEY" : {
                     }
@@ -8131,7 +8167,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block217.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1421")
+                .setHost(host,"nameD2")
                 .setName("測試人員簽名")
                 .setDataBinder("rdb2")
                 .setDataField("D測試人員簽名")
@@ -8142,11 +8178,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("測試人員簽名")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_named2_onclick")
             );
             
             host.xui_ui_block217.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1422")
+                .setHost(host,"leaderD2")
                 .setName("測試組長覆核")
                 .setDataBinder("rdb2")
                 .setDataField("D測試組長覆核")
@@ -8157,6 +8194,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("測試組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderd2_onclick")
             );
             
             host.xui_ui_block217.append(
@@ -8516,6 +8554,9 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "A6" : {
                             "value" : "Minutes to 17k/Spec="
                         },
+                        "A7" : {
+                            "value" : "1st Stage Temp Control Test"
+                        },
                         "B7" : {
                             "value" : "100k ±1k"
                         },
@@ -8524,6 +8565,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         },
                         "A9" : {
                             "value" : "#1 15mins；#2 15mins"
+                        },
+                        "A10" : {
+                            "value" : "2nd Stage Warm Up Test"
+                        },
+                        "A11" : {
+                            "value" : "RESET FACTORY REGEN PARAMETER\n1st cooling control temp. = 100K,\n2nd cooling target temp. = 17K, \nExtended purge time for FULL regeneration = 0 mins,\nRepurge cycle upper limit = 3,  Repurge time = 60sec,  ROR base pressure = 75mm/tr,  ROR threshold value = 38m/m,  ROR cycle upper limit = 10,"
                         },
                         "B11" : {
                             "value" : "真空值"
@@ -8689,7 +8736,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div470")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "D4"
             );
@@ -8750,7 +8797,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div471")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "D6"
             );
@@ -8811,7 +8858,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div472")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "D15"
             );
@@ -8821,7 +8868,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div473")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "B6"
             );
@@ -8844,7 +8891,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div474")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("36.46666666666667em")
+                .setWidth("36.2em")
                 .setHeight("1.8666666666666667em"),
                 "B8"
             );
@@ -8934,7 +8981,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div475")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("36.46666666666667em")
+                .setWidth("36.2em")
                 .setHeight("1.8666666666666667em"),
                 "B12"
             );
@@ -8979,7 +9026,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div476")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("36.46666666666667em")
+                .setWidth("36.2em")
                 .setHeight("1.8666666666666667em"),
                 "B13"
             );
@@ -9025,7 +9072,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("55.06666666666667em")
+                .setWidth("55.13333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "A15"
             );
@@ -9130,7 +9177,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div479")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("5.8em"),
                 "D7"
             );
@@ -9191,7 +9238,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div480")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("36.46666666666667em")
+                .setWidth("36.2em")
                 .setHeight("1.8666666666666667em"),
                 "B10"
             );
@@ -9215,7 +9262,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div481")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "D10"
             );
@@ -9276,7 +9323,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div482")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("6.4em")
+                .setWidth("6.333333333333333em")
                 .setHeight("5.8em"),
                 "D11"
             );
@@ -9333,30 +9380,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout17.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label219")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("18.533333333333335em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("1<sup>st</sup> Stage Temp Control Test")
-                .setHAlign("left"),
-                "A7"
-            );
-            
-            host.xui_ui_formlayout17.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label220")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("18.533333333333335em")
-                .setHeight("1.8666666666666667em")
-                .setCaption("2<sup>nd</sup> Stage Warm Up Test")
-                .setHAlign("left"),
-                "A10"
-            );
-            
-            host.xui_ui_formlayout17.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1435")
                 .setName("B4")
@@ -9364,7 +9387,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("E3")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "B4"
@@ -9378,7 +9401,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("E5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
                 .setType("time"),
@@ -9393,22 +9416,10 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("E7")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none"),
                 "C6"
-            );
-            
-            host.xui_ui_formlayout17.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label221")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("18.533333333333335em")
-                .setHeight("14.4em")
-                .setCaption("RESET FACTORY REGEN PARAMETER   <br>                                       1st cooling control temp. = 100K,  2nd cooling target temp. = 17K,  Extended purge time for FULL regeneration = 0 mins,  Repurge cycle upper limit = 3,  Repurge time = 60sec,  ROR base pressure = 75mm/tr,  ROR threshold value = 38m/m,  ROR cycle upper limit = 10, ")
-                .setHAlign("left"),
-                "A11"
             );
             
             host.xui_ui_formlayout17.append(
@@ -9416,7 +9427,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block219")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("8.533333333333333em")
                 .setBorderType("none"),
                 "B14"
@@ -9427,7 +9438,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block220")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("18.2em")
+                .setWidth("18.066666666666666em")
                 .setHeight("8.533333333333333em")
                 .setBorderType("none"),
                 "C14"
@@ -9476,6 +9487,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             utils.saveForm(ns,"","",null, db);
+            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
         },
 
         /**
@@ -9485,6 +9497,9 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _dialog_onshow:function(profile){
             var ns = this, prop = ns.properties;
+            var data = ns.rdb.getData();
+            ns.rdb2.setData(data);
+            ns.rdb2.updateDataToUI();
             ns.updateSheetType(ns.sheetType.getUIValue());
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -9583,6 +9598,227 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         ns.updateSheetType(newValue);
                         //console.log(utils.createDDL(ns.dialog,"Cryopump維修工單", true));
                     },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namea_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.dateA, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leadera_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderA,uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namea2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateA2, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leadera2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderA2,uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _nameb_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateB, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderb_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderB, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _nameb2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateB2, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderb2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderB, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namec_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateC, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderc_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderC, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _namec2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateC2, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _dateleaderc2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderC2, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _named_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderd_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _named2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderd2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"組長,主管");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _repairbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
+
+        },
 
         /*,
         // To determine how properties affects this module
