@@ -420,10 +420,6 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                     {
                         "id" : "短後",
                         "caption" : "短後"
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "_"
                     }
                 ])
                 .setDock("top")
@@ -678,82 +674,6 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div490.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput378")
-                .setName("Heater 1st")
-                .setDataBinder("rdb")
-                .setDataField("A5#1")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("3.5047619047619047em")
-                .setTop("8.761904761904763em")
-                .setWidth("13em")
-                .setLabelSize("8em")
-                .setLabelCaption("5.Heater阻值:1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div490.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput379")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("A5#2")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("20.8em")
-                .setTop("8.838095238095239em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div490.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput382")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("A5#3")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("21.561904761904763em")
-                .setTop("9.6em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("交叉")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div490.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput383")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("A5#4")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("22.323809523809523em")
-                .setTop("10.361904761904762em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("接地")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div490.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox207")
                 .setDataBinder("rdb")
@@ -771,6 +691,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                     }
                 ])
                 .setDock("top")
+                .setDockOrder(5)
                 .setDockMargin({
                     "left" : 0,
                     "top" : -3,
@@ -782,7 +703,9 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setTop("18.97142857142857em")
                 .setWidth("13em")
                 .setHeight("1.7523809523809524em")
+                .setLabelSize("1em")
                 .setLabelGap("0em")
+                .setLabelCaption("Ω")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -791,6 +714,94 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
+            );
+            
+            host.xui_ui_div490.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput378")
+                .setName("Heater 1st")
+                .setDataBinder("rdb")
+                .setDataField("A5#1")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("3.5047619047619047em")
+                .setTop("8.761904761904763em")
+                .setWidth("13em")
+                .setLabelSize("8em")
+                .setLabelCaption("5.Heater阻值:1<sup>st</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div490.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput379")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("A5#2")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("20.8em")
+                .setTop("8.838095238095239em")
+                .setWidth("8em")
+                .setLabelSize("3em")
+                .setLabelCaption("Ω 2<sup>nd</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div490.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput382")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("A5#3")
+                .setDock("top")
+                .setDockOrder(3)
+                .setDockStretch("fixed")
+                .setLeft("21.561904761904763em")
+                .setTop("9.6em")
+                .setWidth("9em")
+                .setLabelSize("3.5em")
+                .setLabelCaption("Ω 交叉")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div490.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput383")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("A5#4")
+                .setDock("top")
+                .setDockOrder(4)
+                .setDockStretch("fixed")
+                .setLeft("22.323809523809523em")
+                .setTop("10.361904761904762em")
+                .setWidth("8.5em")
+                .setLabelSize("3.5em")
+                .setLabelCaption("Ω 接地")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block1.append(
@@ -1055,82 +1066,6 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div655.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput556")
-                .setName("Heater 1st")
-                .setDataBinder("rdb")
-                .setDataField("C3#1")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("4.266666666666667em")
-                .setTop("9.523809523809524em")
-                .setWidth("13em")
-                .setLabelSize("8em")
-                .setLabelCaption("3.Heater阻值:1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div655.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput557")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("C3#2")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("21.561904761904763em")
-                .setTop("9.6em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div655.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput558")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("C3#3")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("22.323809523809523em")
-                .setTop("10.361904761904762em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("交叉")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div655.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput559")
-                .setName("Heater 2nd")
-                .setDataBinder("rdb")
-                .setDataField("C3#4")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("23.085714285714285em")
-                .setTop("11.123809523809523em")
-                .setWidth("8em")
-                .setLabelSize("3em")
-                .setLabelCaption("接地")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_div655.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox349")
                 .setDataBinder("rdb")
@@ -1148,6 +1083,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                     }
                 ])
                 .setDock("top")
+                .setDockOrder(5)
                 .setDockMargin({
                     "left" : 0,
                     "top" : -3,
@@ -1159,7 +1095,9 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setTop("19.733333333333334em")
                 .setWidth("13em")
                 .setHeight("1.7523809523809524em")
+                .setLabelSize("1em")
                 .setLabelGap("0em")
+                .setLabelCaption("Ω")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -1168,6 +1106,92 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
+            );
+            
+            host.xui_ui_div655.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput556")
+                .setName("Heater 1st")
+                .setDataBinder("rdb")
+                .setDataField("C3#1")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("4.266666666666667em")
+                .setTop("9.523809523809524em")
+                .setWidth("13em")
+                .setLabelSize("8em")
+                .setLabelCaption("3.Heater阻值:1<sup>st</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div655.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput557")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("C3#2")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("21.561904761904763em")
+                .setTop("9.6em")
+                .setWidth("8em")
+                .setLabelSize("3em")
+                .setLabelCaption("Ω 2<sup>nd</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div655.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput558")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("C3#3")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("22.323809523809523em")
+                .setTop("10.361904761904762em")
+                .setWidth("8.5em")
+                .setLabelSize("3.5em")
+                .setLabelCaption("Ω 交叉")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_div655.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput559")
+                .setName("Heater 2nd")
+                .setDataBinder("rdb")
+                .setDataField("C3#4")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("23.085714285714285em")
+                .setTop("11.123809523809523em")
+                .setWidth("8.5em")
+                .setLabelSize("3.5em")
+                .setLabelCaption("Ω 接地")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.block3.append(

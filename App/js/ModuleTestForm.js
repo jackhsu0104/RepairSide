@@ -114,7 +114,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             );
             
             host.xui_ui_div779.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input1506")
                 .setDataBinder("mdb")
                 .setDataField("維修狀況")
@@ -124,6 +124,20 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setWidth("11.352380952380953em")
                 .setLabelSize("5em")
                 .setLabelCaption("維修狀況")
+                .setItems([
+                    {
+                        "id" : "Standard維修",
+                        "caption" : "Standard維修"
+                    },
+                    {
+                        "id" : "更換3V Battery",
+                        "caption" : "更換3V Battery"
+                    },
+                    {
+                        "id" : "例行更換15V Power Supply & 24V Power Supply",
+                        "caption" : "例行更換15V Power Supply & 24V Power Supply"
+                    }
+                ])
             );
             
             host.form.append(
@@ -275,7 +289,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             );
             
             host.xui_ui_div800.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input1642")
                 .setDataBinder("mdb")
                 .setDataField("Software")
@@ -286,6 +300,40 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setWidth("15em")
                 .setLabelSize("8em")
                 .setLabelCaption("Software")
+                .setItems([
+                    {
+                        "id" : "PG 02.23",
+                        "caption" : "PG 02.23"
+                    },
+                    {
+                        "id" : "PG 03.06",
+                        "caption" : "PG 03.06"
+                    },
+                    {
+                        "id" : "PK 02.23",
+                        "caption" : "PK 02.23"
+                    },
+                    {
+                        "id" : "PK 02.33",
+                        "caption" : "PK 02.33"
+                    },
+                    {
+                        "id" : "PK 02.27",
+                        "caption" : "PK 02.27"
+                    },
+                    {
+                        "id" : "PK 03.05",
+                        "caption" : "PK 03.05"
+                    },
+                    {
+                        "id" : "PC 02.23",
+                        "caption" : "PC 02.23"
+                    },
+                    {
+                        "id" : "PC 03.06",
+                        "caption" : "PC 03.06"
+                    }
+                ])
             );
             
             host.xui_ui_div800.append(

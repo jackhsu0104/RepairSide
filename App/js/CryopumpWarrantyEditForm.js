@@ -92,7 +92,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setReadonly(true)
                 .setLeft("-0.0761904761904762em")
                 .setTop("0.6857142857142857em")
-                .setWidth("10.666666666666666em")
+                .setWidth("11.4em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長確認")
                 .setType("getter")
@@ -105,9 +105,9 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataBinder("cwdb")
                 .setDataField("秘書確認")
                 .setReadonly(true)
-                .setLeft("12.666666666666666em")
+                .setLeft("12em")
                 .setTop("0.6857142857142857em")
-                .setWidth("10.666666666666666em")
+                .setWidth("12em")
                 .setLabelSize("5em")
                 .setLabelCaption("秘書確認")
                 .setType("getter")
@@ -262,7 +262,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                     },
                     {
                         "id" : "e",
-                        "caption" : "D.Vaccum Side檢查"
+                        "caption" : "D.Vacuum Side檢查"
                     },
                     {
                         "id" : "f",
@@ -376,7 +376,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataBinder("cwdb")
                 .setDataField("Pump S/N")
                 .setLeft("21.333333333333332em")
-                .setTop("7.333333333333333em")
+                .setTop("8em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("Pump S/N")
@@ -579,6 +579,34 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block1.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox317")
+                .setDataBinder("cwdb")
+                .setDataField("Type")
+                .setItems([
+                    {
+                        "id" : "Repair",
+                        "caption" : "Repair",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Exchange",
+                        "caption" : "Exchange",
+                        "imageClass" : "",
+                        "disabled" : false
+                    }
+                ])
+                .setDockStretch("fixed")
+                .setLeft("2.6666666666666665em")
+                .setTop("0.6em")
+                .setWidth("30.2em")
+                .setHeight("2.6666666666666665em")
+                .setLabelPos("top")
+                .setLabelHAlign("left")
+                .setValue("a")
+            );
+            
+            host.block1.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput654")
                 .setName("Motor#2")
@@ -589,7 +617,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("4.8em")
                 .setLabelSize("1em")
                 .setLabelCaption("/")
-                .setType("number")
+                .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
@@ -606,48 +634,10 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("4.733333333333333em")
                 .setLabelSize("2em")
                 .setLabelCaption("of")
-                .setType("number")
+                .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox317")
-                .setDataBinder("cwdb")
-                .setDataField("Type")
-                .setItems([
-                    {
-                        "id" : "Repair",
-                        "caption" : "Repair",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "CIC/W",
-                        "caption" : "CIC/W",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "Exchange",
-                        "caption" : "Exchange",
-                        "imageClass" : "",
-                        "disabled" : false
-                    },
-                    {
-                        "id" : "OT",
-                        "caption" : "Test/Other",
-                        "imageClass" : ""
-                    }
-                ])
-                .setDockStretch("fixed")
-                .setLeft("2.6666666666666665em")
-                .setTop("0.6em")
-                .setWidth("30.2em")
-                .setHeight("2.6666666666666665em")
-                .setLabelPos("top")
-                .setLabelHAlign("left")
-                .setValue("a")
             );
             
             host.xui_ui_tabs18.append(
@@ -657,176 +647,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLeft("11.333333333333334em")
                 .setTop("16.666666666666668em"),
                 "b"
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput479")
-                .setName("Diode 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Diode 1st")
-                .setLeft("2.6666666666666665em")
-                .setTop("3.7333333333333334em")
-                .setWidth("13.466666666666667em")
-                .setLabelSize("8em")
-                .setLabelCaption("  Diode 室溫1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput482")
-                .setName("Diode 2nd")
-                .setDataBinder("cwdb")
-                .setDataField("Diode 2nd")
-                .setLeft("2.6666666666666665em")
-                .setTop("5.714285714285714em")
-                .setWidth("13.333333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput485")
-                .setName("Heater 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Heater 1st")
-                .setLeft("2.742857142857143em")
-                .setTop("8em")
-                .setWidth("16.6em")
-                .setLabelSize("8em")
-                .setLabelCaption("Heater 1<sup>st</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput486")
-                .setName("Heater 2nd")
-                .setDataBinder("cwdb")
-                .setDataField("Heater 2nd")
-                .setLeft("20em")
-                .setTop("8.066666666666666em")
-                .setWidth("12em")
-                .setLabelSize("3em")
-                .setLabelCaption("2<sup>nd</sup>")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput487")
-                .setName("Heater交叉")
-                .setDataBinder("cwdb")
-                .setDataField("Heater交叉")
-                .setLeft("2.6666666666666665em")
-                .setTop("10.666666666666666em")
-                .setWidth("16.666666666666668em")
-                .setLabelSize("8em")
-                .setLabelCaption("交叉")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput488")
-                .setName("Heater接地")
-                .setDataBinder("cwdb")
-                .setDataField("Heater接地")
-                .setLeft("15.066666666666666em")
-                .setTop("10.666666666666666em")
-                .setWidth("16.933333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("接地")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput489")
-                .setName("Motor#1")
-                .setDataBinder("cwdb")
-                .setDataField("Motor#1")
-                .setLeft("2.742857142857143em")
-                .setTop("14em")
-                .setWidth("11.933333333333334em")
-                .setLabelSize("8em")
-                .setLabelCaption("Motor#1")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput490")
-                .setName("Motor#2")
-                .setDataBinder("cwdb")
-                .setDataField("Motor#2")
-                .setLeft("14.666666666666666em")
-                .setTop("14em")
-                .setWidth("4.8em")
-                .setLabelSize("1em")
-                .setLabelCaption("/")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput491")
-                .setName("Motor#3")
-                .setDataBinder("cwdb")
-                .setDataField("Motor#3")
-                .setLeft("20em")
-                .setTop("14em")
-                .setWidth("4.733333333333333em")
-                .setLabelSize("1em")
-                .setLabelCaption("/ ")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput492")
-                .setName("Motor#4")
-                .setDataBinder("cwdb")
-                .setDataField("Motor#4")
-                .setLeft("24.666666666666668em")
-                .setTop("14em")
-                .setWidth("7.333333333333333em")
-                .setLabelSize("2em")
-                .setLabelCaption("⏚")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.xui_ui_block178.append(
@@ -883,20 +703,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("其他異常狀況")
                 .setMaxlength("200")
-            );
-            
-            host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input526")
-                .setName("A組裝簽名")
-                .setDataBinder("cwdb")
-                .setDataField("A測試簽名")
-                .setLeft("21.333333333333332em")
-                .setTop("44.733333333333334em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("測試簽名")
-                .setMaxlength("32")
             );
             
             host.xui_ui_block178.append(
@@ -1278,20 +1084,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input307")
-                .setName("故障原因主要")
-                .setDataBinder("cwdb")
-                .setDataField("故障主因")
-                .setLeft("2.2857142857142856em")
-                .setTop("40.304761904761904em")
-                .setWidth("38.6em")
-                .setLabelSize("8em")
-                .setLabelCaption("故障主因")
-                .setMaxlength("200")
-            );
-            
-            host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput151")
                 .setName("Motor#3")
@@ -1309,17 +1101,139 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block178.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input547")
                 .setName("Failed Reason")
                 .setDataBinder("cwdb")
                 .setDataField("Failed Reason")
                 .setLeft("2.2857142857142856em")
-                .setTop("42.666666666666664em")
-                .setWidth("16.666666666666668em")
+                .setTop("49.86666666666667em")
+                .setWidth("20.533333333333335em")
                 .setLabelSize("8em")
                 .setLabelCaption("Failed Reason")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "F01-1_Motor軸心斷裂(原廠)",
+                        "caption" : "F01-1_Motor軸心斷裂(原廠)"
+                    },
+                    {
+                        "id" : "F01-2_Motor軸心斷裂(自製)",
+                        "caption" : "F01-2_Motor軸心斷裂(自製)"
+                    },
+                    {
+                        "id" : "F01-3_線圈斷裂,線圈接地Short",
+                        "caption" : "F01-3_線圈斷裂,線圈接地Short"
+                    },
+                    {
+                        "id" : "F01-4_Motor Bearing磨損",
+                        "caption" : "F01-4_Motor Bearing磨損"
+                    },
+                    {
+                        "id" : "F01-5_Valve Body內漏",
+                        "caption" : "F01-5_Valve Body內漏"
+                    },
+                    {
+                        "id" : "F01-6_Motor面板擴孔",
+                        "caption" : "F01-6_Motor面板擴孔"
+                    },
+                    {
+                        "id" : "F01-7_Bushing鬆脫",
+                        "caption" : "F01-7_Bushing鬆脫"
+                    },
+                    {
+                        "id" : "F01-9_Motor, Others",
+                        "caption" : "F01-9_Motor, Others"
+                    },
+                    {
+                        "id" : "F02-1_Seal磨損",
+                        "caption" : "F02-1_Seal磨損"
+                    },
+                    {
+                        "id" : "F02-2_Seal與Seal Ring缺口同向或位移",
+                        "caption" : "F02-2_Seal與Seal Ring缺口同向或位移"
+                    },
+                    {
+                        "id" : "F02-3_Seal Ring斷裂",
+                        "caption" : "F02-3_Seal Ring斷裂"
+                    },
+                    {
+                        "id" : "F03-1_Displacer鉛粒溢出",
+                        "caption" : "F03-1_Displacer鉛粒溢出"
+                    },
+                    {
+                        "id" : "F03-2_Displacer粉塵污染",
+                        "caption" : "F03-2_Displacer粉塵污染"
+                    },
+                    {
+                        "id" : "F03-3_Displacer鉛粒鬆?或阻塞, 效率不佳",
+                        "caption" : "F03-3_Displacer鉛粒鬆?或阻塞, 效率不佳"
+                    },
+                    {
+                        "id" : "F03-4_Displacer Pin磨損",
+                        "caption" : "F03-4_Displacer Pin磨損"
+                    },
+                    {
+                        "id" : "F03-5_Collar 擴孔",
+                        "caption" : "F03-5_Collar 擴孔"
+                    },
+                    {
+                        "id" : " F03-9_Displacer Others",
+                        "caption" : " F03-9_Displacer Others"
+                    },
+                    {
+                        "id" : "F04-1_Diode斷裂",
+                        "caption" : "F04-1_Diode斷裂"
+                    },
+                    {
+                        "id" : "F04-2_Diode Line Short",
+                        "caption" : "F04-2_Diode Line Short"
+                    },
+                    {
+                        "id" : "F04-3_Diode Connector Short",
+                        "caption" : "F04-3_Diode Connector Short"
+                    },
+                    {
+                        "id" : "F05_Module",
+                        "caption" : "F05_Module"
+                    },
+                    {
+                        "id" : "F06_Heater",
+                        "caption" : "F06_Heater"
+                    },
+                    {
+                        "id" : "F07_材料問題",
+                        "caption" : "F07_材料問題"
+                    },
+                    {
+                        "id" : "F08_有輕微異常但測試通過",
+                        "caption" : "F08_有輕微異常但測試通過"
+                    },
+                    {
+                        "id" : "F09_Charcoal & Array",
+                        "caption" : "F09_Charcoal & Array"
+                    },
+                    {
+                        "id" : "F10_客戶端機台問題(客戶要求)",
+                        "caption" : "F10_客戶端機台問題(客戶要求)"
+                    },
+                    {
+                        "id" : "F11_測試通過且無任何異常",
+                        "caption" : "F11_測試通過且無任何異常"
+                    },
+                    {
+                        "id" : "F12_醛污染",
+                        "caption" : "F12_醛污染"
+                    },
+                    {
+                        "id" : "F13_Cylinder",
+                        "caption" : "F13_Cylinder"
+                    },
+                    {
+                        "id" : "F14_Compressor造成",
+                        "caption" : "F14_Compressor造成"
+                    }
+                ])
             );
             
             host.xui_ui_block178.append(
@@ -1358,17 +1272,237 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_block178.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput210")
-                .setName("日期")
+                .setHost(host,"xui_ui_comboinput485")
+                .setName("Heater 1st")
                 .setDataBinder("cwdb")
-                .setDataField("A測試日期")
-                .setLeft("41.142857142857146em")
-                .setTop("44.49523809523809em")
-                .setWidth("15em")
-                .setLabelSize("5em")
-                .setLabelCaption("測試日期")
-                .setType("date")
+                .setDataField("Heater 1st")
+                .setLeft("2.742857142857143em")
+                .setTop("8em")
+                .setWidth("16.6em")
+                .setLabelSize("8em")
+                .setLabelCaption("Heater 1<sup>st</sup>")
+                .setType("input")
                 .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput486")
+                .setName("Heater 2nd")
+                .setDataBinder("cwdb")
+                .setDataField("Heater 2nd")
+                .setLeft("20em")
+                .setTop("8.066666666666666em")
+                .setWidth("12em")
+                .setLabelSize("3em")
+                .setLabelCaption("2<sup>nd</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput479")
+                .setName("Diode 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Diode 1st")
+                .setLeft("2.6666666666666665em")
+                .setTop("3.7333333333333334em")
+                .setWidth("13.466666666666667em")
+                .setLabelSize("8em")
+                .setLabelCaption("  Diode 室溫1<sup>st</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput482")
+                .setName("Diode 2nd")
+                .setDataBinder("cwdb")
+                .setDataField("Diode 2nd")
+                .setLeft("2.6666666666666665em")
+                .setTop("5.714285714285714em")
+                .setWidth("13.333333333333334em")
+                .setLabelSize("8em")
+                .setLabelCaption("2<sup>nd</sup>")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput487")
+                .setName("Heater交叉")
+                .setDataBinder("cwdb")
+                .setDataField("Heater交叉")
+                .setLeft("2.6666666666666665em")
+                .setTop("10.666666666666666em")
+                .setWidth("16.666666666666668em")
+                .setLabelSize("8em")
+                .setLabelCaption("交叉")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput488")
+                .setName("Heater接地")
+                .setDataBinder("cwdb")
+                .setDataField("Heater接地")
+                .setLeft("20.4em")
+                .setTop("10.866666666666667em")
+                .setWidth("11.6em")
+                .setLabelSize("2.5em")
+                .setLabelCaption("接地")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label5377")
+                .setLeft("19.666666666666668em")
+                .setTop("11.066666666666666em")
+                .setCaption("Ω")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label5378")
+                .setLeft("32.333333333333336em")
+                .setTop("11.2em")
+                .setCaption("Ω")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput492")
+                .setName("Motor#4")
+                .setDataBinder("cwdb")
+                .setDataField("Motor#4")
+                .setLeft("25.533333333333335em")
+                .setTop("14em")
+                .setWidth("7.333333333333333em")
+                .setLabelSize("2em")
+                .setLabelCaption("Ω⏚")
+                .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput489")
+                .setName("Motor#1")
+                .setDataBinder("cwdb")
+                .setDataField("Motor#1")
+                .setLeft("2.742857142857143em")
+                .setTop("14em")
+                .setWidth("11.933333333333334em")
+                .setLabelSize("8em")
+                .setLabelCaption("Motor#1")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput490")
+                .setName("Motor#2")
+                .setDataBinder("cwdb")
+                .setDataField("Motor#2")
+                .setLeft("14.666666666666666em")
+                .setTop("14em")
+                .setWidth("5.333333333333333em")
+                .setLabelSize("1.5em")
+                .setLabelCaption("Ω/")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput491")
+                .setName("Motor#3")
+                .setDataBinder("cwdb")
+                .setDataField("Motor#3")
+                .setLeft("20em")
+                .setTop("14em")
+                .setWidth("5.333333333333333em")
+                .setLabelSize("1.5em")
+                .setLabelCaption("Ω/ ")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label5379")
+                .setLeft("19.6em")
+                .setTop("16.933333333333334em")
+                .setCaption("MΩ")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label5380")
+                .setLeft("19.6em")
+                .setTop("19.333333333333332em")
+                .setCaption("MΩ")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label5381")
+                .setLeft("19.666666666666668em")
+                .setTop("21.6em")
+                .setCaption("MΩ")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input307")
+                .setName("故障原因主要")
+                .setDataBinder("cwdb")
+                .setDataField("故障主因")
+                .setLeft("2.2857142857142856em")
+                .setTop("40.304761904761904em")
+                .setWidth("51.733333333333334em")
+                .setHeight("8.066666666666666em")
+                .setLabelSize("8em")
+                .setLabelCaption("故障主因")
+                .setMaxlength("200")
+                .setMultiLines(true)
             );
             
             host.xui_ui_tabs18.append(
@@ -1382,21 +1516,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput939")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Valve Bearing#2")
-                .setLeft("27.428571428571427em")
-                .setTop("4.8em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input958")
                 .setName("B組裝簽名")
                 .setDataBinder("cwdb")
@@ -1406,6 +1525,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("測試簽名")
+                .setType("getter")
                 .setMaxlength("32")
             );
             
@@ -1439,23 +1559,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput978")
-                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("cwdb")
-                .setDataField("Crosshead S/N")
-                .setLeft("6.857142857142857em")
-                .setTop("2.2095238095238097em")
-                .setWidth("20.571428571428573em")
-                .setLabelSize("10em")
-                .setLabelCaption("Crosshead S/N")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.block3.append(
@@ -1570,51 +1673,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput672")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Driver Bearing#2")
-                .setLeft("27.428571428571427em")
-                .setTop("7.0095238095238095em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput673")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("偏心軸#2")
-                .setLeft("27.428571428571427em")
-                .setTop("9.295238095238096em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput674")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Timing Valve#2")
-                .setLeft("27.428571428571427em")
-                .setTop("11.504761904761905em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox684")
                 .setDataBinder("cwdb")
@@ -1644,36 +1702,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput675")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Bushing#2")
-                .setLeft("27.428571428571427em")
-                .setTop("13.790476190476191em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput676")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Teflon Seal#2")
-                .setLeft("27.428571428571427em")
-                .setTop("16.228571428571428em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.block3.append(
@@ -1805,51 +1833,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput677")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("O-ring Seal#2")
-                .setLeft("27.428571428571427em")
-                .setTop("18.438095238095237em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput678")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Yoke#2")
-                .setLeft("27.428571428571427em")
-                .setTop("20.723809523809525em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput679")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Motor Bearing#2")
-                .setLeft("27.428571428571427em")
-                .setTop("22.933333333333334em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block3.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox689")
                 .setDataBinder("cwdb")
@@ -1882,6 +1865,174 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block3.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input957")
+                .setName("80k Radiation Shield 安裝")
+                .setDataBinder("cwdb")
+                .setDataField("其他狀況描述C")
+                .setLeft("-0.45714285714285713em")
+                .setTop("31.16190476190476em")
+                .setWidth("40.838095238095235em")
+                .setHeight("6.095238095238095em")
+                .setLabelSize("18em")
+                .setLabelCaption("其他狀況描述")
+                .setMaxlength("32")
+                .setMultiLines(true)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput978")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("cwdb")
+                .setDataField("Crosshead S/N")
+                .setLeft("6.857142857142857em")
+                .setTop("2.2095238095238097em")
+                .setWidth("20.571428571428573em")
+                .setLabelSize("10em")
+                .setLabelCaption("Crosshead S/N")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput939")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Valve Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("4.8em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput672")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Driver Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("7.0095238095238095em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput673")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("偏心軸#2")
+                .setLeft("27.428571428571427em")
+                .setTop("9.295238095238096em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput674")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Timing Valve#2")
+                .setLeft("27.428571428571427em")
+                .setTop("11.504761904761905em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput675")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Bushing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("13.790476190476191em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput676")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Teflon Seal#2")
+                .setLeft("27.428571428571427em")
+                .setTop("16.228571428571428em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput677")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("O-ring Seal#2")
+                .setLeft("27.428571428571427em")
+                .setTop("18.438095238095237em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput678")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Yoke#2")
+                .setLeft("27.428571428571427em")
+                .setTop("20.723809523809525em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput679")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Motor Bearing#2")
+                .setLeft("27.428571428571427em")
+                .setTop("22.933333333333334em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput680")
                 .setName("HeaterB 1st")
@@ -1890,7 +2041,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLeft("27.428571428571427em")
                 .setTop("25.21904761904762em")
                 .setWidth("12.952380952380953em")
-                .setType("number")
+                .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
@@ -1907,7 +2058,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("19.80952380952381em")
                 .setLabelSize("10em")
                 .setLabelCaption("軸心彈力  原")
-                .setType("number")
+                .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
@@ -1924,26 +2075,10 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("13.714285714285714em")
                 .setLabelSize("3em")
                 .setLabelCaption("現")
-                .setType("number")
+                .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input957")
-                .setName("80k Radiation Shield 安裝")
-                .setDataBinder("cwdb")
-                .setDataField("其他狀況描述C")
-                .setLeft("-0.45714285714285713em")
-                .setTop("31.16190476190476em")
-                .setWidth("40.838095238095235em")
-                .setHeight("6.095238095238095em")
-                .setLabelSize("18em")
-                .setLabelCaption("其他狀況描述")
-                .setMaxlength("32")
-                .setMultiLines(true)
             );
             
             host.xui_ui_tabs18.append(
@@ -1956,98 +2091,316 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block4.append(
+                xui.create("xui.UI.Group")
+                .setHost(host,"xui_ui_group1")
+                .setLeft("4.133333333333334em")
+                .setTop("2.4em")
+                .setWidth("33.2em")
+                .setHeight("13.6em")
+                .setCaption("")
+                .setToggleBtn(false)
+            );
+            
+            host.xui_ui_group1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1653")
+                .setHost(host,"xui_ui_input13636")
                 .setName("Displacer 1st S/N")
                 .setDataBinder("cwdb")
                 .setDataField("Displacer S/N")
-                .setLeft("1.3333333333333333em")
-                .setTop("1.4476190476190476em")
+                .setLeft("0.6666666666666666em")
+                .setTop("0.6666666666666666em")
                 .setWidth("17.752380952380953em")
                 .setLabelSize("8em")
-                .setLabelCaption("Displacer S/N")
+                .setLabelCaption("1st Displacer S/N")
                 .setMaxlength("32")
             );
             
-            host.block4.append(
+            host.xui_ui_group1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1657")
+                .setHost(host,"xui_ui_input13637")
                 .setName("Seal 1st")
                 .setDataBinder("cwdb")
                 .setDataField("原Flow")
-                .setLeft("1.3333333333333333em")
-                .setTop("3.7333333333333334em")
+                .setLeft("0.6666666666666666em")
+                .setTop("2.933333333333333em")
                 .setWidth("13.333333333333334em")
                 .setLabelSize("8em")
                 .setLabelCaption("原Flow")
                 .setMaxlength("32")
             );
             
-            host.block4.append(
+            host.xui_ui_group1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1658")
+                .setHost(host,"xui_ui_input13638")
                 .setName("Seal 2nd")
                 .setDataBinder("cwdb")
                 .setDataField("現Flow")
-                .setLeft("14.476190476190476em")
-                .setTop("3.7333333333333334em")
+                .setLeft("13.8em")
+                .setTop("2.933333333333333em")
                 .setWidth("8.866666666666667em")
                 .setLabelSize("4em")
                 .setLabelCaption("現Flow")
                 .setMaxlength("32")
             );
             
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1659")
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput10343")
                 .setName("Seal 推")
                 .setDataBinder("cwdb")
                 .setDataField("Seal")
-                .setLeft("24.38095238095238em")
-                .setTop("3.7333333333333334em")
-                .setWidth("7.4em")
+                .setLeft("23.666666666666668em")
+                .setTop("2.933333333333333em")
+                .setWidth("7.8em")
                 .setLabelSize("3em")
                 .setLabelCaption("/Seal")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "D3",
+                        "caption" : "D3"
+                    },
+                    {
+                        "id" : "D5",
+                        "caption" : "D5"
+                    }
+                ])
             );
             
-            host.block4.append(
+            host.xui_ui_group1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1660")
+                .setHost(host,"xui_ui_input13639")
                 .setName("Seal 拉")
                 .setDataBinder("cwdb")
                 .setDataField("其他#2")
-                .setLeft("8.380952380952381em")
-                .setTop("9.066666666666666em")
+                .setLeft("7.666666666666667em")
+                .setTop("8.266666666666667em")
                 .setWidth("19.123809523809523em")
                 .setMaxlength("32")
             );
             
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1551")
+                .setDataBinder("cwdb")
+                .setDataField("正常")
+                .setLeft("2.3333333333333335em")
+                .setTop("6.066666666666666em")
+                .setWidth("6.704761904761905em")
+                .setCaption("正常")
+            );
+            
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1552")
+                .setDataBinder("cwdb")
+                .setDataField("粉塵汙染")
+                .setLeft("7.666666666666667em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("粉塵汙染")
+            );
+            
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1553")
+                .setDataBinder("cwdb")
+                .setDataField("醛汙染")
+                .setLeft("14.533333333333333em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("醛汙染")
+            );
+            
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1554")
+                .setDataBinder("cwdb")
+                .setDataField("Seal不良")
+                .setLeft("20.6em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("Seal不良")
+            );
+            
+            host.xui_ui_group1.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1555")
+                .setDataBinder("cwdb")
+                .setDataField("其他")
+                .setLeft("2.3333333333333335em")
+                .setTop("8.266666666666667em")
+                .setWidth("6.704761904761905em")
+                .setCaption("其他")
+            );
+            
             host.block4.append(
+                xui.create("xui.UI.Group")
+                .setHost(host,"xui_ui_group4")
+                .setLeft("4em")
+                .setTop("17.866666666666667em")
+                .setWidth("33.2em")
+                .setHeight("13.6em")
+                .setCaption("")
+                .setToggleBtn(false)
+            );
+            
+            host.xui_ui_group4.append(
                 xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input13648")
+                .setName("Displacer 1st S/N")
+                .setDataBinder("cwdb")
+                .setDataField("Displacer S/N#2")
+                .setLeft("0.6666666666666666em")
+                .setTop("0.6666666666666666em")
+                .setWidth("17.752380952380953em")
+                .setLabelSize("9em")
+                .setLabelCaption("2nd Displacer S/N")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input13649")
+                .setName("Seal 1st")
+                .setDataBinder("cwdb")
+                .setDataField("原Flow#2")
+                .setLeft("0.6666666666666666em")
+                .setTop("2.933333333333333em")
+                .setWidth("13.333333333333334em")
+                .setLabelSize("8em")
+                .setLabelCaption("原Flow")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input13650")
+                .setName("Seal 2nd")
+                .setDataBinder("cwdb")
+                .setDataField("現Flow#2")
+                .setLeft("13.8em")
+                .setTop("2.933333333333333em")
+                .setWidth("8.866666666666667em")
+                .setLabelSize("4em")
+                .setLabelCaption("現Flow")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput10346")
+                .setName("Seal 推")
+                .setDataBinder("cwdb")
+                .setDataField("Seal#2")
+                .setLeft("23.666666666666668em")
+                .setTop("2.933333333333333em")
+                .setWidth("7.8em")
+                .setLabelSize("3em")
+                .setLabelCaption("/Seal")
+                .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "CE",
+                        "caption" : "CE"
+                    }
+                ])
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input13651")
+                .setName("Seal 拉")
+                .setDataBinder("cwdb")
+                .setDataField("其他#4")
+                .setLeft("7.666666666666667em")
+                .setTop("8.266666666666667em")
+                .setWidth("19.123809523809523em")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1566")
+                .setDataBinder("cwdb")
+                .setDataField("正常#2")
+                .setLeft("2.3333333333333335em")
+                .setTop("6.066666666666666em")
+                .setWidth("6.704761904761905em")
+                .setCaption("正常")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1567")
+                .setDataBinder("cwdb")
+                .setDataField("粉塵汙染#2")
+                .setLeft("7.666666666666667em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("粉塵汙染")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1568")
+                .setDataBinder("cwdb")
+                .setDataField("醛汙染#2")
+                .setLeft("14.533333333333333em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("醛汙染")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1569")
+                .setDataBinder("cwdb")
+                .setDataField("Seal不良#2")
+                .setLeft("20.6em")
+                .setTop("6em")
+                .setWidth("6.704761904761905em")
+                .setCaption("Seal不良")
+            );
+            
+            host.xui_ui_group4.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1570")
+                .setDataBinder("cwdb")
+                .setDataField("其他#3")
+                .setLeft("2.3333333333333335em")
+                .setTop("8.266666666666667em")
+                .setWidth("6.704761904761905em")
+                .setCaption("其他")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input1670")
                 .setName("C組裝簽名")
                 .setDataBinder("cwdb")
                 .setDataField("B測試簽名")
-                .setLeft("0.0761904761904762em")
-                .setTop("13.638095238095238em")
+                .setLeft("6.666666666666667em")
+                .setTop("33.2em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("測試簽名")
+                .setType("getter")
                 .setMaxlength("32")
             );
             
             host.block4.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input1671")
                 .setName("C組長覆核")
                 .setDataBinder("cwdb")
                 .setDataField("C組長覆核")
                 .setLeft("6.666666666666667em")
-                .setTop("45.266666666666666em")
+                .setTop("35.2em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
+                .setType("getter")
                 .setMaxlength("32")
             );
             
@@ -2058,7 +2411,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataBinder("cwdb")
                 .setDataField("C覆核日期")
                 .setLeft("25.333333333333332em")
-                .setTop("45.46666666666667em")
+                .setTop("35.4em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("覆核日期")
@@ -2071,68 +2424,13 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox181")
-                .setDataBinder("cwdb")
-                .setDataField("正常")
-                .setLeft("3.0476190476190474em")
-                .setTop("6.857142857142857em")
-                .setWidth("6.704761904761905em")
-                .setCaption("正常")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox182")
-                .setDataBinder("cwdb")
-                .setDataField("粉塵汙染")
-                .setLeft("8.380952380952381em")
-                .setTop("6.780952380952381em")
-                .setWidth("6.704761904761905em")
-                .setCaption("粉塵汙染")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox183")
-                .setDataBinder("cwdb")
-                .setDataField("醛汙染")
-                .setLeft("15.238095238095237em")
-                .setTop("6.780952380952381em")
-                .setWidth("6.704761904761905em")
-                .setCaption("醛汙染")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox184")
-                .setDataBinder("cwdb")
-                .setDataField("Seal不良")
-                .setLeft("21.333333333333332em")
-                .setTop("6.780952380952381em")
-                .setWidth("6.704761904761905em")
-                .setCaption("Seal不良")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox185")
-                .setDataBinder("cwdb")
-                .setDataField("其他")
-                .setLeft("3.0476190476190474em")
-                .setTop("9.066666666666666em")
-                .setWidth("6.704761904761905em")
-                .setCaption("其他")
-            );
-            
-            host.block4.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput1769")
                 .setName("日期")
                 .setDataBinder("cwdb")
                 .setDataField("B測試日期")
-                .setLeft("18.285714285714285em")
-                .setTop("13.638095238095238em")
+                .setLeft("25.333333333333332em")
+                .setTop("33.2em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("測試日期")
@@ -2152,21 +2450,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.block5.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput842")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("80K Array#2")
-                .setLeft("24.076190476190476em")
-                .setTop("0.9904761904761905em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1450")
                 .setName("B組裝簽名")
                 .setDataBinder("cwdb")
@@ -2176,6 +2459,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("測試簽名")
+                .setType("getter")
                 .setMaxlength("32")
             );
             
@@ -2323,51 +2607,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput845")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("80K Rad Shield#2")
-                .setLeft("24.076190476190476em")
-                .setTop("3.2em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput846")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("15K Array#2")
-                .setLeft("24.076190476190476em")
-                .setTop("5.485714285714286em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput847")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("1st Diode#2")
-                .setLeft("24.076190476190476em")
-                .setTop("7.695238095238095em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox796")
                 .setDataBinder("cwdb")
@@ -2397,36 +2636,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput848")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("2nd Diode#2")
-                .setLeft("24.076190476190476em")
-                .setTop("9.980952380952381em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput849")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Diode Line#2")
-                .setLeft("24.076190476190476em")
-                .setTop("12.41904761904762em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.block5.append(
@@ -2558,51 +2767,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput850")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("Diode Connector#2")
-                .setLeft("24.076190476190476em")
-                .setTop("14.628571428571428em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput851")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("D Rough Valve#2")
-                .setLeft("24.076190476190476em")
-                .setTop("16.914285714285715em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput852")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("D Purge Valve#2")
-                .setLeft("24.076190476190476em")
-                .setTop("19.123809523809523em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox801")
                 .setDataBinder("cwdb")
@@ -2635,21 +2799,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput853")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("D Relif Valve#2")
-                .setLeft("24.076190476190476em")
-                .setTop("21.409523809523808em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.block5.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1451")
                 .setName("80k Radiation Shield 安裝")
@@ -2663,21 +2812,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLabelCaption("其他狀況描述")
                 .setMaxlength("32")
                 .setMultiLines(true)
-            );
-            
-            host.block5.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput906")
-                .setName("HeaterB 1st")
-                .setDataBinder("cwdb")
-                .setDataField("D Module#2")
-                .setLeft("24.076190476190476em")
-                .setTop("23.695238095238096em")
-                .setWidth("12.952380952380953em")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.block5.append(
@@ -2710,6 +2844,171 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput842")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("80K Array#2")
+                .setLeft("24.076190476190476em")
+                .setTop("0.9904761904761905em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput845")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("80K Rad Shield#2")
+                .setLeft("24.076190476190476em")
+                .setTop("3.2em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput846")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("15K Array#2")
+                .setLeft("24.076190476190476em")
+                .setTop("5.485714285714286em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput847")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("1st Diode#2")
+                .setLeft("24.076190476190476em")
+                .setTop("7.695238095238095em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput848")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("2nd Diode#2")
+                .setLeft("24.076190476190476em")
+                .setTop("9.980952380952381em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput849")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Diode Line#2")
+                .setLeft("24.076190476190476em")
+                .setTop("12.41904761904762em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput850")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("Diode Connector#2")
+                .setLeft("24.076190476190476em")
+                .setTop("14.628571428571428em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput851")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("D Rough Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("16.914285714285715em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput852")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("D Purge Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("19.123809523809523em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput853")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("D Relif Valve#2")
+                .setLeft("24.076190476190476em")
+                .setTop("21.409523809523808em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput906")
+                .setName("HeaterB 1st")
+                .setDataBinder("cwdb")
+                .setDataField("D Module#2")
+                .setLeft("24.076190476190476em")
+                .setTop("23.695238095238096em")
+                .setWidth("12.952380952380953em")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.xui_ui_tabs18.append(
@@ -3066,18 +3365,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "A21" : {
                             "value" : "2ᶮᵈ Stage Heater Test"
                         },
-                        "B21" : {
-                            "value" : "Warm Up",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
-                        "D21" : {
-                            "value" : "P  /  F",
-                            "style" : {
-                                "textAlign" : "center"
-                            }
-                        },
                         "A22" : {
                             "value" : "Reset Factory Regan Parameter Ext."
                         },
@@ -3102,7 +3389,17 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "C25" : {
                             "value" : "1234567889123456789012"
                         },
+                        "B21" : {
+                            "style" : {
+                                "textAlign" : "center"
+                            }
+                        },
                         "C21" : {
+                            "style" : {
+                                "textAlign" : "center"
+                            }
+                        },
+                        "D21" : {
                             "style" : {
                                 "textAlign" : "center"
                             }
@@ -3242,7 +3539,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input2012")
                 .setName("New Diode 1st S/N")
                 .setDataBinder("cwdb")
@@ -3253,6 +3550,24 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLabelSize("10em")
                 .setLabelCaption("2.Compressor Model")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "9600",
+                        "caption" : "9600"
+                    },
+                    {
+                        "id" : "9600S",
+                        "caption" : "9600S"
+                    },
+                    {
+                        "id" : "HC70",
+                        "caption" : "HC70"
+                    },
+                    {
+                        "id" : "8500",
+                        "caption" : "8500"
+                    }
+                ])
             );
             
             host.xui_ui_block238.append(
@@ -3297,90 +3612,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setMaxlength("32")
             );
             
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2016")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("底溫#1")
-                .setLeft("1.4476190476190476em")
-                .setTop("6.019047619047619em")
-                .setWidth("7.619047619047619em")
-                .setLabelSize("3em")
-                .setLabelCaption("底溫")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2017")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("底溫#2")
-                .setLeft("9.066666666666666em")
-                .setTop("6.019047619047619em")
-                .setWidth("5.79047619047619em")
-                .setLabelSize("2em")
-                .setLabelCaption("of")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2018")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("底溫#3")
-                .setLeft("14.4em")
-                .setTop("6.019047619047619em")
-                .setWidth("12.19047619047619em")
-                .setLabelSize("4em")
-                .setLabelCaption("Pump")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2115")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("設溫#3")
-                .setLeft("40.304761904761904em")
-                .setTop("6.019047619047619em")
-                .setWidth("12.19047619047619em")
-                .setLabelSize("4em")
-                .setLabelCaption("Pump")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2116")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("設溫#2")
-                .setLeft("34.97142857142857em")
-                .setTop("6.019047619047619em")
-                .setWidth("5.79047619047619em")
-                .setLabelSize("2em")
-                .setLabelCaption("of")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block238.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2117")
-                .setName("New Diode 1st V")
-                .setDataBinder("cwdb")
-                .setDataField("設溫#1")
-                .setLeft("27.35238095238095em")
-                .setTop("6.019047619047619em")
-                .setWidth("7.619047619047619em")
-                .setLabelSize("3em")
-                .setLabelCaption("/ 設溫")
-                .setMaxlength("32")
-            );
-            
             host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div748")
@@ -3389,14 +3620,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("66.2em")
                 .setHeight("1.8666666666666667em"),
                 "A2"
-            );
-            
-            host.xui_ui_div748.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label413")
-                .setLeft("0.4em")
-                .setTop("0.26666666666666666em")
-                .setCaption("Test")
             );
             
             host.xui_ui_div748.append(
@@ -3455,6 +3678,32 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setCaption("Assy OK")
             );
             
+            host.xui_ui_div748.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input14419")
+                .setName("P/N")
+                .setDataBinder("cwdb")
+                .setDataField("E1")
+                .setLeft("0em")
+                .setTop("0.13333333333333333em")
+                .setWidth("8.666666666666666em")
+                .setLabelSize("2.5em")
+                .setLabelCaption("Test")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_div748.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input14420")
+                .setName("P/N")
+                .setDataBinder("cwdb")
+                .setDataField("E2")
+                .setLeft("45.333333333333336em")
+                .setTop("0.13333333333333333em")
+                .setWidth("6.066666666666666em")
+                .setMaxlength("32")
+            );
+            
             host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div749")
@@ -3483,7 +3732,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3544,7 +3793,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3605,7 +3854,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3666,7 +3915,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3727,7 +3976,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3788,7 +4037,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3849,7 +4098,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3910,7 +4159,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -3971,7 +4220,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setDock("fill")
+                .setDock("origin")
                 .setDockMargin({
                     "left" : 4,
                     "top" : 2,
@@ -4046,7 +4295,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_div761.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5228")
+                .setHost(host,"d1")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to 20k/Spec=#1")
                 .setDock("fill")
@@ -4069,7 +4318,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_div762.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5229")
+                .setHost(host,"d2")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to 11k after 20k/ Gauge 15k，must be ≦ 40 mins#1")
                 .setDock("width")
@@ -4115,7 +4364,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_div764.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5231")
+                .setHost(host,"d3")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to 17k/Spec=#1")
                 .setDock("fill")
@@ -4138,7 +4387,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_div765.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5232")
+                .setHost(host,"d4")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to Bottom Out#1")
                 .setDock("fill")
@@ -4529,7 +4778,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDockStretch("0.5")
                 .setLeft("-0.5333333333333333em")
                 .setTop("0.1523809523809524em")
-                .setWidth("12.723809523809523em")
+                .setWidth("7.8em")
                 .setHeight("1.8285714285714285em")
                 .setLabelSize("4em")
                 .setLabelCaption("#1:")
@@ -4548,6 +4797,26 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLabelSize("3em")
                 .setLabelCaption("Time")
                 .setType("time")
+            );
+            
+            host.xui_ui_div771.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input15388")
+                .setDataBinder("cwdb")
+                .setDataField("E3")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setDockStretch("0.5")
+                .setLeft("7em")
+                .setTop("0.1523809523809524em")
+                .setWidth("5.866666666666666em")
+                .setHeight("1.8285714285714285em")
+                .setLabelSize("2em")
+                .setLabelCaption("E-")
             );
             
             host.xui_ui_formlayout39.append(
@@ -4574,7 +4843,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDockStretch("0.5")
                 .setLeft("-0.5333333333333333em")
                 .setTop("0.1523809523809524em")
-                .setWidth("12.723809523809523em")
+                .setWidth("7.8em")
                 .setHeight("1.8285714285714285em")
                 .setLabelSize("4em")
                 .setLabelCaption("#2:")
@@ -4593,6 +4862,26 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLabelSize("3em")
                 .setLabelCaption("Time")
                 .setType("time")
+            );
+            
+            host.xui_ui_div772.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input15389")
+                .setDataBinder("cwdb")
+                .setDataField("E4")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setDockStretch("0.5")
+                .setLeft("7em")
+                .setTop("0.1523809523809524em")
+                .setWidth("5.866666666666666em")
+                .setHeight("1.8285714285714285em")
+                .setLabelSize("2em")
+                .setLabelCaption("E-")
             );
             
             host.xui_ui_formlayout39.append(
@@ -4634,6 +4923,224 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setLeft("83.80952380952381em")
                 .setTop("50.285714285714285em")
                 .setWidth("8.304761904761905em")
+                .setHeight("2.057142857142857em")
+                .setTagCmdsAlign("left")
+                .setLabelPos("none")
+                .setLabelGap("0em")
+                .setLabelHAlign("left")
+                .setLabelVAlign("")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "margin" : "4px 0px 0px 8px",
+                        "overflow" : "hidden"
+                    },
+                    "ITEM" : {
+                        "padding" : "0px 0px 0px 4px",
+                        "margin" : "0px 0px 0px -7px"
+                    },
+                    "CAPTION" : {
+                        "margin" : "0px 0px 0px -7px"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout39.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div777")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("6.133333333333334em")
+                .setHeight("5.8em"),
+                "D22"
+            );
+            
+            host.xui_ui_div777.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox1527")
+                .setDataBinder("cwdb")
+                .setDataField("2nd Stage Heater Test")
+                .setIsFormField(false)
+                .setItems([
+                    {
+                        "id" : "Pass",
+                        "caption" : "P",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Fail",
+                        "caption" : "F",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDock("origin")
+                .setDockMargin({
+                    "left" : 4,
+                    "top" : 2,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0em")
+                .setTop("-2.1333333333333333em")
+                .setWidth("5.485714285714286em")
+                .setHeight("2.057142857142857em")
+                .setTagCmdsAlign("left")
+                .setLabelPos("none")
+                .setLabelGap("0em")
+                .setLabelHAlign("left")
+                .setLabelVAlign("")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "margin" : "4px 0px 0px 8px",
+                        "overflow" : "hidden"
+                    },
+                    "ITEM" : {
+                        "padding" : "0px 0px 0px 4px",
+                        "margin" : "0px 0px 0px -7px"
+                    },
+                    "CAPTION" : {
+                        "margin" : "0px 0px 0px -7px"
+                    }
+                })
+            );
+            
+            host.xui_ui_formlayout39.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div817")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("66.2em")
+                .setHeight("16.533333333333335em"),
+                "A27"
+            );
+            
+            host.xui_ui_div817.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1236")
+                .setDataBinder("cwdb")
+                .setDataField("Test Data 處理情形")
+                .setDock("left")
+                .setDockOrder(1)
+                .setDockStretch("stretch")
+                .setLeft("9.904761904761905em")
+                .setTop("10.666666666666666em")
+                .setWidth("30.01904761904762em")
+                .setHeight("10em")
+                .setLabelSize("6em")
+                .setLabelCaption("處理情形：")
+                .setMultiLines(true)
+            );
+            
+            host.xui_ui_div817.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1237")
+                .setDataBinder("cwdb")
+                .setDataField("Test Data Fail原因")
+                .setDock("left")
+                .setDockOrder(0)
+                .setDockStretch("stretch")
+                .setLeft("10.666666666666666em")
+                .setTop("11.428571428571429em")
+                .setWidth("28.114285714285714em")
+                .setHeight("10em")
+                .setLabelSize("6em")
+                .setLabelCaption("Fail原因：")
+                .setMultiLines(true)
+            );
+            
+            host.xui_ui_formlayout39.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div5112")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("17.266666666666666em")
+                .setHeight("3.2em"),
+                "C7"
+            );
+            
+            host.xui_ui_div5112.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"t3")
+                .setName("C7")
+                .setDataBinder("cwdb")
+                .setDataField("Minutes to 11k after 20k/ Gauge 15k，must be ≦ 40 mins#2")
+                .setDock("origin")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("17.266666666666666em")
+                .setHeight("1.8666666666666667em")
+                .setLabelPos("none")
+                .setType("time")
+                .afterUIValueSet("_t3_afteruivalueset")
+            );
+            
+            host.xui_ui_formlayout39.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div5433")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("34.6em")
+                .setHeight("1.8666666666666667em"),
+                "B21"
+            );
+            
+            host.xui_ui_div5433.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput11796")
+                .setName("B5")
+                .setDataBinder("cwdb")
+                .setDataField("Warm Up")
+                .setDock("origin")
+                .setLeft("13.638095238095238em")
+                .setTop("0em")
+                .setWidth("13.666666666666666em")
+                .setHeight("2.1333333333333333em")
+                .setLabelSize("5em")
+                .setLabelCaption("Warm Up")
+                .setType("time")
+            );
+            
+            host.xui_ui_formlayout39.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div5438")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("6.133333333333334em")
+                .setHeight("1.8666666666666667em"),
+                "D21"
+            );
+            
+            host.xui_ui_div5438.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox10200")
+                .setDataBinder("cwdb")
+                .setDataField("Warm Up#2")
+                .setIsFormField(false)
+                .setItems([
+                    {
+                        "id" : "Pass",
+                        "caption" : "P",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Fail",
+                        "caption" : "F",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDock("origin")
+                .setDockMargin({
+                    "left" : 4,
+                    "top" : 2,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("0.6666666666666666em")
+                .setTop("50.285714285714285em")
+                .setWidth("5.4857em")
                 .setHeight("2.057142857142857em")
                 .setTagCmdsAlign("left")
                 .setLabelPos("none")
@@ -4719,111 +5226,6 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div777")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("6.133333333333334em")
-                .setHeight("5.8em"),
-                "D22"
-            );
-            
-            host.xui_ui_div777.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox1527")
-                .setDataBinder("cwdb")
-                .setDataField("2nd Stage Heater Test")
-                .setIsFormField(false)
-                .setItems([
-                    {
-                        "id" : "Pass",
-                        "caption" : "P",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "Fail",
-                        "caption" : "F",
-                        "imageClass" : ""
-                    }
-                ])
-                .setDock("origin")
-                .setDockMargin({
-                    "left" : 4,
-                    "top" : 2,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("84.57142857142857em")
-                .setTop("51.04761904761905em")
-                .setWidth("5.485714285714286em")
-                .setHeight("2.057142857142857em")
-                .setTagCmdsAlign("left")
-                .setLabelPos("none")
-                .setLabelGap("0em")
-                .setLabelHAlign("left")
-                .setLabelVAlign("")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "margin" : "4px 0px 0px 8px",
-                        "overflow" : "hidden"
-                    },
-                    "ITEM" : {
-                        "padding" : "0px 0px 0px 4px",
-                        "margin" : "0px 0px 0px -7px"
-                    },
-                    "CAPTION" : {
-                        "margin" : "0px 0px 0px -7px"
-                    }
-                })
-            );
-            
-            host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div817")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("66.2em")
-                .setHeight("16.533333333333335em"),
-                "A27"
-            );
-            
-            host.xui_ui_div817.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1236")
-                .setDataBinder("cwdb")
-                .setDataField("Test Data 處理情形")
-                .setDock("left")
-                .setDockOrder(1)
-                .setDockStretch("stretch")
-                .setLeft("9.904761904761905em")
-                .setTop("10.666666666666666em")
-                .setWidth("30.01904761904762em")
-                .setHeight("10em")
-                .setLabelSize("6em")
-                .setLabelCaption("處理情形：")
-                .setMultiLines(true)
-            );
-            
-            host.xui_ui_div817.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1237")
-                .setDataBinder("cwdb")
-                .setDataField("Test Data Fail原因")
-                .setDock("left")
-                .setDockOrder(0)
-                .setDockStretch("stretch")
-                .setLeft("10.666666666666666em")
-                .setTop("11.428571428571429em")
-                .setWidth("28.114285714285714em")
-                .setHeight("10em")
-                .setLabelSize("6em")
-                .setLabelCaption("Fail原因：")
-                .setMultiLines(true)
-            );
-            
-            host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5253")
                 .setName("B4")
@@ -4839,7 +5241,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput4321")
+                .setHost(host,"t1")
                 .setName("B5")
                 .setDataBinder("cwdb")
                 .setDataField("Start Time")
@@ -4848,13 +5250,14 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("17.266666666666666em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
-                .setType("time"),
+                .setType("time")
+                .afterUIValueSet("_t1_afteruivalueset"),
                 "B5"
             );
             
             host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5254")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"t2")
                 .setName("C6")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to 20k/Spec=#2")
@@ -4862,22 +5265,10 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setWidth("17.266666666666666em")
                 .setHeight("1.8666666666666667em")
-                .setLabelPos("none"),
+                .setLabelPos("none")
+                .setType("time")
+                .afterUIValueSet("_t2_afteruivalueset"),
                 "C6"
-            );
-            
-            host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5255")
-                .setName("C7")
-                .setDataBinder("cwdb")
-                .setDataField("Minutes to 11k after 20k/ Gauge 15k，must be ≦ 40 mins#2")
-                .setLeft("0em")
-                .setTop("0em")
-                .setWidth("17.266666666666666em")
-                .setHeight("3.2em")
-                .setLabelPos("none"),
-                "C7"
             );
             
             host.xui_ui_formlayout39.append(
@@ -4896,7 +5287,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             
             host.xui_ui_formlayout39.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput4322")
+                .setHost(host,"t4")
                 .setName("B11")
                 .setDataBinder("cwdb")
                 .setDataField("Start Time2")
@@ -4905,7 +5296,8 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setWidth("17.266666666666666em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
-                .setType("time"),
+                .setType("time")
+                .afterUIValueSet("_t4_afteruivalueset"),
                 "B11"
             );
             
@@ -4930,21 +5322,23 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             );
             
             host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5257")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"t5")
                 .setName("C12")
                 .setDataField("Minutes to 17k/Spec=#2")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("17.266666666666666em")
                 .setHeight("1.8666666666666667em")
-                .setLabelPos("none"),
+                .setLabelPos("none")
+                .setType("time")
+                .afterUIValueSet("_t5_afteruivalueset"),
                 "C12"
             );
             
             host.xui_ui_formlayout39.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5258")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"t6")
                 .setName("C13")
                 .setDataBinder("cwdb")
                 .setDataField("Minutes to Bottom Out#2")
@@ -4952,7 +5346,9 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setWidth("17.266666666666666em")
                 .setHeight("1.8666666666666667em")
-                .setLabelPos("none"),
+                .setLabelPos("none")
+                .setType("time")
+                .afterUIValueSet("_t6_afteruivalueset"),
                 "C13"
             );
             
@@ -5086,7 +5482,98 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
             _repairbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
             utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
-            }
+            },
+        updateMinutes: function(){
+          var ns = this;
+          utils.calcMinutes(ns.t2, ns.t1,ns.d1);
+          utils.calcMinutes(ns.t3, ns.t2,ns.d2);
+          utils.calcMinutes(ns.t5, ns.t4,ns.d3);
+          utils.calcMinutes(ns.t6, ns.t5,ns.d4);
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t1_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t2_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t3_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t4_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t5_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t6_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinutes();
+       }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

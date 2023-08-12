@@ -310,7 +310,8 @@ utils = {
             utils.installModuleTableBoxHooks(mod);
             if(mod.saveBtn && utils.hasSavePrivilege(item) == false)
               mod.saveBtn.setDisabled(true);
-                
+            
+            utils.disableAutoTips(mod);
             db.setData(item).updateDataToUI();
             utils.updateModuleTableBoxCaption(mod);
             if(onload)
@@ -659,7 +660,18 @@ utils = {
                     uictrl.setItems(items);
                 });
         };                
+        let passFailCb = function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            if(type == 1)
+            {
+              if(item.id == "Pass")
+                  uictrl.setValue("Pass");
+              else 
+                  uictrl.setValue("Fail");
+            }            
+        }
         mod.tableBox_beforecombopop = popcb;  
+        mod.passFail_onitemselected = passFailCb;
        // mod.tableBox_beforecombopop2 = popcb2;
         for(var i=0; i< nodes.length; i++)
         {
@@ -674,8 +686,18 @@ utils = {
                    //console.log("popbo:",n.getDataField());    
                    n.beforeComboPop("tableBox_beforecombopop");
                 }
+                
                 //else if(n.getType() == "combobox")
                 //   n.beforeComboPop("tableBox_beforecombopop2");
+            }
+            else if(n.KEY == "xui.UI.RadioBox")
+            {
+              var items = n.getItems();  
+              if(items.length == 2 && items[0].id == "Pass")
+              {
+                  n.setSelMode("multi");
+                  n.onItemSelected("passFail_onitemselected");
+              }
             }
         }
     },
@@ -1034,19 +1056,22 @@ utils = {
                 xui.alert("請先通知組長確認!");   
                 return;        
               }
-              utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"待秘書確認"});  
+              utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"待秘書確認"}); 
+              db.setData("確認狀態","待秘書確認");   
               xui.alert("已通知秘書確認!");   
               uictrl.setCaption("待秘書確認");
             }
             else if(confirm == "通知組長確認")
             {
               utils.modifyTableItem(table, key, {[key]:id, "確認狀態":"待組長確認"});  
+              db.setData("確認狀態","待組長確認");   
               xui.alert("已通知組長確認!");        
               uictrl.setCaption("待組長確認");
             }
             else if(confirm == "秘書已確認,取消通知")
             {
               utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"秘書已確認"});  
+              db.setData("確認狀態","秘書已確認");   
               xui.alert("已取消通知!");        
               uictrl.setCaption("秘書已確認");
             }               
@@ -1139,8 +1164,8 @@ utils = {
             uictrl.setValue(name);    
             if(saveFlag){
               utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
-              db.setData("確認狀態", confirmState); 
             }
+            db.setData("確認狀態", confirmState); 
             xui.alert("已確認!");
             return true;
           }
@@ -1233,7 +1258,7 @@ utils = {
         else 
             menu.popUp(uictrl);
     },
-    showTableCombo: function(uictrl){
+    showTableCombo: function(uictrl, field=null){
                 var mod = uictrl.getHost();
                 var db = mod.getDataBinders();
                 if(db.length > 0)
@@ -1248,7 +1273,8 @@ utils = {
                 var tableName  = prop.tableName;
                 if(typeof tableName == "undefined")  //get from db tagvar
                   tableName = "通用";
-                var field  = uictrl.getDataField();
+                if(field == null)
+                  field  = uictrl.getDataField();
                 var condition = "";
                 //if(uictrl.getType == "popbox")
                 //  condition = `[${prop.keyid}] LIKE '%${uictrl.getUIValue()}%'`;
@@ -1288,5 +1314,35 @@ utils = {
             // error message
             console.log(error.message);
         });
-    }
+    },
+    disableAutoTips: function(mod){
+        if(mod.dialog)
+          var nodes = mod.dialog.getChildren(true,true).get();
+        else if(mod.form)
+          var nodes = mod.form.getChildren(true,true).get();
+        else 
+          return;  
+        for(var i=0; i< nodes.length; i++)
+        {
+            let n = nodes[i].boxing();
+            if(typeof n.setAutoTips != "undefined")
+                n.setAutoTips(false);
+        }        
+    },
+    getMinutes: function(t){
+        var ts = t.split(":");
+        if(ts.length >= 2)
+        {
+          var m = Number(ts[0])*60 + Number(ts[1]);
+          return m;
+        }
+        else 
+            return 0;
+    },
+    calcMinute: function(t1, t2, dst){
+            var end = utils.getMinutes(t1.getUIValue());
+            var start = utils.getMinutes(t2.getUIValue());
+            var diff = (end -start);
+            dst.setValue(diff);
+    },        
  };

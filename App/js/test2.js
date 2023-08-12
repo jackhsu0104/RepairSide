@@ -46,6 +46,162 @@ xui.Class('App.test2', 'xui.Module',{
                 .onClick("_xui_ui_button36_onclick")
             );
             
+            host.form.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox3198")
+                .setDataBinder("rdb")
+                .setDataField("E4")
+                .setIsFormField(false)
+                .setItems([
+                    {
+                        "id" : "Pass",
+                        "caption" : "P",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "Fail",
+                        "caption" : "F",
+                        "imageClass" : ""
+                    }
+                ])
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 4,
+                    "top" : 2,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("83.04761904761905em")
+                .setTop("49.523809523809526em")
+                .setWidth("5.485714285714286em")
+                .setHeight("2.057142857142857em")
+                .setSelMode("multi")
+                .setTagCmdsAlign("left")
+                .setLabelPos("none")
+                .setLabelGap("0em")
+                .setLabelHAlign("left")
+                .setLabelVAlign("")
+                .setCheckBox(true)
+                .setValue("")
+                .onItemSelected("_xui_ui_radiobox3198_onitemselected")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "margin" : "4px 0px 0px 8px",
+                        "overflow" : "hidden"
+                    },
+                    "ITEM" : {
+                        "padding" : "0px 0px 0px 4px",
+                        "margin" : "0px 0px 0px -7px"
+                    },
+                    "CAPTION" : {
+                        "margin" : "0px 0px 0px -7px"
+                    }
+                })
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput7025")
+                .setLeft("40em")
+                .setTop("3.3333333333333335em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("t1")
+                .setType("time")
+                .setExcelCellId("D1")
+                .setValue("00:15")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput7026")
+                .setLeft("40.333333333333336em")
+                .setTop("6.266666666666667em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("t2")
+                .setType("time")
+                .setExcelCellId("E1")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput7028")
+                .setLeft("39.666666666666664em")
+                .setTop("10.266666666666667em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("t")
+                .setType("input")
+                .setExcelCellFormula("=D1")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input7750")
+                .setLeft("18.666666666666668em")
+                .setTop("10em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("Input")
+                .setExcelCellId("A1")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input7751")
+                .setLeft("18.6em")
+                .setTop("14em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("Input")
+                .setExcelCellId("B1")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input7752")
+                .setLeft("18.6em")
+                .setTop("18.666666666666668em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("Input")
+                .setExcelCellFormula("=D1-E1")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput7800")
+                .setName("Pump S/N")
+                .setDataBinder("comdb")
+                .setDataField("附屬配件")
+                .setLeft("18.6em")
+                .setTop("6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("附屬配件")
+                .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "N/A",
+                        "caption" : "N/A"
+                    }
+                ])
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input14498")
+                .setLeft("20em")
+                .setTop("28em")
+                .setWidth("18em")
+                .setHeight("10em")
+                .setResizer(true)
+                .setLabelSize("8em")
+                .setLabelCaption("Text Area")
+                .setMultiLines(true)
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -71,6 +227,27 @@ xui.Class('App.test2', 'xui.Module',{
             console.log(mod);
             console.log(db);
             
+        },
+        /**
+         * Fired when list item is selected
+         * @method onItemSelected [xui.UI.RadioBox event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {} type:Number,0:noaffacted;1:checked;-1  unchecked
+        */
+        _xui_ui_radiobox3198_onitemselected:function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            if(type == 1)
+            {
+              if(item.id == "Pass")
+                  uictrl.setValue("Pass");
+              else 
+                  uictrl.setValue("Fail");
+                  
+                
+            }
         }
         /*,
         // To determine how properties affects this module
