@@ -33058,7 +33058,8 @@ xui.Class("xui.UI.ProgressBar", ["xui.UI.Widget","xui.absValue"] ,{
             "KEY textarea":{
                 'white-space':'pre',
                 'overflow-x':'hidden',
-                'overflow-y':'auto'
+                'overflow-y':'auto',
+				'text-wrap':'wrap'
             },
             ERROR:{
                 position:'absolute',

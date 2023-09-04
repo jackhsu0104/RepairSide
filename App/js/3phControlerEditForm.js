@@ -84,6 +84,18 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .onClick("_savebtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"nextBtn")
+                .setAutoTips(false)
+                .setLeft("34.666666666666664em")
+                .setTop("0.7333333333333333em")
+                .setWidth("10.333333333333334em")
+                .setCaption("工單到下一站")
+                .setType("drop")
+                .onClick("_nextbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -205,6 +217,18 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setWidth("8.666666666666666em")
                 .setCaption("維修委託單")
                 .onClick("_repairbtn_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"pickingBtn")
+                .setAutoTips(false)
+                .setLeft("36.666666666666664em")
+                .setTop("2.7333333333333334em")
+                .setWidth("8.666666666666666em")
+                .setCaption("領料報工單")
+                .setType("drop")
+                .onClick("_pickingbtn_onclick")
             );
             
             host.form.append(
@@ -1706,7 +1730,31 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             _repairbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
-            }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _pickingbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                 utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue());
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _nextbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                         utils.nextStation(uictrl);
+                   }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

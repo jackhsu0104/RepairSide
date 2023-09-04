@@ -90,6 +90,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .onClick("_savebtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"nextBtn")
+                .setAutoTips(false)
+                .setLeft("32.666666666666664em")
+                .setTop("0.8666666666666667em")
+                .setWidth("10.333333333333334em")
+                .setCaption("工單到下一站")
+                .setType("drop")
+                .onClick("_nextbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -135,7 +147,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("上次登錄編號")
                 .setLeft("26em")
                 .setTop("0.6em")
-                .setWidth("16.685714285714287em")
+                .setWidth("16em")
                 .setLabelSize("9em")
                 .setLabelCaption("Pump上次登錄編號")
                 .setMaxlength("20")
@@ -157,25 +169,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div868.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairNo")
-                .setName("登錄編號")
-                .setDataBinder("crdb")
-                .setDataField("登錄編號")
-                .setLeft("43.42857142857143em")
-                .setTop("0.7333333333333333em")
-                .setWidth("13.266666666666667em")
-                .setLabelSize("5em")
-                .setLabelCaption("登錄編號")
-                .setType("popbox")
-                .setMaxlength("20")
-                .onValueChange("_repairno_onvaluechange")
-            );
-            
-            host.xui_ui_div868.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"lastWorkSheetBtn")
-                .setLeft("46.666666666666664em")
+                .setLeft("45.333333333333336em")
                 .setTop("3.2666666666666666em")
                 .setWidth("10em")
                 .setCaption("上次維修工單")
@@ -215,6 +211,44 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setWidth("8.666666666666666em")
                 .setCaption("維修委託單")
                 .onClick("_repairbtn_onclick")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"pickingBtn")
+                .setAutoTips(false)
+                .setLeft("26.666666666666668em")
+                .setTop("3.1333333333333333em")
+                .setWidth("8.666666666666666em")
+                .setCaption("領料報工單")
+                .setType("drop")
+                .onClick("_pickingbtn_onclick")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
+                .setName("登錄編號")
+                .setDataBinder("crdb")
+                .setDataField("登錄編號")
+                .setLeft("42em")
+                .setTop("0.7333333333333333em")
+                .setWidth("13.266666666666667em")
+                .setLabelSize("5em")
+                .setLabelCaption("登錄編號")
+                .setType("getter")
+                .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
+            );
+            
+            host.xui_ui_div868.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"changeRepairBtn")
+                .setTips("更換登錄編號")
+                .setLeft("55.46666666666667em")
+                .setTop("0.6em")
+                .setCaption("▼")
+                .onClick("_changerepairbtn_onclick")
             );
             
             host.form.append(
@@ -5392,7 +5426,43 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             _repairbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                      utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
-   }
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _pickingbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                 utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue());
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _nextbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                        utils.nextStation(uictrl);
+                    },
+                        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                        _changerepairbtn_onclick:function(profile, e, src, value){
+                            var ns = this, uictrl = profile.boxing();
+                            utils.showTableCombo(ns.repairNo,"更換登錄編號");
+                        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

@@ -70,14 +70,15 @@ xui.Class('App', 'xui.Module',{
                         "caption" : "維修委託單/工單"
                     },
                     {
-                        "id" : "維修測試單",
-                        "caption" : "維修測試單",
+                        "id" : "維修測試區",
+                        "caption" : "維修測試區",
                         "imageClass" : ""
                     },
                     {
                         "id" : "領料報工",
                         "caption" : "領料報工",
-                        "imageClass" : ""
+                        "imageClass" : "",
+                        "hidden" : true
                     },
                     {
                         "id" : "廠內領料報工",
@@ -107,7 +108,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("站內物件列表")
+                .setValue("維修委託單/工單")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -377,6 +378,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "CryopumpEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -550,6 +552,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "CrossheadEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -709,6 +712,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "CompressorEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -777,6 +781,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "3phControlerEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -845,6 +850,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "ModuleTestForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -913,6 +919,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "ChallentechBenchEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1069,6 +1076,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "CylinderHeaterEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1213,6 +1221,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "領料報工單號",
                     "openPageName" : "ErpPickingForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1278,6 +1287,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "領料報工單號",
                     "openPageName" : "ErpPickingForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1346,6 +1356,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "",
                     "mode" : "readonly",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1415,160 +1426,6 @@ xui.Class('App', 'xui.Module',{
             );
             
             host.mainPage.append(
-                xui.create("xui.UI.Tabs")
-                .setHost(host,"xui_ui_tabs27")
-                .setItems([
-                    {
-                        "id" : "a",
-                        "caption" : "Cryopump Test Form",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "b",
-                        "caption" : "Cryopump Warranty 原因分析表"
-                    }
-                ])
-                .setLeft("0em")
-                .setTop("0em")
-                .setValue("b"),
-                "維修測試單"
-            );
-            
-            host.xui_ui_tabs27.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"testBlock1")
-                .setDock("top")
-                .setLeft("16em")
-                .setTop("16.761904761904763em")
-                .setHeight("8.60952380952381em"),
-                "a"
-            );
-            
-            host.testBlock1.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"testPumpRepairno")
-                .setDataBinder("repairdb1")
-                .setDataField("登錄編號")
-                .setLeft("0.8380952380952381em")
-                .setTop("1.6em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("登錄編號")
-            );
-            
-            host.testBlock1.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"searchPumpTestBtn")
-                .setLeft("46.476190476190474em")
-                .setTop("1.5238095238095237em")
-                .setWidth("10.666666666666666em")
-                .setCaption("查詢")
-                .onClick("_searchpumptestbtn_onclick")
-            );
-            
-            host.xui_ui_tabs27.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block772")
-                .setDock("fill")
-                .setLeft("22.095238095238095em")
-                .setTop("22.857142857142858em"),
-                "a"
-            );
-            
-            host.xui_ui_block772.append(
-                xui.create("Module.DataGrid", "xui.Module")
-                .setHost(host,"testGrid1")
-                .setProperties({
-                    "tableName" : "CryopumpTestForm",
-                    "insertTableName" : "",
-                    "displayFields" : "",
-                    "condition" : "",
-                    "condition2" : "",
-                    "orderby" : "登錄編號",
-                    "fieldWidths" : null,
-                    "fieldCaptions" : null,
-                    "pageLength" : 100,
-                    "keyid" : "rowid",
-                    "openPageName" : "CryopumpTestForm",
-                    "mode" : "normal",
-                    "formCaption" : "",
-                    "newDatas" : null,
-                    "binder" : "",
-                    "useCache" : false,
-                    "saveIgnoreFields" : "",
-                    "excelFileName" : ""
-                })
-                .setEvents({
-                    "onInitNewData" : "_testgrid1_oninitnewdata"
-                })
-            );
-            
-            host.xui_ui_tabs27.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"testBlock2")
-                .setDock("top")
-                .setLeft("16em")
-                .setTop("16.761904761904763em")
-                .setHeight("8.60952380952381em"),
-                "b"
-            );
-            
-            host.testBlock2.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input598")
-                .setDataBinder("repairdb1")
-                .setDataField("登錄編號")
-                .setLeft("0.8380952380952381em")
-                .setTop("1.6em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("登錄編號")
-            );
-            
-            host.testBlock2.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button1767")
-                .setLeft("46.476190476190474em")
-                .setTop("1.5238095238095237em")
-                .setWidth("10.666666666666666em")
-                .setCaption("查詢")
-            );
-            
-            host.xui_ui_tabs27.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block811")
-                .setDock("fill")
-                .setLeft("26.666666666666668em")
-                .setTop("23.61904761904762em"),
-                "b"
-            );
-            
-            host.xui_ui_block811.append(
-                xui.create("Module.DataGrid", "xui.Module")
-                .setHost(host,"testGrid2")
-                .setProperties({
-                    "tableName" : "CryopumpWarranty原因分析表",
-                    "insertTableName" : "",
-                    "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
-                    "orderby" : "",
-                    "fieldWidths" : null,
-                    "fieldCaptions" : null,
-                    "pageLength" : 100,
-                    "keyid" : "登錄編號",
-                    "openPageName" : "CryopumpWarrantyEditForm",
-                    "mode" : "normal",
-                    "formCaption" : "",
-                    "newDatas" : null,
-                    "binder" : "",
-                    "useCache" : false,
-                    "saveIgnoreFields" : "",
-                    "excelFileName" : ""
-                })
-            );
-            
-            host.mainPage.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block710")
                 .setDock("top")
@@ -1615,6 +1472,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "",
                     "mode" : "readonly",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -1721,6 +1579,7 @@ xui.Class('App', 'xui.Module',{
                     "keyid" : "登錄編號",
                     "openPageName" : "",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -2107,7 +1966,26 @@ xui.Class('App', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
 //            if(ns.modDatalist1.grid.getHeader().length == 0)
         },
-
+        appendPage:function(pagename, subid){
+            var ns  = this;
+            xui.newModule("App."+  pagename,function(err,mod){
+                Pages[subid] = mod;
+                ns.mainPage.append(mod, subid);
+                utils.installModuleTableBoxHooks(mod);
+                utils.installDataBinderHooks(mod);
+            });
+        
+        },        
+        loadPage: function(subid){
+          var ns = this;
+          if(Pages[subid])
+              return;
+          var pageName = "";  
+          if(subid == "維修測試區")
+            pageName = "TestAreaForm";
+          if(pageName != "")
+            ns.appendPage(pageName, subid);
+        },
         /**
          * Fired when a tab is selected
          * @method onItemSelected [xui.UI.ButtonViews event]
@@ -2120,8 +1998,11 @@ xui.Class('App', 'xui.Module',{
         _mainpage_onitemselected:function(profile, item, e, src, n){
             var ns = this, uictrl = profile.boxing();
             //console.log(item);
-            if(item.id == "員工資料管理")
-                ns.employeeGrid.loadGridData(0);
+            //if(item.id == "員工資料管理")
+            //    ns.employeeGrid.loadGridData(0);
+            if(item.id == "維修測試區")
+                ns.loadPage(item.id);
+
         },
 /**
          * Fired before the pop-up window is created. If returns false, the default pop window will be ignored
@@ -2301,6 +2182,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     ns.repairdb1["SiteName"] = SiteName;
                     console.log("CloseDate:",utils.getCloseDate());
                     MainPage = ns;
+                    Pages = {};
                     //utils.toggleFullScreen("document");
 
                 },
@@ -2310,10 +2192,10 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
           ns.labelUserTitle.setCaption("職稱：" + LoginUser.JobTitle);  
           var value = utils.getItemValue("BU3員工資料表","員工代號", LoginUser.EmplID, "權限");
           LoginUser["Privilege"] = value;  
-          if(value.indexOf("主管") == -1)
-          {
+//          if(value.indexOf("主管") == -1)
+//          {
               ns.mainPage.updateItem("掃碼入站", {"hidden":"hidden"});        
-          }
+//          }
           ns.updateAllGrids();
           utils.toggleFullScreen("body");
             
@@ -2441,8 +2323,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             ns.repairGrid3.refreshGrid();
             ns.repairGrid5.refreshGrid();
             ns.repairGrid6.refreshGrid();
-            ns.testGrid1.refreshGrid();
-            ns.testGrid2.refreshGrid();
+            //ns.testGrid1.refreshGrid();
+            //ns.testGrid2.refreshGrid();
             ns.pickingGrid1.refreshGrid();
             ns.pickingGrid2.refreshGrid();
         },
@@ -2516,7 +2398,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
              item["入站時間"] = utils.now();
              item["維修站名"] = SiteName;
              delete item["rowid"]; 
-             utils.modifyTableItem("維修站總資料表", "登錄編號", item);                
+             utils.modifyTableItem("維修站總資料表", "登錄編號", item); 
+              ns.updateAllGrids();
              xui.alert("已入站!");
          }
         },

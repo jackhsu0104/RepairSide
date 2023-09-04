@@ -76,6 +76,34 @@ function insertTableItem($table, $item){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function insertTableItem2($table, $item){
+  global $db;
+  $bindarray = array();
+  $query = "INSERT INTO $table (";
+  $valuestr = "VALUES(";
+  foreach($item as $key => $value)
+  {
+      $query = $query."[$key],";
+      $valuestr = $valuestr."?,";
+      array_push($bindarray, $value);
+  }
+  $query = rtrim($query, ",");
+  $valuestr = rtrim($valuestr, ",");
+  $query = $query.") "."  ".$valuestr.")";
+  file_put_contents("log5.txt", $query);
+  file_put_contents("log5.txt", print_r($bindarray,true), FILE_APPEND);
+  
+  $stmt=$db->prepare($query);
+  for($i=0;$i<count($bindarray); $i++)
+  {
+     $stmt->bindValue($i+1, $bindarray[$i]);
+  }
+ 
+  $r = $stmt->execute();
+  return $r;
+      
+}
+
 function insertTableItemPrefixId($table, $item, $field, $prefix){
   global $db;
   $r = insertTableItem($table, $item);
@@ -105,6 +133,29 @@ function modifyTableItem($table, $primarykey, $item){
       }
   }
   array_push($bindarray,  $item->$primarykey);  
+    
+  $query = rtrim($query, ", ");
+  $query = $query." WHERE [$primarykey] = ?";
+  file_put_contents("log2.txt", print_r($item, true).$query."\n".print_r($bindarray, true));
+  $stmt=$db->prepare($query);
+  for($i=0; $i<count($bindarray);$i++)
+     $stmt->bindValue($i+1, $bindarray[$i]);
+  
+  //file_put_contents('log.txt', $query."\n".print_r($bindarray, true));  
+  //echo $query."\n".print_r($bindarray);  
+  return $stmt->execute();
+}
+
+function modifyTableItem2($table, $primarykey, $keyValue, $item){
+  global $db;
+  $bindarray = array();
+  $query = "UPDATE $table SET ";
+  foreach($item as $key=>$value)
+  {
+        $query = $query."[$key] =  ?, ";
+        array_push($bindarray, $value);
+  }
+  array_push($bindarray,  $keyValue);  
     
   $query = rtrim($query, ", ");
   $query = $query." WHERE [$primarykey] = ?";

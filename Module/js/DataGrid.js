@@ -197,6 +197,21 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 .afterUIValueSet("_filter_afteruivalueset")
             );
             
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"copyBtn")
+                .setTag("copy")
+                .setDock("left")
+                .setDockStretch("fixed")
+                .setLeft("0.7619047619047619em")
+                .setTop("0em")
+                .setWidth("6em")
+                .setHeight("2em")
+                .setCaption("複製")
+                .setImageClass("fa fa-lg fa-copy")
+                .onClick("_newbtn_onclick")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -303,27 +318,49 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         var col = data.columns[i];  
                         var caption = col;
                         var fw  = 8;
+                        if(col == "DelFlag" || col == "rowid")  //skip it
+                            continue;   
                         if(fieldCaptions[i])
                             caption = fieldCaptions[i];
                         if(fieldWidths[i])
                             fw = fieldWidths[i];
+                        caption = caption.replace("群呈","");
                         let item = {"id": col, "caption":caption, "width":fw+"em"};
                         if(prop.mode == "editor")
                         {    
                           let combo = utils.getTableFieldComboConfig(tableName, col);  
                           if(combo)
-                            item.type = "cmdbox";    
+                            item.type = "popbox";    
                           else
                           {
-                            let type = utils.getTableFieldConfig(tableName, col).DATA_TYPE;  
-                            if(type == "datetime")
-                              type = "date";
-                            else if(type == "bit")
-                              type = "checkbox";
-                            else 
-                              type = "input";
-                            item.type = type;  
+                            let config = utils.getTableFieldConfig(tableName, col);
+                            if(config)
+                            {    
+                              let type = config.DATA_TYPE;  
+                              if(type == "datetime")
+                                type = "date";
+                              else if(type == "bit")
+                                type = "checkbox";
+                              else 
+                                type = "input";
+                              item.type = type;
+                            }
                           }
+                        }
+                        else
+                        {
+                            let config = utils.getTableFieldConfig(tableName, col);
+                            if(config)
+                            {
+                              let type = config.DATA_TYPE;  
+                              if(type == "datetime")
+                                type = "date";
+                              else if(type == "bit")
+                                type = "checkbox";
+                              else 
+                                type = "input";
+                              item.type = type;
+                            }
                         }
                         header.push(item);        
                       }
@@ -621,6 +658,32 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 
             //ns.xui_msgs1.broadcast(ns.properties.outMsgType, "delete",  ids, '', cb);
         },
+        _copyRecords:function(ids){
+            var ns=this, grid=ns.grid,prop = ns.properties; 
+            var cb=function(){
+                ns.deleteRows(ids);
+            };
+            xui.Dom.busy(null, "複製資料中 ...");
+            console.log(ns.grid.getRowMap(ids[0]));
+/*
+            var r = ns.fireEvent("onCreateRecords", [ ids, cb]);
+            if(typeof r != "undefined" && r == true)  //已經處理完畢
+            {
+                xui.Dom.free();
+                ns.refreshGrid();
+                return;
+            }
+*/            
+            for(var i=0; i<ids.length; i++)
+            {
+              var row = ns.grid.getRowMap(ids[i]); 
+              utils.insertTableItem(prop.tableName, row);  
+            }
+            xui.Dom.free();
+            ns.refreshGrid();
+
+            //ns.xui_msgs1.broadcast(ns.properties.outMsgType, "delete",  ids, '', cb);
+        },
         refreshGrid : function(){
             var ns=this, pb=ns.pagebar;
             ns.loadGridData(pb.getPage()-1);
@@ -806,6 +869,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             "keyid" : "",
             "openPageName" : "",
             "mode" : "normal",
+            "enableCopyButton" : false,
             "formCaption" : "",
             "newDatas" : null,
             "binder" : "",
@@ -824,6 +888,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         _page_beforeshow:function(e,i){
             var ns=this, prop=ns.properties;
             ns.setMode(prop.mode);
+            if(prop.enableCopyButton)
+                ns.copyBtn.show();
+            else
+                ns.copyBtn.hide();
         },
         
         prepareNewDatas: function(){
@@ -945,15 +1013,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 var ns = this, uictrl = profile.boxing(), prop=ns.properties;
                 if(cell._col.type == "date" || cell._col.type == "datetime")
                     return;
-                var tableName = prop.tableName;
                 var col =  cell._col.id;
-                var config = utils.getTableFieldComboConfig(tableName,  col);
+                var config = utils.getTableFieldComboConfig("通用",  col);
                 var prop = config;
-                var cachetitle = `${prop.tableName}:${prop.displayFields}:${prop.displayCaptions}`;
-                if(typeof ComboBoxCache == "undefined")
-                    ComboBoxCache = {};
-                if(typeof ComboBoxCache[cachetitle] == "undefined")
-                {
+
                     xui.newModule("App.DataListForm", function(err,module){
                         module.setProperties("tableName", config.tableName);
                         module.setProperties("keyid", config.keyid);
@@ -963,12 +1026,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         module.setProperties("fieldCaptions", config.displayCaptions);
                         module.setProperties("grid",ns.grid);
                         module.setProperties("cell",cell);
-                      //  ComboBoxCache[cachetitle] = module;
+                        module.setProperties("orderby", config.orderby)
                         module.popUp(proEditor);
                     });
-                }
-                else 
-                  ComboBoxCache[cachetitle].popUp(proEditor);
+                
             },
         /**
          * Fired when a cell(type is 'label/button' or not editable) is clicked
@@ -1050,6 +1111,16 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         xui.message("請先選擇資料!");
                     }
                     break;
+                case "copy": 
+                    var ids=ns.grid.getUIValue(true);
+                    if(ids && ids.length != 0 && ids[0] != ""){
+                        xui.confirm("Confirm", "確定要複製"+ids.length+" 紀錄嗎?", function(){
+                            ns._copyRecords(ids);
+                        });
+                    }else{
+                        xui.message("請先選擇資料!");
+                    }
+                    break;
                case "custom1":
                     if(row=ns.grid.getActiveRow()){
                         ns.fireEvent("onCustom1Clicked", [ row.id, ns.getRowMap(row)]);
@@ -1109,7 +1180,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         ns._openForm(row.id, ns.getRowMap(row));
                     }
             }
-        }
+        },
+
     },
     Static:{
         // export functions

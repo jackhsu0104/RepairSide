@@ -84,6 +84,18 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .onClick("_savebtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"nextBtn")
+                .setAutoTips(false)
+                .setLeft("35.333333333333336em")
+                .setTop("0.7333333333333333em")
+                .setWidth("10.333333333333334em")
+                .setCaption("工單到下一站")
+                .setType("drop")
+                .onClick("_nextbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -143,28 +155,12 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div165.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairNo")
-                .setName("登錄編號")
-                .setDataBinder("rdb")
-                .setDataField("登錄編號")
-                .setLeft("29.133333333333333em")
-                .setTop("0.7333333333333333em")
-                .setWidth("14.533333333333333em")
-                .setLabelSize("5em")
-                .setLabelCaption("登錄編號")
-                .setType("popbox")
-                .setMaxlength("20")
-                .onValueChange("_repairno_onvaluechange")
-            );
-            
-            host.xui_ui_div165.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox61")
                 .setDataBinder("rdb")
                 .setDataField("Report")
-                .setLeft("45.13333333333333em")
-                .setTop("0.7619047619047619em")
+                .setLeft("54em")
+                .setTop("3em")
                 .setWidth("6.780952380952381em")
                 .setCaption("Report")
             );
@@ -177,7 +173,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setDataField("Cylinder S/N")
                 .setLeft("28em")
                 .setTop("3.066666666666667em")
-                .setWidth("15.666666666666666em")
+                .setWidth("14.666666666666666em")
                 .setLabelSize("6em")
                 .setLabelCaption("Cylinder S/N")
                 .setMaxlength("20")
@@ -275,7 +271,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div165.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"lastWorkSheetBtn")
-                .setLeft("45.2em")
+                .setLeft("44em")
                 .setTop("2.8666666666666667em")
                 .setWidth("9.266666666666667em")
                 .setCaption("上次維修工單")
@@ -284,12 +280,58 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             
             host.xui_ui_div165.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"repairBtn")
-                .setLeft("45.266666666666666em")
+                .setHost(host,"pickingBtn")
+                .setAutoTips(false)
+                .setLeft("51.333333333333336em")
                 .setTop("5.266666666666667em")
-                .setWidth("9.2em")
-                .setCaption("維修委託單")
-                .onClick("_repairbtn_onclick")
+                .setWidth("8.666666666666666em")
+                .setCaption("領料報工單")
+                .setType("drop")
+                .onClick("_pickingbtn_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"lastRepairNo")
+                .setDataBinder("comdb")
+                .setDataField("上次登錄編號")
+                .setReadonly(true)
+                .setLeft("45.333333333333336em")
+                .setTop("0.8em")
+                .setWidth("14.666666666666666em")
+                .setLabelSize("6.5em")
+                .setLabelCaption("上次登錄編號")
+                .setType("getter")
+                .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
+                .onClick("_repairno_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
+                .setName("登錄編號")
+                .setDataBinder("rdb")
+                .setDataField("登錄編號")
+                .setLeft("29.133333333333333em")
+                .setTop("0.7333333333333333em")
+                .setWidth("13.533333333333333em")
+                .setLabelSize("5em")
+                .setLabelCaption("登錄編號")
+                .setType("getter")
+                .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
+                .onClick("_repairno_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"changeRepairBtn")
+                .setTips("更換登錄編號")
+                .setLeft("43em")
+                .setTop("0.6em")
+                .setCaption("▼")
+                .onClick("_changerepairbtn_onclick")
             );
             
             host.form.append(
@@ -1645,8 +1687,56 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         */
             _repairbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
+            },
+                /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                _pickingbtn_onclick:function(profile, e, src, value){
+                    var ns = this, uictrl = profile.boxing();
+                 utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue());
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _nextbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                         utils.nextStation(uictrl);
+                    },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _repairno_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
             utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
-            }
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _changerepairbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showTableCombo(ns.repairNo,"更換登錄編號");
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

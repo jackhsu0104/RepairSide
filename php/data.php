@@ -255,7 +255,10 @@ function prepareTableKey($table, $item)
         $d = date_format($d,"Ym");
         $d = substr($d, 2);
         $n = 1;
-        $h = $h1.$d.$h2;
+        if(strlen($h2) > 1) //including year,month
+          $h = $h1.$h2;
+        else
+          $h = $h1.$d.$h2;
         $q1 = "SELECT TOP  1 [登錄編號] FROM [CTI Control Number總資料庫]  WHERE [登錄編號] LIKE '$h%' ORDER BY [登錄編號] DESC";  
         $items = execquery($q1);
         if(count($items)  > 0)
@@ -300,6 +303,21 @@ function prepareTableKey($table, $item)
         $value = sprintf("%s%04d",$d,$n);
         $item->出貨單號 = $value;
         
+    }
+    else if($table == "[PS101,零件PO資料表]")
+    {
+        $n = 1;
+        $k = "PO#";
+        $po = $item->$k;
+        $items = execquery("SELECT TOP 1  Item FROM [PS101,零件PO資料表] WHERE [PO#] = '$po' ORDER BY Item DESC");
+        if(count($items)  > 0)
+        {
+            print_r($items);
+            $value = $items[0]["Item"];
+            $n = (int)$value;
+            $n++;
+        }        
+        $item->Item = sprintf('%02d',$n);
     }
     else  if($table == "GDCRM.dbo.[Incident]")
     {
@@ -497,6 +515,18 @@ else  if($req->cmd == "modifyTableItem")
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem($table, $key, $item);
+    $RES->result = "OK";
+}
+else  if($req->cmd == "modifyTableItem2")
+{
+    $key = $req->key; 
+    $keyValue = $req->keyValue; 
+    $table = $req->table;
+    $item = json_decode($req->item);
+
+    if($table == "[CTI Control Number總資料庫]")
+      unset($item->type);  //no use    
+    $res = modifyTableItem2($table, $key, $keyValue, $item);
     $RES->result = "OK";
 }
 else if($req->cmd == "insertTableItem")

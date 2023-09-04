@@ -271,7 +271,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("d")
             );
             
             host.xui_ui_tabs18.append(

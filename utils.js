@@ -232,6 +232,12 @@ utils = {
         var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":data};
         utils.sendDataCmd(hash,  onFinish, wait);
     }, 
+    modifyTableItem2 : function(table, key, keyValue, datas, onFinish,  wait){
+        var data = utils.removeInvalidFields(table, datas);
+        key = utils.removeBracket(key);
+        var hash={"cmd":"modifyTableItem2","table":table, "key":key,"keyValue":keyValue, "item":data};
+        utils.sendDataCmd(hash,  onFinish, wait);
+    }, 
     removeInvalidFields: function(table, datas){
         var data = Object.assign(datas);
         var fields = utils.getTableFieldNames(table);
@@ -331,12 +337,23 @@ utils = {
         DataPageTheme = DataPageThemeNames[DataPageThemeIndex++];
         xui.showModule("App." + pagename, cb2, null, null, false); //not cached
     }, 
-    showPage : function(pagename,  cb){
+    showPage : function(pagename,  onload, ondestroy){
         var cb2 = function(mod){
             utils.installDataBinderHooks(mod);  
             utils.installModuleTableBoxHooks(mod);
-            if(cb)
-              cb(mod);  
+            if(onload)
+              onload(mod); 
+            mod.setEvents("onDestroy",function(){
+                    //DataPageTheme = "";
+                    DataPageThemeIndex--;
+                    if(DataPageThemeIndex < 0)
+                        DataPageThemeIndex = 0;
+                    if(ondestroy)
+                      ondestroy(mod);
+                });    
+            if(DataPageTheme != "")
+                mod.dialog.setSandboxTheme(DataPageTheme);
+            mod.dialog.setModal(true);            
         };
         xui.showModule("App." + pagename, cb2, null, null, false);
     }, 
@@ -584,7 +601,7 @@ utils = {
            var nodes = mod.mainPage.getChildren(true,true).get();
         else if(mod.dialog)
            var nodes = mod.dialog.getChildren(true,true).get();
-        var formTableName = mod.properties.tableName;   
+        var formTableName = mod.key;   
         var showCombo = function(uictrl){
                 var db = mod.getDataBinders();
                 if(db.length > 0)
@@ -755,6 +772,8 @@ utils = {
     },
     getTableFieldConfig : function(table,  field){
         var cols = utils.getTableConfig(table);
+        if(typeof cols == "undefined")
+            return null;
         for(var i=0; i<cols.length; i++)
         {
             if(cols[i].COLUMN_NAME == field)
@@ -816,6 +835,11 @@ utils = {
                    input = xui.create("xui.UI.Input");
                    s += 'xui.create("xui.UI.Input")'; 
                 }
+                else {
+                   input = xui.create("xui.UI.Input");
+                   s += 'xui.create("xui.UI.Input")'; 
+                }
+                  
                 
                 input.setDock("none")
                     .setLeft(x +"em")
@@ -860,11 +884,17 @@ utils = {
         var items = utils.getTableConfig(table);
         cb(items);
     },
+    dateToString: function(d){
+      return xui.Date.format(d,"yyyy-mm-dd");  
+    },
     today: function(){
         return xui.Date.format(new Date(),"yyyy-mm-dd");
     },
     now: function(){
         return xui.Date.format(new Date(),"yyyy-mm-dd hh:nn:ss");
+    },     
+    dateTimeToString: function(d){
+        return xui.Date.format(d,"yyyy-mm-dd hh:nn:ss");
     },     
     formatString: function(fmt, item, quoteFlag = true){
         var cb = function(match,offset,str)
@@ -918,6 +948,19 @@ utils = {
         var canvas = document.createElement("canvas");
         JsBarcode(canvas, text, {format: "CODE128",width:2});
         return canvas.toDataURL("image/png");
+    },
+    showWarrantyEditForm: function(id){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("CryopumpWarranty原因分析表","登錄編號",id,"*");
+                    if(item != "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("CryopumpWarrantyEditForm", item, "edit")  ;      
+
     },
     showRepairOptionForm: function(db){
                     db.updateDataFromUI();
@@ -1258,8 +1301,9 @@ utils = {
         else 
             menu.popUp(uictrl);
     },
-    showTableCombo: function(uictrl, field=null){
-                var mod = uictrl.getHost();
+    showTableCombo: function(uictrl, field=null, mod=null){
+                if(mod == null)
+                   mod = uictrl.getHost();
                 var db = mod.getDataBinders();
                 if(db.length > 0)
                 {
@@ -1270,7 +1314,7 @@ utils = {
                 else 
                     var comboDatas = {};
                 var prop = mod.properties;
-                var tableName  = prop.tableName;
+                var tableName  = mod.key;
                 if(typeof tableName == "undefined")  //get from db tagvar
                   tableName = "通用";
                 if(field == null)
@@ -1344,5 +1388,168 @@ utils = {
             var start = utils.getMinutes(t2.getUIValue());
             var diff = (end -start);
             dst.setValue(diff);
-    },        
+    },    
+    getEmployeeData: function(emplID){
+        return utils.getITemValue("crm.Employee","EmplID", emplID);
+    },
+    showPickingSheetMenu: function(uictrl, rno){
+            var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增委託單"}];
+            if(typeof ns.pickingMenu == "undefined")
+            {
+              ns._pickingmenu_onmenuselected = function(profile, item, src){
+                  let ns = this;
+                if(item.id == "new")
+                {
+                  var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+                  if(data != "")
+                  {   
+                    var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
+                        "登錄編號":rno, "Creator": LoginUser.EmplID,"型號":data["In Model"]};
+                    var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
+                    if(data2 != "")
+                    {
+                      item["客戶簡稱"] = data2["客戶簡稱"];      
+                      item["客戶代號"] = data2["客戶代號"];      
+                      item["發票地址一"] = data2["發票地址一"];      
+                      item["發票地址二"] = data2["發票地址二"];      
+                      item["課稅別"] = data2["課稅別"];      
+                      item["營業稅率"] = data2["營業稅率"];      
+                      item["叫修單別"] = data2["叫修單別"];      
+                      item["叫修單號"] = data2["叫修單號"];      
+                    }
+                    utils.showDataPage("ErpPickingForm", item, "new");
+                  }                   
+                }
+                else
+                {
+                  var data = utils.getItemValue("領料報工單","領料報工單號", item.id);  
+                  utils.showDataPage("ErpPickingForm", data, "edit");
+                }                  
+              }  
+              var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"pickingMenu").onMenuSelected("_pickingmenu_onmenuselected");
+              ns.AddComponents(menu);
+            }
+            var condition = `[登錄編號] = '${rno}'`; 
+            var cb = function(datas){
+               var rows = datas.rows;   
+               for(var i=0; i<rows.length; i++)
+               {
+                 if(rows[i])
+                 {
+                   var r = rows[i];
+                   let empl = utile.getEmployeeData(r[1]);
+                   let caption = r[0] + "  " + empl.DisplayName;
+                   items.push({"id" : r[0], "caption" : caption}); 
+                 }
+               }
+               ns.pickingMenu.setItems(items);
+               ns.pickingMenu.popUp(uictrl); 
+            };
+            utils.getTableItems({"tableName":"領料報工單","condition":condition, "fields":"領料報工單號,Creator"}, cb);
+    },
+    showTestFormMenu: function(uictrl, rno){
+            var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增Test Form"}];
+            if(typeof ns.testFormMenu == "undefined")
+            {
+              ns._testformmenu_onmenuselected = function(profile, item, src){
+                  let ns = this;
+                if(item.id == "new")
+                {
+                  var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+                  if(data != "")
+                  {   
+                    var item = {"Pump":data["In Model"],"P/N":data["In P/N"], "S/N":data["型號(EX form)"],"S/N":data["In S/N"],"TestDate":utils.today(),
+                        "登錄編號":rno};
+                    utils.showDataPage("CryopumpTestSubForm", item, "new");
+                  }                   
+                }
+                else
+                {
+                  var data = utils.getItemValue("CryopumpTestForm","rowid", item.id);  
+                  utils.showDataPage("CryopumpTestSubForm", data, "edit");
+                }                  
+              }  
+              var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"testFormMenu").onMenuSelected("_testformmenu_onmenuselected");
+              ns.AddComponents(menu);
+            }
+            var condition = `[登錄編號] = '${rno}'`; 
+            var cb = function(datas){
+               var rows = datas.rows;   
+               for(var i=0; i<rows.length; i++)
+               {
+                 if(rows[i])
+                 {
+                   var r = rows[i];
+                   let caption = (rows.length-i) + ": " + r[1];
+                   items.push({"id" : r[0], "caption" : caption}); 
+                 }
+               }
+               ns.testFormMenu.setItems(items);
+               ns.testFormMenu.popUp(uictrl); 
+            };
+            utils.getTableItems({"tableName":"CryopumpTestForm","condition":condition, "fields":"rowid,Fail 原因", "orderby":"rowid DESC"}, cb);
+    },
+    nextStation: function(uictrl){
+            var ns = uictrl.getModule(), items = [
+    {
+        "id" : "拆解站",
+        "caption" : "拆解站"
+    },
+    {
+        "id" : "Vacuum side",
+        "caption" : "Vacuum站"
+    },
+    {
+        "id" : "Helium side",
+        "caption" : "Helium站"
+    },
+    {
+        "id" : "Compressor",
+        "caption" : "Compressor站"
+    },
+    {
+        "id" : "Crosshead",
+        "caption" : "Crosshead站"
+    },
+    {
+        "id" : "Module",
+        "caption" : "Module站"
+    },
+    {
+        "id" : "測試站",
+        "caption" : "測試站"
+    }
+];
+            var rno = ns.repairNo.getUIValue();
+            if(typeof ns.nextMenu == "undefined")
+            {
+              ns._nextmenu_onmenuselected = function(profile, item, src){
+                  let ns = this;
+                  utils.modifyTableItem("維修站總資料表","登錄編號",{"登錄編號":rno, "維修站名": item.id});
+                  utils.alert("維修工單:" + rno + "已放入 " + item.caption);
+              }  
+              var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"nextMenu").onMenuSelected("_nextmenu_onmenuselected");
+              ns.AddComponents(menu);
+            }
+            ns.nextMenu.setItems(items);
+            ns.nextMenu.updateItem(SiteName, {"hidden":true});
+            ns.nextMenu.popUp(uictrl);
+    },
+    newCryoPumpTestForm: function(rno){
+            var rdata = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno);
+            if(rdata == "")
+            {
+                utils.alert("查無此登錄編號!");
+                return "";
+            }
+            var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today()};
+            var data = utils.insertTableItem("CryopumpTestForm", ndata);
+            return data;
+    },
+    pad: function(num, size) {
+        num = num.toString();
+        while (num.length < size) num = "0" + num;
+        return num;
+    }
+    
  };

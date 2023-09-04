@@ -2275,6 +2275,18 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .onClick("_repairbtn_onclick")
             );
             
+            host.xui_ui_block305.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"pickingBtn")
+                .setAutoTips(false)
+                .setLeft("40.6em")
+                .setTop("6em")
+                .setWidth("8.666666666666666em")
+                .setCaption("領料報工單")
+                .setType("drop")
+                .onClick("_pickingbtn_onclick")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -2343,7 +2355,19 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 _repairbtn_onclick:function(profile, e, src, value){
                     var ns = this, uictrl = profile.boxing();
                     utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
-                }
+                },
+                    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                    _pickingbtn_onclick:function(profile, e, src, value){
+                        var ns = this, uictrl = profile.boxing();
+                utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue());
+                    }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

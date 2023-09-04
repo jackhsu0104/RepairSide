@@ -1,1 +1,1 @@
-SELECT * FROM [領料報工單] WHERE 客戶代號 = '190026'  ORDER BY [領料報工單號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY�名 = '拆解站')  ORDER BY [登錄編號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT * FROM [領料報工單] WHERE 客戶代號 = '190026'  ORDER BY [領料報工單號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
