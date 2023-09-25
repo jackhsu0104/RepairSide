@@ -259,34 +259,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setLabelSize("6em")
                 .setLabelCaption("課稅別")
                 .setType("popbox")
-            );
-            
-            host.xui_ui_block638.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput399")
-                .setDataBinder("pdb")
-                .setDataField("營業稅率")
-                .setLeft("45.333333333333336em")
-                .setTop("7.619047619047619em")
-                .setWidth("14.4em")
-                .setLabelSize("6em")
-                .setLabelCaption("營業稅率")
-                .setType("popbox")
-            );
-            
-            host.xui_ui_block638.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput442")
-                .setDataBinder("pdb")
-                .setDataField("工時")
-                .setLeft("0.7619047619047619em")
-                .setTop("10.438095238095238em")
-                .setWidth("14.476190476190476em")
-                .setLabelSize("6em")
-                .setLabelCaption("工時")
-                .setType("spin")
-                .setPrecision(1)
-                .setValue(0)
+                .setMin(null)
             );
             
             host.xui_ui_block638.append(
@@ -307,7 +280,6 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setHost(host,"repairNo")
                 .setDataBinder("pdb")
                 .setDataField("登錄編號")
-                .setRequired(true)
                 .setLeft("32em")
                 .setTop("5.266666666666667em")
                 .setWidth("14.4em")
@@ -341,6 +313,37 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setLabelCaption("型號")
             );
             
+            host.xui_ui_block638.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput442")
+                .setDataBinder("pdb")
+                .setDataField("工時")
+                .setLeft("0.7619047619047619em")
+                .setTop("10.438095238095238em")
+                .setWidth("14.476190476190476em")
+                .setLabelSize("6em")
+                .setLabelCaption("工時")
+                .setType("counter")
+                .setPrecision(1)
+                .setIncrement(0.5)
+                .setMin(0)
+                .setValue(0)
+            );
+            
+            host.xui_ui_block638.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput399")
+                .setDataBinder("pdb")
+                .setDataField("營業稅率")
+                .setLeft("45.333333333333336em")
+                .setTop("7.619047619047619em")
+                .setWidth("14.4em")
+                .setLabelSize("6em")
+                .setLabelCaption("營業稅率")
+                .setType("counter")
+                .setMin(0)
+            );
+            
             host.form.append(
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"mgrid")
@@ -357,6 +360,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                     "keyid" : "rowid",
                     "openPageName" : "PickingEditForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",
@@ -480,6 +484,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
+            if(prop.mode == "new")
+                ns.pdb.setData("Creator", LoginUser.EmplID);
             utils.saveForm(ns);
         },
         prepareNewData: function(rno){
@@ -541,21 +547,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
         },
         uploadPickingData: function(edata){
                 var ns = this;
-                var wait = true;
-                if(onFinish)
-                    wait = false;
-                var result = null;
-                xui.Ajax("http://192.168.10.21/WEBAPI_W3R027/INSERTRMAMI13",edata,function(rsp){
-                    var data =rsp;
-                    if(!data)    alert("no data");
-                    else
-                    {
-                        result = data;
-                        if(onFinish)
-                          onFinish(data);  
-                    }
-                },null,null,{"reqType":"json","asy": !wait}).start();
-                return result;
+                var data  = utils.uploadErpDatas(edata);
+                console.log(data);           
         },
         prepareErpHeader: function(){
             var ns = this;

@@ -5279,8 +5279,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.sheetType.setDataBinder(dbname);
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
-            utils.saveForm(ns,"","",null, db);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.saveForm(ns,"","",null, db);
        },
 
         /**
@@ -5297,6 +5297,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.crdb2.updateDataToUI();
             ns.updateSheetType(ns.sheetType.getUIValue());
             console.log(utils.createDDL(ns.dialog,"Crosshead維修工單", true));
+            ns.tabs1.setValue("a");
+            ns.tabs2.setValue("a");
+
         },
             /**
          * Fired when user click it

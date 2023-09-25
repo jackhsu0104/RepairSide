@@ -1,6 +1,6 @@
 INSERT INTO [測試區總資料表] ([Area],[CH],[TestFormRowid],[登錄編號]) OUTPUT inserted.*   VALUES(?,?,?,?)Array
 (
-    [0] => A
+    [0] => B
     [1] => 14
     [2] => -1
     [3] => 

@@ -1,1 +1,1 @@
-SELECT * FROM [領料報工單] WHERE 客戶代號 = '190026'  ORDER BY [領料報工單號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT count(*) FROM [Cryopump維修工單] WHERE ([A組裝簽名] != '' AND [A組裝簽名] = '')  OR ([B組裝簽名] != '' AND [B組裝簽名] = '')  OR ([C組裝簽名] != '' AND [C組裝簽名] = '')  OR ([D測試人員簽名] != '' AND [D測試人員簽名] = '')  

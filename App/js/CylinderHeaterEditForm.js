@@ -336,7 +336,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.Tabs")
-                .setHost(host,"xui_ui_tabs6")
+                .setHost(host,"tabs")
                 .setItems([
                     {
                         "id" : "a",
@@ -357,7 +357,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setValue("c")
             );
             
-            host.xui_ui_tabs6.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block1")
                 .setDock("fill")
@@ -900,7 +900,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setLabelCaption("Remark")
             );
             
-            host.xui_ui_tabs6.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block3")
                 .setDock("fill")
@@ -1328,7 +1328,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setMultiLines(true)
             );
             
-            host.xui_ui_tabs6.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block227")
                 .setDock("fill")
@@ -1584,8 +1584,8 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            utils.saveForm(ns);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.saveForm(ns);
         },
 
         /**
@@ -1598,6 +1598,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
             var cmd = utils.createDDL(ns.dialog, "CylinderHeater維修工單");
             console.log(cmd);
+            ns.tabs.setValue("a");
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },

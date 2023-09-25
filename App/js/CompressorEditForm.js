@@ -86,14 +86,13 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"nextBtn")
+                .setHost(host,"reportBtn")
                 .setAutoTips(false)
-                .setLeft("40.60952380952381em")
+                .setLeft("2.1333333333333333em")
                 .setTop("0.8666666666666667em")
                 .setWidth("10.333333333333334em")
-                .setCaption("工單到下一站")
-                .setType("drop")
-                .onClick("_nextbtn_onclick")
+                .setCaption("產生測試報告")
+                .onClick("_reportbtn_onclick")
             );
             
             host.dialog.append(
@@ -255,7 +254,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.Tabs")
-                .setHost(host,"xui_ui_tabs14")
+                .setHost(host,"tabs")
                 .setItems([
                     {
                         "id" : "a",
@@ -280,7 +279,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setValue("d")
             );
             
-            host.xui_ui_tabs14.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block246")
                 .setDock("fill")
@@ -292,7 +291,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_block246.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input495")
-                .setName("上次登錄編號")
                 .setDataBinder("comdb")
                 .setDataField("上次登錄編號")
                 .setLeft("1.3333333333333333em")
@@ -339,7 +337,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataBinder("comdb")
                 .setDataField("進廠原因")
                 .setLeft("1.2em")
-                .setTop("11.933333333333334em")
+                .setTop("14.733333333333333em")
                 .setWidth("38em")
                 .setLabelSize("8em")
                 .setLabelCaption("進廠原因")
@@ -366,8 +364,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setName("Compressor S/N")
                 .setDataBinder("comdb")
                 .setDataField("Compressor S/N")
-                .setLeft("21.333333333333332em")
-                .setTop("5.266666666666667em")
+                .setLeft("1.3333333333333333em")
+                .setTop("9.933333333333334em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("Compressor S/N")
@@ -381,7 +379,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataBinder("comdb")
                 .setDataField("Compressor ETM")
                 .setLeft("-2.8190476190476192em")
-                .setTop("9.82857142857143em")
+                .setTop("12.6em")
                 .setWidth("22.323809523809523em")
                 .setLabelSize("12em")
                 .setLabelCaption("Compressor ETM")
@@ -430,7 +428,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label2415")
                 .setLeft("19.8em")
-                .setTop("10em")
+                .setTop("12.8em")
                 .setCaption("hrs")
             );
             
@@ -474,7 +472,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
             );
             
-            host.xui_ui_tabs14.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block2")
                 .setDock("fill")
@@ -539,7 +537,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A2#1")
                 .setLeft("3.8095238095238093em")
                 .setTop("3.3523809523809525em")
-                .setWidth("16.666666666666668em")
+                .setWidth("22.2em")
                 .setLabelSize("10em")
                 .setLabelCaption("2.Helium Leak Check")
                 .setMaxlength("32")
@@ -562,7 +560,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("22.857142857142858em")
+                .setLeft("26em")
                 .setTop("3.123809523809524em")
                 .setHeight("2.5904761904761906em")
                 .setLabelPos("top")
@@ -1082,7 +1080,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelSize("10em")
                 .setLabelCaption("12.Water In Temp")
                 .setMaxlength("32")
-                .afterValueSet("_c3_aftervalueset")
+                .afterUIValueSet("_c3_afteruivalueset")
             );
             
             host.block2.append(
@@ -1421,7 +1419,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setCaption("A")
             );
             
-            host.xui_ui_tabs14.append(
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block3")
                 .setDock("fill")
@@ -2698,7 +2696,45 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelCaption("=")
             );
             
-            host.xui_ui_tabs14.append(
+            host.block3.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label1072")
+                .setLeft("13.333333333333334em")
+                .setTop("68.53333333333333em")
+                .setWidth("10.666666666666666em")
+                .setHeight("1.5em")
+                .setCaption("20.隔音棉檢查")
+                .setVAlign("bottom")
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox1646")
+                .setDataBinder("comdb")
+                .setDataField("B20")
+                .setItems([
+                    {
+                        "id" : "Y",
+                        "caption" : "Y"
+                    },
+                    {
+                        "id" : "N",
+                        "caption" : "N"
+                    }
+                ])
+                .setLeft("23.666666666666668em")
+                .setTop("68.2em")
+                .setWidth("8.5em")
+                .setHeight("1.8em")
+                .setCheckBox(true)
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
+            );
+            
+            host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block4")
                 .setDock("fill")
@@ -3343,22 +3379,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("日期C")
                 .setLeft("4.647619047619048em")
                 .setTop("0.6857142857142857em")
-                .setWidth("9.333333333333334em")
+                .setWidth("10.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input885")
-                .setDataBinder("comdb")
-                .setDataField("ModelC")
-                .setLeft("13.942857142857143em")
-                .setTop("0.6857142857142857em")
-                .setWidth("11.333333333333334em")
-                .setLabelSize("3.3333333333333335em")
-                .setLabelCaption("Model")
             );
             
             host.block4.append(
@@ -4060,8 +4084,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            utils.saveForm(ns);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.saveForm(ns);
         },
 
         /**
@@ -4073,6 +4097,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
             console.log(utils.createDDL(ns.dialog,"Compressor維修工單"));
+            ns.tabs.setValue("a");
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -4228,12 +4253,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             },
         setTempF: function(uictrl, value){
             value - Number(value);
-            value = Math.Floor(value * 9 / 5 + 32);
+            value = Math.floor(value * 9 / 5 + 32);
             uictrl.setValue(value);
         },
         setTempC: function(uictrl, value){
             value - Number(value);
-            value = Math.Floor((value-32) * 5 / 9);
+            value = Math.floor((value-32) * 5 / 9);
             uictrl.setValue(value);
         },
         /**
@@ -4264,19 +4289,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
              ns.setTempF(ns.f2, newValue);
         },
-        /**
-         * Fired after setValue is called
-         * @method afterValueSet [xui.UI.Input event]
-         * @param {xui.UIProfile.} profile  The current control's profile object
-         * @param {String} oldValue , old Value
-         * @param {String} newValue , new Value
-         * @param {Boolean} force , force to call or not
-         * @param {call} tag  extra info
-        */
-        _c3_aftervalueset:function(profile, oldValue, newValue, force, tag){
-            var ns = this, uictrl = profile.boxing();
-            ns.setTempF(ns.f3, newValue);
-        },
+
         /**
          * Fired after setUIValue is called
          * @method afterUIValueSet [xui.UI.Input event]
@@ -4406,7 +4419,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         updateMinutes: function(){
             var ns = this;
             utils.calcMinute(ns.ct2, ns.ct1, ns.t17k);
-            utils.calcMinute(ns.ct3, ns.ct1, ns.t14k);
+            utils.calcMinute(ns.ct3, ns.ct2, ns.t14k);
             
         },
         /**
@@ -4536,6 +4549,32 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _changerepairbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             utils.showTableCombo(ns.repairNo,"更換登錄編號");
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _reportbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.createCompressorTestReport(ns.repairNo.getUIValue());
+            },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.Input event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _c3_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.setTempF(ns.f3, newValue);
         }
         /*,
         // To determine how properties affects this module

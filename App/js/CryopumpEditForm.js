@@ -102,6 +102,17 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .onClick("_nextbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"reportBtn")
+                .setAutoTips(false)
+                .setLeft("1.3333333333333333em")
+                .setTop("0.8666666666666667em")
+                .setWidth("10.333333333333334em")
+                .setCaption("產生測試報告")
+                .onClick("_reportbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -302,7 +313,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("8.666666666666666em")
                 .setHeight("2em")
                 .setCaption("Compressor工單")
-                .onClick("_warrantybtn_onclick")
+                .onClick("_compressorbtn_onclick")
             );
             
             host.xui_ui_div262.append(
@@ -315,7 +326,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("8.666666666666666em")
                 .setHeight("1.9333333333333333em")
                 .setCaption("Crosshead工單")
-                .onClick("_warrantybtn_onclick")
+                .onClick("_crossheadbtn_onclick")
             );
             
             host.xui_ui_div262.append(
@@ -328,7 +339,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("10.666666666666666em")
                 .setHeight("1.9333333333333333em")
                 .setCaption("Cylinder/Heater工單")
-                .onClick("_warrantybtn_onclick")
+                .onClick("_heaterbtn_onclick")
             );
             
             host.form.append(
@@ -367,7 +378,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("e")
             );
             
             host.tabs1.append(
@@ -1910,12 +1921,18 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("A3#5")
                 .setAutoTips(false)
-                .setLeft("15.066666666666666em")
+                .setLeft("20.133333333333333em")
                 .setTop("10.666666666666666em")
-                .setWidth("16.933333333333334em")
-                .setLabelSize("8em")
+                .setWidth("11.866666666666667em")
+                .setLabelSize("3em")
                 .setLabelCaption("接地")
                 .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
                 .setPrecision(1)
                 .setIncrement(1)
             );
@@ -2271,23 +2288,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput978")
-                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("rdb")
-                .setDataField("B2#1")
-                .setLeft("2.6666666666666665em")
-                .setTop("2.6666666666666665em")
-                .setWidth("19.885714285714286em")
-                .setLabelSize("12em")
-                .setLabelCaption("Heater & Cylinder S/N")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
             );
             
             host.block3.append(
@@ -2828,6 +2828,23 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("30.266666666666666em")
                 .setTop("17.533333333333335em")
                 .setCaption("K")
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput978")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("rdb")
+                .setDataField("B2#1")
+                .setLeft("2.6666666666666665em")
+                .setTop("2.6666666666666665em")
+                .setWidth("19.885714285714286em")
+                .setLabelSize("12em")
+                .setLabelCaption("Heater & Cylinder S/N")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.tabs1.append(
@@ -3822,7 +3839,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C17#1")
                 .setLeft("8em")
                 .setTop("41.06666666666667em")
-                .setWidth("20.133333333333333em")
+                .setWidth("26em")
                 .setLabelSize("15em")
                 .setLabelCaption("15k Array版本")
                 .setMaxlength("32")
@@ -6620,7 +6637,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("b")
             );
             
             host.tabs2.append(
@@ -7966,23 +7983,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block215.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput898")
-                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
-                .setDataBinder("rdb2")
-                .setDataField("B2#1")
-                .setLeft("4.666666666666667em")
-                .setTop("2.6666666666666665em")
-                .setWidth("24em")
-                .setLabelSize("10em")
-                .setLabelCaption("2.Cylinder S/N")
-                .setType("number")
-                .setMaxlength("null")
-                .setPrecision(1)
-                .setIncrement(1)
-            );
-            
-            host.xui_ui_block215.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox736")
                 .setDataBinder("rdb2")
@@ -8283,6 +8283,23 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("30.2em")
                 .setTop("13.6em")
                 .setCaption("K")
+            );
+            
+            host.xui_ui_block215.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput898")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("rdb2")
+                .setDataField("B2#1")
+                .setLeft("4.666666666666667em")
+                .setTop("2.6666666666666665em")
+                .setWidth("24em")
+                .setLabelSize("10em")
+                .setLabelCaption("2.Cylinder S/N")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
             );
             
             host.tabs2.append(
@@ -8962,7 +8979,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C17#1")
                 .setLeft("10em")
                 .setTop("33.93333333333333em")
-                .setWidth("20.133333333333333em")
+                .setWidth("26.666666666666668em")
                 .setLabelSize("15em")
                 .setLabelCaption("15k Array版本")
                 .setMaxlength("32")
@@ -10615,8 +10632,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             ns.sheetType.setDataBinder(dbname);
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
-            utils.saveForm(ns,"","",null, db);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.saveForm(ns,"","",null, db);
         },
 
         /**
@@ -10633,6 +10650,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
             console.log(utils.createDDL(ns.dialog,"Cryopump維修工單", true));
+            ns.tabs1.setValue("a");
+            ns.tabs2.setValue("a");
                             
         },
             /**
@@ -11169,6 +11188,54 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         _warrantybtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             utils.showWarrantyEditForm(ns.repairNo.getUIValue());
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _reportbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.createCryopumpTestReport(ns.repairNo.getUIValue());
+            },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _compressorbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showCompressorEditForm(ns.repairNo.getUIValue());
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _crossheadbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showCrossheadEditForm(ns.repairNo.getUIValue());
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _heaterbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showCylinderHeaterEditForm(ns.repairNo.getUIValue());
         }
 
 

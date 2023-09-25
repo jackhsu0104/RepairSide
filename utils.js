@@ -956,12 +956,51 @@ utils = {
                       return;
                     }
                     var item = utils.getItemValue("CryopumpWarranty原因分析表","登錄編號",id,"*");
-                    if(item != "")
+                    if(item == "")
                       utils.alert("查無表單!");        
                     else
-                      utils.showDataPage("CryopumpWarrantyEditForm", item, "edit")  ;      
+                      utils.showDataPage("CryopumpWarrantyEditForm", item, "edit");      
 
     },
+    showCompressorEditForm: function(id){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Compressor維修工單","登錄編號",id,"*");
+                    if(item == "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("CompressorEditForm", item, "edit");      
+
+    },
+    showCrossheadEditForm: function(id){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Crosshead維修工單","登錄編號",id,"*");
+                    if(item == "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("CrossheadEditForm", item, "edit");      
+
+    },
+    showCylinderHeaterEditForm: function(id){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("CylinderHeater維修工單","登錄編號",id,"*");
+                    if(item == "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("CylinderHeaterEditForm", item, "edit");      
+
+    },    
     showRepairOptionForm: function(db){
                     db.updateDataFromUI();
                     var data = db.getData();
@@ -1384,16 +1423,26 @@ utils = {
             return 0;
     },
     calcMinute: function(t1, t2, dst){
-            var end = utils.getMinutes(t1.getUIValue());
-            var start = utils.getMinutes(t2.getUIValue());
+            var t1 = t1.getUIValue();
+            var t2 = t2.getUIValue();
+            if(t1 == "" || t2 == "")
+                return;
+            var end = utils.getMinutes(t1);
+            var start = utils.getMinutes(t2);
             var diff = (end -start);
             dst.setValue(diff);
     },    
     getEmployeeData: function(emplID){
-        return utils.getITemValue("crm.Employee","EmplID", emplID);
+        return utils.getItemValue("crm.Employee","EmplID", emplID);
     },
     showPickingSheetMenu: function(uictrl, rno){
             var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增委託單"}];
+            var data = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
+            if(data == "")
+            {
+              utils.alert("ERP查無此登錄編號: "+ rno);
+              return;  
+            }
             if(typeof ns.pickingMenu == "undefined")
             {
               ns._pickingmenu_onmenuselected = function(profile, item, src){
@@ -1437,7 +1486,7 @@ utils = {
                  if(rows[i])
                  {
                    var r = rows[i];
-                   let empl = utile.getEmployeeData(r[1]);
+                   let empl = utils.getEmployeeData(r[1]);
                    let caption = r[0] + "  " + empl.DisplayName;
                    items.push({"id" : r[0], "caption" : caption}); 
                  }
@@ -1536,20 +1585,87 @@ utils = {
             ns.nextMenu.popUp(uictrl);
     },
     newCryoPumpTestForm: function(rno){
-            var rdata = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno);
-            if(rdata == "")
+            var items = utils.getItemValue("CryopumpTestForm","登錄編號",ns.repairNo.getUIValue(),"*",true);
+            if(items == "")
             {
+              var rdata = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno);
+              if(rdata == "")
+              {
                 utils.alert("查無此登錄編號!");
                 return "";
+              }
+              var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today(), "item":1};
+              var data = utils.insertTableItem("CryopumpTestForm", ndata);
+                    
             }
-            var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today()};
-            var data = utils.insertTableItem("CryopumpTestForm", ndata);
+            else
+            {    
+              var last = items[items.length-1];
+              var datas = {"登錄編號":last["登錄編號"], "item": Number(last["item"])+1, "Pump":last["Pump"], "P/N":last["P/N"], "S/N":last["S/N"], "Type":last["Type"], "Ch":last["Ch"],
+                         "Pump#2":last["Pump#2"],"Pump#3":last["Pump#3"]};
+              var data = utils.insertTableItem("CryopumpTestForm",datas);
+            }
+        
             return data;
     },
     pad: function(num, size) {
         num = num.toString();
         while (num.length < size) num = "0" + num;
         return num;
+    },
+    createPdfReport: async function(formUrl, data, fileName){
+              const { PDFDocument,StandardFonts } = PDFLib
+              const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
+              // Load a PDF with form fields
+              const pdfDoc = await PDFDocument.load(formPdfBytes)
+              // Get the form containing all the fields
+              const form = pdfDoc.getForm()
+
+          // Get all fields in the PDF by their names
+              var keys = Object.keys(data);
+              for(var i=0; i<keys.length; i++)
+              {
+                var name = keys[i];
+                try{    
+                  var field = form.getTextField(name);
+                  if(field)
+                  {
+                    field.setText(data[name]);
+                    field.enableReadOnly();
+                    
+                  }
+                }
+                catch(e){
+                }
+              }
+              // Serialize the PDFDocument to bytes (a Uint8Array)
+              const pdfBytes = await pdfDoc.save()
+
+              // Trigger the browser to download the PDF document
+              download(pdfBytes, fileName, "application/pdf");
+    },
+    createCryopumpTestReport: function(rno){
+            var data = utils.getItemValue("Cryopump維修工單","登錄編號", rno)
+            if(data != "")
+            {
+              var fname = rno +"_CryopumpTestReport.pdf";   
+              this.createPdfReport("./TestData.pdf", data, fname);
+            }
+
+    },
+    createCompressorTestReport: function(rno){
+            var data = utils.getItemValue("Compressor維修工單","登錄編號", rno)
+            if(data != "")
+            {
+              var fname = rno +"_CompressorTestReport.pdf";   
+              this.createPdfReport("./CompressorTestData.pdf", data, fname);
+            }
+
+    },
+    uploadErpDatas:function(edata){
+        var item = JSON.stringify(edata);
+        var data = this.sendDataCmd({"cmd":"uploadErpDatas", "item": item});
+        return data;
     }
     
  };

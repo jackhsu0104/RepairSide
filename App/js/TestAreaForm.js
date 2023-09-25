@@ -79,6 +79,17 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .onClick("_savebtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"xui_ui_button982")
+                .setLeft("1.3333333333333333em")
+                .setTop("1em")
+                .setWidth("10em")
+                .setHeight("2em")
+                .setCaption("新增Test Form")
+                .onClick("_newbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -116,23 +127,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.xui_ui_block36.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"newBtn")
+                .setHost(host,"loadBtn")
                 .setLeft("20.666666666666668em")
                 .setTop("4em")
-                .setWidth("10em")
+                .setWidth("8.8em")
                 .setHeight("2em")
-                .setCaption("新增Test Form")
-                .onClick("_newbtn_onclick")
-            );
-            
-            host.xui_ui_block36.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"loadBtn")
-                .setLeft("31.333333333333332em")
-                .setTop("4.133333333333334em")
-                .setWidth("12.666666666666666em")
-                .setHeight("2em")
-                .setCaption("載入最新一筆Test Form")
+                .setCaption("載入Test Form")
                 .onClick("_loadbtn_onclick")
             );
             
@@ -1399,6 +1399,23 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
         _page_aftershow:function(e,i){
             var ns = this, uictrl = profile.boxing();
 
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _reportbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.saveChamber();
+            var id = ns.tabs.getValue();  
+            var rowid = ns.rowidList[id];  
+            if(rowid < 0)
+                return;
+            utils.createCryoTestReport(rowid);
         }
         /*,
         // To determine how properties affects this module

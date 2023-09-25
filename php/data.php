@@ -1,5 +1,6 @@
 <?php
 require_once("utils.php");
+require_once("restclient.php");
 $req = xui_getRequestData();
 if(!isset($req->cmd))
 {
@@ -240,6 +241,8 @@ function prepareTableKey($table, $item)
     }
     else  if($table == "[CTI Control Number總資料庫]")
     {
+        if(!isset($item->type))
+            return;
         $h1 = "A";  
         $wid  = $item->工號;  
         $q1 = "SELECT Robot FROM [工號登錄總資料表]  WHERE [工號] = '$wid'";  
@@ -517,18 +520,6 @@ else  if($req->cmd == "modifyTableItem")
     $res = modifyTableItem($table, $key, $item);
     $RES->result = "OK";
 }
-else  if($req->cmd == "modifyTableItem2")
-{
-    $key = $req->key; 
-    $keyValue = $req->keyValue; 
-    $table = $req->table;
-    $item = json_decode($req->item);
-
-    if($table == "[CTI Control Number總資料庫]")
-      unset($item->type);  //no use    
-    $res = modifyTableItem2($table, $key, $keyValue, $item);
-    $RES->result = "OK";
-}
 else if($req->cmd == "insertTableItem")
 {
     $table = $req->table;
@@ -612,14 +603,27 @@ else if($req->cmd == "getTableNames")
 else  if($req->cmd == "newCnNumber")
 {
     $value = $req->value; 
-
     $nbr = newCnNumber();
     $key = "CN#";
-    $datas = new stdClass;
-    $datas->登錄編號 = $value;
-    $datas->$key = $nbr;
-    modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
+    if($value != "")
+    {    
+      $datas = new stdClass;
+      $datas->登錄編號 = $value;
+      $datas->$key = $nbr;
+      modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
+    }
     $RES->$key = $nbr;
+    $RES->result = "OK";
+}
+else  if($req->cmd == "uploadErpDatas")
+{
+    $item = json_decode($req->item);
+    $api = new RestClient;
+    $result = $api->post("http://192.168.10.21/WEBAPI_W3R027/INSERTRMAMI13", $req->item,
+            array('Content-Type' => 'application/json'));
+        
+    $rjson = $result->decode_response();
+    $RES->message = $rjson->message;
     $RES->result = "OK";
 }
 else

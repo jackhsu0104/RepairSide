@@ -1,14 +1,14 @@
 stdClass Object
 (
-    [Pump] => OB-400
-    [P/N] => 8116174G001
-    [S/N] => 1206CHE12588
-    [登錄編號] => B2301R007
+    [Pump] => 8300
+    [P/N] => 8018182G001
+    [S/N] => 555556
+    [登錄編號] => A2307R001
     [Type] => 
     [Test] => 
     [AssyOK] => 
-    [TestDate] => 2023-09-03 00:00:00
-    [Supply] => 
+    [TestDate] => 2023-09-19 00:00:00
+    [Supply] => 456
     [Return] => 
     [Ch] => 
     [Comp] => 
@@ -40,25 +40,30 @@ stdClass Object
     [Warm Up] => 
     [Fail 原因] => 
     [處理情形] => 
-    [rowid] => 32
+    [rowid] => 37
     [確認狀態] => 
     [秘書確認] => 
     [組長確認] => 
-    [Test Plate] => OB/IS/P300
+    [Test Plate] => 
     [Warm Up Pass] => 
+    [TestName1] => 
+    [TestName2] => 
+    [TestDate1] => 1900-01-01
+    [TestDate2] => 1900-01-01
+    [item] => 0
 )
-UPDATE [CryopumpTestForm] SET [Pump] =  ?, [P/N] =  ?, [S/N] =  ?, [登錄編號] =  ?, [Type] =  ?, [Test] =  ?, [AssyOK] =  ?, [TestDate] =  ?, [Supply] =  ?, [Return] =  ?, [Ch] =  ?, [Comp] =  ?, [Comp#2] =  ?, [Comp#3] =  ?, [Pump#2] =  ?, [Start Time] =  ?, [Start Time#2] =  ?, [Start Time#3] =  ?, [Pump#3] =  ?, [20k/17k] =  ?, [20k/17k#2] =  ?, [20k/17k#3] =  ?, [20k/17k#4] =  ?, [底溫1st] =  ?, [底溫2nd] =  ?, [100k #1] =  ?, [100k #2] =  ?, [100k #3] =  ?, [100k #4] =  ?, [65k#1] =  ?, [65k#2] =  ?, [85k#1] =  ?, [85k#2] =  ?, [65k#3] =  ?, [65k#4] =  ?, [85k#3] =  ?, [85k#4] =  ?, [Warm Up] =  ?, [Fail 原因] =  ?, [處理情形] =  ?, [確認狀態] =  ?, [秘書確認] =  ?, [組長確認] =  ?, [Test Plate] =  ?, [Warm Up Pass] =  ? WHERE [rowid] = ?
+UPDATE [CryopumpTestForm] SET [Pump] =  ?, [P/N] =  ?, [S/N] =  ?, [登錄編號] =  ?, [Type] =  ?, [Test] =  ?, [AssyOK] =  ?, [TestDate] =  ?, [Supply] =  ?, [Return] =  ?, [Ch] =  ?, [Comp] =  ?, [Comp#2] =  ?, [Comp#3] =  ?, [Pump#2] =  ?, [Start Time] =  ?, [Start Time#2] =  ?, [Start Time#3] =  ?, [Pump#3] =  ?, [20k/17k] =  ?, [20k/17k#2] =  ?, [20k/17k#3] =  ?, [20k/17k#4] =  ?, [底溫1st] =  ?, [底溫2nd] =  ?, [100k #1] =  ?, [100k #2] =  ?, [100k #3] =  ?, [100k #4] =  ?, [65k#1] =  ?, [65k#2] =  ?, [85k#1] =  ?, [85k#2] =  ?, [65k#3] =  ?, [65k#4] =  ?, [85k#3] =  ?, [85k#4] =  ?, [Warm Up] =  ?, [Fail 原因] =  ?, [處理情形] =  ?, [確認狀態] =  ?, [秘書確認] =  ?, [組長確認] =  ?, [Test Plate] =  ?, [Warm Up Pass] =  ?, [TestName1] =  ?, [TestName2] =  ?, [TestDate1] =  ?, [TestDate2] =  ?, [item] =  ? WHERE [rowid] = ?
 Array
 (
-    [0] => OB-400
-    [1] => 8116174G001
-    [2] => 1206CHE12588
-    [3] => B2301R007
+    [0] => 8300
+    [1] => 8018182G001
+    [2] => 555556
+    [3] => A2307R001
     [4] => 
     [5] => 
     [6] => 
-    [7] => 2023-09-03 00:00:00
-    [8] => 
+    [7] => 2023-09-19 00:00:00
+    [8] => 456
     [9] => 
     [10] => 
     [11] => 
@@ -93,7 +98,12 @@ Array
     [40] => 
     [41] => 
     [42] => 
-    [43] => OB/IS/P300
+    [43] => 
     [44] => 
-    [45] => 32
+    [45] => 
+    [46] => 
+    [47] => 1900-01-01
+    [48] => 1900-01-01
+    [49] => 0
+    [50] => 37
 )

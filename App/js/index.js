@@ -108,7 +108,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修委託單/工單")
+                .setValue("廠內領料報工")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -2171,7 +2171,10 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     var ns = this;
                     ns.initCodeReader();        
                     Logined = 0;
-    
+             xui.Ajax.method = "POST";
+            xui.Ajax.timeout = 15000;
+            xui.Ajax.retry = 3;
+   
                     utils.installModuleTableBoxHooks(ns);
                     xui.setLang("tw");
                     StoreNameList = {"拆解站":"1102-1","Vacuum side":"1102-3","Helium side":"1102-4","Compressor":"1102-7", "Crosshead":"1102-2","Module":"1102-5","測試站":"1102-6","Charcoal":"1102-8","Displacer":"1102-9"};
@@ -2523,7 +2526,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         },
 
         _pickinggrid2_oninitnewdata:function(){
-            var data = {"客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05};
+            var data = {"客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05, "維修單別":"B200","維修站別":"902","維修部門":"902","單據日期":utils.today()};
             /*var data2 = utils.getITemValue("erp.領料報工表單查詢","客戶代號", data["客戶代號"]); 
             if(data2 != "")
             {
