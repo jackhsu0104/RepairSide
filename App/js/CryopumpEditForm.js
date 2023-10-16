@@ -113,6 +113,20 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .onClick("_reportbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataField("維修狀況")
+                .setAutoTips(false)
+                .setLeft("12.666666666666666em")
+                .setTop("1.0666666666666667em")
+                .setWidth("20em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀況")
+                .setType("popbox")
+                .setMaxlength("32")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -308,7 +322,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"compressorBtn")
                 .setAutoTips(false)
                 .setTips("Warranty原因分析表")
-                .setLeft("16.666666666666668em")
+                .setLeft("26em")
                 .setTop("4.933333333333334em")
                 .setWidth("8.666666666666666em")
                 .setHeight("2em")
@@ -321,7 +335,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"crossheadBtn")
                 .setAutoTips(false)
                 .setTips("Warranty原因分析表")
-                .setLeft("26.066666666666666em")
+                .setLeft("35.4em")
                 .setTop("5em")
                 .setWidth("8.666666666666666em")
                 .setHeight("1.9333333333333333em")
@@ -334,12 +348,42 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"heaterBtn")
                 .setAutoTips(false)
                 .setTips("Warranty原因分析表")
-                .setLeft("35.333333333333336em")
+                .setLeft("44.666666666666664em")
                 .setTop("5em")
                 .setWidth("10.666666666666666em")
                 .setHeight("1.9333333333333333em")
                 .setCaption("Cylinder/Heater工單")
                 .onClick("_heaterbtn_onclick")
+            );
+            
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input3227")
+                .setName("Pump P/N")
+                .setDataBinder("rdb")
+                .setDataField("Pump P/N")
+                .setAutoTips(false)
+                .setLeft("0.5333333333333333em")
+                .setTop("5.333333333333333em")
+                .setWidth("13.666666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("Pump P/N")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_div262.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input3228")
+                .setName("Pump P/N")
+                .setDataBinder("rdb")
+                .setDataField("Pump S/N")
+                .setAutoTips(false)
+                .setLeft("13.6em")
+                .setTop("5.333333333333333em")
+                .setWidth("11.733333333333333em")
+                .setLabelSize("3em")
+                .setLabelCaption("S/N")
+                .setMaxlength("32")
             );
             
             host.form.append(
@@ -378,7 +422,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("e")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -3271,7 +3315,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("22.666666666666668em")
-                .setTop("13.2em")
+                .setTop("13.066666666666666em")
                 .setWidth("13.18095238095238em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("4em")
@@ -3842,6 +3886,20 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("26em")
                 .setLabelSize("15em")
                 .setLabelCaption("15k Array版本")
+                .setMaxlength("32")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_input2807")
+                .setDataBinder("rdb")
+                .setDataField("Crosshead編號")
+                .setLeft("37.333333333333336em")
+                .setTop("4.8em")
+                .setWidth("16.666666666666668em")
+                .setLabelSize("8em")
+                .setLabelCaption("\"X\" head編號 XH")
+                .setType("popbox")
                 .setMaxlength("32")
             );
             
@@ -6637,7 +6695,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("d")
             );
             
             host.tabs2.append(
@@ -8469,8 +8527,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("13.6em")
-                .setTop("0.3333333333333333em")
+                .setLeft("16em")
+                .setTop("0.06666666666666667em")
                 .setWidth("21.733333333333334em")
                 .setHeight("1.9047619047619047em")
                 .setLabelSize("13em")
@@ -9104,6 +9162,20 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setMaxlength("null")
                 .setPrecision(1)
                 .setIncrement(1)
+            );
+            
+            host.xui_ui_block216.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput1666")
+                .setDataBinder("rdb2")
+                .setDataField("Crosshead編號")
+                .setLeft("38.095238095238095em")
+                .setTop("2.6666666666666665em")
+                .setWidth("16.666666666666668em")
+                .setLabelSize("8em")
+                .setLabelCaption("\"X\" head編號 XH")
+                .setType("popbox")
+                .setMaxlength("32")
             );
             
             host.tabs2.append(
@@ -10633,6 +10705,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.writeRepairStatus(ns);
             utils.saveForm(ns,"","",null, db);
         },
 
@@ -10652,7 +10725,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             console.log(utils.createDDL(ns.dialog,"Cryopump維修工單", true));
             ns.tabs1.setValue("a");
             ns.tabs2.setValue("a");
-                            
+            utils.readRepairStatus(ns);
         },
             /**
          * Fired when user click it

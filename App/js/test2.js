@@ -216,13 +216,24 @@ xui.Class('App.test2', 'xui.Module',{
                 .setDock("none")
                 .setLeft("7em")
                 .setTop("22.933333333333334em")
+                .setWidth("41em")
                 .setHeight("2.6666666666666665em")
                 .setNoPanel(true)
-                .setWidth("41em")
                 .setValue("1")
                 .beforeUIValueSet("_tabs_beforeuivalueset")
                 .beforePageClose("_tabs_beforepageclose")
                 .onItemSelected("_tabs_onitemselected")
+            );
+            
+            host.form.append(
+                xui.create("Module.CryopumpTestLayout", "xui.Module")
+                .setHost(host,"module_cryopumptestlayout1")
+                .setProperties({
+                    "keyid" : "rowid",
+                    "tableName" : "CryopumpTestForm",
+                    "datas" : null,
+                    "mode" : "new"
+                })
             );
             
             append(

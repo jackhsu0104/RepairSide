@@ -95,6 +95,20 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .onClick("_reportbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataField("維修狀況")
+                .setAutoTips(false)
+                .setLeft("13.40952380952381em")
+                .setTop("1.0666666666666667em")
+                .setWidth("20em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀況")
+                .setType("popbox")
+                .setMaxlength("32")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -115,7 +129,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("10.133333333333333em")
                 .setTop("3.4285714285714284em")
-                .setHeight("5.933333333333334em")
+                .setHeight("8.6em")
             );
             
             host.xui_ui_div571.append(
@@ -252,6 +266,34 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .onClick("_changerepairbtn_onclick")
             );
             
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input3455")
+                .setName("Compressor P/N")
+                .setDataBinder("comdb")
+                .setDataField("Compressor P/N")
+                .setLeft("0.8em")
+                .setTop("5.866666666666666em")
+                .setWidth("14.533333333333333em")
+                .setLabelSize("8em")
+                .setLabelCaption("Compressor P/N")
+                .setMaxlength("32")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input3458")
+                .setName("Compressor P/N")
+                .setDataBinder("comdb")
+                .setDataField("Compressor P/N")
+                .setLeft("16em")
+                .setTop("5.933333333333334em")
+                .setWidth("14.533333333333333em")
+                .setLabelSize("8em")
+                .setLabelCaption("Compressor S/N")
+                .setMaxlength("32")
+            );
+            
             host.form.append(
                 xui.create("xui.UI.Tabs")
                 .setHost(host,"tabs")
@@ -276,7 +318,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("a")
             );
             
             host.tabs.append(
@@ -4085,6 +4127,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.writeRepairStatus(ns);
             utils.saveForm(ns);
         },
 
@@ -4098,6 +4141,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
             console.log(utils.createDDL(ns.dialog,"Compressor維修工單"));
             ns.tabs.setValue("a");
+            utils.readRepairStatus(ns);
+
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },

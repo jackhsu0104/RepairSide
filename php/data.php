@@ -623,6 +623,7 @@ else  if($req->cmd == "uploadErpDatas")
             array('Content-Type' => 'application/json'));
         
     $rjson = $result->decode_response();
+    $RES->code = $rjson->code;
     $RES->message = $rjson->message;
     $RES->result = "OK";
 }

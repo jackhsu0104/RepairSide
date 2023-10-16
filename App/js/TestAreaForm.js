@@ -46,6 +46,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setCloseBtn(false)
                 .setStatus("max")
                 .setConLayoutColumns(null)
+                .setSandboxTheme("army")
                 .onShow("_dialog_onshow")
             );
             
@@ -208,12 +209,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             host.xui_ui_block62.append(
                 xui.create("xui.UI.FormLayout")
                 .setHost(host,"testLayout")
-                .setDock("fill")
+                .setDock("top")
                 .setDockOrder(1)
-                .setLeft("13.714285714285714em")
-                .setTop("6.095238095238095em")
+                .setLeft("14.476190476190476em")
+                .setTop("6.857142857142857em")
                 .setWidth("88.66666666666667em")
-                .setHeight("34.4em")
+                .setHeight("35.333333333333336em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 14,
@@ -297,7 +298,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div307")
+                .setHost(host,"xui_ui_div1051")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("88.46666666666667em")
@@ -305,55 +306,62 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A1"
             );
             
-            host.xui_ui_div307.append(
+            host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input279")
+                .setHost(host,"xui_ui_input1472")
                 .setDataBinder("tdb")
                 .setDataField("Pump")
                 .setReadonly(true)
                 .setDock("top")
+                .setDockOrder(1)
                 .setDockStretch("fixed")
                 .setLeft("3.0476190476190474em")
                 .setTop("0.7619047619047619em")
+                .setWidth("12em")
                 .setLabelSize("4em")
                 .setLabelCaption("Pump")
             );
             
-            host.xui_ui_div307.append(
+            host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input280")
+                .setHost(host,"xui_ui_input1473")
                 .setDataBinder("tdb")
                 .setDataField("P/N")
                 .setReadonly(true)
                 .setDock("top")
+                .setDockOrder(2)
                 .setDockStretch("fixed")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
+                .setWidth("12em")
                 .setLabelSize("3em")
                 .setLabelCaption("P/N")
             );
             
-            host.xui_ui_div307.append(
+            host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input281")
+                .setHost(host,"xui_ui_input1474")
                 .setDataBinder("tdb")
                 .setDataField("S/N")
                 .setReadonly(true)
                 .setDock("top")
+                .setDockOrder(3)
                 .setDockStretch("fixed")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
+                .setWidth("12em")
                 .setLabelSize("3em")
                 .setLabelCaption("S/N")
             );
             
-            host.xui_ui_div307.append(
+            host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input282")
+                .setHost(host,"xui_ui_input1475")
                 .setDataBinder("tdb")
                 .setDataField("登錄編號")
                 .setReadonly(true)
                 .setDock("top")
+                .setDockOrder(4)
                 .setDockStretch("fixed")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
@@ -362,22 +370,39 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("登錄編號")
             );
             
-            host.xui_ui_div307.append(
+            host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input283")
+                .setHost(host,"xui_ui_input1476")
                 .setDataBinder("tdb")
                 .setDataField("Type")
                 .setReadonly(true)
                 .setDock("top")
+                .setDockOrder(5)
                 .setDockStretch("fixed")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
                 .setLabelSize("1em")
             );
             
+            host.xui_ui_div1051.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1477")
+                .setDataBinder("tdb")
+                .setDataField("item")
+                .setReadonly(true)
+                .setDock("top")
+                .setDockOrder(0)
+                .setDockStretch("fixed")
+                .setLeft("3.8095238095238093em")
+                .setTop("0.7619047619047619em")
+                .setWidth("3em")
+                .setLabelSize("1em")
+                .setLabelCaption("#")
+            );
+            
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div308")
+                .setHost(host,"xui_ui_div1052")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("88.46666666666667em")
@@ -386,9 +411,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A2"
             );
             
-            host.xui_ui_div308.append(
+            host.xui_ui_div1052.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput157")
+                .setHost(host,"xui_ui_comboinput787")
                 .setDataBinder("tdb")
                 .setDataField("Test")
                 .setDock("top")
@@ -402,9 +427,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .onClick("_xui_ui_input632_onclick")
             );
             
-            host.xui_ui_div308.append(
+            host.xui_ui_div1052.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox91")
+                .setHost(host,"xui_ui_radiobox353")
                 .setDataBinder("tdb")
                 .setDataField("Test Plate")
                 .setItems([
@@ -424,6 +449,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                     }
                 ])
                 .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : -5,
+                    "right" : 0,
+                    "bottom" : 0
+                })
                 .setDockStretch("fixed")
                 .setLeft("14.4em")
                 .setTop("-0.0761904761904762em")
@@ -442,16 +473,16 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_div308.append(
+            host.xui_ui_div1052.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput158")
+                .setHost(host,"xui_ui_comboinput788")
                 .setDataBinder("tdb")
                 .setDataField("AssyOK")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("4.571428571428571em")
                 .setTop("0.7619047619047619em")
-                .setWidth("12em")
+                .setWidth("14em")
                 .setLabelSize("4em")
                 .setLabelCaption("AssyOK")
                 .setType("getter")
@@ -460,7 +491,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div309")
+                .setHost(host,"xui_ui_div1053")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -468,9 +499,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A3"
             );
             
-            host.xui_ui_div309.append(
+            host.xui_ui_div1053.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput159")
+                .setHost(host,"xui_ui_comboinput789")
                 .setDataBinder("tdb")
                 .setDataField("TestDate")
                 .setDock("top")
@@ -483,9 +514,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setType("date")
             );
             
-            host.xui_ui_div309.append(
+            host.xui_ui_div1053.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input284")
+                .setHost(host,"xui_ui_input1478")
                 .setDataBinder("tdb")
                 .setDataField("Supply")
                 .setDock("top")
@@ -497,9 +528,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("Supply")
             );
             
-            host.xui_ui_div309.append(
+            host.xui_ui_div1053.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input286")
+                .setHost(host,"xui_ui_input1479")
                 .setDataBinder("tdb")
                 .setDataField("Return")
                 .setDock("top")
@@ -511,9 +542,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("/Return")
             );
             
-            host.xui_ui_div309.append(
+            host.xui_ui_div1053.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input287")
+                .setHost(host,"xui_ui_input1480")
                 .setDataBinder("tdb")
                 .setDataField("Ch")
                 .setDock("top")
@@ -527,7 +558,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div310")
+                .setHost(host,"xui_ui_div1054")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -535,9 +566,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A4"
             );
             
-            host.xui_ui_div310.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input288")
+            host.xui_ui_div1054.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput790")
                 .setDataBinder("tdb")
                 .setDataField("Comp")
                 .setDock("top")
@@ -546,11 +577,29 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setTop("0.7619047619047619em")
                 .setLabelSize("3em")
                 .setLabelCaption("Comp")
+                .setItems([
+                    {
+                        "id" : "9600",
+                        "caption" : "9600"
+                    },
+                    {
+                        "id" : "9600S",
+                        "caption" : "9600S"
+                    },
+                    {
+                        "id" : "BC70",
+                        "caption" : "BC70"
+                    },
+                    {
+                        "id" : "8500",
+                        "caption" : "8500"
+                    }
+                ])
             );
             
-            host.xui_ui_div310.append(
+            host.xui_ui_div1054.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input289")
+                .setHost(host,"xui_ui_input1481")
                 .setDataBinder("tdb")
                 .setDataField("Comp#2")
                 .setDock("top")
@@ -562,9 +611,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("/")
             );
             
-            host.xui_ui_div310.append(
+            host.xui_ui_div1054.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input290")
+                .setHost(host,"xui_ui_input1482")
                 .setDataBinder("tdb")
                 .setDataField("Comp#3")
                 .setDock("top")
@@ -576,22 +625,49 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("of")
             );
             
-            host.xui_ui_div310.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input291")
+            host.xui_ui_div1054.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput791")
                 .setDataBinder("tdb")
                 .setDataField("Pump#2")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("7.619047619047619em")
                 .setTop("0.7619047619047619em")
-                .setLabelSize("4em")
+                .setWidth("12em")
+                .setLabelSize("3em")
                 .setLabelCaption("Pump")
+                .setItems([
+                    {
+                        "id" : "N/A",
+                        "caption" : "N/A"
+                    },
+                    {
+                        "id" : "OB-8系列",
+                        "caption" : "OB-8系列"
+                    },
+                    {
+                        "id" : "OB-250F系列",
+                        "caption" : "OB-250F系列"
+                    },
+                    {
+                        "id" : "OB-10系列",
+                        "caption" : "OB-10系列"
+                    },
+                    {
+                        "id" : "IS-8系列",
+                        "caption" : "IS-8系列"
+                    },
+                    {
+                        "id" : "P300",
+                        "caption" : "P300"
+                    }
+                ])
             );
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div311")
+                .setHost(host,"xui_ui_div1055")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -599,9 +675,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A5"
             );
             
-            host.xui_ui_div311.append(
+            host.xui_ui_div1055.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput160")
+                .setHost(host,"st")
                 .setDataBinder("tdb")
                 .setDataField("Start Time")
                 .setDock("top")
@@ -611,11 +687,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelSize("5em")
                 .setLabelCaption("Start Time")
                 .setType("time")
+                .afterUIValueSet("_st_afteruivalueset")
             );
             
-            host.xui_ui_div311.append(
+            host.xui_ui_div1055.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input292")
+                .setHost(host,"xui_ui_input1483")
                 .setDataBinder("tdb")
                 .setDataField("Start Time#2")
                 .setDock("top")
@@ -627,9 +704,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("/")
             );
             
-            host.xui_ui_div311.append(
+            host.xui_ui_div1055.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input293")
+                .setHost(host,"xui_ui_input1484")
                 .setDataBinder("tdb")
                 .setDataField("Start Time#3")
                 .setDock("top")
@@ -641,22 +718,49 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("of")
             );
             
-            host.xui_ui_div311.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input294")
+            host.xui_ui_div1055.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput793")
                 .setDataBinder("tdb")
                 .setDataField("Pump#3")
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("8.380952380952381em")
                 .setTop("0.7619047619047619em")
-                .setLabelSize("4em")
+                .setWidth("12em")
+                .setLabelSize("3em")
                 .setLabelCaption("Pump")
+                .setItems([
+                    {
+                        "id" : "N/A",
+                        "caption" : "N/A"
+                    },
+                    {
+                        "id" : "OB-8系列",
+                        "caption" : "OB-8系列"
+                    },
+                    {
+                        "id" : "OB-250F系列",
+                        "caption" : "OB-250F系列"
+                    },
+                    {
+                        "id" : "OB-10系列",
+                        "caption" : "OB-10系列"
+                    },
+                    {
+                        "id" : "IS-8系列",
+                        "caption" : "IS-8系列"
+                    },
+                    {
+                        "id" : "P300",
+                        "caption" : "P300"
+                    }
+                ])
             );
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div313")
+                .setHost(host,"xui_ui_div1056")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -664,9 +768,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A6"
             );
             
-            host.xui_ui_div313.append(
+            host.xui_ui_div1056.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input295")
+                .setHost(host,"min1")
                 .setDataBinder("tdb")
                 .setDataField("20k/17k")
                 .setDock("top")
@@ -677,9 +781,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("20k/17k")
             );
             
-            host.xui_ui_div313.append(
+            host.xui_ui_div1056.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput161")
+                .setHost(host,"t1")
                 .setDataBinder("tdb")
                 .setDataField("20k/17k#2")
                 .setDock("top")
@@ -689,11 +793,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelSize("3.5em")
                 .setLabelCaption("mins / ")
                 .setType("time")
+                .afterUIValueSet("_t1_afteruivalueset")
             );
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div314")
+                .setHost(host,"xui_ui_div1057")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -701,9 +806,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A7"
             );
             
-            host.xui_ui_div314.append(
+            host.xui_ui_div1057.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input296")
+                .setHost(host,"min2")
                 .setDataBinder("tdb")
                 .setDataField("20k/17k#3")
                 .setDock("top")
@@ -714,9 +819,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("20k/17k")
             );
             
-            host.xui_ui_div314.append(
+            host.xui_ui_div1057.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput162")
+                .setHost(host,"t2")
                 .setDataBinder("tdb")
                 .setDataField("20k/17k#4")
                 .setDock("top")
@@ -726,11 +831,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelSize("3.5em")
                 .setLabelCaption("mins / ")
                 .setType("time")
+                .afterUIValueSet("_t2_afteruivalueset")
             );
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div315")
+                .setHost(host,"xui_ui_div1058")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -738,9 +844,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A8"
             );
             
-            host.xui_ui_div315.append(
+            host.xui_ui_div1058.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input297")
+                .setHost(host,"xui_ui_input1487")
                 .setDataBinder("tdb")
                 .setDataField("底溫1st")
                 .setDock("top")
@@ -751,9 +857,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("底溫  1<sup>st</sup>")
             );
             
-            host.xui_ui_div315.append(
+            host.xui_ui_div1058.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input298")
+                .setHost(host,"xui_ui_input1488")
                 .setDataBinder("tdb")
                 .setDataField("底溫2nd")
                 .setDock("top")
@@ -766,7 +872,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div316")
+                .setHost(host,"xui_ui_div1059")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -774,9 +880,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A12"
             );
             
-            host.xui_ui_div316.append(
+            host.xui_ui_div1059.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input299")
+                .setHost(host,"xui_ui_input1489")
                 .setDataBinder("tdb")
                 .setDataField("100k #1")
                 .setDock("top")
@@ -788,9 +894,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("1<sup>st</sup>100k #1 1<sup>st</sup>")
             );
             
-            host.xui_ui_div316.append(
+            host.xui_ui_div1059.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input300")
+                .setHost(host,"xui_ui_input1490")
                 .setDataBinder("tdb")
                 .setDataField("100k #2")
                 .setDock("top")
@@ -803,7 +909,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div317")
+                .setHost(host,"xui_ui_div1060")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -811,9 +917,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A13"
             );
             
-            host.xui_ui_div317.append(
+            host.xui_ui_div1060.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input301")
+                .setHost(host,"xui_ui_input1491")
                 .setDataBinder("tdb")
                 .setDataField("100k #3")
                 .setDock("top")
@@ -825,9 +931,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("15mins #2 1<sup>st</sup>")
             );
             
-            host.xui_ui_div317.append(
+            host.xui_ui_div1060.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input302")
+                .setHost(host,"xui_ui_input1492")
                 .setDataBinder("tdb")
                 .setDataField("100k #4")
                 .setDock("top")
@@ -840,7 +946,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div318")
+                .setHost(host,"xui_ui_div1061")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -848,9 +954,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A9"
             );
             
-            host.xui_ui_div318.append(
+            host.xui_ui_div1061.append(
                 xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label46")
+                .setHost(host,"xui_ui_label283")
                 .setDock("top")
                 .setLeft("8.380952380952381em")
                 .setTop("1.5238095238095237em")
@@ -861,7 +967,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div319")
+                .setHost(host,"xui_ui_div1062")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -869,9 +975,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A10"
             );
             
-            host.xui_ui_div319.append(
+            host.xui_ui_div1062.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input303")
+                .setHost(host,"xui_ui_input1493")
                 .setDataBinder("tdb")
                 .setDataField("65k#1")
                 .setDock("top")
@@ -883,9 +989,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("#1 1<sup>st</sup>")
             );
             
-            host.xui_ui_div319.append(
+            host.xui_ui_div1062.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input304")
+                .setHost(host,"xui_ui_input1494")
                 .setDataBinder("tdb")
                 .setDataField("65k#2")
                 .setDock("top")
@@ -897,9 +1003,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("2<sup>nd</sup>")
             );
             
-            host.xui_ui_div319.append(
+            host.xui_ui_div1062.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input305")
+                .setHost(host,"xui_ui_input1495")
                 .setDataBinder("tdb")
                 .setDataField("85k#1")
                 .setDock("top")
@@ -911,9 +1017,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("/ #1 1<sup>st</sup>")
             );
             
-            host.xui_ui_div319.append(
+            host.xui_ui_div1062.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input308")
+                .setHost(host,"xui_ui_input1496")
                 .setDataBinder("tdb")
                 .setDataField("85k#2")
                 .setDock("top")
@@ -927,7 +1033,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div320")
+                .setHost(host,"xui_ui_div1063")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -935,9 +1041,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A11"
             );
             
-            host.xui_ui_div320.append(
+            host.xui_ui_div1063.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input309")
+                .setHost(host,"xui_ui_input1497")
                 .setDataBinder("tdb")
                 .setDataField("65k#3")
                 .setDock("top")
@@ -949,9 +1055,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("#2 1<sup>st</sup>")
             );
             
-            host.xui_ui_div320.append(
+            host.xui_ui_div1063.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input310")
+                .setHost(host,"xui_ui_input1498")
                 .setDataBinder("tdb")
                 .setDataField("65k#4")
                 .setDock("top")
@@ -963,9 +1069,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("2<sup>nd</sup>")
             );
             
-            host.xui_ui_div320.append(
+            host.xui_ui_div1063.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input311")
+                .setHost(host,"xui_ui_input1499")
                 .setDataBinder("tdb")
                 .setDataField("85k#3")
                 .setDock("top")
@@ -977,9 +1083,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setLabelCaption("/ #2 1<sup>st</sup>")
             );
             
-            host.xui_ui_div320.append(
+            host.xui_ui_div1063.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input312")
+                .setHost(host,"xui_ui_input1500")
                 .setDataBinder("tdb")
                 .setDataField("85k#4")
                 .setDock("top")
@@ -993,7 +1099,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div321")
+                .setHost(host,"xui_ui_div1064")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.2em")
@@ -1002,9 +1108,9 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "A14"
             );
             
-            host.xui_ui_div321.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input313")
+            host.xui_ui_div1064.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput796")
                 .setDataBinder("tdb")
                 .setDataField("Warm Up")
                 .setDock("top")
@@ -1014,11 +1120,12 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setWidth("14em")
                 .setLabelSize("5em")
                 .setLabelCaption("Warm Up")
+                .setType("time")
             );
             
-            host.xui_ui_div321.append(
+            host.xui_ui_div1064.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox92")
+                .setHost(host,"xui_ui_radiobox354")
                 .setDataBinder("tdb")
                 .setDataField("Warm Up Pass")
                 .setItems([
@@ -1053,7 +1160,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div322")
+                .setHost(host,"xui_ui_div1065")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.266666666666666em")
@@ -1061,16 +1168,56 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "B3"
             );
             
-            host.xui_ui_div322.append(
+            host.xui_ui_div1065.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div1066")
+                .setDock("bottom")
+                .setLeft("8em")
+                .setTop("8.666666666666666em")
+                .setHeight("1.9333333333333333em")
+            );
+            
+            host.xui_ui_div1066.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"sign1")
+                .setDataBinder("tdb")
+                .setDataField("TestName1")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("4.571428571428571em")
+                .setTop("0.7619047619047619em")
+                .setWidth("12em")
+                .setLabelSize("4em")
+                .setLabelCaption("簽名")
+                .setType("getter")
+                .onClick("_sign1_onclick")
+            );
+            
+            host.xui_ui_div1066.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"testDate1")
+                .setDataBinder("tdb")
+                .setDataField("TestDate1")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("6.095238095238095em")
+                .setTop("0.7619047619047619em")
+                .setWidth("11em")
+                .setLabelSize("3em")
+                .setLabelCaption("Date")
+                .setType("date")
+            );
+            
+            host.xui_ui_div1065.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input314")
+                .setHost(host,"xui_ui_input1501")
                 .setDataBinder("tdb")
                 .setDataField("Fail 原因")
                 .setDock("fill")
-                .setLeft("10.666666666666666em")
-                .setTop("7.619047619047619em")
+                .setLeft("5.6em")
+                .setTop("0.26666666666666666em")
                 .setWidth("18em")
-                .setHeight("10em")
+                .setHeight("6em")
                 .setLabelSize("8em")
                 .setLabelCaption("Fail 原因")
                 .setMultiLines(true)
@@ -1078,7 +1225,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.testLayout.append(
                 xui.create("xui.UI.Div")
-                .setHost(host,"xui_ui_div323")
+                .setHost(host,"xui_ui_div1067")
                 .setLeft("0em")
                 .setTop("0em")
                 .setWidth("44.266666666666666em")
@@ -1086,14 +1233,54 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 "B9"
             );
             
-            host.xui_ui_div323.append(
+            host.xui_ui_div1067.append(
+                xui.create("xui.UI.Div")
+                .setHost(host,"xui_ui_div1068")
+                .setDock("bottom")
+                .setLeft("8.761904761904763em")
+                .setTop("9.447619047619048em")
+                .setHeight("1.9333333333333333em")
+            );
+            
+            host.xui_ui_div1068.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"sign2")
+                .setDataBinder("tdb")
+                .setDataField("TestName2")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("4.571428571428571em")
+                .setTop("0.7619047619047619em")
+                .setWidth("12em")
+                .setLabelSize("4em")
+                .setLabelCaption("簽名")
+                .setType("getter")
+                .onClick("_sign2_onclick")
+            );
+            
+            host.xui_ui_div1068.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"testDate2")
+                .setDataBinder("tdb")
+                .setDataField("TestDate2")
+                .setDock("top")
+                .setDockStretch("fixed")
+                .setLeft("6.095238095238095em")
+                .setTop("0.7619047619047619em")
+                .setWidth("11em")
+                .setLabelSize("3em")
+                .setLabelCaption("Date")
+                .setType("date")
+            );
+            
+            host.xui_ui_div1067.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input315")
+                .setHost(host,"xui_ui_input1502")
                 .setDataBinder("tdb")
                 .setDataField("處理情形")
                 .setDock("fill")
-                .setLeft("11.428571428571429em")
-                .setTop("8.380952380952381em")
+                .setLeft("11.6em")
+                .setTop("1.8666666666666667em")
                 .setWidth("18em")
                 .setHeight("10em")
                 .setLabelSize("8em")
@@ -1146,6 +1333,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
            // ns.tabs.setValue(0);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+          //  console.log("changeTheme:","A");
         },
             /**
          * Fired when user click it
@@ -1375,6 +1563,15 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             if(newValue != null)
                 ns.loadChamber();
         },
+        changeTheme: function(value){
+            var ns = this;
+            if(value == 'A')
+                ns.dialog.setSandboxTheme("army");
+            else if(value == 'B')
+                ns.dialog.setSandboxTheme("orange");
+            else 
+                ns.dialog.setSandboxTheme("classic");
+        },
         /**
          * Fired after setValue is called
          * @method afterValueSet [xui.UI.Tabs event]
@@ -1395,10 +1592,10 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 ns.currentArea = area;
                 ns.loadTestArea(area);
                 ns.tabs.setValue(0,true);
+                ns.changeTheme(newValue);
         },
         _page_aftershow:function(e,i){
             var ns = this, uictrl = profile.boxing();
-
         },
         /**
          * Fired when user click it
@@ -1416,7 +1613,54 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             if(rowid < 0)
                 return;
             utils.createCryoTestReport(rowid);
-        }
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _st_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinute();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t1_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+             ns.updateMinute();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _t2_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateMinute();
+        },
+        updateMinute: function(){
+            var ns = this;
+            utils.calcMinute(ns.t1, ns.st, ns.min1);
+            utils.calcMinute(ns.t2, ns.t1, ns.min2);
+        },        
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

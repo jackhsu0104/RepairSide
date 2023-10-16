@@ -29,6 +29,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 xui.create("xui.Timer")
                 .setHost(host,"timer1")
                 .setAutoStart(false)
+                .setInterval(3000)
                 .onTime("_timer1_ontime")
             );
             
@@ -147,7 +148,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                         "id" : "領用庫別",
                         "caption" : "領用庫別",
                         "type" : "label",
-                        "width" : "5em"
+                        "width" : "5.0285714285714285em"
                     },
                     {
                         "id" : "品號",
@@ -287,13 +288,14 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
            // utils.saveForm(ns);
-            var data = ns.getGridData();  //will do updateDataFromUI
+            var datas = ns.getGridData();  //will do updateDataFromUI
             //console.log(data);
             var pd = ns.pdb2.getData();                
             utils.removeTableItem("領料報工單子表","領料報工單號", pd["領料報工單號"]); //remove all subrecords
-            for(var i=0; i<data.length;i++)
+            for(var i=0; i<datas.length;i++)
             {
-                utils.insertTableItem("領料報工單子表",data[i]);
+                var d = datas[i];
+                utils.insertTableItem("領料報工單子表",d);
             }
             ns.destroy();
         },
@@ -394,6 +396,25 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 rows.push(items[i]);
           }
           return rows;  
+        },
+        getPickingItemCount: function(model,pn){
+            var ns = this;
+            if(typeof ns.pickingCountList == "undefined")
+            {
+              var data = ns.pdb2.getData();  
+              var id = data["領料報工單號"];  
+              ns.pickingCountList = utils.getItemValue("領料報工單子表","領料報工單號",id, "*", true);
+                
+              if(ns.pickingCountList == "")
+                  ns.pickingCountList = [];
+            }
+            for(var i=0; i<ns.pickingCountList.length; i++)
+            {
+              var item = ns.pickingCountList[i];   
+              if(pn == item["品號"] && model == item["型號"])
+                  return item["領料數量"];
+            }
+            return 0;
         },
         getStoreItemCount: function(pn){
             var ns = this;
@@ -508,47 +529,60 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         loadControls: function(){
             var ns=this, prop=ns.properties;
             var data = ns.pdb2.getData();
-            var condition = `站別 = '${data["維修站別"]}' AND 型號 = '${data["型號"]}'`;
-            var cb = function(datas){
-              var items = utils.getRowMap(datas); 
-              ns.mainTabs.updateItem('a',{"caption": data["型號"]});
+            var model = data["型號"];
+            var condition = `站別 = '${data["維修站別"]}' AND 型號 = '${model}'`;
+            var mode = prop.mode;
+
+            if(model && model != "")
+            {    
+              var cb = function(datas){
+                let items = utils.getRowMap(datas); 
+                ns.mainTabs.updateItem('a',{"caption": model});
                 
-              //ns.setLayout(ns.modelLayout,items);
-              for(var i=0; i<items.length; i++)
-              {
-                var item = items[i];
-                item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
-                item["領用庫別"] = ns.storeName;
-                if(prop.mode.includes("edit"))
-                    item["領料數量"] = 0;
-              }
-              ns.grid1.setRows(items);
-              ns.updateGridStoreCount(ns.grid1);
+                for(var i=0; i<items.length; i++)
+                {
+                  let item = items[i];
+                  item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
+                  item["領用庫別"] = ns.storeName;
+                  var value =  ns.getPickingItemCount(model, item["品號"]); 
+                  item["領料數量"] = {"value": value, "max":Number(item["庫存數量"])};
+                }
+                ns.grid1.setRows(items);
+                //ns.updateGridStoreCount(ns.grid1);
+              };
+              let datas = utils.getTableItems({"tableName":"Bench領用料副資料表", "condition":condition, "orderby":"型號,品號"});
+              cb(datas);
             }
-            var datas = utils.getTableItems({"tableName":"Bench領用料副資料表", "condition":condition, "orderby":"型號,品號"});
-            cb(datas);
+            else 
+            {
+                ns.mainTabs.updateItem('a',{"hidden": true});
+                ns.mainTabs.setValue('b');
+            }
+            
             var condition2 = `庫別 = '${ns.storeName}'`;
             var cb2 = function(data){
-              var items = utils.getRowMap(data); 
+              let items = utils.getRowMap(data); 
               
               for(var i=0; i<items.length; i++)
               {
-                var it = items[i];
+                let it = items[i];
                 it["數量"] = 1;
                 it["品名"] = ns.getPnName(it["品號"]);  
+                it["庫存數量"] = ns.getStoreItemCount(it["品號"]);  
                 it["型號"] = "其他";
-                it["領料數量"] = 0;
+                var value =  ns.getPickingItemCount("其他", it["品號"]); 
+                it["領料數量"] = {"value": value, "max":Number(it["庫存數量"])};
                 it["領用庫別"] = ns.storeName;
               }
-              //ns.setLayout(ns.pickLayout,items);
               ns.grid2.setRows(items);  
-              ns.updateGridStoreCount(ns.grid2);
+              //ns.updateGridStoreCount(ns.grid2);
             }
-            var datas = utils.getTableItems({"tableName":"erp.領料庫存查詢", "condition":condition2, "orderby":"品號"});
-            cb2(datas);
+            let datas2 = utils.getTableItems({"tableName":"erp.領料庫存查詢", "condition":condition2, "orderby":"品號"});
+            cb2(datas2);
             
         },
         updateControls: function(){
+            /*
           var ns = this;
           var data = ns.pdb2.getData();  
           var id = data["領料報工單號"];  
@@ -560,11 +594,12 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             ns.pdb2.setData(key, value);  
           }
           ns.timer1.start(); //start once
+          */
         },
         updateGrid: function(){
           var ns = this;
-          ns.grid1.render();
-          ns.grid2.render();  
+          //ns.grid1.render();
+          //ns.grid2.render();  
           var data = ns.pdb2.getData();  
           var id = data["領料報工單號"];  
           var pdata = utils.getItemValue("領料報工單子表","領料報工單號",id, "*", true);
@@ -669,16 +704,10 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             var item = utils.getItemValue("領料報工單子表","領料報工單號", pno);
             if(item != "")
                 ns.storeName = item["領用庫別"];
-            if(prop.mode == "edit")
-            {
-                var pitem = utils.getItemValue("領料報工單","領料報工單號", pno);
-                ns.pdb2.setData("型號", pitem["型號"]);  
-                ns.loadControls();
-                ns.updateGrid();
-                //ns.updateControls();
-            }
-            else
-              ns.loadControls();
+            var pitem = utils.getItemValue("領料報工單","領料報工單號", pno);
+            ns.pdb2.setData("型號", pitem["型號"]);  
+            ns.loadControls();
+            //ns.updateGrid();
 // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -728,7 +757,8 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         */
         _timer1_ontime:function(profile, threadId){
             var ns = this, uictrl = profile.boxing();
-            ns.pdb2.updateDataToUI();
+            //ns.pdb2.updateDataToUI();
+            ns.updateGrid();
             ns.timer1.suspend();
         },
         /**

@@ -56,12 +56,12 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                     },
                     {
                         "id" : "d",
-                        "caption" : "Repair Quotation Sheet"
+                        "caption" : "Compressor零件更換表"
                     }
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("d")
             );
             
             host.stack.append(
@@ -204,8 +204,10 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           var ns = this;  
           var list = ns.listd;
           list.clearItems();
-          ns.updateList2(list, "Compressor Repair Quotation Sheet", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,維修內容簡述");
-          ns.updateCaptionCount("d", list, "Repair Quotation Sheet");
+          ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,保養名稱","-秘書已確認");
+          if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))  
+              ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,保養名稱","-待確認");
+          ns.updateCaptionCount("d", list, "Compressor零件更換表");
         },
         updateNoRepairSheetList: function(){
           var ns = this;  
@@ -332,7 +334,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         */
         _unitformlist_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
-            ns.showPage("RepairOptionForm", "Option零件更換表","登錄編號", item.id);
+            ns.showPage("CompressorSpecialPriceEditForm", "Compressor零件更換表","登錄編號", item.id);
             uictrl.setValue("");
         },
         /**

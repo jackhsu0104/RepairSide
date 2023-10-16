@@ -26,6 +26,12 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             var host=this, children=[], append=function(child){children.push(child.get(0));};
             
             append(
+                xui.create("xui.Timer")
+                .setHost(host,"timer1")
+                .onTime("_timer1_ontime")
+            );
+            
+            append(
                 xui.create("xui.DataBinder")
                 .setHost(host,"cdb")
                 .setName("cdb")
@@ -87,12 +93,12 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"confirm1")
-                .setDataBinder("rdb")
+                .setDataBinder("cdb")
                 .setDataField("組長確認")
                 .setReadonly(true)
                 .setLeft("-0.0761904761904762em")
                 .setTop("0.6857142857142857em")
-                .setWidth("10.666666666666666em")
+                .setWidth("11.4em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長確認")
                 .setType("getter")
@@ -102,12 +108,12 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"confirm2")
-                .setDataBinder("rdb")
+                .setDataBinder("cdb")
                 .setDataField("秘書確認")
                 .setReadonly(true)
                 .setLeft("11.333333333333334em")
                 .setTop("0.6857142857142857em")
-                .setWidth("10.666666666666666em")
+                .setWidth("12em")
                 .setLabelSize("5em")
                 .setLabelCaption("秘書確認")
                 .setType("getter")
@@ -119,18 +125,18 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"confirmBtn")
                 .setDataBinder("opdb")
                 .setDataField("秘書確認")
-                .setLeft("23.333333333333332em")
+                .setLeft("24.666666666666668em")
                 .setTop("0.6857142857142857em")
                 .setWidth("9.142857142857142em")
-                .setCaption("通知秘書確認")
+                .setCaption("通知組長確認")
                 .onClick("_confirmbtn_onclick")
             );
             
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput618")
-                .setDataBinder("rdb")
-                .setDataField("秘書確認")
+                .setHost(host,"sign1")
+                .setDataBinder("cdb")
+                .setDataField("工程師簽名")
                 .setReadonly(true)
                 .setLeft("35.333333333333336em")
                 .setTop("0.6857142857142857em")
@@ -138,7 +144,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setLabelSize("6em")
                 .setLabelCaption("工程師簽名")
                 .setType("getter")
-                .onClick("_confirm2_onclick")
+                .onClick("_sign1_onclick")
             );
             
             host.dialog.append(
@@ -312,11 +318,13 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                     {
                         "id" : "小計",
                         "caption" : "小計",
-                        "type" : "number",
+                        "type" : "currency",
+                        "formula" : "=C?*F?",
                         "width" : "8em",
                         "readonly" : true
                     }
                 ])
+                .setExcelCellId("A1")
             );
             
             host.tabs.append(
@@ -548,7 +556,6 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
          * @param {xui} profile .UIProfile
         */
         _dialog_onshow:function(profile){
-            var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -561,6 +568,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
               ns.updatePartsGrid();
               ns.updateContentToUI();
             }
+            else if(prop.mode == "new")
+                ns.name.setValue("A. 自行勾選");
         },
             /**
          * Fired when user click it
@@ -585,7 +594,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
                 _confirm1_onclick:function(profile, e, src, value, n){
                     var ns = this, uictrl = profile.boxing();
-                      utils.confirmNameClick(ns, uictrl, "組長,主管");
+                      utils.confirmNameClick(ns, uictrl, "組長,主管","通知秘書確認");
                 },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -598,7 +607,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
         _confirm2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-                      utils.confirmNameClick(ns, uictrl, "秘書");
+            utils.confirmNameClick(ns, uictrl, "秘書","秘書已確認,通知Bench");
         },
         /**
          * Fired when user click it
@@ -610,7 +619,23 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            if(ns.sign1.getUIValue() == "")
+            {
+              utils.alert("請工程師簽名!");
+              return;  
+            }
              utils.confirmBtnClick(ns, uictrl);
+        },
+        calcSum: function(){
+            var ns = this;
+            var sum = 0;
+            var rows = ns.partsGrid.getRows("min");
+            for(var i=0; i<rows.length; i++)
+            {
+              var r = rows[i];
+              sum += r[6];  
+            }
+            ns.sum.setValue(sum);
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -637,6 +662,29 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         _name_onvaluechange:function(profile, oldValue, newValue, force, tag){
             var ns = this, uictrl = profile.boxing();
             ns.updatePartsGrid();
+        },
+        /**
+         * When the timer is triggered regularly. If returns [false], the timer will end
+         * @method onTime [xui.Timer event]
+         * @param {xui} profile .Profile
+         * @param {} threadId  String
+        */
+        _timer1_ontime:function(profile, threadId){
+            var ns = this, uictrl = profile.boxing();
+            ns.calcSum();
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _sign1_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.confirmNameClick(ns, uictrl, "維修");
         },
 
         /*,

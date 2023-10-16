@@ -269,6 +269,7 @@ xui.Class('App.CryopumpTestForm', 'xui.Module',{
                     "keyid" : "rowid",
                     "openPageName" : "CryopumpTestSubForm",
                     "mode" : "normal",
+                    "enableCopyButton" : false,
                     "formCaption" : "",
                     "newDatas" : null,
                     "binder" : "",

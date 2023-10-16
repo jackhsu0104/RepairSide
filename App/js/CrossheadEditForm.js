@@ -102,6 +102,31 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .onClick("_nextbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn")
+                .setDock("left")
+                .setLeft("24.685714285714287em")
+                .setTop("0.6857142857142857em")
+                .setWidth("6.4em")
+                .setCaption("完工入庫")
+                .onClick("_finishbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataField("維修狀況")
+                .setAutoTips(false)
+                .setLeft("7.066666666666666em")
+                .setTop("1.1333333333333333em")
+                .setWidth("20em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀況")
+                .setType("popbox")
+                .setMaxlength("32")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -276,7 +301,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -625,7 +650,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("0.7619047619047619em")
                 .setTop("0em")
-                .setWidth("7.619047619047619em")
+                .setWidth("7.5em")
                 .setHeight("2.6666666666666665em")
                 .setVAlign("middle")
                 .setIconPos("right")
@@ -2853,8 +2878,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_block758.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5921")
-                .setName("登錄編號")
+                .setHost(host,"xhCode")
                 .setDataBinder("crdb")
                 .setDataField("Crosshead編號")
                 .setLeft("2em")
@@ -5280,6 +5304,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.writeRepairStatus(ns);
             utils.saveForm(ns,"","",null, db);
        },
 
@@ -5299,6 +5324,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             console.log(utils.createDDL(ns.dialog,"Crosshead維修工單", true));
             ns.tabs1.setValue("a");
             ns.tabs2.setValue("a");
+            utils.readRepairStatus(ns);
 
         },
             /**
@@ -5465,7 +5491,25 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         _changerepairbtn_onclick:function(profile, e, src, value){
                             var ns = this, uictrl = profile.boxing();
                             utils.showTableCombo(ns.repairNo,"更換登錄編號");
-                        }
+                        },
+                            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                            _finishbtn_onclick:function(profile, e, src, value){
+                                var ns = this, uictrl = profile.boxing();
+                                utils.saveForm(ns);
+                                var xhcode = ns.xhCode.getUIValue();
+                                if(xhcode == "")
+                                {
+                                  utils.alert("請先輸入Crosshead編號!")  
+                                  return;        
+                                }
+                            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

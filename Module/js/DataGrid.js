@@ -318,14 +318,14 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         var col = data.columns[i];  
                         var caption = col;
                         var fw  = 8;
-                        if(col == "DelFlag" || col == "rowid")  //skip it
-                            continue;   
                         if(fieldCaptions[i])
                             caption = fieldCaptions[i];
                         if(fieldWidths[i])
                             fw = fieldWidths[i];
                         caption = caption.replace("群呈","");
                         let item = {"id": col, "caption":caption, "width":fw+"em"};
+                        if(col == "DelFlag" || col == "rowid")  //hide it
+                            item.hidden = true;   
                         if(prop.mode == "editor")
                         {    
                           let combo = utils.getTableFieldComboConfig(tableName, col);  
@@ -427,7 +427,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 if(prop.tableName.startsWith('SELECT '))
                   utils.getQueryItems(prop.tableName,cb);
                 else  
-                  utils.getTableItems({"tableName":prop.tableName, "condition":condition,  "fields": fields},cb);
+				{
+				  if(prop.orderby != "")
+					utils.getTableItems({"tableName":prop.tableName, "condition":condition, "orderby":prop.orderby, "fields": fields},cb);
+				  else 			
+					utils.getTableItems({"tableName":prop.tableName, "condition":condition, "fields": fields},cb);
+				}
               }
               else 
                 cb(cachedata);  
@@ -503,6 +508,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 ns.grid.setSelMode("none").setRowHandler(true);
                 ns.newBtn.hide();
                 ns.deleteBtn.hide();
+				ns.openBtn.hide();
             }else if(mode=="selection"){
                 ns.grid.setSelMode("none").setRowHandler(false);
                 ns.openBtn.hide();
@@ -512,13 +518,14 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 ns.grid.setHotRowMode("hidden");
                 ns.grid.setHotRowMode("after");
                 //ns.grid.setHotRowRequired(prop.keyid);
-                ns.grid.setSelMode("none").setRowHandler(false);
+ //               ns.grid.setSelMode("none").setRowHandler(false);
+                ns.grid.setSelMode("multi").setRowHandler(true);             
                 ns.newBtn.hide();
                 ns.openBtn.hide();
                 ns.deleteBtn.hide();
             }else if(mode == "normal") {
                 ns.grid.setHotRowMode("hidden");
-               // ns.grid.setSelMode("multi").setRowHandler(true);             
+                ns.grid.setSelMode("multi").setRowHandler(true);             
                 ns.newBtn.show();
                 ns.openBtn.show();
                 ns.deleteBtn.show();
@@ -547,6 +554,13 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             xui.message(ids.length+" 紀錄已刪除!");
             xui.Dom.free();
         },
+		getUpdateTableName: function(){
+			var ns = this, prop = ns.properties;
+			if(prop.insertTableName != "")
+				return prop.insertTableName;
+			else 
+				return prop.tableName;
+		},
         _openForm:function(recordId, fields){
             var ns = this, mode="";
             var prop=ns.properties,updateRow=function(){
@@ -570,6 +584,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 var r = ns.fireEvent("onCreateRecords",[addRow, updateRow]);
                 if(r == "noop")
                     return;
+                if(r != "")
+                    mode = r;
                 fields = ns.prepareNewDatas();
             }
             var pagename = prop.openPageName; 
@@ -597,10 +613,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 mod.setProperties("mode",mode);
                 mod.setProperties("datas",fields);
                 mod.setProperties("keyid",prop.keyid);
-                if(prop.insertTableName != "")
-                  mod.setProperties("tableName",prop.insertTableName);
-                else
-                  mod.setProperties("tableName",prop.tableName);
+                mod.setProperties("tableName", ns.getUpdateTableName());
                 if(prop.formCaption && prop.formCaption != "")
                     mod.dialog.setCaption(prop.formCaption);
                 db.setData(fields);
@@ -618,7 +631,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     ns.refreshGrid();
                 });
                 
-            });            
+            },null, null, false);  //not cached            
             
         },
         getRowMap: function(row)
@@ -648,10 +661,11 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 ns.refreshGrid();
                 return;
             }
+			var tableName = ns.getUpdateTableName();
             for(var i=0; i<ids.length; i++)
             {
               var row = ns.grid.getRowMap(ids[i]); 
-              utils.removeTableItem(prop.tableName, prop.keyid, row[prop.keyid]);  
+              utils.removeTableItem(tableName, prop.keyid, row[prop.keyid]);  
             }
             xui.Dom.free();
             ns.refreshGrid();
@@ -674,10 +688,19 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 return;
             }
 */            
+			var tableName = ns.getUpdateTableName();
             for(var i=0; i<ids.length; i++)
             {
               var row = ns.grid.getRowMap(ids[i]); 
-              utils.insertTableItem(prop.tableName, row);  
+			  var keys = Object.keys(row);
+			  for(var j=0; j<keys.length; j++)
+			  {
+				  var k = keys[j];
+				  var v = row[k];
+				  if(typeof v == "object" && v != null && "getDate" in v) //date time
+					  row[k] = utils.dateTimeToString(v);
+			  }
+              utils.insertTableItem(tableName, row);  
             }
             xui.Dom.free();
             ns.refreshGrid();
@@ -839,10 +862,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         },
         _grid_afteruivalueset:function (profile, oldValue, newValue){
             var ns = this;
+		/*	
             if(newValue)
               ns.deleteBtn.show();
             else 
-              ns.deleteBtn.hide();  
+              ns.deleteBtn.hide(); 
+*/		  
         },
         _ctl_sbutton1_onclick:function (){
             var ns=this;
@@ -934,13 +959,6 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             }
             return R;
         },
-        getSaveTableName: function(){
-            var ns = this, prop=ns.properties;
-            var tableName = prop.tableName;
-            if(prop.insertTableName != "")
-                  tableName = prop.insertTableName;
-            return tableName;            
-        },
         /**
          * Fired before the hot row is added. If it returns true, the new row will be added; if it returns false, the hot row will be removed; if it returns cell, the new row will not be added, and the cell in the hot row will be focused; if it returns [null], do nothing
          * @method beforeHotRowAdded [xui.UI.TreeGrid event]
@@ -951,7 +969,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         */
         _grid_beforehotrowadded:function(profile, cellMap, row, leaveGrid){
             var ns = this, uictrl = profile.boxing(), prop=ns.properties;
-            var tableName = ns.getSaveTableName();
+            var tableName = ns.getUpdateTableName();
             if(tableName == "")
             {
                 xui.Dom.free();
@@ -985,9 +1003,11 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             ns.fireEvent("beforeCellUpdated",[cell._col.id, options.value,  r, isHotRow]);
             if(isHotRow)  //do not do update
                 return true;
-            var tableName = ns.getSaveTableName();
+            var tableName = ns.getUpdateTableName();
             var keyid = prop.keyid;
             var col = cell._col.id;  
+			if(col == "ETD")
+				col = "ETS";
             var value = options.value;
             if(cell._col.type == "date")
               value = xui.Date.format(value,"yyyy-mm-dd");

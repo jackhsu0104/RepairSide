@@ -1,3 +1,3 @@
-SELECT * FROM [Compressor維修工單] WHERE [登錄編號]='B2301R007'
+SELECT [維修狀況] FROM [CTI Control Number總資料庫] WHERE [登錄編號]=''
 
-SELECT count(1) FROM [Compressor維修工單] WHERE [登錄編號]='B2301R007'
+SELECT count(1) FROM [CTI Control Number總資料庫] WHERE [登錄編號]=''

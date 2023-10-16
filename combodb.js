@@ -11,12 +11,16 @@ TableComboConfigs = {
         "入站登錄編號":"維修站總資料表:登錄編號::::維修站名 != {維修站名}",
         "更換登錄編號":"維修工單列表:登錄編號:登錄編號,維修工單:::登錄編號 != {登錄編號} AND 維修工單 = 'Cryopump維修工單'",
         "測試區登錄編號":"測試區登錄編號查詢:登錄編號:登錄編號,維修站名:::",
-        "課稅別":"SELECT DISTINCT 課稅別 FROM erp.領料報工表單查詢:課稅別"
+        "課稅別":"SELECT DISTINCT 課稅別 FROM erp.領料報工表單查詢:課稅別",
+        "維修狀況":"1001,維修狀況代號副資料表:維修狀況敘述:::17"
   },
    "App.CrossheadEditForm": {
         "登錄編號":"新增Crosshead維修工單查詢:登錄編號",
    },
-   "App.ErpPickingForm": {
+   "App.CryopumpEditForm": {
+        "Crosshead編號":"未領用Crosshead編號查詢:Crosshead編號",
+   },
+    "App.ErpPickingForm": {
         "登錄編號":"站內資料表查詢:登錄編號",
    },
 };

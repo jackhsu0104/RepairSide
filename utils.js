@@ -296,7 +296,7 @@ utils = {
                 utils.showDataPage(pagename, item, mode, onload, ondestroy);        
             }
     },
-    showDataPage : function(pagename, item, mode, onload,  ondestroy){
+    showDataPage : function(pagename, item, mode = "edit", onload,  ondestroy){
         var cb2 = function(mod){
             var db = mod.getDataBinders();
             if(db.length > 0)
@@ -595,12 +595,12 @@ utils = {
     installModuleTableBoxHooks : function(mod){
         var root = mod.getRoot();
         console.log("root:", root);
-        if(mod.form)
+        if(mod.dialog)
+           var nodes = mod.dialog.getChildren(true,true).get();
+        else if(mod.form)
            var nodes = mod.form.getChildren(true,true).get();
         else if(mod.mainPage)
            var nodes = mod.mainPage.getChildren(true,true).get();
-        else if(mod.dialog)
-           var nodes = mod.dialog.getChildren(true,true).get();
         var formTableName = mod.key;   
         var showCombo = function(uictrl){
                 var db = mod.getDataBinders();
@@ -1106,13 +1106,15 @@ utils = {
                   uictrl.setCaption("待秘書確認");
             else if(confirm == "待組長確認")
                   uictrl.setCaption("待組長確認");
+            else if(confirm == "通知秘書確認")
+                  uictrl.setCaption("通知秘書確認");
             else if(confirm == "秘書已確認，通知Bench")
                 uictrl.setCaption("秘書已確認,取消通知");
             else if(confirm.includes("已確認"))
                 uictrl.setCaption(confirm);
             else if(data["組長確認"] == "")
                 uictrl.setCaption("通知組長確認");
-            else 
+            else if(data["秘書確認"] == "")
                 uictrl.setCaption("通知秘書確認");
     },
     confirmBtnClick: function(mod, uictrl, key = "登錄編號"){
@@ -1208,7 +1210,7 @@ utils = {
           }
         }
     },
-    confirmNameClick: function(mod, uictrl, pri, saveFlag=true){
+    confirmNameClick: function(mod, uictrl, pri, finishStat = "", saveFlag=true){
         var db = mod.getDataBinders();
         if(db.length > 0)
            db = db[0].boxing();
@@ -1220,6 +1222,9 @@ utils = {
         var name = uictrl.getValue();
         var key = prop["keyid"];
         var id = data[key];
+        var confirmBtn = null;
+        if(mod.confirmBtn)
+            confirmBtn = mod.confirmBtn;
         if(name == "")
         {
           var priflag = false;  
@@ -1242,18 +1247,23 @@ utils = {
             {
                 confirmName =  "組長確認";
                 confirmState = "組長已確認";
+                
+                if(confirmBtn)
+                    confirmBtn.setCaption(confirmState);  
             }
+            if(finishState != "")
+               confirmState = finishState; 
             uictrl.setValue(name);    
             if(saveFlag){
               utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
             }
             db.setData("確認狀態", confirmState); 
-            xui.alert("已確認!");
+            utils.alert("已確認!");
             return true;
           }
           else
           {
-            xui.alert("請 '"+ pri + "' 確認!");
+            utils.alert("請 '"+ pri + "' 確認!");
             return false;
           }
         }
@@ -1436,7 +1446,7 @@ utils = {
         return utils.getItemValue("crm.Employee","EmplID", emplID);
     },
     showPickingSheetMenu: function(uictrl, rno){
-            var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增委託單"}];
+            var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
             var data = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
             if(data == "")
             {
@@ -1452,7 +1462,7 @@ utils = {
                   var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
                   if(data != "")
                   {   
-                    var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
+                    var item = {"維修單別":"B200","維修部門":"902","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
                         "登錄編號":rno, "Creator": LoginUser.EmplID,"型號":data["In Model"]};
                     var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
                     if(data2 != "")
@@ -1666,6 +1676,24 @@ utils = {
         var item = JSON.stringify(edata);
         var data = this.sendDataCmd({"cmd":"uploadErpDatas", "item": item});
         return data;
+    },
+    currencyString: function(num){
+        return num.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                });
+    },
+    readRepairStatus:function(ns){
+        var uictrl = ns.repairStatus;
+        var rno = ns.repairNo.getUIValue();
+        var r = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno, "維修狀況");
+        uictrl.setValue(r);
+    },
+    writeRepairStatus:function(ns){
+        var uictrl = ns.repairStatus;
+        var rno = ns.repairNo.getUIValue();
+        var status = uictrl.getUIValue();
+        var data = {"登錄編號":rno, "維修狀況": status};
+        utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
     }
-    
  };
