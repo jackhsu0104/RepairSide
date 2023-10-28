@@ -109,7 +109,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修委託單/工單")
+                .setValue("站內物件列表")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -298,8 +298,8 @@ xui.Class('App', 'xui.Module',{
                         "caption" : "Compressor維修工單"
                     },
                     {
-                        "id" : "Controler",
-                        "caption" : "Controler維修工單",
+                        "id" : "Controller",
+                        "caption" : "Controller維修工單",
                         "hidden" : false
                     },
                     {
@@ -319,7 +319,7 @@ xui.Class('App', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Cryopump"),
+                .setValue("CylinderHeater"),
                 "維修工單"
             );
             
@@ -335,7 +335,7 @@ xui.Class('App', 'xui.Module',{
             
             host.rtopblock1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input258")
+                .setHost(host,"repair1")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
                 .setLeft("0.8380952380952381em")
@@ -348,10 +348,31 @@ xui.Class('App', 'xui.Module',{
             host.rtopblock1.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"rsearchBtn1")
-                .setLeft("46.476190476190474em")
+                .setLeft("22em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchbtn1_onclick")
+            );
+            
+            host.rtopblock1.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn1")
+                .setLeft("4.666666666666667em")
+                .setTop("5.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtn1_onclick")
+            );
+            
+            host.rtopblock1.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtn1")
+                .setLeft("14em")
+                .setTop("5.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtn1_onclick")
             );
             
             host.repairTabs.append(
@@ -368,11 +389,11 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"repairGrid1")
                 .setProperties({
-                    "tableName" : "Cryopump維修工單",
-                    "insertTableName" : "",
+                    "tableName" : "Cryopump維修工單查詢",
+                    "insertTableName" : "Cryopump維修工單",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -388,9 +409,95 @@ xui.Class('App', 'xui.Module',{
                     "saveIgnoreFields" : "",
                     "excelFileName" : "",
                     "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
                         "newBtn" : {
                             "properties" : {
-                                "dirtyMark" : true
+                                "dirtyMark" : true,
+                                "display" : "none"
                             }
                         },
                         "openBtn" : {
@@ -400,7 +507,8 @@ xui.Class('App', 'xui.Module',{
                         },
                         "deleteBtn" : {
                             "properties" : {
-                                "dirtyMark" : true
+                                "dirtyMark" : true,
+                                "display" : "none"
                             }
                         },
                         "selectAllBtn" : {
@@ -428,53 +536,9 @@ xui.Class('App', 'xui.Module',{
                                 "dirtyMark" : true
                             }
                         },
-                        "grid" : {
+                        "copyBtn" : {
                             "properties" : {
-                                "dirtyMark" : true,
-                                "header" : [
-                                    {
-                                        "id" : "登錄編號",
-                                        "caption" : "登錄編號",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "客戶名稱",
-                                        "caption" : "客戶名稱",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "Pump",
-                                        "caption" : "Pump",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "Pump P/N",
-                                        "caption" : "Pump P/N",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "Pump S/N",
-                                        "caption" : "Pump S/N",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "日期",
-                                        "caption" : "日期",
-                                        "type" : "date",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "進廠原因",
-                                        "caption" : "進廠原因",
-                                        "type" : "input",
-                                        "width" : "16em"
-                                    }
-                                ]
+                                "dirtyMark" : true
                             }
                         }
                     }
@@ -491,13 +555,13 @@ xui.Class('App', 'xui.Module',{
                 .setDock("top")
                 .setLeft("14.476190476190476em")
                 .setTop("15.238095238095237em")
-                .setHeight("8.60952380952381em"),
+                .setHeight("9.933333333333334em"),
                 "Crosshead"
             );
             
             host.rtopblock2.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input276")
+                .setHost(host,"repair3")
                 .setDataBinder("repairdb2")
                 .setDataField("登錄編號")
                 .setLeft("0.7619047619047619em")
@@ -510,15 +574,16 @@ xui.Class('App', 'xui.Module',{
             host.rtopblock2.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"rsearchBtn2")
-                .setLeft("47.23809523809524em")
+                .setLeft("22em")
                 .setTop("2.2857142857142856em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchbtn2_onclick")
             );
             
             host.rtopblock2.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input309")
+                .setHost(host,"xh3")
                 .setDataBinder("repairdb2")
                 .setDataField("Crosshead編號")
                 .setLeft("0.7619047619047619em")
@@ -526,6 +591,26 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("Crosshead編號")
+            );
+            
+            host.rtopblock2.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn3")
+                .setLeft("5.40952380952381em")
+                .setTop("7.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtn3_onclick")
+            );
+            
+            host.rtopblock2.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtn3")
+                .setLeft("14.780952380952382em")
+                .setTop("7.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtn3_onclick")
             );
             
             host.repairTabs.append(
@@ -542,11 +627,11 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"repairGrid3")
                 .setProperties({
-                    "tableName" : "Crosshead維修工單",
-                    "insertTableName" : "",
+                    "tableName" : "Crosshead維修工單查詢",
+                    "insertTableName" : "Crosshead維修工單",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -567,26 +652,32 @@ xui.Class('App', 'xui.Module',{
                                 "dirtyMark" : true,
                                 "header" : [
                                     {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
                                         "id" : "登錄編號",
                                         "caption" : "登錄編號",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
                                     {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
                                         "id" : "客戶名稱",
                                         "caption" : "客戶名稱",
-                                        "type" : "input",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "日期",
-                                        "caption" : "日期",
-                                        "type" : "date",
-                                        "width" : "8em"
-                                    },
-                                    {
-                                        "id" : "Crosshead編號",
-                                        "caption" : "Crosshead編號",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
@@ -597,16 +688,46 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "8em"
                                     },
                                     {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
                                         "id" : "S/N",
                                         "caption" : "S/N",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
                                     {
-                                        "id" : "Remark",
-                                        "caption" : "Remark",
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
                                         "type" : "input",
                                         "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
                                     }
                                 ]
                             }
@@ -647,6 +768,11 @@ xui.Class('App', 'xui.Module',{
                             }
                         },
                         "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "copyBtn" : {
                             "properties" : {
                                 "dirtyMark" : true
                             }
@@ -670,7 +796,7 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block466.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1463")
+                .setHost(host,"repair5")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
                 .setLeft("0.8380952380952381em")
@@ -682,11 +808,32 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block466.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button703")
-                .setLeft("46.476190476190474em")
+                .setHost(host,"rsearchBtn5")
+                .setLeft("22em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchbtn5_onclick")
+            );
+            
+            host.xui_ui_block466.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn5")
+                .setLeft("5.40952380952381em")
+                .setTop("5.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtn5_onclick")
+            );
+            
+            host.xui_ui_block466.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtn5")
+                .setLeft("14.780952380952382em")
+                .setTop("5.266666666666667em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtn5_onclick")
             );
             
             host.repairTabs.append(
@@ -702,11 +849,11 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"repairGrid5")
                 .setProperties({
-                    "tableName" : "Compressor維修工單",
-                    "insertTableName" : "",
+                    "tableName" : "Compressor維修工單查詢",
+                    "insertTableName" : "Compressor維修工單",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -720,7 +867,141 @@ xui.Class('App', 'xui.Module',{
                     "binder" : "",
                     "useCache" : false,
                     "saveIgnoreFields" : "",
-                    "excelFileName" : ""
+                    "excelFileName" : "",
+                    "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "copyBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        }
+                    }
                 })
                 .setEvents({
                     "onPrepareCondition" : "_repairgrid1_onpreparecondition"
@@ -734,12 +1015,12 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("14.476190476190476em")
                 .setTop("15.238095238095237em")
                 .setHeight("8.60952380952381em"),
-                "Controler"
+                "Controller"
             );
             
             host.xui_ui_block469.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1465")
+                .setHost(host,"repair6")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
                 .setLeft("0.8380952380952381em")
@@ -751,11 +1032,32 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block469.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button710")
-                .setLeft("46.476190476190474em")
+                .setHost(host,"rsearchBtn6")
+                .setLeft("22em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchbtn6_onclick")
+            );
+            
+            host.xui_ui_block469.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn6")
+                .setLeft("5.40952380952381em")
+                .setTop("4.6em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtn6_onclick")
+            );
+            
+            host.xui_ui_block469.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtn6")
+                .setLeft("14.780952380952382em")
+                .setTop("4.6em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtn6_onclick")
             );
             
             host.repairTabs.append(
@@ -764,18 +1066,18 @@ xui.Class('App', 'xui.Module',{
                 .setDock("fill")
                 .setLeft("10.666666666666666em")
                 .setTop("26.666666666666668em"),
-                "Controler"
+                "Controller"
             );
             
             host.rblock6.append(
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"repairGrid6")
                 .setProperties({
-                    "tableName" : "3phControler維修工單",
-                    "insertTableName" : "",
+                    "tableName" : "3phControler維修工單查詢",
+                    "insertTableName" : "3phControler維修工單",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -789,7 +1091,141 @@ xui.Class('App', 'xui.Module',{
                     "binder" : "",
                     "useCache" : false,
                     "saveIgnoreFields" : "",
-                    "excelFileName" : ""
+                    "excelFileName" : "",
+                    "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Pump",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "copyBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        }
+                    }
                 })
                 .setEvents({
                     "onPrepareCondition" : "_repairgrid1_onpreparecondition"
@@ -808,7 +1244,7 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block539.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input461")
+                .setHost(host,"repair7")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
                 .setLeft("0.8380952380952381em")
@@ -820,11 +1256,32 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block539.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button1173")
-                .setLeft("46.476190476190474em")
+                .setHost(host,"rsearchBtn7")
+                .setLeft("22em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchbtn7_onclick")
+            );
+            
+            host.xui_ui_block539.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtn7")
+                .setLeft("6.171428571428572em")
+                .setTop("5.333333333333333em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtn7_onclick")
+            );
+            
+            host.xui_ui_block539.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtn7")
+                .setLeft("15.542857142857143em")
+                .setTop("5.333333333333333em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtn7_onclick")
             );
             
             host.repairTabs.append(
@@ -840,11 +1297,11 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"reapirGrid7")
                 .setProperties({
-                    "tableName" : "Module功能測試表",
-                    "insertTableName" : "",
+                    "tableName" : "Module功能測試表查詢",
+                    "insertTableName" : "Module功能測試表",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -858,7 +1315,140 @@ xui.Class('App', 'xui.Module',{
                     "binder" : "",
                     "useCache" : false,
                     "saveIgnoreFields" : "",
-                    "excelFileName" : ""
+                    "excelFileName" : "",
+                    "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "header" : [
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Pump",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
+                        "newBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "display" : "none"
+                            }
+                        },
+                        "openBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "deleteBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "selectAllBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "excelBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "pageLength" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "custom1Btn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "copyBtn" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        }
+                    }
                 })
                 .setEvents({
                     "onPrepareCondition" : "_repairgrid1_onpreparecondition"
@@ -1034,7 +1624,7 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block355.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1027")
+                .setHost(host,"repairHeater")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
                 .setLeft("0.8380952380952381em")
@@ -1046,11 +1636,32 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block355.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button518")
-                .setLeft("46.476190476190474em")
+                .setHost(host,"rsearchHeaterBtn")
+                .setLeft("22em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
+                .onClick("_rsearchheaterbtn_onclick")
+            );
+            
+            host.xui_ui_block355.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"finishBtnHeater")
+                .setLeft("6.171428571428572em")
+                .setTop("5.333333333333333em")
+                .setWidth("7.066666666666666em")
+                .setCaption("已完工")
+                .onClick("_finishbtnheater_onclick")
+            );
+            
+            host.xui_ui_block355.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"unfinishBtnHeater")
+                .setLeft("15.542857142857143em")
+                .setTop("5.333333333333333em")
+                .setWidth("7.066666666666666em")
+                .setCaption("未完工")
+                .onClick("_unfinishbtnheater_onclick")
             );
             
             host.repairTabs.append(
@@ -1066,11 +1677,11 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"heaterGrid")
                 .setProperties({
-                    "tableName" : "CylinderHeater維修工單",
-                    "insertTableName" : "",
+                    "tableName" : "CylinderHeater維修工單查詢",
+                    "insertTableName" : "CylinderHeater維修工單",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 = {SiteName})",
-                    "condition2" : "",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
+                    "condition2" : "維修狀態 != '完工'",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -1091,10 +1702,28 @@ xui.Class('App', 'xui.Module',{
                                 "dirtyMark" : true,
                                 "header" : [
                                     {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
                                         "id" : "登錄編號",
                                         "caption" : "登錄編號",
                                         "type" : "input",
                                         "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
                                     },
                                     {
                                         "id" : "客戶名稱",
@@ -1109,8 +1738,26 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "8em"
                                     },
                                     {
+                                        "id" : "秘書確認",
+                                        "caption" : "秘書確認",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
                                         "id" : "Cylinder S/N",
-                                        "caption" : "Cylinder S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
@@ -1119,13 +1766,26 @@ xui.Class('App', 'xui.Module',{
                                         "caption" : "日期",
                                         "type" : "date",
                                         "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "維修狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
                                     }
                                 ]
                             }
                         },
                         "newBtn" : {
                             "properties" : {
-                                "dirtyMark" : true
+                                "dirtyMark" : true,
+                                "display" : "none"
                             }
                         },
                         "openBtn" : {
@@ -1135,7 +1795,8 @@ xui.Class('App', 'xui.Module',{
                         },
                         "deleteBtn" : {
                             "properties" : {
-                                "dirtyMark" : true
+                                "dirtyMark" : true,
+                                "display" : "none"
                             }
                         },
                         "selectAllBtn" : {
@@ -1159,6 +1820,11 @@ xui.Class('App', 'xui.Module',{
                             }
                         },
                         "filter" : {
+                            "properties" : {
+                                "dirtyMark" : true
+                            }
+                        },
+                        "copyBtn" : {
                             "properties" : {
                                 "dirtyMark" : true
                             }
@@ -1347,10 +2013,10 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"outGrid")
                 .setProperties({
-                    "tableName" : "維修站總資料表",
+                    "tableName" : "站內物件查詢",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "維修站名 != '已入庫'",
+                    "condition" : "完工狀態 IN ('完工','不修','簡修完工')",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
@@ -1367,6 +2033,112 @@ xui.Class('App', 'xui.Module',{
                     "saveIgnoreFields" : "",
                     "excelFileName" : "",
                     "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "rowHandlerWidth" : "8em",
+                                "header" : [
+                                    {
+                                        "id" : "ERP維修單號",
+                                        "caption" : "ERP維修單號",
+                                        "width" : "8em",
+                                        "type" : "input"
+                                    },
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "完工狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "產品分類",
+                                        "caption" : "產品分類",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ],
+                                "tagCmds" : [
+                                    {
+                                        "id" : "out",
+                                        "type" : "button",
+                                        "location" : "left",
+                                        "caption" : "入庫"
+                                    },
+                                    {
+                                        "id" : "unfinish",
+                                        "type" : "button",
+                                        "location" : "left",
+                                        "caption" : "取消完工"
+                                    }
+                                ]
+                            }
+                        },
                         "newBtn" : {
                             "properties" : {
                                 "dirtyMark" : true
@@ -1407,18 +2179,9 @@ xui.Class('App', 'xui.Module',{
                                 "dirtyMark" : true
                             }
                         },
-                        "grid" : {
+                        "copyBtn" : {
                             "properties" : {
-                                "dirtyMark" : true,
-                                "rowHandlerWidth" : "6em",
-                                "tagCmds" : [
-                                    {
-                                        "id" : "out",
-                                        "type" : "button",
-                                        "location" : "left",
-                                        "caption" : "入庫"
-                                    }
-                                ]
+                                "dirtyMark" : true
                             }
                         }
                     }
@@ -1463,10 +2226,10 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"outHistoryGrid")
                 .setProperties({
-                    "tableName" : "維修站總資料表",
+                    "tableName" : "站內物件查詢2",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "維修站名 = '已入庫'",
+                    "condition" : "完工狀態 = '已入庫'",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
@@ -1483,6 +2246,98 @@ xui.Class('App', 'xui.Module',{
                     "saveIgnoreFields" : "",
                     "excelFileName" : "",
                     "__inner_coms_prf__" : {
+                        "grid" : {
+                            "properties" : {
+                                "dirtyMark" : true,
+                                "rowHandlerWidth" : "6em",
+                                "header" : [
+                                    {
+                                        "id" : "ERP維修單號",
+                                        "caption" : "ERP維修單號",
+                                        "width" : "8em",
+                                        "type" : "input"
+                                    },
+                                    {
+                                        "id" : "維修前測試",
+                                        "caption" : "維修前測試",
+                                        "type" : "checkbox",
+                                        "width" : "5.485714285714286em"
+                                    },
+                                    {
+                                        "id" : "登錄編號",
+                                        "caption" : "登錄編號",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Extno",
+                                        "caption" : "-",
+                                        "type" : "input",
+                                        "width" : "1.980952380952381em"
+                                    },
+                                    {
+                                        "id" : "維修分類歸屬",
+                                        "caption" : "維修分類歸屬",
+                                        "type" : "input",
+                                        "width" : "6.019047619047619em"
+                                    },
+                                    {
+                                        "id" : "客戶名稱",
+                                        "caption" : "客戶名稱",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "P/N",
+                                        "caption" : "P/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "S/N",
+                                        "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "日期",
+                                        "caption" : "日期",
+                                        "type" : "date",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "進廠原因",
+                                        "caption" : "進廠原因",
+                                        "type" : "input",
+                                        "width" : "16em"
+                                    },
+                                    {
+                                        "id" : "完工狀態",
+                                        "caption" : "完工狀態",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "產品分類",
+                                        "caption" : "產品分類",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    }
+                                ]
+                            }
+                        },
                         "newBtn" : {
                             "properties" : {
                                 "dirtyMark" : true
@@ -1523,10 +2378,9 @@ xui.Class('App', 'xui.Module',{
                                 "dirtyMark" : true
                             }
                         },
-                        "grid" : {
+                        "copyBtn" : {
                             "properties" : {
-                                "dirtyMark" : true,
-                                "rowHandlerWidth" : "6em"
+                                "dirtyMark" : true
                             }
                         }
                     }
@@ -1573,7 +2427,7 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "維修工單列表",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 != '已入庫' AND 維修站名 = {SiteName})",
+                    "condition" : "維修站名 = {SiteName}",
                     "condition2" : "",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
@@ -1718,7 +2572,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231013-B3")
+                .setCaption("維修站管理系統-20231026")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -1858,6 +2712,10 @@ xui.Class('App', 'xui.Module',{
                         "caption" : "拆解站"
                     },
                     {
+                        "id" : "Crosshead",
+                        "caption" : "Crosshead站"
+                    },
+                    {
                         "id" : "Vacuum side",
                         "caption" : "Vacuum站"
                     },
@@ -1866,20 +2724,24 @@ xui.Class('App', 'xui.Module',{
                         "caption" : "Helium站"
                     },
                     {
-                        "id" : "Compressor",
-                        "caption" : "Compressor站"
-                    },
-                    {
-                        "id" : "Crosshead",
-                        "caption" : "Crosshead站"
-                    },
-                    {
                         "id" : "Module",
                         "caption" : "Module站"
                     },
                     {
                         "id" : "測試站",
                         "caption" : "測試站"
+                    },
+                    {
+                        "id" : "Compressor",
+                        "caption" : "Compressor站"
+                    },
+                    {
+                        "id" : "Controller",
+                        "caption" : "Controller站"
+                    },
+                    {
+                        "id" : "Heater",
+                        "caption" : "Heater站"
                     }
                 ])
                 .setLeft("0em")
@@ -2007,6 +2869,10 @@ xui.Class('App', 'xui.Module',{
             //    ns.employeeGrid.loadGridData(0);
             if(item.id == "維修測試區")
                 ns.loadPage(item.id);
+            else if(item.id == "站內物件列表")
+                ns.outGrid.refreshGrid();
+            else if(item.id == "已入庫清單")
+                ns.outHistoryGrid.refreshGrid();
 
         },
 /**
@@ -2123,7 +2989,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 ns.repairTabs.updateItem("Crosshead",{"hidden": true});        
               //  ns.repairTabs.updateItem("ShiCrosshead",{"hidden": true});        
                 ns.repairTabs.updateItem("Compressor",{"hidden": true});        
-                ns.repairTabs.updateItem("Controler",{"hidden": true});        
+                ns.repairTabs.updateItem("Controller",{"hidden": true});        
                 ns.repairTabs.updateItem("ModuleTest",{"hidden": true});        
                 ns.repairTabs.updateItem("ChallentechBench",{"hidden": true});        
                 ns.repairTabs.updateItem("CylinderHeater",{"hidden": true});        
@@ -2147,8 +3013,17 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             else if(SiteName.includes("Module"))
             {
                 ns.repairTabs.updateItem("ModuleTest",{"hidden": false});        
-                ns.repairTabs.updateItem("Controler",{"hidden": false});        
-                ns.repairTabs.setValue("Controler");
+                ns.repairTabs.setValue("ModuleTest");
+            }  
+            else if(SiteName.includes("Controller"))
+            {
+                ns.repairTabs.updateItem("Controller",{"hidden": false});        
+                ns.repairTabs.setValue("Controller");
+            }  
+            else if(SiteName.includes("Heater"))
+            {
+                ns.repairTabs.updateItem("CylinderHeater",{"hidden": false});        
+                ns.repairTabs.setValue("CylinderHeater");
             }  
             else if(SiteName.includes("拆解站") || SiteName.includes("測試站"))
             {
@@ -2157,7 +3032,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 ns.repairTabs.updateItem("Crosshead",{"hidden": false});        
                 //ns.repairTabs.updateItem("ShiCrosshead",{"hidden": false});        
                 ns.repairTabs.updateItem("Compressor",{"hidden": false});        
-                ns.repairTabs.updateItem("Controler",{"hidden": false});        
+                ns.repairTabs.updateItem("Controller",{"hidden": false});        
                 ns.repairTabs.updateItem("ModuleTest",{"hidden": false});        
                 //ns.repairTabs.updateItem("ChallentechBench",{"hidden": false});        
                 ns.repairTabs.updateItem("CylinderHeater",{"hidden": false});        
@@ -2176,6 +3051,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     var ns = this;
                     //ns.initCodeReader();        
                     Logined = 0;
+                    AppName = "RepairSide";
              xui.Ajax.method = "POST";
             xui.Ajax.timeout = 15000;
             xui.Ajax.retry = 3;
@@ -2205,6 +3081,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
               ns.mainPage.updateItem("掃碼入站", {"hidden":"hidden"});        
 //          }
           ns.updateAllGrids();
+          ns.mainPage.setValue("維修工單");
           utils.toggleFullScreen("body");
             
         },
@@ -2446,14 +3323,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 return;
             ns.processInsite();
         },
-        _outgrid_oncmdclick:function(grid,item,cmdkey){
-            var ns = this;
-            if(typeof item == "undefined")
-                return;
-            var id = item["登錄編號"];
-            if(cmdkey == "out")
-            {
-                /*
+        newUnitServiceForm:function(id){
                 var uitem = utils.getItemValue("UnitServiceForm子表","登錄編號", id);   
                 if(uitem == "") //新增 Unit Service Form
                 {
@@ -2461,34 +3331,66 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                   if(ritem == "")
                   {
                     xui.alert("查無登錄編號...");
-                    return;  
+                    return false;  
                   }
                   var workid = ritem["工號"];
                   var witem = utils.getItemValue("工號登錄總資料表","工號", workid);
                   var mitem = utils.getItemValue("UnitServiceForm子表","工號", workid);
                   if(mitem == "")  //新增unit service form 總表 
                   {
-                      var data = {"業務名稱":ritem["Sponser"],"日期": utils.today()};
-                      var mdata = utils.insertTableItem("UnitServiceForm總表", data, null, true);  
+                      var emplName = ritem["Sponser"];
+                      var emplID = utils.getItemValue("BU3員工資料表","姓名",emplName, "員工代號");
+                      if(emplID == "")
+                      {
+                          emplID = "0860048";
+                          emplName = "馬藍菁";
+                      }
+                      var today = utils.today();
+                      var condition = `業務ID = '${emplID}' AND 日期 = '${today}'`;
+                      var mdata = utils.getItemValueByCondition("UnitServiceForm總表", condition);
+                      if(mdata == "")  //no today;s unit service form, create one
+                      {
+                        var data = {"業務ID":  emplID, "業務名稱": emplName,"日期": utils.today()};
+                        mdata = utils.insertTableItem("UnitServiceForm總表", data, null, true);
+                      }
                       var mid = mdata["總表單號"];
                   }
                   else 
                       var mid = mitem["總表單號"];
-                  var subitem = {"總表單號":mid, "登錄編號":id, "Model": item["Model"], "P/N":item["P/N"], "S/N":item["S/N"],"工號":workid,
-                                 "公司名稱":witem["客戶名稱"]};
-                  uitem = utils.insertTableItem("UnitServiceForm子表", subitem);  
-                  xui.alert("Unit Service Form已產生!");
+                      var robot = "Robot";
+                      if(wdata["Robot"] == 0)
+                        robot = "Cryo";
+                      var subitem = {"總表單號": mid, "Type":"Repair", "登錄編號": id, "工號":ritem["工號"], "公司名稱":witem["客戶名稱"], "公司編號":witem["CompanyID"],
+                             "Model":"In Model","P/N":"In P/N", "S/N":"In S/N", "End User":witem["End User"], "Tel":witem["電話"], "連絡人代號":witem["ContactID"], "Request By": emplName,
+                             "日期":utils.today(), "System ID":ritem["System ID"], "Chamber ID": ritem["Chamber ID"], "Process":ritem["Process"], "User Name":witem["連絡人"],
+                             "單別": robot};
+                      uitem = utils.insertTableItem("UnitServiceForm子表", subitem);  
+                  //xui.alert("Unit Service Form已產生!");
+                  return true;  
                 }
-                */
-                var cb = function(){
-                    utils.modifyTableItem("維修站總資料表", "登錄編號", {"登錄編號":id, "維修站名":"已入庫", "入庫時間":utils.now(), "維修狀態":"已修復待出貨"});
+                return true;
+        },
+        _outgrid_oncmdclick:function(grid,item,cmdkey){
+            var ns = this;
+            if(typeof item == "undefined")
+                return;
+            var id = item["登錄編號"];
+            if(cmdkey == "out")
+            {
+               // if(ns.newUnitServiceForm(id) == false)
+               //     return;
+                    utils.writeRepairStatus(id,"入庫");
                     ns.outGrid.refreshGrid();
                     ns.outHistoryGrid.refreshGrid();
-                    utils.alert("已入庫!");
-                }
-                cb();
+                    utils.alert("已入庫!<br>已通知秘書!");
                // utils.showDataPage("SubUnitServiceForm",uitem,"edit", null, cb);  
-                
+            }
+            else if(cmdkey == "unfinish")
+            {
+                    utils.writeRepairStatus(id,"待維修");
+                    ns.outGrid.refreshGrid();
+                    ns.outHistoryGrid.refreshGrid();
+                    utils.alert("已取消完工!");
             }
         },
             /**
@@ -2508,11 +3410,9 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 count += ns.getMessageCount("Cryopump維修工單", "A組裝簽名:A組長覆核,B組裝簽名:B組長覆核,C組裝簽名:C組長覆核,D測試人員簽名:D測試組長覆核");
                 count += ns.getMessageCount("Crosshead維修工單", "C組裝簽名:C組長覆核");
                 count += ns.getMessageCount("Compressor維修工單", "A簽名:A組長覆核,C簽名:C組長覆核");
-                count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '秘書已確認'");
-                if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))
-                  count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '待組長確認'");
+                count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '秘書已確認,通知Bench'");
+                count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '待組長確認'");
                     
-                count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '秘書已確認'");
                 count += ns.getMessageCount2("維修站總資料表", "維修狀態 = '待維修'");
                 count += ns.getMessageCount2("維修站總資料表", "維修狀態 = '待測試'");
 
@@ -2711,7 +3611,273 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             ns.account.setValue(value);
             value = localStorage.getItem("RepairSide_Password");
             ns.password.setValue(value);
-        }
+        },
+        searchRepairGrid: function(grid, rnoctrl, xhctrl = null){
+                var rno = rnoctrl.getUIValue();            
+                var xh = "";
+                if(xhctrl)
+                    xh = xhctrl.getUIValue();
+                if(rno != "")
+                    grid.properties["condition2"] = ` 登錄編號 LIKE '%${rno}%'`;
+                else
+                    grid.properties["condition2"] = "";
+
+                if(xh != "")
+                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                
+                grid.refreshGrid();
+        },
+        finishRepairGrid:function(grid, rnoctrl, xhctrl = null){
+                var rno = rnoctrl.getUIValue();            
+                var xh = "";
+                if(xhctrl)
+                    xh = xhctrl.getUIValue();
+                if(rno != "")
+                    grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
+                else
+                    grid.properties["condition2"] = "";
+                if(xh != "")
+                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                if(grid.properties["condition2"] != "")
+                    grid.properties["condition2"] += " AND ";
+                grid.properties["condition2"] += "維修狀態 = '完工'";
+                grid.refreshGrid();
+            
+        },
+        unfinishRepairGrid:function(grid, rnoctrl, xhctrl = null){
+                var rno = rnoctrl.getUIValue();            
+                var xh = "";
+                if(xhctrl)
+                    xh = xhctrl.getUIValue();
+                if(rno != "")
+                    grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
+                else
+                    grid.properties["condition2"] = "";
+                if(xh != "")
+                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                if(grid.properties["condition2"] != "")
+                    grid.properties["condition2"] += " AND ";
+                grid.properties["condition2"] += "維修狀態 != '完工'";
+                grid.refreshGrid();
+            
+        },        
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _rsearchbtn1_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                ns.searchRepairGrid(ns.repairGrid1, ns.repair1);
+            },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn1_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid1, ns.repair1);
+
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtn1_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.unfinishRepairGrid(ns.repairGrid1, ns.repair3, ns.xh3);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn3_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _rsearchbtn2_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.searchRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtn3_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _rsearchbtn5_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.searchRepairGrid(ns.repairGrid5, ns.repair5);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn5_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid5, ns.repair5);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtn5_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.unfinishRepairGrid(ns.repairGrid5, ns.repair5);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _rsearchbtn6_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.searchRepairGrid(ns.repairGrid6, ns.repair6);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn6_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid6, ns.repair6);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtn6_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.unfinishRepairGrid(ns.repairGrid6, ns.repair6);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _rsearchbtn7_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.searchRepairGrid(ns.repairGrid7, ns.repair7);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn7_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.repairGrid7, ns.repair7);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtn7_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.unfinishRepairGrid(ns.repairGrid7, ns.repair7);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _rsearchheaterbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.searchRepairGrid(ns.heaterGrid, ns.repairHeater);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtnheater_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.finishRepairGrid(ns.heaterGrid, ns.repairHeater);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _unfinishbtnheater_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+             ns.unfinishRepairGrid(ns.heaterGrid, ns.repairHeater);
+       }
 
         /*,
         // To determine how properties affects this module

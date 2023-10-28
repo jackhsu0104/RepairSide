@@ -9,8 +9,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "Module功能測試表",
             "datas" : null,
             "mode" : "new"
         },
@@ -82,6 +82,43 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setWidth("5.561904761904762em")
                 .setCaption("儲存")
                 .onClick("_savebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"nextBtn")
+                .setAutoTips(false)
+                .setLeft("29.266666666666666em")
+                .setTop("0.8666666666666667em")
+                .setWidth("10.333333333333334em")
+                .setCaption("工單到下一站")
+                .setType("drop")
+                .onClick("_nextbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"deleteBtn")
+                .setLeft("19.8em")
+                .setTop("1em")
+                .setWidth("8.533333333333333em")
+                .setCaption("刪除Module工單")
+                .onClick("_deletebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataBinder("mdb")
+                .setDataField("維修狀態")
+                .setAutoTips(false)
+                .setLeft("4.6em")
+                .setTop("1.2em")
+                .setWidth("14.133333333333333em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀態")
+                .setType("popbox")
+                .setMaxlength("32")
             );
             
             host.dialog.append(
@@ -2270,7 +2307,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setHost(host,"repairBtn")
                 .setLeft("40.6em")
                 .setTop("3em")
-                .setWidth("8.666666666666666em")
+                .setWidth("9.333333333333334em")
                 .setCaption("維修委託單")
                 .onClick("_repairbtn_onclick")
             );
@@ -2281,10 +2318,21 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setAutoTips(false)
                 .setLeft("40.6em")
                 .setTop("6em")
-                .setWidth("8.666666666666666em")
+                .setWidth("9.333333333333334em")
                 .setCaption("領料報工單")
                 .setType("drop")
                 .onClick("_pickingbtn_onclick")
+            );
+            
+            host.xui_ui_block305.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"optionBtn")
+                .setAutoTips(false)
+                .setLeft("40.6em")
+                .setTop("9.333333333333334em")
+                .setWidth("9.333333333333334em")
+                .setCaption("Option零件更換表")
+                .onClick("_optionbtn_onclick")
             );
             
             return children;
@@ -2317,8 +2365,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
+//            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
             utils.saveForm(ns);
-            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
         },
 
         /**
@@ -2329,6 +2377,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
         _dialog_onshow:function(profile){
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();
+            //utils.updateFinishOutBtnCaption(ns);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -2367,7 +2417,70 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                     _pickingbtn_onclick:function(profile, e, src, value){
                         var ns = this, uictrl = profile.boxing();
                 utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue());
-                    }
+                    },
+                        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                        _nextbtn_onclick:function(profile, e, src, value){
+                            var ns = this, uictrl = profile.boxing();
+                            utils.nextStation(uictrl,["Module"]);
+                        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _finishbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.finishBtnClick(ns);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _outbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.outBtnClick(ns);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _deletebtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            xui.confirm("訊息","是否刪除本Module功能測試表?", function(){
+                utils.removeTableItem("Module功能測試表","登錄編號", rno);
+                ns.destroy();
+            });
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _optionbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showRepairOptionForm(ns.mdb);
+       }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

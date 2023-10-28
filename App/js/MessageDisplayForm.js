@@ -204,7 +204,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           var ns = this;  
           var list = ns.listd;
           list.clearItems();
-          ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '秘書已確認'", "登錄編號,客戶名稱,保養名稱","-秘書已確認");
+          ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '秘書已確認,通知Bench'", "登錄編號,客戶名稱,保養名稱","-秘書已確認");
           if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))  
               ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,保養名稱","-待確認");
           ns.updateCaptionCount("d", list, "Compressor零件更換表");

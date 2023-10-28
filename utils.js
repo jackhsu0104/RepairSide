@@ -19,6 +19,8 @@ utils = {
                                 var value = cells[i];
                                 if(value && value.endsWith(" 00:00:00.000"))
                                     value = value.slice(0,-13);
+                                if(value && value == ".0000")
+                                    value = "";
                                 row[cols[i]] = value||"";
                             }
                             rows.push(row);
@@ -47,7 +49,19 @@ utils = {
                 },null,null,{"asy": !wait}).start();
                 return result;
     },
+    fixDateIssue: function(rows){
+        for(var i=0; i<rows.length; i++)
+        {
+          var r = rows[i];
+          for(var j=0; j<r.length; j++)
+          {
+            if(typeof r[j] == "string" && r[j].includes("1900-01-01"))
+                r[j] = null;
+          }
+        }
+    },
     sendDataCmd : function(hash, onFinish, wait){
+                var ns = this;
                 var wait = true;
                 if(onFinish)
                     wait = false;
@@ -62,6 +76,7 @@ utils = {
                     }//alert("ERROR");
                     else
                         result = data;
+                    //ns.fixDateIssue(data.rows);
                     if(onFinish)
                        onFinish(data);  
                 },null,null,{"asy": !wait}).start();
@@ -182,10 +197,11 @@ utils = {
         }
         return table;
     },
-    getItemValue: function(table, key, keyValue,  getField, allRows = false)
+	getItemValueList: function(table, key, keyValue, orderby = ""){
+		return utils.getItemValue(table, key, keyValue,"*", true, orderby);
+	},
+    getItemValue: function(table, key, keyValue,  getField="*", allRows = false, orderby = "")
     {
-        if(typeof getField == "undefined")
-            getField = "*";
         getField = utils.getProperFields(getField);
         table = utils.getProperTableName(table);
         if(typeof key == "undefined")
@@ -198,6 +214,8 @@ utils = {
           key = utils.getProperFields(key);
           var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
         }
+		if(orderby != "")
+			query += " ORDER BY " + orderby;
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash);
         if(datas.rows.length > 0)
@@ -238,8 +256,10 @@ utils = {
         var hash={"cmd":"modifyTableItem2","table":table, "key":key,"keyValue":keyValue, "item":data};
         utils.sendDataCmd(hash,  onFinish, wait);
     }, 
-    removeInvalidFields: function(table, datas){
+    removeInvalidFields: function(table, datas, action = ""){
         var data = Object.assign(datas);
+		if(data.ETD)
+		  data.ETS = data.ETD;
         var fields = utils.getTableFieldNames(table);
         var keys = Object.keys(data);     
         for(let i=0; i<keys.length; i++)
@@ -247,10 +267,21 @@ utils = {
            if(fields.indexOf(keys[i]) == -1)
               delete data[keys[i]];
         }
+        if(action == "insert")
+        {
+		  delete data["rowid"];
+		  delete data["CreateTime"];
+          if(table == "CTI Control Number總資料庫")
+          {
+            delete data["維修報告"];
+            //delete data["CN#"];
+            //delete data["登錄編號"];  
+          }
+        }
         return data;
     },
     insertTableItem : function(table, datas){
-        var data = utils.removeInvalidFields(table, datas);
+        var data = utils.removeInvalidFields(table, datas, "insert");
         var hash={"cmd":"insertTableItem","table":table, "item":data};
         var res = utils.sendDataCmd(hash);
         return res.item;
@@ -450,6 +481,13 @@ utils = {
           config.condition = s[5];
         return config;
     },
+	checkRepairStatus: function(datas){
+		var status = datas["維修狀態"];
+		if(["完工","不修","簡修完工"].includes(status))
+		{
+			datas["完工確認"] = LoginUser.DisplayName;
+		}
+	},
     saveForm: function(mod, ignoreFields, extDatas, onFinish, db){
             var prop = mod.properties;
             if(typeof db == "undefined")
@@ -471,7 +509,14 @@ utils = {
                     onFinish(item);  
             }
             var datas = db.getData();
-                
+			if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("主管")))
+			{
+				utils.alert("組長才能修改完工工單");
+				return;
+			}
+            if(mod.prevRepairStatus && mod.prevRepairStatus != datas["維修狀態"])
+				utils.checkRepairStatus(datas);
+					
             if(typeof datas.__row__id  != "undefined")
                 delete datas.__row__id;
             if(prop.tableName == "工號登錄總資料表")
@@ -507,16 +552,7 @@ utils = {
                   delete datas[ignoreFields[i]];
               }
             }
-/*        
-            //remove unused field
-            var fields = utils.getTableFieldNames(prop.tableName);
-            var keys = Object.keys(datas);     
-            for(let i=0; i<keys.length; i++)
-            {
-                if(fields.indexOf(keys[i]) == -1)
-                  delete datas[keys[i]];
-            }
-*/        
+ 
             if(extDatas)
             {    
               let keys = Object.keys(extDatas);     
@@ -526,7 +562,18 @@ utils = {
                 datas[key] = extDatas[key];
               }
             }
-            if(prop.mode.indexOf("new") != -1)
+        
+            //fix 1900-01-01 issue
+            var keys = Object.keys(datas);
+            for(var i=0; i<keys.length; i++)
+            {
+              var k = keys[i];  
+              if(typeof datas[k] == "string" && datas[k].includes("1900-01-01"))
+                  datas[k] = null;
+            }
+			datas["修改人員"] = LoginUser.DisplayName;
+			datas["修改時間"] = utils.now();
+            if(prop.mode.includes("new"))
             {
               var data = utils.insertTableItem(prop.tableName,  datas); //wait 
               newcb(data);
@@ -535,8 +582,9 @@ utils = {
             {
                utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
                if(onFinish)
-                 onFinish();  
-               mod.dialog.close();
+                 onFinish();
+			   if(AppName == "BU3")		
+                 mod.dialog.close();
             }    
             return true;
     },
@@ -581,8 +629,12 @@ utils = {
         mod._db_afterupdatedatafromui = function (profile,dataFromUI){
                       var ns = this, uictrl = profile.boxing();
                       xui.each(dataFromUI,function(o,i){
-                      if(xui.isDate(o))
-                        dataFromUI[i] = xui.Date.format(o,"yyyy-mm-dd hh:nn:ss");
+							if(xui.isDate(o))
+							{
+								dataFromUI[i] = xui.Date.format(o,"yyyy-mm-dd hh:nn:ss");
+								if(dataFromUI[i].includes("1900-01-01"))
+									dataFromUI[i] = null;
+							}
                       });
         }
         // console.log("nodes:",nodes); 
@@ -606,7 +658,18 @@ utils = {
                 var db = mod.getDataBinders();
                 if(db.length > 0)
                 {
-                   db = db[0].boxing();
+                   if(typeof mod.db == "string" && mod.db != "")
+				   {
+					   for(var i=0; i<db.length; i++)
+					   {
+						 if(db[i].alias == mod.db)  
+                         db = db[i].boxing();
+						 break; 
+					   }
+				   }
+                   else
+                     db = db[0].boxing();
+                       
                    db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
                    var comboDatas = db.getData(); 
                 }
@@ -655,6 +718,11 @@ utils = {
         }        
         let popcb = function(profile, pos, e, src){
                 var ns = this, uictrl = profile.boxing();//, prop = uictrl.getPopCtrlProp();
+                if(uictrl.beforeComboPop0)
+                {
+                  if(ns[uictrl.beforeComboPop0](profile) == false)
+                      return false;
+                }
                 showCombo(uictrl);
         }; 
         let popcb2 = function(profile, pos, e, src){
@@ -697,10 +765,14 @@ utils = {
             {
                 
                 if(n.getType() == "cmdbox")
+                {
+                   n.beforeComboPop0 = n.n0.beforeComboPop;  //string
                    n.beforeComboPop("tableBox_beforecombopop");
+                }
                 else if(n.getType() == "popbox")
                 {
                    //console.log("popbo:",n.getDataField());    
+                   n.beforeComboPop0 = n.n0.beforeComboPop;  //string
                    n.beforeComboPop("tableBox_beforecombopop");
                 }
                 
@@ -787,6 +859,12 @@ utils = {
             mod.askData(config, cb);
         });        
     },
+	askNumber: function(caption, cb){
+		var cb2 = function(data){
+			cb(data.Number);
+		}
+		utils.askData({"Number": caption},cb2);
+	},
     createTableControls : function(table, key, thepage, onFinish){
         var form = thepage.form;
         var cb = function(items){
@@ -988,6 +1066,19 @@ utils = {
                       utils.showDataPage("CrossheadEditForm", item, "edit");      
 
     },
+    showCrossheadEditFormXH: function(xh){
+                    if(xh == "")
+                    {
+                      xui.alert("請先指定XH代碼!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Crosshead維修工單","Crosshead編號",xh,"*");
+                    if(item == "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("CrossheadEditForm", item, "edit");      
+
+    },
     showCylinderHeaterEditForm: function(id){
                     if(id == "")
                     {
@@ -999,6 +1090,19 @@ utils = {
                       utils.alert("查無表單!");        
                     else
                       utils.showDataPage("CylinderHeaterEditForm", item, "edit");      
+
+    },    
+    showModuleTestForm: function(id){
+                    if(id == "")
+                    {
+                      xui.alert("請先指定登錄編號!");
+                      return;
+                    }
+                    var item = utils.getItemValue("Module功能測試表","登錄編號",id,"*");
+                    if(item == "")
+                      utils.alert("查無表單!");        
+                    else
+                      utils.showDataPage("ModuleTestForm", item, "edit");      
 
     },    
     showRepairOptionForm: function(db){
@@ -1108,14 +1212,14 @@ utils = {
                   uictrl.setCaption("待組長確認");
             else if(confirm == "通知秘書確認")
                   uictrl.setCaption("通知秘書確認");
-            else if(confirm == "秘書已確認，通知Bench")
-                uictrl.setCaption("秘書已確認,取消通知");
-            else if(confirm.includes("已確認"))
-                uictrl.setCaption(confirm);
+            else if(confirm == "秘書已確認,通知Bench")
+                uictrl.setCaption("秘書已確認<br>取消通知!");
             else if(data["組長確認"] == "")
                 uictrl.setCaption("通知組長確認");
             else if(data["秘書確認"] == "")
                 uictrl.setCaption("通知秘書確認");
+            else if(confirm.includes("已確認"))
+                uictrl.setCaption(confirm);
     },
     confirmBtnClick: function(mod, uictrl, key = "登錄編號"){
             var db = mod.getDataBinders();
@@ -1152,7 +1256,7 @@ utils = {
               xui.alert("已通知組長確認!");        
               uictrl.setCaption("待組長確認");
             }
-            else if(confirm == "秘書已確認,取消通知")
+            else if(confirm == "秘書已確認<br>取消通知!")
             {
               utils.modifyTableItem(table,key,{[key]:id, "確認狀態":"秘書已確認"});  
               db.setData("確認狀態","秘書已確認");   
@@ -1210,7 +1314,7 @@ utils = {
           }
         }
     },
-    confirmNameClick: function(mod, uictrl, pri, finishStat = "", saveFlag=true){
+    confirmNameClick: function(mod, uictrl, pri, finishState = "", saveFlag=true){
         var db = mod.getDataBinders();
         if(db.length > 0)
            db = db[0].boxing();
@@ -1539,53 +1643,71 @@ utils = {
                  if(rows[i])
                  {
                    var r = rows[i];
-                   let caption = (rows.length-i) + ": " + r[1];
+				   var postfix = r[1];
+				   if(r[2] == 1)
+					   postfix = "維修前測試";
+					   
+                   let caption = (rows.length-i) + ": " + postfix;
                    items.push({"id" : r[0], "caption" : caption}); 
                  }
                }
                ns.testFormMenu.setItems(items);
                ns.testFormMenu.popUp(uictrl); 
             };
-            utils.getTableItems({"tableName":"CryopumpTestForm","condition":condition, "fields":"rowid,Fail 原因", "orderby":"rowid DESC"}, cb);
+            utils.getTableItems({"tableName":"CryopumpTestForm","condition":condition, "fields":"rowid,Fail 原因,維修前測試", "orderby":"rowid DESC"}, cb);
     },
-    nextStation: function(uictrl){
-            var ns = uictrl.getModule(), items = [
-    {
-        "id" : "拆解站",
-        "caption" : "拆解站"
-    },
-    {
-        "id" : "Vacuum side",
-        "caption" : "Vacuum站"
-    },
-    {
-        "id" : "Helium side",
-        "caption" : "Helium站"
-    },
-    {
-        "id" : "Compressor",
-        "caption" : "Compressor站"
-    },
-    {
-        "id" : "Crosshead",
-        "caption" : "Crosshead站"
-    },
-    {
-        "id" : "Module",
-        "caption" : "Module站"
-    },
-    {
-        "id" : "測試站",
-        "caption" : "測試站"
-    }
-];
+	updateNextStationStatus:function(tableName, site, rno){
+		var state = "";
+		if(site == "Vacuum side" || site == "Helium side")
+			state = "組裝中";
+		else if(site == "測試站")
+			state = "測試中";
+		else if(site == "拆解站")
+			state = "待拆解";
+		else
+			state = "待維修";
+			
+        var data = {"登錄編號":rno,"維修狀態":state};
+        utils.modifyTableItem(tableName, "登錄編號", data);
+	},
+    nextStation: function(uictrl, sites){
+            var ns = uictrl.getModule(), items = [];
+	  if(ns.prevRepairStatus && ["完工","不修","簡修完工"].includes(ns.prevRepairStatus))
+	  {
+		  utils.alert("完工狀態,無法過站!");
+		  return;
+	  }		  
+	  for(var i=0; i<sites.length; i++)
+	  {
+		var s = sites[i];
+		if(s == SiteName)
+			continue;
+		if(s == "拆解站")
+		  items.push({"id" : "拆解站","caption" : "拆解站"});
+		else if(s == "Vacuum side")
+		  items.push({"id" : "Vacuum side","caption" : "Vacuum站"});
+		else if(s == "Helium side")
+		  items.push({"id" : "Helium side","caption" : "Helium"});
+		//else if(s == "Compressor")
+		//  items.push({"id" : "Compressor站","caption" : "Compressor站站"});
+		else if(s == "Crosshead")
+		  items.push({"id" : "Crosshead","caption" : "Crosshead站"});
+		else if(s == "Module")
+		  items.push({"id" : "Module","caption" : "Module站"});
+		else if(s == "測試站")
+		  items.push({"id" : "測試站","caption" : "測試站"});
+	  }
+	  var tableName = ns.properties.tableName;
+	  
             var rno = ns.repairNo.getUIValue();
             if(typeof ns.nextMenu == "undefined")
             {
               ns._nextmenu_onmenuselected = function(profile, item, src){
                   let ns = this;
-                  utils.modifyTableItem("維修站總資料表","登錄編號",{"登錄編號":rno, "維修站名": item.id});
+                  utils.modifyTableItem(tableName,"登錄編號",{"登錄編號":rno, "維修站名": item.id});
+				  utils.updateNextStationStatus(tableName, item.id, rno);
                   utils.alert("維修工單:" + rno + "已放入 " + item.caption);
+				  ns.destroy();
               }  
               var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"nextMenu").onMenuSelected("_nextmenu_onmenuselected");
               ns.AddComponents(menu);
@@ -1594,29 +1716,16 @@ utils = {
             ns.nextMenu.updateItem(SiteName, {"hidden":true});
             ns.nextMenu.popUp(uictrl);
     },
-    newCryoPumpTestForm: function(rno){
-            var items = utils.getItemValue("CryopumpTestForm","登錄編號",ns.repairNo.getUIValue(),"*",true);
-            if(items == "")
-            {
+    newCryopumpTestForm: function(rno){
               var rdata = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno);
               if(rdata == "")
               {
                 utils.alert("查無此登錄編號!");
                 return "";
               }
-              var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today(), "item":1};
+              var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today()};
               var data = utils.insertTableItem("CryopumpTestForm", ndata);
-                    
-            }
-            else
-            {    
-              var last = items[items.length-1];
-              var datas = {"登錄編號":last["登錄編號"], "item": Number(last["item"])+1, "Pump":last["Pump"], "P/N":last["P/N"], "S/N":last["S/N"], "Type":last["Type"], "Ch":last["Ch"],
-                         "Pump#2":last["Pump#2"],"Pump#3":last["Pump#3"]};
-              var data = utils.insertTableItem("CryopumpTestForm",datas);
-            }
-        
-            return data;
+			  return data;
     },
     pad: function(num, size) {
         num = num.toString();
@@ -1684,16 +1793,142 @@ utils = {
                 });
     },
     readRepairStatus:function(ns){
-        var uictrl = ns.repairStatus;
         var rno = ns.repairNo.getUIValue();
         var r = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno, "維修狀況");
-        uictrl.setValue(r);
-    },
-    writeRepairStatus:function(ns){
+		if(r == null)
+			r = "";
         var uictrl = ns.repairStatus;
+		if(uictrl)
+          uictrl.setValue(r);
+		return r;
+    },
+    writeRepairStatus:function(rno, status){
+		var items = utils.getItemValue("維修工單列表","登錄編號", rno,"*", true);
+		if(items != "")
+		{	
+		  for(var i=0; i<items.length; i++)
+		  {			  
+            var data = {"登錄編號":rno, "維修狀態": status, "維修狀況":status};
+			var tableName = items["維修工單"];
+			if(tableName.includes("Controller"))
+				tableName = "3phControler維修工單";
+		    if(status = "完工")  
+		    {
+			  data["Date Complete"] = utils.today();
+              utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
+		    }
+            utils.modifyTableItem(tableName,"登錄編號", data);
+		  }
+		}
+    },
+	updateDataBinder: function(ns, data)
+	{
+		var dbs = ns.getDataBinders();
+		for(var i=0; i<dbs.length; i++)
+		{
+			var db = dbs[i].boxing();
+			var keys = Object.keys(data);
+			for(var k=0; k<keys.length; k++)
+			  db.setData(keys[k], data[keys[k]]);	
+		}
+	},
+    putInStorehouse:function(ns,tableName = ""){
         var rno = ns.repairNo.getUIValue();
-        var status = uictrl.getUIValue();
-        var data = {"登錄編號":rno, "維修狀況": status};
-        utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
-    }
+		if(tableName == "")
+		  tableName = ns.properties.tableName;
+        var data = {"登錄編號":rno, "維修站名": "已入庫", "維修狀態":"完工", "入庫時間":utils.now()};
+        utils.modifyTableItem(tableName,"登錄編號", data);
+		utils.updateDataBinder(ns, data);
+    },
+	isSubSheets:function(ns){
+			var rno = ns.repairNo.getUIValue();
+			var tableName = ns.properties.tableName;
+			if(tableName == "Crosshead維修工單" || tableName == "Module功能測試表")
+			{
+				var items = utils.getItemValue("維修工單列表","登錄編號",rno, "*", true);
+				if(items.length >= 2) //子工單,不須通知秘書
+					return true;
+			}
+			return false;
+	},
+	finishBtnClick: function(ns){
+				var uictrl = ns.finishBtn;
+				var prop = ns.properties, tableName = prop.tableName;
+				if(uictrl.getCaption() == "已入庫")
+                    return;
+                if(tableName == "Cryopump維修工單" && !ns.checkSubSheetFinish())
+                    return;
+				var text = "已入庫!\n並設定維修狀況為A10.";
+				if(!utils.isSubSheets(ns)) //主工單
+				{
+				  if(tableName == "Compressor維修工單")
+				  {
+                    ns.repairStatus.setValue("C30,入庫--Compressor");
+					text = "已入庫!\n並設定維修狀況為C30.";
+				  }
+				  else	
+                    ns.repairStatus.setValue("A10,入庫--Pump/Controller");
+                  utils.writeRepairStatus(ns);
+				}
+				else 
+					text = "已完工入庫!";  //子工單完工
+                utils.putInStorehouse(ns);
+                uictrl.setCaption("已入庫");
+                utils.alert(text);
+	},
+	outBtnClick(ns){
+			var prop = ns.properties, tableName = prop.tableName;
+			var uictrl = ns.outBtn;
+			if(uictrl.getCaption().includes("已通知"))
+				return;
+			if(utils.isSubSheets(ns))
+			{
+				utils.alert("子工單,不通知出貨!");
+				return;
+			}
+            if(tableName == "Cryopump維修工單" && !ns.checkSubSheetFinish())
+                return;
+			var text = "已通知秘書入庫/出貨!\n並設定維修狀況為A08.";
+			if(tableName == "Compressor維修工單")
+			{
+				ns.repairStatus.setValue("C28,待入庫/待出貨--Compressor");
+				text = "已通知秘書入庫/出貨!\n並設定維修狀況為C28.";
+			}
+			else
+				ns.repairStatus.setValue("A08,待入庫/待出貨--Pump/Controller");
+            utils.writeRepairStatus(ns);
+            uictrl.setCaption("已通知出貨");
+            utils.alert(text);
+	},
+	updateFinishOutBtnCaption: function(ns){
+		var prop = ns.properties, tableName = prop.tableName;
+		var status = utils.readRepairStatus(ns);
+		var rno = ns.repairNo.getUIValue();
+		if(status.includes("A08") || status.includes("C28"))
+		{
+			if(ns.outBtn)
+				ns.outBtn.setCaption("已通知出貨");
+		}
+		if(status.includes("A08") || status.includes("C28"))
+		{
+			if(ns.finishBtn)
+				ns.finishBtn.setCaption("已入庫");
+		}
+		if(utils.isSubSheets(ns)) //cehck if need outBtn
+		{
+			if(ns.outBtn)
+				ns.outBtn.hide();
+			if(ns.repairStatus)
+				ns.repairStatus.hide();
+			var db = ns.getDataBinders();
+			if(db.length > 0)
+			{
+			  db = db[0].boxing();
+			  var data = db.getData();
+			if(ns.finishBtn && data["維修狀態"] == "已完工")
+				ns.finishBtn.setCaption("已入庫");
+			  
+			}
+		}
+	}
  };

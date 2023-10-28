@@ -307,6 +307,23 @@ function prepareTableKey($table, $item)
         $item->出貨單號 = $value;
         
     }
+    else if($table == "[CryopumpTestForm]")
+    {
+        $n = 1;
+        $k = "登錄編號";
+        $rno = $item->$k;
+        $items = execquery("SELECT TOP 1  item FROM [CryopumpTestForm] WHERE [登錄編號] = '$rno' ORDER BY item DESC");
+        if(count($items)  > 0)
+        {
+            //print_r($items);
+            $value = $items[0]["item"];
+            $n = (int)$value;
+            $n++;
+        }        
+        $item->item = sprintf('%d',$n);
+        unset($item->rowid);
+        unset($item->CreateTime);
+    }
     else if($table == "[PS101,零件PO資料表]")
     {
         $n = 1;
@@ -315,12 +332,14 @@ function prepareTableKey($table, $item)
         $items = execquery("SELECT TOP 1  Item FROM [PS101,零件PO資料表] WHERE [PO#] = '$po' ORDER BY Item DESC");
         if(count($items)  > 0)
         {
-            print_r($items);
+            //print_r($items);
             $value = $items[0]["Item"];
             $n = (int)$value;
             $n++;
         }        
         $item->Item = sprintf('%02d',$n);
+        unset($item->rowid);
+        unset($item->CreateTime);
     }
     else  if($table == "GDCRM.dbo.[Incident]")
     {
@@ -348,6 +367,33 @@ function prepareTableKey($table, $item)
           $qry = "UPDATE GDCRM.dbo.KeyFieldDefine  Set Seed = $seed  WHERE　TableName = 'ServiceRecord'";
           execsql($qry);
         }
+    }
+    if($table == "[Crosshead維修工單]")
+    {
+        if(isset($item->NewType) && $item->NewType == "noXH")
+            return;
+        $items = execquery("SELECT TOP 1  [Crosshead編號] FROM [Crosshead維修工單]  ORDER BY [Crosshead編號] DESC");
+        if(count($items) > 0)
+        {
+            $value = $items[0]["Crosshead編號"];
+            $h = $value[0];
+            $n = (int)substr($value,1);
+            $n++;
+            if($n >= 1000)
+            {
+              $n = 1;
+              $h = chr(ord($h)+1);
+            }
+            $value = sprintf("%s%03d",$h,$n);
+            $key = "Crosshead編號";
+            $item->$key = $value;
+        }
+        else
+        {
+            $key = "Crosshead編號";
+            $item->$key = "A001";
+        }
+            
     }
     else  if($table == "[UnitServiceForm總表]")
     {

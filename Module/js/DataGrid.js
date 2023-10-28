@@ -522,7 +522,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 ns.grid.setSelMode("multi").setRowHandler(true);             
                 ns.newBtn.hide();
                 ns.openBtn.hide();
-                ns.deleteBtn.hide();
+                ns.deleteBtn.show();
             }else if(mode == "normal") {
                 ns.grid.setHotRowMode("hidden");
                 ns.grid.setSelMode("multi").setRowHandler(true);             
@@ -575,16 +575,16 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 {
                   if(r == "noop")
                     return;
-                  if(r != "")
+                  if(r && r != "")
                     mode = r;
                 }
             }
             else{
                 mode = "new";
                 var r = ns.fireEvent("onCreateRecords",[addRow, updateRow]);
-                if(r == "noop")
+                if(r === "noop")
                     return;
-                if(r != "")
+                if(r && r != "")
                     mode = r;
                 fields = ns.prepareNewDatas();
             }
@@ -855,11 +855,13 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         },
         _grid_afterrowactive:function (profile, row){
             var ns = this;
+			/*
             if(row)
               ns.openBtn.show();
             else 
               ns.openBtn.hide();               
-        },
+			*/
+		},
         _grid_afteruivalueset:function (profile, oldValue, newValue){
             var ns = this;
 		/*	

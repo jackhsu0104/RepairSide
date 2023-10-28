@@ -127,7 +127,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDataField("秘書確認")
                 .setLeft("24.666666666666668em")
                 .setTop("0.6857142857142857em")
-                .setWidth("9.142857142857142em")
+                .setWidth("10em")
                 .setCaption("通知組長確認")
                 .onClick("_confirmbtn_onclick")
             );

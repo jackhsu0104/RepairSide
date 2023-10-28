@@ -82,13 +82,13 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button982")
+                .setHost(host,"newTestBtn")
                 .setLeft("1.3333333333333333em")
                 .setTop("1em")
                 .setWidth("10em")
                 .setHeight("2em")
                 .setCaption("新增Test Form")
-                .onClick("_newbtn_onclick")
+                .onClick("_newtestbtn_onclick")
             );
             
             host.dialog.append(
@@ -116,7 +116,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.xui_ui_block36.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairNo")
+                .setHost(host,"repairNo2")
                 .setDataField("測試區登錄編號")
                 .setLeft("6em")
                 .setTop("4.133333333333334em")
@@ -356,7 +356,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             
             host.xui_ui_div1051.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1475")
+                .setHost(host,"repairNo")
                 .setDataBinder("tdb")
                 .setDataField("登錄編號")
                 .setReadonly(true)
@@ -368,20 +368,6 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setWidth("12em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
-            );
-            
-            host.xui_ui_div1051.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1476")
-                .setDataBinder("tdb")
-                .setDataField("Type")
-                .setReadonly(true)
-                .setDock("top")
-                .setDockOrder(5)
-                .setDockStretch("fixed")
-                .setLeft("4.571428571428571em")
-                .setTop("0.7619047619047619em")
-                .setLabelSize("1em")
             );
             
             host.xui_ui_div1051.append(
@@ -398,6 +384,17 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setWidth("3em")
                 .setLabelSize("1em")
                 .setLabelCaption("#")
+            );
+            
+            host.xui_ui_div1051.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox1165")
+                .setDataBinder("tdb")
+                .setDataField("維修前測試")
+                .setLeft("51.93333333333333em")
+                .setTop("0.06666666666666667em")
+                .setWidth("12em")
+                .setCaption("維修前測試")
             );
             
             host.testLayout.append(
@@ -1405,14 +1402,21 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
         loadTestArea: function(area){
             var ns = this;
             ns.rowidList = Array(ns.chamberCount).fill(-1);
-            var datas = utils.getItemValue("測試區總資料表","Area", area, "*", true);
+            var datas = utils.getItemValueList("測試區總資料表","Area", area);
             if(datas != "")
             {
               for(var i=0; i<datas.length; i++)
               {
                 var data= datas[i];
                 var id = data.CH;
-                ns.rowidList[id] = data.TestFormRowid;  
+                var rno = data["登錄編號"];  
+                if(rno != "")  
+                {
+                  var datas2 = utils.getItemValueList("CryopumpTestForm","登錄編號", rno, "item DESC");  
+                  ns.rowidList[id] = datas2[0].rowid;  
+                }
+                else 
+                  ns.rowidList[id] = -1;  
               }
             }
             ns.dialog.setCaption("測試區"+area);
@@ -1483,7 +1487,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
               return;  
             }    
             ns.saveChamber();  
-            var data = utils.newCryoPumpTestForm(rno);
+            var data = utils.newCryopumpTestForm(rno);
             var id = ns.tabs.getValue();
             ns.rowidList[id] = data.rowid;
             ns.loadChamber();
@@ -1499,7 +1503,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
         */
         _loadbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            var rno = ns.repairNo.getUIValue();
+            var rno = ns.repairNo2.getUIValue();
             if(rno == "")
             {
               utils.alert("請先輸入登錄編號");
@@ -1516,16 +1520,11 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 utils.alert("查無此登錄編號!");
                 return;
             }
-            var data = utils.getItemValue("CryopumpTestForm", "登錄編號", rno,"*", true);
+            var data = utils.getItemValueList("CryopumpTestForm", "登錄編號", rno,"rowid DESC");
             if(data == "")
-                data = utils.newCryoPumpTestForm(rno);
+                data = utils.newCryopumpTestForm(rno);
             else
-            {
-                data.sort(function(a,b){
-                  return b.rowid - a.rowid; //DESC      
-                });
                 data = data[0];
-            }
             ns.saveChamber();  
              var id = ns.tabs.getValue();
             ns.rowidList[id] = data.rowid;
@@ -1534,6 +1533,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
         },
         _page_onready:function(e,i){
             var ns = this;
+            ns.initFlag = false;
             ns.chamberCount = 15;
             var items = [];
             ns.rowidList = Array(ns.chamberCount).fill(-1);
@@ -1558,10 +1558,19 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             if(newValue == null)
                 return;
+            /*
+            if(oldValue != null && ns.initFlag == true)
+            {
+                var yes = confirm("CH" + (Number(oldValue)+1) +": 是否要儲存測試資料?");
+                if(yes)
+                  ns.saveChamber();
+            }
+            */
             if(oldValue != null)
-                ns.saveChamber();
+                  ns.saveChamber();
             if(newValue != null)
                 ns.loadChamber();
+            ns.initFlag = true;
         },
         changeTheme: function(value){
             var ns = this;
@@ -1660,6 +1669,58 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             var ns = this;
             utils.calcMinute(ns.t1, ns.st, ns.min1);
             utils.calcMinute(ns.t2, ns.t1, ns.min2);
+        },
+            /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+            _sign1_onclick:function(profile, e, src, value, n){
+                var ns = this, uictrl = profile.boxing();
+                utils.signNameClick(ns.testDate1, uictrl, "維修");
+            },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _sign2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.testDate2, uictrl, "維修");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _newtestbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+              var id = ns.tabs.getUIValue();  
+            if(ns.rowidList[id] == -1)
+            {
+              utils.alert("空表單,無法新增!");
+              return;  
+            };
+
+            ns.saveChamber();
+            var data = utils.newCryopumpTestForm(ns.repairNo.getUIValue());
+            if(data != "")
+            {    
+              ns.tdb.setData(data);
+              ns.tdb.updateDataToUI();  
+              ns.rowidList[id] = data.rowid;  
+            }
         },        
         /*,
         // To determine how properties affects this module

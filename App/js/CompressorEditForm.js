@@ -88,7 +88,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"reportBtn")
                 .setAutoTips(false)
-                .setLeft("2.1333333333333333em")
+                .setLeft("16.666666666666668em")
                 .setTop("0.8666666666666667em")
                 .setWidth("10.333333333333334em")
                 .setCaption("產生測試報告")
@@ -98,13 +98,14 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairStatus")
-                .setDataField("維修狀況")
+                .setDataBinder("comdb")
+                .setDataField("維修狀態")
                 .setAutoTips(false)
-                .setLeft("13.40952380952381em")
+                .setLeft("27.933333333333334em")
                 .setTop("1.0666666666666667em")
-                .setWidth("20em")
+                .setWidth("12.866666666666667em")
                 .setLabelSize("5em")
-                .setLabelCaption("維修狀況")
+                .setLabelCaption("維修狀態")
                 .setType("popbox")
                 .setMaxlength("32")
             );
@@ -201,7 +202,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"lastWorkSheetBtn")
                 .setLeft("54em")
-                .setTop("3.2666666666666666em")
+                .setTop("3.3333333333333335em")
                 .setWidth("10em")
                 .setHeight("2em")
                 .setCaption("上次維修工單")
@@ -227,29 +228,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataBinder("comdb")
                 .setDataField("上次登錄編號")
                 .setReadonly(true)
-                .setLeft("35.6em")
-                .setTop("3.2666666666666666em")
+                .setLeft("37.53333333333333em")
+                .setTop("3.466666666666667em")
                 .setWidth("15.066666666666666em")
                 .setLabelSize("6.5em")
                 .setLabelCaption("上次登錄編號")
-                .setType("getter")
-                .setMaxlength("20")
-                .onValueChange("_repairno_onvaluechange")
-                .onClick("_repairno_onclick")
-            );
-            
-            host.xui_ui_div571.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairNo")
-                .setName("登錄編號")
-                .setDataBinder("comdb")
-                .setDataField("登錄編號")
-                .setReadonly(true)
-                .setLeft("37.2em")
-                .setTop("0.7333333333333333em")
-                .setWidth("13.466666666666667em")
-                .setLabelSize("5em")
-                .setLabelCaption("登錄編號")
                 .setType("getter")
                 .setMaxlength("20")
                 .onValueChange("_repairno_onvaluechange")
@@ -292,6 +275,35 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("Compressor S/N")
                 .setMaxlength("32")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setLeft("29.333333333333332em")
+                .setTop("3.2666666666666666em")
+                .setWidth("7.333333333333333em")
+                .setHeight("2em")
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
+            );
+            
+            host.xui_ui_div571.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairNo")
+                .setName("登錄編號")
+                .setDataBinder("comdb")
+                .setDataField("登錄編號")
+                .setReadonly(true)
+                .setLeft("37.2em")
+                .setTop("0.7333333333333333em")
+                .setWidth("12.8em")
+                .setLabelSize("5em")
+                .setLabelCaption("登錄編號")
+                .setType("input")
+                .setMaxlength("20")
+                .onValueChange("_repairno_onvaluechange")
+                .onClick("_repairno_onclick")
             );
             
             host.form.append(
@@ -4141,7 +4153,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
             console.log(utils.createDDL(ns.dialog,"Compressor維修工單"));
             ns.tabs.setValue("a");
-            utils.readRepairStatus(ns);
+//            utils.readRepairStatus(ns);
+//            utils.updateFinishOutBtnCaption(ns);
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();
 
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -4580,7 +4594,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _repairno_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
         },
 
         /**
@@ -4620,6 +4633,31 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _c3_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
             var ns = this, uictrl = profile.boxing();
             ns.setTempF(ns.f3, newValue);
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _finishbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.finishBtnClick(ns);
+            },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _outbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.outBtnClick(ns);
+            
         }
         /*,
         // To determine how properties affects this module

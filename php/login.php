@@ -64,7 +64,7 @@ if($req->cmd == "login")
       $account = $req->account;
       $passwd =  $req->passwd;      
       if($account == "jackhsu0104")
-          $account = "Dicky_Hsu";//"Dicky_Hsu" //"Ann_Yao";
+          $account = "Ann_Yao";//"Dicky_Hsu" //"Ann_Yao";
       else
       {
         if(checkAccount($account,$passwd) == false)

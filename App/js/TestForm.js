@@ -642,8 +642,10 @@ xui.Class('App.TestForm', 'xui.Module',{
                     //xui.alert(ns.type.getValue());
                     //ns.db.updateDataFromUI();
                     //var data = ns.db.getData();
-                    var data = ns.grid11.getRowMap();
-                    console.log(data);
+                   // var data = ns.grid11.getRowMap();
+                    var f = ns.combo5.n0.beforeComboPop;
+                    console.log(f);
+                    ns[f](ns.combo5.getProfile());
                 },
                     /**
          * Fired when control's UI value is changed!
@@ -713,7 +715,19 @@ xui.Class('App.TestForm', 'xui.Module',{
         _combo5_onvaluechange:function(profile, oldValue, newValue, force, tag){
             var ns = this, uictrl = profile.boxing();
               console.log("OnValueChange");
-      }
+        },
+            /**
+         * Fired before the pop-up window is created. If returns false, the default pop window will be ignored
+         * @method beforeComboPop [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {the} pos  mouse position
+         * @param {Event} e , Dom event object
+         * @param {String} src , the event source DOM element's xid
+        */
+            _combo5_beforecombopop:function(profile, pos, e, src){
+                var ns = this, uictrl = profile.boxing();
+                xui.alert("beforeComboPop");
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

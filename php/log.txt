@@ -1,1 +1,1 @@
-SELECT * FROM [維修工單列表] WHERE 登錄編號 IN (SELECT 登錄編號 FROM 維修站總資料表 WHERE 維修站名 != '已入庫' AND 維修站名 = 'Crosshead')  ORDER BY 登錄編號 DESC  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT * FROM [站內物件查詢] WHERE 完工狀態 IN ('完工','不修','簡修完工')  ORDER BY [登錄編號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY

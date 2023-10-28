@@ -9,8 +9,8 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "CylinderHeater維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -85,15 +85,18 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"nextBtn")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataBinder("rdb")
+                .setDataField("維修狀態")
                 .setAutoTips(false)
-                .setLeft("35.333333333333336em")
-                .setTop("0.7333333333333333em")
-                .setWidth("10.333333333333334em")
-                .setCaption("工單到下一站")
-                .setType("drop")
-                .onClick("_nextbtn_onclick")
+                .setLeft("16.076190476190476em")
+                .setTop("1.2em")
+                .setWidth("12.733333333333333em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀態")
+                .setType("popbox")
+                .setMaxlength("32")
             );
             
             host.dialog.append(
@@ -1599,6 +1602,9 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             var cmd = utils.createDDL(ns.dialog, "CylinderHeater維修工單");
             console.log(cmd);
             ns.tabs.setValue("a");
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();
+
+            //utils.updateFinishOutBtnCaption(ns);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -1737,6 +1743,30 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         _changerepairbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             utils.showTableCombo(ns.repairNo,"更換登錄編號");
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _finishbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.finishBtnClick(ns);
+            },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _outbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.outBtnClick(ns);
         }
         /*,
         // To determine how properties affects this module

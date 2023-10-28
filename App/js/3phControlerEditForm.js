@@ -9,8 +9,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
-            "tableName" : null,
+            "keyid" : "登錄編號",
+            "tableName" : "3phControler維修工單",
             "datas" : null,
             "mode" : "new"
         },
@@ -85,15 +85,18 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"nextBtn")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataBinder("rdb")
+                .setDataField("維修狀態")
                 .setAutoTips(false)
-                .setLeft("34.666666666666664em")
-                .setTop("0.7333333333333333em")
-                .setWidth("10.333333333333334em")
-                .setCaption("工單到下一站")
-                .setType("drop")
-                .onClick("_nextbtn_onclick")
+                .setLeft("22.8em")
+                .setTop("1.0666666666666667em")
+                .setWidth("14.133333333333333em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀態")
+                .setType("popbox")
+                .setMaxlength("32")
             );
             
             host.dialog.append(
@@ -229,6 +232,17 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setCaption("領料報工單")
                 .setType("drop")
                 .onClick("_pickingbtn_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"optionBtn")
+                .setAutoTips(false)
+                .setLeft("46em")
+                .setTop("2.8666666666666667em")
+                .setWidth("9.333333333333334em")
+                .setCaption("Option零件更換表")
+                .onClick("_optionbtn_onclick")
             );
             
             host.form.append(
@@ -1098,7 +1112,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
                 .setTop("60.49523809523809em")
-                .setWidth("9.333333333333334em")
+                .setWidth("11em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
                 .setType("getter")
@@ -1651,7 +1665,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            //utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
             utils.saveForm(ns);
         },
 
@@ -1666,6 +1680,8 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             var cmd = utils.createDDL(ns.dialog, "3phControler維修工單");
             console.log(cmd);
             ns.tabs.setValue("a");
+           // utils.updateFinishOutBtnCaption(ns);
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -1755,7 +1771,43 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                     _nextbtn_onclick:function(profile, e, src, value){
                         var ns = this, uictrl = profile.boxing();
                          utils.nextStation(uictrl);
-                   }
+                    },
+                        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+                        _finishbtn_onclick:function(profile, e, src, value){
+                            var ns = this, uictrl = profile.boxing();
+                            utils.finishBtnClick(ns);
+                        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _outbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.outBtnClick(ns);
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _optionbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            utils.showRepairOptionForm(ns.rdb);
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){
