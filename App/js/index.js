@@ -109,7 +109,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("站內物件列表")
+                .setValue("維修工單")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -392,8 +392,8 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "Cryopump維修工單查詢",
                     "insertTableName" : "Cryopump維修工單",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -630,8 +630,8 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "Crosshead維修工單查詢",
                     "insertTableName" : "Crosshead維修工單",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -852,8 +852,8 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "Compressor維修工單查詢",
                     "insertTableName" : "Compressor維修工單",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -1076,8 +1076,8 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "3phControler維修工單查詢",
                     "insertTableName" : "3phControler維修工單",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -1295,13 +1295,13 @@ xui.Class('App', 'xui.Module',{
             
             host.xui_ui_block540.append(
                 xui.create("Module.DataGrid", "xui.Module")
-                .setHost(host,"reapirGrid7")
+                .setHost(host,"repairGrid7")
                 .setProperties({
                     "tableName" : "Module功能測試表查詢",
                     "insertTableName" : "Module功能測試表",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -1680,8 +1680,8 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "CylinderHeater維修工單查詢",
                     "insertTableName" : "CylinderHeater維修工單",
                     "displayFields" : "",
-                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫','不修')",
-                    "condition2" : "維修狀態 != '完工'",
+                    "condition" : "維修站名 = {SiteName} AND 維修狀態 NOT IN ('出貨','入庫')",
+                    "condition2" : "維修狀態 NOT IN ('完工','不修','簡修完工') ",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
                     "fieldCaptions" : null,
@@ -2013,7 +2013,7 @@ xui.Class('App', 'xui.Module',{
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"outGrid")
                 .setProperties({
-                    "tableName" : "站內物件查詢",
+                    "tableName" : "站內物件查詢2",
                     "insertTableName" : "",
                     "displayFields" : "",
                     "condition" : "完工狀態 IN ('完工','不修','簡修完工')",
@@ -2229,7 +2229,7 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "站內物件查詢2",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "完工狀態 = '已入庫'",
+                    "condition" : "完工狀態 = '入庫' ",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
@@ -2572,7 +2572,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231026")
+                .setCaption("維修站管理系統-20231113-B1")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -3025,17 +3025,19 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 ns.repairTabs.updateItem("CylinderHeater",{"hidden": false});        
                 ns.repairTabs.setValue("CylinderHeater");
             }  
+            else if(SiteName.includes("測試站"))
+            {
+                ns.repairTabs.updateItem("Cryopump",{"hidden": false});        
+                ns.repairTabs.setValue("Cryopump");
+            }
             else if(SiteName.includes("拆解站") || SiteName.includes("測試站"))
             {
                 ns.repairTabs.updateItem("Cryopump",{"hidden": false});        
                 //ns.repairTabs.updateItem("ShiCryopump",{"hidden": false});        
                 ns.repairTabs.updateItem("Crosshead",{"hidden": false});        
                 //ns.repairTabs.updateItem("ShiCrosshead",{"hidden": false});        
-                ns.repairTabs.updateItem("Compressor",{"hidden": false});        
-                ns.repairTabs.updateItem("Controller",{"hidden": false});        
                 ns.repairTabs.updateItem("ModuleTest",{"hidden": false});        
                 //ns.repairTabs.updateItem("ChallentechBench",{"hidden": false});        
-                ns.repairTabs.updateItem("CylinderHeater",{"hidden": false});        
                 ns.repairTabs.setValue("Cryopump");
            }
         },
@@ -3412,9 +3414,12 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 count += ns.getMessageCount("Compressor維修工單", "A簽名:A組長覆核,C簽名:C組長覆核");
                 count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '秘書已確認,通知Bench'");
                 count += ns.getMessageCount2("Compressor零件更換表", "確認狀態 = '待組長確認'");
+                count += ns.getMessageCount2("Option零件更換表", "確認狀態 = '秘書已確認,通知Bench'");
+                count += ns.getMessageCount2("Option零件更換表", "確認狀態 = '待組長確認'");
                     
-                count += ns.getMessageCount2("維修站總資料表", "維修狀態 = '待維修'");
-                count += ns.getMessageCount2("維修站總資料表", "維修狀態 = '待測試'");
+                count += ns.getMessageCount2("站內物件查詢", "完工狀態 = '通知維修'");
+                count += ns.getMessageCount2("CryopumpTestForm", "維修狀態 = '通知測試'");
+                count += ns.getMessageCount2("CryopumpWarranty原因分析表", "維修狀態 = '通知測試'");
 
 
                 ns.message.setItems([
@@ -3640,7 +3645,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 = '完工'";
+                grid.properties["condition2"] += "維修狀態 IN ('完工','不修','簡修完工')";
                 grid.refreshGrid();
             
         },
@@ -3657,7 +3662,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 != '完工'";
+                grid.properties["condition2"] += "維修狀態 NOT IN ('完工','不修','簡修完工')";
                 grid.refreshGrid();
             
         },        
@@ -3732,7 +3737,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         */
         _unfinishbtn3_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+            ns.unfinishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
         },
         /**
          * Fired when user click it

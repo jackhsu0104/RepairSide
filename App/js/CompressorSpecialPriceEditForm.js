@@ -55,7 +55,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDock("bottom")
                 .setLeft("13.333333333333334em")
                 .setTop("20.723809523809525em")
-                .setHeight("3.8857142857142857em")
+                .setHeight("4.533333333333333em")
                 .setConDockPadding({
                     "left" : 0,
                     "top" : 10,
@@ -97,8 +97,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDataField("組長確認")
                 .setReadonly(true)
                 .setLeft("-0.0761904761904762em")
-                .setTop("0.6857142857142857em")
-                .setWidth("11.4em")
+                .setTop("2.6666666666666665em")
+                .setWidth("12.066666666666666em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長確認")
                 .setType("getter")
@@ -111,9 +111,9 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDataBinder("cdb")
                 .setDataField("秘書確認")
                 .setReadonly(true)
-                .setLeft("11.333333333333334em")
-                .setTop("0.6857142857142857em")
-                .setWidth("12em")
+                .setLeft("12.666666666666666em")
+                .setTop("2.6666666666666665em")
+                .setWidth("13.333333333333334em")
                 .setLabelSize("5em")
                 .setLabelCaption("秘書確認")
                 .setType("getter")
@@ -125,9 +125,9 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setHost(host,"confirmBtn")
                 .setDataBinder("opdb")
                 .setDataField("秘書確認")
-                .setLeft("24.666666666666668em")
-                .setTop("0.6857142857142857em")
-                .setWidth("10em")
+                .setLeft("31.333333333333332em")
+                .setTop("1.4em")
+                .setWidth("8.2em")
                 .setCaption("通知組長確認")
                 .onClick("_confirmbtn_onclick")
             );
@@ -138,13 +138,37 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setDataBinder("cdb")
                 .setDataField("工程師簽名")
                 .setReadonly(true)
-                .setLeft("35.333333333333336em")
-                .setTop("0.6857142857142857em")
+                .setLeft("39.333333333333336em")
+                .setTop("1.6em")
                 .setWidth("12.8em")
                 .setLabelSize("6em")
                 .setLabelCaption("工程師簽名")
                 .setType("getter")
                 .onClick("_sign1_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataBinder("cdb")
+                .setDataField("維修狀態")
+                .setAutoTips(false)
+                .setLeft("12.666666666666666em")
+                .setTop("0.6666666666666666em")
+                .setWidth("13.333333333333334em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀態")
+                .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "確認維修",
+                        "caption" : "確認維修"
+                    },
+                    {
+                        "id" : "確認不修",
+                        "caption" : "確認不修"
+                    }
+                ])
             );
             
             host.dialog.append(
@@ -183,7 +207,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("a")
+                .onItemSelected("_tabs_onitemselected")
             );
             
             host.tabs.append(
@@ -352,7 +377,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             
             host.block1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1229")
+                .setHost(host,"repairNo")
                 .setName("登錄編號")
                 .setDataBinder("cdb")
                 .setDataField("登錄編號")
@@ -435,8 +460,9 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             );
             
             host.block1.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1235")
+                xui.create("xui.UI.ComboInput")
+                .setType("currency")
+                .setHost(host,"estimatePrice")
                 .setName("客戶名稱")
                 .setDataBinder("cdb")
                 .setDataField("預估金額")
@@ -487,10 +513,17 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             ns.updateUIToContent();
+            if(AppName == "RepairSide")
+            {
+                var data = ns.cdb.getData();  
+                if(data["確認狀態"]=="秘書已確認,通知Bench")
+                  ns.cdb.setData("確認狀態","秘書已確認");
+            }
             utils.saveForm(ns);
         },
         updateContentToUI: function(){
             var ns = this;
+            ns.partsGrid.render();
             var data = ns.cdb.getData()["保養內容"];
             if(data != "" && data != null)
             {
@@ -546,7 +579,10 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             var item = items[i]  
             if(typeof item["建議數量"] == "undefined")
                item["建議數量"] = 1; 
-            item["數量"] = item["建議數量"];        
+            if(name.includes("A. "))
+                  item["數量"] = 0;
+            else  
+                item["數量"] = item["建議數量"];        
           }
           ns.partsGrid.removeAllRows().setRows(items);
        },
@@ -563,13 +599,11 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             utils.installConfirmNameButtonOnClick(ns);
             ns.tabs.setValue('a');
             utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
-            if(prop.mode == "edit")
+            ns.initFlag = false; 
+            if(AppName == "RepairSide")
             {
-              ns.updatePartsGrid();
-              ns.updateContentToUI();
+                ns.repairStatus.setReadonly(true);        
             }
-            else if(prop.mode == "new")
-                ns.name.setValue("A. 自行勾選");
         },
             /**
          * Fired when user click it
@@ -594,7 +628,12 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
                 _confirm1_onclick:function(profile, e, src, value, n){
                     var ns = this, uictrl = profile.boxing();
-                      utils.confirmNameClick(ns, uictrl, "組長,主管","通知秘書確認");
+                    if(ns.sign1.getUIValue() == "")
+                    {
+                        utils.alert("請工程師簽名");
+                        return;
+                    }
+                      utils.confirmNameClick(ns, uictrl, "組長,主管","待秘書確認");
                 },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -607,7 +646,16 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
         _confirm2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
+            var rno = ns.repairNo.getUIValue();
+            var status = ns.repairStatus.getUIValue();
+            if(status == "")
+            {
+              utils.alert("請先選擇維修狀態,再確認!");
+              return;  
+            }
             utils.confirmNameClick(ns, uictrl, "秘書","秘書已確認,通知Bench");
+            if(uictrl.getValue() != "")
+              utils.modifyTableItem("Compressor零件更換表","登錄編號",rno, {"登錄編號":rno, "維修狀態": status});
         },
         /**
          * Fired when user click it
@@ -624,6 +672,9 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
               utils.alert("請工程師簽名!");
               return;  
             }
+            if(uictrl.getCaption() == "通知秘書確認")
+                utils.modifyTableItem("Compressor零件更換表","登錄編號",rno, {"登錄編號":rno, "維修狀態":"報價待確認"});
+            
              utils.confirmBtnClick(ns, uictrl);
         },
         calcSum: function(){
@@ -636,6 +687,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
               sum += r[6];  
             }
             ns.sum.setValue(sum);
+            ns.estimatePrice.setValue(sum);
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -684,7 +736,35 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
         _sign1_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "維修");
+            utils.confirmNameClick(ns, uictrl, "維修","待組長確認");
+        },
+        /**
+         * Fired when a tab is selected
+         * @method onItemSelected [xui.UI.Tabs event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {}  
+        */
+        _tabs_onitemselected:function(profile, item, e, src, n){
+            var ns = this, uictrl = profile.boxing();
+            var prop = ns.properties;
+            if(item.id == "b")
+            {
+                if(ns.initFlag == false)
+                {    
+                  if(prop.mode == "edit")
+                  {
+                    ns.updatePartsGrid();
+                    ns.updateContentToUI();
+                  }
+                  else if(prop.mode == "new")
+                    ns.name.setValue("A. 自行勾選");
+                  ns.initFlag = true;
+                }
+                   
+            }
         },
 
         /*,

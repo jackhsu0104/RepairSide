@@ -11,6 +11,7 @@ function myDeleteTableItem($table, $key, $value)
 {
     if(isDelFlag($table))
     {
+      $key = str_replace(array('[',']'),'',$key);  
       $item = new stdClass;
       $item->$key = $value;
       $item->DelFlag = 1;  
@@ -22,7 +23,11 @@ function myDeleteTableItem($table, $key, $value)
 }
 function myGetTableItems($table, $key, $value)
 {
-  $query = "SELECT * FROM $table WHERE [$key] = '$value'";
+  global $db;  
+  if(!str_contains($key,"["))
+      $key = "[$key]";
+  $query = "SELECT * FROM $table WHERE $key = '$value'";
+  //echo $query."<br>";  
   $stmt=$db->prepare($query);
   $R2 = $stmt->execute();
   $R = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -590,12 +595,14 @@ else if($req->cmd == "insertTableItem")
 }
 else  if($req->cmd == "deleteTableItem")
 {
-    $key = $req->key; 
+    $key = "[$req->key]"; 
     $value = $req->value; 
     $table = $req->table;
-    if($table == "[unitServiceForm子表]")
+    if($table == "[UnitServiceForm總表]" && $key == "[子表單號]") //應該刪除子表
+       $table = "[UnitServiceForm子表]"; 
+    if($table == "[UnitServiceForm子表]")
     {
-        $items = myGetTableItems("[unitServiceForm子表]", $key, $value);
+        $items = myGetTableItems("[UnitServiceForm子表]", $key, $value);
         $rid = "登錄編號";
         if(count($items) > 0)
         {

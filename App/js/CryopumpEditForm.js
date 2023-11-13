@@ -43,7 +43,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("2.6em")
                 .setTop("0.6em")
                 .setWidth("69.2em")
-                .setHeight("45.13333333333333em")
+                .setHeight("50.43809523809524em")
                 .setCaption("CryoPump維修工單")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
@@ -424,7 +424,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setHeight("19.35238095238095em")
+                .setValue("e")
             );
             
             host.tabs1.append(
@@ -492,7 +493,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setAutoTips(false)
                 .setLeft("1.3333333333333333em")
                 .setTop("6.733333333333333em")
-                .setWidth("18em")
+                .setWidth("56em")
                 .setLabelSize("8em")
                 .setLabelCaption("上次故障原因")
                 .setMaxlength("200")
@@ -505,42 +506,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("進廠原因")
                 .setAutoTips(false)
-                .setLeft("21.333333333333332em")
-                .setTop("6.733333333333333em")
-                .setWidth("18em")
+                .setLeft("1.3333333333333333em")
+                .setTop("8.666666666666666em")
+                .setWidth("56em")
                 .setLabelSize("8em")
                 .setLabelCaption("進廠原因")
                 .setMaxlength("200")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input216")
-                .setName("Pump P/N")
-                .setDataBinder("rdb")
-                .setDataField("Pump P/N")
-                .setAutoTips(false)
-                .setLeft("-2.8em")
-                .setTop("8.8em")
-                .setWidth("22.133333333333333em")
-                .setLabelSize("12em")
-                .setLabelCaption("Pump P/N")
-                .setMaxlength("32")
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input217")
-                .setName("Pump S/N")
-                .setDataBinder("rdb")
-                .setDataField("Pump S/N")
-                .setAutoTips(false)
-                .setLeft("21.333333333333332em")
-                .setTop("8.8em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump S/N")
-                .setMaxlength("32")
             );
             
             host.block1.append(
@@ -635,7 +606,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block1.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input224")
+                .setHost(host,"etm1")
                 .setName("Pump/Module ETM")
                 .setDataBinder("rdb")
                 .setDataField("Pump/Module ETM")
@@ -677,7 +648,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("上次Diode Line更換日期")
                 .setAutoTips(false)
                 .setLeft("17em")
-                .setTop("26.466666666666665em")
+                .setTop("29.2em")
                 .setWidth("23.266666666666666em")
                 .setLabelSize("12em")
                 .setLabelCaption("上次Diode Line更換日期")
@@ -743,7 +714,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setAutoTips(false)
                 .setLeft("17.666666666666668em")
-                .setTop("30.533333333333335em")
+                .setTop("32.53333333333333em")
                 .setWidth("19.733333333333334em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("11em")
@@ -813,7 +784,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setAutoTips(false)
                 .setLeft("16.666666666666668em")
-                .setTop("28.533333333333335em")
+                .setTop("30.533333333333335em")
                 .setWidth("24.133333333333333em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("12em")
@@ -883,7 +854,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setAutoTips(false)
                 .setLeft("17.4em")
                 .setTop("18.666666666666668em")
-                .setWidth("21.933333333333334em")
+                .setWidth("25.933333333333334em")
                 .setLabelSize("12em")
                 .setLabelCaption("Module對應Pump S/N")
                 .setMaxlength("200")
@@ -965,6 +936,45 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("Module Full Regen")
                 .setType("input")
                 .setMaxlength("200")
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox3322")
+                .setDataBinder("rdb")
+                .setDataField("角度")
+                .setItems([
+                    {
+                        "id" : "90°",
+                        "caption" : "90°"
+                    },
+                    {
+                        "id" : "180°",
+                        "caption" : "180°",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "270°",
+                        "caption" : "270°",
+                        "imageClass" : ""
+                    }
+                ])
+                .setAutoTips(false)
+                .setLeft("20.666666666666668em")
+                .setTop("26.6em")
+                .setWidth("31.466666666666665em")
+                .setHeight("1.7523809523809524em")
+                .setLabelSize("8em")
+                .setLabelGap("0em")
+                .setLabelCaption("角度")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
             );
             
             host.tabs1.append(
@@ -1160,8 +1170,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("A組長覆核")
                 .setDataBinder("rdb")
                 .setDataField("A組長覆核")
-                .setLeft("38em")
-                .setTop("47.13333333333333em")
+                .setLeft("21.333333333333332em")
+                .setTop("47.93333333333333em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
@@ -1297,7 +1307,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setAutoTips(false)
-                .setLeft("32.666666666666664em")
+                .setLeft("34.666666666666664em")
                 .setTop("13.6em")
                 .setHeight("2.4em")
                 .setLabelPos("top")
@@ -1736,7 +1746,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("A組裝日期")
                 .setReadonly(true)
-                .setLeft("24.333333333333332em")
+                .setLeft("40em")
                 .setTop("45.06666666666667em")
                 .setWidth("15em")
                 .setLabelSize("5em")
@@ -1752,8 +1762,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("A覆核日期")
                 .setReadonly(true)
-                .setLeft("40.93333333333333em")
-                .setTop("45.13333333333333em")
+                .setLeft("40em")
+                .setTop("47.93333333333333em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("覆核日期")
@@ -1768,7 +1778,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("A組裝簽名")
                 .setLeft("21.333333333333332em")
-                .setTop("47.13333333333333em")
+                .setTop("45.13333333333333em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組裝簽名")
@@ -2102,11 +2112,16 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setAutoTips(false)
                 .setLeft("26em")
                 .setTop("14em")
-                .setWidth("5.5em")
+                .setWidth("7.333333333333333em")
                 .setLabelSize("2em")
                 .setLabelCaption("Ω⏚")
-                .setType("input")
                 .setMaxlength("null")
+                .setItems([
+                    {
+                        "id" : "O.L",
+                        "caption" : "O.L"
+                    }
+                ])
                 .setPrecision(1)
                 .setIncrement(1)
             );
@@ -2114,9 +2129,25 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             host.xui_ui_block178.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label185")
-                .setLeft("32em")
+                .setLeft("34em")
                 .setTop("14.4em")
                 .setCaption("Ω")
+            );
+            
+            host.xui_ui_block178.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2231")
+                .setDataBinder("rdb")
+                .setDataField("備註A")
+                .setAutoTips(false)
+                .setLeft("42em")
+                .setTop("32.13333333333333em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
             );
             
             host.tabs1.append(
@@ -2135,7 +2166,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B3#4")
                 .setLeft("6.666666666666667em")
-                .setTop("7.333333333333333em")
+                .setTop("9.142857142857142em")
                 .setWidth("14.666666666666666em")
                 .setLabelSize("8em")
                 .setLabelCaption("交叉")
@@ -2155,7 +2186,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B3#5")
                 .setLeft("22em")
-                .setTop("7.333333333333333em")
+                .setTop("9.142857142857142em")
                 .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("接地")
@@ -2175,7 +2206,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B8#1")
                 .setLeft("4.666666666666667em")
-                .setTop("22.466666666666665em")
+                .setTop("26.514285714285716em")
                 .setWidth("18em")
                 .setLabelSize("10em")
                 .setLabelCaption("New Diode 1<sup>st</sup>  S/N")
@@ -2189,7 +2220,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B8#2")
                 .setLeft("23.533333333333335em")
-                .setTop("22.466666666666665em")
+                .setTop("26.514285714285716em")
                 .setWidth("9.133333333333333em")
                 .setLabelSize("1em")
                 .setLabelCaption("V")
@@ -2203,7 +2234,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B9#1")
                 .setLeft("4.666666666666667em")
-                .setTop("24.466666666666665em")
+                .setTop("28.495238095238093em")
                 .setWidth("18em")
                 .setLabelSize("10em")
                 .setLabelCaption("New Diode 2<sup>nd</sup> S/N")
@@ -2217,7 +2248,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B9#2")
                 .setLeft("23.466666666666665em")
-                .setTop("24.466666666666665em")
+                .setTop("28.495238095238093em")
                 .setWidth("9.2em")
                 .setLabelSize("1em")
                 .setLabelCaption("V")
@@ -2231,7 +2262,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B13#1")
                 .setLeft("6.171428571428572em")
-                .setTop("38.333333333333336em")
+                .setTop("42.43809523809524em")
                 .setWidth("15.066666666666666em")
                 .setLabelSize("8em")
                 .setLabelCaption("TC Gauge")
@@ -2248,7 +2279,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B14#1")
                 .setLeft("7.333333333333333em")
-                .setTop("40.8em")
+                .setTop("44.95238095238095em")
                 .setWidth("20em")
                 .setLabelSize("16em")
                 .setLabelCaption("Vacuum Side Leak Test：(5x10<Sup>-9</sup>)")
@@ -2263,7 +2294,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B15")
                 .setLeft("5.333333333333333em")
-                .setTop("43.46666666666667em")
+                .setTop("47.61904761904762em")
                 .setWidth("26.666666666666668em")
                 .setLabelSize("18em")
                 .setLabelCaption("80k Radiation Shield 安裝")
@@ -2279,7 +2310,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B組裝簽名")
                 .setLeft("13.333333333333334em")
-                .setTop("48.13333333333333em")
+                .setTop("52.266666666666666em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組裝簽名")
@@ -2295,7 +2326,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B組長覆核")
                 .setLeft("13.333333333333334em")
-                .setTop("50.8em")
+                .setTop("54.93333333333333em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
@@ -2322,7 +2353,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("3.3333333333333335em")
-                .setTop("0.3333333333333333em")
+                .setTop("2.1333333333333333em")
                 .setWidth("21.733333333333334em")
                 .setHeight("1.9047619047619047em")
                 .setLabelSize("13em")
@@ -2356,7 +2387,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("28.733333333333334em")
-                .setTop("2.3333333333333335em")
+                .setTop("4.190476190476191em")
                 .setWidth("11.866666666666667em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("3em")
@@ -2390,7 +2421,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("30.666666666666668em")
-                .setTop("4.4em")
+                .setTop("6.247619047619048em")
                 .setWidth("11.866666666666667em")
                 .setHeight("1.8em")
                 .setLabelSize("1em")
@@ -2424,7 +2455,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("30.666666666666668em")
-                .setTop("6.933333333333334em")
+                .setTop("8.761904761904763em")
                 .setWidth("11.866666666666667em")
                 .setHeight("1.8em")
                 .setLabelSize("1em")
@@ -2457,7 +2488,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("11.657142857142857em")
-                .setTop("9.266666666666667em")
+                .setTop("13.333333333333334em")
                 .setWidth("28.952380952380953em")
                 .setHeight("1.8285714285714285em")
                 .setLabelSize("20em")
@@ -2491,7 +2522,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.733333333333333em")
-                .setTop("11.333333333333334em")
+                .setTop("15.39047619047619em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.8666666666666667em")
                 .setLabelSize("18em")
@@ -2525,7 +2556,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.8em")
-                .setTop("13.266666666666667em")
+                .setTop("17.295238095238094em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.8666666666666667em")
                 .setLabelSize("18em")
@@ -2545,7 +2576,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label93")
                 .setLeft("17.2em")
-                .setTop("18.066666666666666em")
+                .setTop("22.095238095238095em")
                 .setWidth("21.933333333333334em")
                 .setHeight("0em")
                 .setCaption("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k)")
@@ -2569,7 +2600,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("30.733333333333334em")
-                .setTop("19.4em")
+                .setTop("23.466666666666665em")
                 .setWidth("11.866666666666667em")
                 .setHeight("1.8em")
                 .setLabelSize("1em")
@@ -2602,7 +2633,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.6em")
-                .setTop("26.466666666666665em")
+                .setTop("30.476190476190474em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.9047619047619047em")
                 .setLabelSize("18em")
@@ -2636,7 +2667,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.666666666666666em")
-                .setTop("28.466666666666665em")
+                .setTop("32.53333333333333em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("18em")
@@ -2670,7 +2701,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.733333333333333em")
-                .setTop("30.4em")
+                .setTop("34.43809523809524em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("18em")
@@ -2704,7 +2735,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("21.561904761904763em")
-                .setTop("38.06666666666667em")
+                .setTop("42.20952380952381em")
                 .setWidth("18.666666666666668em")
                 .setHeight("1.8em")
                 .setLabelSize("10.1em")
@@ -2738,7 +2769,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("30.666666666666668em")
-                .setTop("40.4em")
+                .setTop("44.49523809523809em")
                 .setWidth("11.866666666666667em")
                 .setHeight("1.8em")
                 .setLabelSize("1em")
@@ -2761,7 +2792,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B覆核日期")
                 .setReadonly(true)
                 .setLeft("32.666666666666664em")
-                .setTop("50.8em")
+                .setTop("54.93333333333333em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("覆核日期")
@@ -2777,7 +2808,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B組裝日期")
                 .setReadonly(true)
                 .setLeft("32.666666666666664em")
-                .setTop("48.13333333333333em")
+                .setTop("52.266666666666666em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("組裝日期")
@@ -2792,7 +2823,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B3#1")
                 .setLeft("6.666666666666667em")
-                .setTop("4.666666666666667em")
+                .setTop("6.476190476190476em")
                 .setWidth("16em")
                 .setLabelSize("8em")
                 .setLabelCaption("Heater 1<sup>st</sup>")
@@ -2810,7 +2841,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B3#2")
                 .setLeft("23.333333333333332em")
-                .setTop("4.666666666666667em")
+                .setTop("6.476190476190476em")
                 .setWidth("7.333333333333333em")
                 .setLabelSize("3em")
                 .setLabelCaption("Ω  2<sup>nd</sup>")
@@ -2828,7 +2859,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B7#1")
                 .setLeft("12.666666666666666em")
-                .setTop("19.8em")
+                .setTop("23.847619047619048em")
                 .setWidth("8.666666666666666em")
                 .setLabelSize("2em")
                 .setLabelCaption("1<sup>st</sup>")
@@ -2845,7 +2876,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B7#2")
                 .setLeft("21.333333333333332em")
-                .setTop("19.8em")
+                .setTop("23.847619047619048em")
                 .setWidth("8.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("K 2<sup>nd</sup>")
@@ -2862,7 +2893,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B14#3")
                 .setLeft("26.666666666666668em")
-                .setTop("40.8em")
+                .setTop("44.95238095238095em")
                 .setWidth("5.6em")
                 .setLabelSize("2em")
                 .setLabelCaption("E-")
@@ -2876,7 +2907,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label501")
                 .setLeft("30.266666666666666em")
-                .setTop("20em")
+                .setTop("24.076190476190476em")
                 .setCaption("K")
             );
             
@@ -2887,7 +2918,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B2#1")
                 .setLeft("2.6666666666666665em")
-                .setTop("2.6666666666666665em")
+                .setTop("4.495238095238095em")
                 .setWidth("19.885714285714286em")
                 .setLabelSize("12em")
                 .setLabelCaption("Heater & Cylinder S/N")
@@ -2915,7 +2946,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.8em")
-                .setTop("15.333333333333334em")
+                .setTop("19.35238095238095em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.8666666666666667em")
                 .setLabelSize("18em")
@@ -2949,12 +2980,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     }
                 ])
                 .setLeft("13.733333333333333em")
-                .setTop("32em")
+                .setTop("36.114285714285714em")
                 .setWidth("26.666666666666668em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("18em")
                 .setLabelGap("0em")
-                .setLabelCaption("更換Pugge Valva塞心")
+                .setLabelCaption("更換Purge Valva塞心")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -2972,7 +3003,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B12#3")
                 .setLeft("7.466666666666667em")
-                .setTop("34.06666666666667em")
+                .setTop("38.17142857142857em")
                 .setWidth("20em")
                 .setLabelSize("16em")
                 .setLabelCaption("Purge Valve漏率")
@@ -2987,7 +3018,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B12#4")
                 .setLeft("26.8em")
-                .setTop("34.06666666666667em")
+                .setTop("38.17142857142857em")
                 .setWidth("5.6em")
                 .setLabelSize("2em")
                 .setLabelCaption("E-")
@@ -3004,7 +3035,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B12#5")
                 .setLeft("7.466666666666667em")
-                .setTop("36.2em")
+                .setTop("40.304761904761904em")
                 .setWidth("20em")
                 .setLabelSize("16em")
                 .setLabelCaption("Relief Valve漏率")
@@ -3019,10 +3050,79 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb")
                 .setDataField("B12#6")
                 .setLeft("26.866666666666667em")
-                .setTop("36.2em")
+                .setTop("40.304761904761904em")
                 .setWidth("5.6em")
                 .setLabelSize("2em")
                 .setLabelCaption("E-")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2234")
+                .setDataBinder("rdb")
+                .setDataField("備註B")
+                .setAutoTips(false)
+                .setLeft("42.74285714285714em")
+                .setTop("38.55238095238095em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput10350")
+                .setName("Diode室溫(標準值:300k ±10k，1st&2nd 相差2k) #1")
+                .setDataBinder("rdb")
+                .setDataField("B0#1")
+                .setLeft("2.2857142857142856em")
+                .setTop("0.7619047619047619em")
+                .setWidth("38.095238095238095em")
+                .setLabelSize("12em")
+                .setLabelCaption("Pump清洗回廠狀況")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput11100")
+                .setName("HeaterB 1st")
+                .setDataBinder("rdb")
+                .setDataField("B0#2")
+                .setLeft("6.704761904761905em")
+                .setTop("11.428571428571429em")
+                .setWidth("16em")
+                .setLabelSize("8em")
+                .setLabelCaption("1st內徑")
+                .setHAlign("right")
+                .setType("input")
+                .setMaxlength("null")
+                .setPrecision(1)
+                .setIncrement(1)
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput11101")
+                .setName("HeaterB 2nd")
+                .setDataBinder("rdb")
+                .setDataField("B0#3")
+                .setLeft("23.314285714285713em")
+                .setTop("11.428571428571429em")
+                .setWidth("14.4em")
+                .setLabelSize("5em")
+                .setLabelCaption("2nd內徑")
+                .setHAlign("right")
                 .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -3148,7 +3248,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1661")
+                .setHost(host,"depth")
                 .setName("Depth")
                 .setDataBinder("rdb")
                 .setDataField("C9#1")
@@ -3158,11 +3258,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("Depth")
                 .setMaxlength("32")
+                .afterUIValueSet("_depth_afteruivalueset")
             );
             
             host.block4.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1662")
+                .setHost(host,"setting")
                 .setName("Setting")
                 .setDataBinder("rdb")
                 .setDataField("C9#2")
@@ -3574,7 +3675,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("12em")
                 .setLabelGap("0em")
-                .setLabelCaption("Purge Helium Side Y/N")
+                .setLabelCaption("Purge Helium Side")
                 .setLabelVAlign("middle")
                 .setCheckBox(true)
                 .setValue("")
@@ -3652,56 +3753,26 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox632")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c14")
                 .setDataBinder("rdb")
                 .setDataField("C14")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("12.8em")
                 .setTop("36.6em")
-                .setWidth("23.4em")
+                .setWidth("23.333333333333332em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("14em")
                 .setLabelGap("0em")
                 .setLabelCaption("Crosshead 螺絲安裝/畫線確認")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c14_onclick")
             );
             
             host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox633")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c15")
                 .setDataBinder("rdb")
                 .setDataField("C15")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("12.733333333333333em")
                 .setTop("38.6em")
                 .setWidth("23.4em")
@@ -3710,47 +3781,25 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelGap("0em")
                 .setLabelCaption("15k Array間距調整(不可接觸)")
                 .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c15_onclick")
             );
             
             host.block4.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox634")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c16")
                 .setDataBinder("rdb")
                 .setDataField("C16")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("11.80952380952381em")
                 .setTop("43.06666666666667em")
-                .setWidth("23.4em")
+                .setWidth("24.2em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("15em")
                 .setLabelGap("0em")
                 .setLabelCaption("Pump各配件Cable確實接好固定")
                 .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c16_onclick")
             );
             
             host.block4.append(
@@ -3799,7 +3848,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("6.666666666666667em")
                 .setWidth("11.333333333333334em")
                 .setLabelSize("8em")
-                .setLabelCaption("Motor")
+                .setLabelCaption("Motor:Ω")
                 .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -3850,7 +3899,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("8.666666666666666em")
                 .setWidth("11.333333333333334em")
                 .setLabelSize("8em")
-                .setLabelCaption("CABLE")
+                .setLabelCaption("CABLE:Ω")
                 .setType("input")
                 .setMaxlength("null")
                 .setPrecision(1)
@@ -4045,6 +4094,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.block4.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2236")
+                .setDataBinder("rdb")
+                .setDataField("備註C")
+                .setAutoTips(false)
+                .setLeft("40em")
+                .setTop("32.91428571428571em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
+            );
+            
+            host.block4.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xmodel1")
                 .setDataBinder("rdb")
@@ -4054,8 +4119,41 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("18.666666666666668em")
                 .setLabelSize("8em")
                 .setLabelCaption("\"X\" head Model")
-                .setType("popbox")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "OB-M350",
+                        "caption" : "OB-M350"
+                    },
+                    {
+                        "id" : "CT-M350",
+                        "caption" : "CT-M350"
+                    },
+                    {
+                        "id" : "OB-M1020/50",
+                        "caption" : "OB-M1020/50"
+                    },
+                    {
+                        "id" : "CT-M1020/50",
+                        "caption" : "CT-M1020/50"
+                    },
+                    {
+                        "id" : "OB-M350 3PH",
+                        "caption" : "OB-M350 3PH"
+                    },
+                    {
+                        "id" : "IS-M600/M900",
+                        "caption" : "IS-M600/M900"
+                    },
+                    {
+                        "id" : "P300",
+                        "caption" : "P300"
+                    },
+                    {
+                        "id" : "Other",
+                        "caption" : "Other"
+                    }
+                ])
                 .onValueChange("_xh1_onvaluechange")
             );
             
@@ -4338,13 +4436,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox333")
                 .setDataBinder("rdb")
                 .setDataField("D1#1")
-                .setLeft("1em")
-                .setTop("2.466666666666667em")
-                .setWidth("16em")
-                .setHeight("1.1333333333333333em")
+                .setLeft("12.533333333333333em")
+                .setTop("2.6em")
+                .setWidth("4.866666666666666em")
+                .setHeight("1.2em")
                 .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("2.管線配接符合Pump要求  Pass")
+                .setCaption("Pass")
             );
             
             host.block5.append(
@@ -4352,12 +4449,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox334")
                 .setDataBinder("rdb")
                 .setDataField("D1#2")
-                .setLeft("0.4em")
+                .setLeft("11.066666666666666em")
                 .setTop("4.066666666666666em")
-                .setWidth("15em")
+                .setWidth("4.6em")
                 .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("3.依Test標準參數設定    Pass")
+                .setCaption("Pass")
             );
             
             host.block5.append(
@@ -4392,12 +4488,20 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "id" : "N",
                         "caption" : "N",
                         "imageClass" : ""
+                    },
+                    {
+                        "id" : "12hrs",
+                        "caption" : "12hrs"
+                    },
+                    {
+                        "id" : " ",
+                        "caption" : " "
                     }
                 ])
                 .setLeft("0em")
                 .setTop("18.2em")
-                .setWidth("21.733333333333334em")
-                .setHeight("1.6666666666666667em")
+                .setWidth("30.666666666666668em")
+                .setHeight("1.8em")
                 .setLabelSize("13em")
                 .setLabelGap("0em")
                 .setLabelCaption("6.Test完成後Runtime 歸零")
@@ -4416,13 +4520,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox348")
                 .setDataBinder("rdb")
                 .setDataField("D5#2")
-                .setLeft("0.6666666666666666em")
+                .setLeft("14.8em")
                 .setTop("20.2em")
-                .setWidth("19em")
+                .setWidth("4.866666666666666em")
                 .setHeight("1.1333333333333333em")
                 .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("7.Test完成後,Helium Side Purge    Pass")
+                .setCaption("Pass")
             );
             
             host.block5.append(
@@ -4430,13 +4533,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox349")
                 .setDataBinder("rdb")
                 .setDataField("D6#2")
-                .setLeft("0.4em")
-                .setTop("23.866666666666667em")
-                .setWidth("20.533333333333335em")
+                .setLeft("16.866666666666667em")
+                .setTop("24.133333333333333em")
+                .setWidth("4.733333333333333em")
                 .setHeight("1.2em")
                 .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("9.15k Array間距調整檢查(不可接觸)Pass")
+                .setCaption("Pass")
             );
             
             host.block5.append(
@@ -4502,13 +4604,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox365")
                 .setDataBinder("rdb")
                 .setDataField("D7#2")
-                .setLeft("0em")
+                .setLeft("12em")
                 .setTop("27.733333333333334em")
-                .setWidth("16em")
+                .setWidth("4.666666666666667em")
                 .setHeight("2em")
                 .setHAlign("right")
-                .setIconPos("right")
-                .setCaption("11.Pump入庫前外觀檢查 Pass")
+                .setCaption(" Pass")
             );
             
             host.block5.append(
@@ -4517,7 +4618,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("Supply Pressure")
                 .setDataBinder("rdb")
                 .setDataField("D2#1")
-                .setLeft("0.6666666666666666em")
+                .setLeft("0.5333333333333333em")
                 .setTop("6em")
                 .setWidth("18em")
                 .setLabelSize("9em")
@@ -4534,7 +4635,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("Return Pressure")
                 .setDataBinder("rdb")
                 .setDataField("D2#2")
-                .setLeft("1.5333333333333334em")
+                .setLeft("1.2666666666666666em")
                 .setTop("8em")
                 .setWidth("17.333333333333332em")
                 .setLabelSize("8em")
@@ -4572,6 +4673,58 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setMaxlength("10")
             );
             
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label463")
+                .setLeft("1.3333333333333333em")
+                .setTop("2.6666666666666665em")
+                .setCaption("2.管線配接符合Pump要求  ")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label464")
+                .setLeft("1.3333333333333333em")
+                .setTop("4.333333333333333em")
+                .setCaption("3.依Test標準參數設定")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label465")
+                .setLeft("1.3333333333333333em")
+                .setTop("20.466666666666665em")
+                .setCaption("7.Test完成後,Helium Side Purge")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label466")
+                .setLeft("1.1333333333333333em")
+                .setTop("24.266666666666666em")
+                .setCaption("9.15k Array間距調整檢查(不可接觸)")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label467")
+                .setLeft("0.5333333333333333em")
+                .setTop("28em")
+                .setCaption("11.Pump入庫前外觀檢查")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input1805")
+                .setDataBinder("rdb")
+                .setDataField("D5#3")
+                .setLeft("30.333333333333332em")
+                .setTop("18.666666666666668em")
+                .setWidth("10.533333333333333em")
+                .setHAlign("left")
+                .setMaxlength("10")
+            );
+            
             host.tabs1.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block6")
@@ -4588,7 +4741,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("7.466666666666667em")
                 .setTop("5.40952380952381em")
                 .setWidth("66.8em")
-                .setHeight("15.333333333333334em")
+                .setHeight("16.666666666666668em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 27,
@@ -5001,43 +5154,32 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_div747.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput4318")
+                .setHost(host,"testName")
                 .setDataBinder("rdb")
-                .setDataField("TestDate")
-                .setLeft("-1.3333333333333333em")
-                .setTop("0em")
-                .setWidth("11.733333333333333em")
-                .setLabelSize("4em")
-                .setLabelCaption("Date")
-                .setType("date")
-            );
-            
-            host.xui_ui_div747.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5226")
-                .setName("P/N")
-                .setDataBinder("rdb")
-                .setDataField("P/N")
-                .setLeft("13.533333333333333em")
-                .setTop("0em")
-                .setWidth("12.466666666666667em")
-                .setLabelSize("4em")
-                .setLabelCaption("P/N")
+                .setDataField("Test")
+                .setLeft("1em")
+                .setTop("0.13333333333333333em")
+                .setWidth("11em")
+                .setLabelSize("3em")
+                .setLabelCaption("Test")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_testname_onclick")
             );
             
             host.xui_ui_div747.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input5227")
-                .setName("S/N")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"assyOkName")
                 .setDataBinder("rdb")
-                .setDataField("S/N")
-                .setLeft("28.2em")
-                .setTop("0em")
+                .setDataField("Assy OK")
+                .setLeft("43.42857142857143em")
+                .setTop("0.13333333333333333em")
                 .setWidth("13.133333333333333em")
-                .setLabelSize("4em")
-                .setLabelCaption("S/N")
+                .setLabelSize("5em")
+                .setLabelCaption("Assy OK")
+                .setType("getter")
                 .setMaxlength("32")
+                .onClick("_assyokname_onclick")
             );
             
             host.xui_ui_formlayout39.append(
@@ -5048,14 +5190,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("65.46666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "A2"
-            );
-            
-            host.xui_ui_div748.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label413")
-                .setLeft("0.4em")
-                .setTop("0.26666666666666666em")
-                .setCaption("Test")
             );
             
             host.xui_ui_div748.append(
@@ -5085,7 +5219,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "imageClass" : ""
                     }
                 ])
-                .setLeft("10em")
+                .setLeft("12em")
                 .setTop("-0.26666666666666666em")
                 .setWidth("29.733333333333334em")
                 .setHeight("1.9333333333333333em")
@@ -5103,43 +5237,29 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.xui_ui_div748.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox732")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"testDate")
                 .setDataBinder("rdb")
-                .setDataField("E2")
-                .setLeft("39.333333333333336em")
-                .setTop("0.1523809523809524em")
-                .setWidth("7.333333333333333em")
-                .setIconPos("right")
-                .setCaption("Assy OK")
+                .setDataField("TestDate")
+                .setLeft("0em")
+                .setTop("0em")
+                .setWidth("12em")
+                .setLabelSize("4em")
+                .setLabelCaption("Date")
+                .setType("date")
             );
             
             host.xui_ui_div748.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"assyOkName")
+                .setHost(host,"assyOkDate")
                 .setDataBinder("rdb")
-                .setDataField("E2#2")
-                .setLeft("44.8em")
-                .setTop("0.13333333333333333em")
-                .setWidth("7.2em")
-                .setLabelCaption("S/N")
-                .setType("getter")
-                .setMaxlength("32")
-                .onClick("_assyokname_onclick")
-            );
-            
-            host.xui_ui_div748.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"testName")
-                .setDataBinder("rdb")
-                .setDataField("E2#3")
-                .setLeft("2.6666666666666665em")
-                .setTop("0.13333333333333333em")
-                .setWidth("6.733333333333333em")
-                .setLabelCaption("S/N")
-                .setType("getter")
-                .setMaxlength("32")
-                .onClick("_testname_onclick")
+                .setDataField("Assy OK Date")
+                .setLeft("44.4em")
+                .setTop("0em")
+                .setWidth("12em")
+                .setLabelSize("4em")
+                .setLabelCaption("Date")
+                .setType("date")
             );
             
             host.xui_ui_formlayout39.append(
@@ -6852,7 +6972,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("f")
             );
             
             host.tabs2.append(
@@ -6943,36 +7063,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block213.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1376")
-                .setName("Pump P/N")
-                .setDataBinder("rdb2")
-                .setDataField("Pump P/N")
-                .setAutoTips(false)
-                .setLeft("-2.8em")
-                .setTop("8em")
-                .setWidth("22.133333333333333em")
-                .setLabelSize("12em")
-                .setLabelCaption("Pump P/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block213.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1377")
-                .setName("Pump S/N")
-                .setDataBinder("rdb2")
-                .setDataField("Pump S/N")
-                .setAutoTips(false)
-                .setLeft("21.333333333333332em")
-                .setTop("8em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Pump S/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block213.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1378")
                 .setName("Module1 P/N")
                 .setDataBinder("rdb2")
@@ -7018,7 +7108,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_block213.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1381")
+                .setHost(host,"etm2")
                 .setName("Pump/Module ETM")
                 .setDataBinder("rdb2")
                 .setDataField("Pump/Module ETM")
@@ -7094,6 +7184,10 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "imageClass" : ""
                     },
                     {
+                        "id" : "Exchange",
+                        "caption" : "Exchange"
+                    },
+                    {
                         "id" : "OT",
                         "caption" : "OT",
                         "imageClass" : ""
@@ -7103,7 +7197,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("2em")
                 .setTop("0.6em")
-                .setWidth("19.666666666666668em")
+                .setWidth("26.666666666666668em")
                 .setHeight("2.6666666666666665em")
                 .setLabelPos("top")
                 .setLabelHAlign("left")
@@ -7138,9 +7232,9 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setDataField("上次維修廠商")
                 .setAutoTips(false)
-                .setLeft("21.333333333333332em")
+                .setLeft("38.666666666666664em")
                 .setTop("1.3333333333333333em")
-                .setWidth("18em")
+                .setWidth("19.333333333333332em")
                 .setLabelSize("8em")
                 .setLabelCaption("上次維修廠商")
                 .setMaxlength("20")
@@ -7347,8 +7441,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("A組長覆核")
                 .setDataBinder("rdb2")
                 .setDataField("A組長覆核")
-                .setLeft("37.333333333333336em")
-                .setTop("39.93333333333333em")
+                .setLeft("20.666666666666668em")
+                .setTop("40.53333333333333em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組長覆核")
@@ -7705,7 +7799,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setDataField("A組裝日期")
                 .setReadonly(true)
-                .setLeft("23.61904761904762em")
+                .setLeft("40.666666666666664em")
                 .setTop("37.25714285714286em")
                 .setWidth("15em")
                 .setLabelSize("5em")
@@ -7721,8 +7815,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setDataField("A覆核日期")
                 .setReadonly(true)
-                .setLeft("40.22857142857143em")
-                .setTop("37.333333333333336em")
+                .setLeft("40.666666666666664em")
+                .setTop("40.53333333333333em")
                 .setWidth("15em")
                 .setLabelSize("5em")
                 .setLabelCaption("覆核日期")
@@ -7820,7 +7914,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setDataField("A組裝簽名")
                 .setLeft("20.666666666666668em")
-                .setTop("39.8em")
+                .setTop("37.333333333333336em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("組裝簽名")
@@ -7935,25 +8029,25 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             host.xui_ui_block214.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label182")
-                .setLeft("19.333333333333332em")
+                .setLeft("19.466666666666665em")
                 .setTop("13em")
-                .setCaption("M")
+                .setCaption("MΩ")
             );
             
             host.xui_ui_block214.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label183")
-                .setLeft("19.333333333333332em")
+                .setLeft("19.466666666666665em")
                 .setTop("15.066666666666666em")
-                .setCaption("M")
+                .setCaption("MΩ")
             );
             
             host.xui_ui_block214.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label184")
-                .setLeft("19.333333333333332em")
+                .setLeft("19.466666666666665em")
                 .setTop("17.333333333333332em")
-                .setCaption("M")
+                .setCaption("Ω")
             );
             
             host.xui_ui_block214.append(
@@ -8035,6 +8129,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setPrecision(1)
                 .setIncrement(1)
+            );
+            
+            host.xui_ui_block214.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2237")
+                .setDataBinder("rdb2")
+                .setDataField("備註A")
+                .setAutoTips(false)
+                .setLeft("42.74285714285714em")
+                .setTop("19.6em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
             );
             
             host.tabs2.append(
@@ -8521,6 +8631,38 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setIncrement(1)
             );
             
+            host.xui_ui_block215.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2238")
+                .setDataBinder("rdb2")
+                .setDataField("備註B")
+                .setAutoTips(false)
+                .setLeft("42em")
+                .setTop("12.8em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
+            );
+            
+            host.xui_ui_block215.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label932")
+                .setLeft("33em")
+                .setTop("16.2em")
+                .setCaption("Ω")
+            );
+            
+            host.xui_ui_block215.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label933")
+                .setLeft("33.06666666666667em")
+                .setTop("18.2em")
+                .setCaption("Ω")
+            );
+            
             host.tabs2.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block216")
@@ -8572,12 +8714,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setMaxlength("32")
                 .setItems([
                     {
-                        "id" : "D3",
-                        "caption" : "D3"
-                    },
-                    {
-                        "id" : "D5",
-                        "caption" : "D5"
+                        "id" : "ID01",
+                        "caption" : "ID01"
                     }
                 ])
             );
@@ -8670,6 +8808,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelCaption("組長覆核")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_leaderc2_onclick")
             );
             
             host.xui_ui_block216.append(
@@ -8932,105 +9071,54 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block216.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox749")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c142")
                 .setDataBinder("rdb2")
                 .setDataField("C14")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("14.095238095238095em")
                 .setTop("25.447619047619046em")
-                .setWidth("23.4em")
+                .setWidth("23.933333333333334em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("15em")
                 .setLabelGap("0em")
                 .setLabelCaption("8.Crosshead 螺絲安裝/畫線確認")
                 .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c142_onclick")
             );
             
             host.xui_ui_block216.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox750")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c152")
                 .setDataBinder("rdb2")
                 .setDataField("C15")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("14.095238095238095em")
                 .setTop("31.61904761904762em")
-                .setWidth("23.4em")
+                .setWidth("23.933333333333334em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("15em")
                 .setLabelGap("0em")
                 .setLabelCaption("11. 15k Array間距調整(不可接觸)")
                 .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c152_onclick")
             );
             
             host.xui_ui_block216.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox751")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c162")
                 .setDataBinder("rdb2")
                 .setDataField("C16")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
                 .setLeft("12.038095238095238em")
                 .setTop("29.333333333333332em")
-                .setWidth("27.580952380952382em")
+                .setWidth("26em")
                 .setHeight("1.7333333333333334em")
                 .setLabelSize("17em")
                 .setLabelGap("0em")
                 .setLabelCaption("10. Pump各配件Cable確實接好固定")
                 .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
+                .setType("getter")
+                .onClick("_c162_onclick")
             );
             
             host.xui_ui_block216.append(
@@ -9184,11 +9272,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("SC9")
                 .setLeft("2.2857142857142856em")
                 .setTop("27.80952380952381em")
-                .setWidth("23.733333333333334em")
+                .setWidth("25.066666666666666em")
                 .setLabelSize("17em")
                 .setLabelCaption("9. I/O Module安裝")
                 .setType("getter")
                 .setMaxlength("32")
+                .onClick("_xui_ui_input1415_onclick")
             );
             
             host.xui_ui_block216.append(
@@ -9343,6 +9432,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.xui_ui_block216.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input2239")
+                .setDataBinder("rdb2")
+                .setDataField("備註C")
+                .setAutoTips(false)
+                .setLeft("40em")
+                .setTop("24em")
+                .setWidth("20.066666666666666em")
+                .setHeight("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("備註")
+                .setMaxlength("32")
+                .setMultiLines(true)
+            );
+            
+            host.xui_ui_block216.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xmodel2")
                 .setDataBinder("rdb2")
@@ -9352,8 +9457,17 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("18.666666666666668em")
                 .setLabelSize("8em")
                 .setLabelCaption("\"X\" head Model")
-                .setType("popbox")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "RD203-Z",
+                        "caption" : "RD203-Z"
+                    },
+                    {
+                        "id" : "Other",
+                        "caption" : "Other"
+                    }
+                ])
                 .onValueChange("_xh1_onvaluechange")
             );
             
@@ -9996,43 +10110,32 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_div468.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput911")
+                .setHost(host,"testName2")
                 .setDataBinder("rdb2")
-                .setDataField("TestDate")
-                .setLeft("-1.3333333333333333em")
-                .setTop("0em")
-                .setWidth("11.733333333333333em")
-                .setLabelSize("4em")
-                .setLabelCaption("Date")
-                .setType("date")
+                .setDataField("Test")
+                .setLeft("0.45714285714285713em")
+                .setTop("0.13333333333333333em")
+                .setWidth("10.59047619047619em")
+                .setLabelSize("3em")
+                .setLabelCaption("Test")
+                .setType("getter")
+                .setMaxlength("32")
+                .onClick("_testname2_onclick")
             );
             
             host.xui_ui_div468.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1423")
-                .setName("P/N")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput2297")
                 .setDataBinder("rdb2")
-                .setDataField("P/N")
-                .setLeft("13.533333333333333em")
-                .setTop("0em")
-                .setWidth("12.466666666666667em")
-                .setLabelSize("4em")
-                .setLabelCaption("P/N")
+                .setDataField("Assy OK")
+                .setLeft("45.94285714285714em")
+                .setTop("0.13333333333333333em")
+                .setWidth("12.19047619047619em")
+                .setLabelSize("4.5em")
+                .setLabelCaption("Assy OK")
+                .setType("getter")
                 .setMaxlength("32")
-            );
-            
-            host.xui_ui_div468.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1424")
-                .setName("S/N")
-                .setDataBinder("rdb2")
-                .setDataField("S/N")
-                .setLeft("28.2em")
-                .setTop("0em")
-                .setWidth("13.133333333333333em")
-                .setLabelSize("4em")
-                .setLabelCaption("S/N")
-                .setMaxlength("32")
+                .onClick("_assyokname2_onclick")
             );
             
             host.xui_ui_formlayout17.append(
@@ -10047,26 +10150,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_div469.append(
                 xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label215")
-                .setLeft("0.4em")
-                .setTop("0.26666666666666666em")
-                .setCaption("Test")
-            );
-            
-            host.xui_ui_div469.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox160")
-                .setDataBinder("rdb2")
-                .setDataField("Assy OK")
-                .setLeft("39.333333333333336em")
-                .setTop("0.1523809523809524em")
-                .setWidth("7.333333333333333em")
-                .setIconPos("right")
-                .setCaption("Assy OK")
-            );
-            
-            host.xui_ui_div469.append(
-                xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label218")
                 .setLeft("22.095238095238095em")
                 .setTop("0.5333333333333333em")
@@ -10075,30 +10158,28 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.xui_ui_div469.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"testName2")
+                .setHost(host,"testDate2")
                 .setDataBinder("rdb2")
-                .setDataField("E2#3")
-                .setLeft("3.4285714285714284em")
-                .setTop("0.13333333333333333em")
-                .setWidth("6.733333333333333em")
-                .setLabelCaption("S/N")
-                .setType("getter")
-                .setMaxlength("32")
-                .onClick("_testname2_onclick")
+                .setDataField("TestDate")
+                .setLeft("-0.6666666666666666em")
+                .setTop("0em")
+                .setWidth("11.733333333333333em")
+                .setLabelSize("4em")
+                .setLabelCaption("Date")
+                .setType("date")
             );
             
             host.xui_ui_div469.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"assyOkName2")
+                .setHost(host,"assyOkDate2")
                 .setDataBinder("rdb2")
-                .setDataField("E2#2")
-                .setLeft("45.56190476190476em")
-                .setTop("0.13333333333333333em")
-                .setWidth("7.2em")
-                .setLabelCaption("S/N")
-                .setType("getter")
-                .setMaxlength("32")
-                .onClick("_assyokname2_onclick")
+                .setDataField("Assy OK Date")
+                .setLeft("46.476190476190474em")
+                .setTop("0.1523809523809524em")
+                .setWidth("11.733333333333333em")
+                .setLabelSize("4em")
+                .setLabelCaption("Date")
+                .setType("date")
             );
             
             host.xui_ui_formlayout17.append(
@@ -10865,7 +10946,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             var ns = this, rno = ns.repairNo.getUIValue();
             db.updateDataFromUI();
             var data = db.getData();
-            if(checkSubSheetFinish() == false)
+            if(ns.checkSubSheetFinish() == false)
                 return false;
             var xmodel=data["Crosshead Model"], xsn = data["C3#1"], xh = data["Crosshead編號"];
             if(xmodel==""|| xsn==""||xh=="")
@@ -10889,6 +10970,16 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             }
             return true;
         },
+        writeModuleTestForm: function(db){
+            var ns = this;
+            db.updateDataFromUI();
+            var d = db.getData();
+            var witem = {"Module#1":d["Module1 Name"], "P/N#1":d["Module1 P/N"], "S/N#1":d["Module1 S/N"],
+                         "Module#2":d["Module2 Name"], "P/N#2":d["Module2 P/N"], "S/N#2":d["Module2 S/N"],
+                         "登錄編號":d["登錄編號"]};
+            utils.modifyTableItem("Module功能測試表","登錄編號", witem);
+
+        },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -10899,7 +10990,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            var db = ns.rdb, dbname = "rdb",finishState = ns.finishStatus.getUIValue();
+            var db = ns.rdb, dbname = "rdb",finishState = ns.repairStatus.getUIValue();
 
             if(ns.sheetType.getUIValue().includes("SHI"))
             {
@@ -10913,10 +11004,11 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             ns.repairStatus.setDataBinder(dbname);
-            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+           // utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
             if(finishState == "完工" && ns.checkFinishState(db)==false)
                 return;
             utils.writeRepairStatus(ns);
+            ns.writeModuleTestForm(db);
             utils.saveForm(ns,"","",null, db);
         },
 
@@ -11145,7 +11237,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _leaderb2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-             utils.signNameClick(ns.dateLeaderB, uictrl,"組長,主管");
+             utils.signNameClick(ns.dateLeaderB2, uictrl,"組長,主管");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -11383,7 +11475,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _testname_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-             utils.signNameClick(null, uictrl,"維修");
+             utils.signNameClick(ns.testDate, uictrl,"維修");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -11396,7 +11488,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _assyokname_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-              utils.signNameClick(null, uictrl,"維修");
+            utils.signNameClick(ns.assyOkDate, uictrl,"維修");
         },
 
         /**
@@ -11410,7 +11502,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _testname2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-             utils.signNameClick(null, uictrl,"維修");
+             utils.signNameClick(ns.testDate2, uictrl,"維修");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -11423,7 +11515,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _assyokname2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-             utils.signNameClick(null, uictrl,"維修");
+            utils.signNameClick(ns.assyOkDate2, uictrl,"維修");
         },
             /**
          * Fired when user click it
@@ -11518,7 +11610,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
               utils.alert("請輸入Crosshead XH代碼");
               return;  
             }
-            utils.showCrossheadEditFormXH(xh);
+            var cb = function(){
+                var etm = utils.getItemValue("Cryopump維修工單","登錄編號", ns.repairNo.getUIValue(),"Pump/Module ETM");
+                ns.etm1.setValue(etm);
+                ns.etm2.setValue(etm);
+            }
+            utils.showCrossheadEditFormXH(xh,null, cb);
         },
 
         /**
@@ -11548,6 +11645,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
              utils.signNameClick(null, uictrl,"維修");
         },
         getCrossheadSN:function(xcode, uictrl){
+            var ns = this;
             var sn = utils.getItemValue("未領用Crosshead編號查詢","Crosshead編號",xcode);
             if(sn != "")
             {
@@ -11556,6 +11654,9 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                   sn = sn["S/N#2"];
               uictrl.setValue(sn);  
             }
+            var rtime = utils.getItemValue("Crosshead維修工單","Crosshead編號",xcode,"Running Time");
+            ns.etm1.setValue(rtime);
+            ns.etm2.setValue(rtime);
         },
         /**
          * Fired when control's inner value is changed!
@@ -11625,7 +11726,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             var ns = this;
             var rno = ns.repairNo.getUIValue();
             var item = utils.getItemValue("Module功能測試表","登錄編號",rno);
-            if(item != "" && item["維修狀態"] != "完工")
+            if(item != "" && !["完工","不修","簡修完工"].includes(item["維修狀態"]) )
             {
                 utils.alert("Module功能測試表,未完工!");
                 return false;
@@ -11675,6 +11776,125 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         _modulebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             utils.showModuleTestForm(ns.repairNo.getUIValue());
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _xui_ui_input1415_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+              utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderc2_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(ns.dateLeaderC2, uictrl,"組長,主管");
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.Input event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _depth_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            var v = Number(newValue) - 0.265;
+            ns.setting.setValue(v);
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c14_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c15_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c16_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+             utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c162_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+              utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c152_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+              utils.signNameClick(null, uictrl,"維修");
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _c142_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+              utils.signNameClick(null, uictrl,"維修");
         },
 
 

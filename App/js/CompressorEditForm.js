@@ -330,7 +330,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("d")
             );
             
             host.tabs.append(
@@ -2541,49 +2541,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2281")
-                .setDataBinder("comdb")
-                .setDataField("B16#9")
-                .setLeft("6.857142857142857em")
-                .setTop("56.06666666666667em")
-                .setWidth("6.857142857142857em")
-                .setLabelSize("1.5em")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2282")
-                .setDataBinder("comdb")
-                .setDataField("B16#10")
-                .setLeft("13.714285714285714em")
-                .setTop("56.06666666666667em")
-                .setWidth("6.857142857142857em")
-                .setLabelSize("1.5em")
-                .setLabelCaption("V")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2283")
-                .setDataBinder("comdb")
-                .setDataField("B16#11")
-                .setLeft("20.571428571428573em")
-                .setTop("56.06666666666667em")
-                .setWidth("6.857142857142857em")
-                .setLabelSize("1.5em")
-                .setLabelCaption("V")
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"xui_ui_label1580")
-                .setLeft("28.19047619047619em")
-                .setTop("56.4em")
-                .setCaption("V (12 hours)")
-            );
-            
-            host.block3.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"nameB")
                 .setDataBinder("comdb")
@@ -2622,19 +2579,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("17.其它零件更換")
                 .setMultiLines(true)
-            );
-            
-            host.block3.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input10221")
-                .setDataBinder("comdb")
-                .setDataField("A17#2")
-                .setLeft("6.066666666666666em")
-                .setTop("66.2em")
-                .setWidth("17.676190476190477em")
-                .setHeight("1.6761904761904762em")
-                .setLabelSize("8em")
-                .setLabelCaption("19.外觀清潔")
             );
             
             host.block3.append(
@@ -2788,6 +2732,17 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 })
             );
             
+            host.block3.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label382")
+                .setLeft("13.333333333333334em")
+                .setTop("66.33333333333333em")
+                .setWidth("10.666666666666666em")
+                .setHeight("1.5em")
+                .setCaption("19.外觀清潔")
+                .setVAlign("bottom")
+            );
+            
             host.tabs.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block4")
@@ -2802,8 +2757,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_formlayout3")
                 .setLeft("4.038095238095238em")
                 .setTop("34.285714285714285em")
-                .setWidth("46.53333333333333em")
-                .setHeight("28.066666666666666em")
+                .setWidth("46.55238095238095em")
+                .setHeight("28.038095238095238em")
                 .setLayoutData({
                     "rows" : 7,
                     "cols" : 4,
@@ -2905,8 +2860,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div219")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.219047619047618em")
+                .setHeight("2.1333333333333333em"),
                 "D2"
             );
             
@@ -2966,8 +2921,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div220")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.219047619047618em")
+                .setHeight("2.1333333333333333em"),
                 "D3"
             );
             
@@ -3027,8 +2982,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div221")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.219047619047618em")
+                .setHeight("2.1333333333333333em"),
                 "D4"
             );
             
@@ -3088,8 +3043,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div222")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("8.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.219047619047618em")
+                .setHeight("2.1333333333333333em"),
                 "D5"
             );
             
@@ -3149,8 +3104,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div223")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("46.333333333333336em")
-                .setHeight("3.2em"),
+                .setWidth("46.4em")
+                .setHeight("3.657142857142857em"),
                 "A6"
             );
             
@@ -3210,8 +3165,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div224")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("46.333333333333336em")
-                .setHeight("9.866666666666667em"),
+                .setWidth("46.4em")
+                .setHeight("11.276190476190477em"),
                 "A7"
             );
             
@@ -3237,8 +3192,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div233")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "B2"
             );
             
@@ -3262,8 +3217,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div234")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "B3"
             );
             
@@ -3287,8 +3242,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div235")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "B4"
             );
             
@@ -3311,8 +3266,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div236")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "B5"
             );
             
@@ -3335,8 +3290,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div275")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "C4"
             );
             
@@ -3359,8 +3314,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div276")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em"),
                 "C5"
             );
             
@@ -3386,8 +3341,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#13")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.9333333333333333em")
+                .setWidth("9.066666666666666em")
+                .setHeight("2.2095238095238097em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct1_onvaluechange"),
@@ -3402,8 +3357,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#14")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em")
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct2_onvaluechange"),
@@ -3418,8 +3373,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#15")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.133333333333333em")
-                .setHeight("1.8666666666666667em")
+                .setWidth("9.066666666666666em")
+                .setHeight("2.1333333333333333em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct3_onvaluechange"),
@@ -3440,42 +3395,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input886")
-                .setDataBinder("comdb")
-                .setDataField("C1#1")
-                .setLeft("1.7523809523809524em")
-                .setTop("2.9714285714285715em")
-                .setWidth("18.666666666666668em")
-                .setLabelSize("11.333333333333334em")
-                .setLabelCaption("1.Supply&ensp;Pressure")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input887")
-                .setDataBinder("comdb")
-                .setDataField("C1#2")
-                .setLeft("20.266666666666666em")
-                .setTop("3.0476190476190474em")
-                .setWidth("17.333333333333332em")
-                .setLabelSize("11.333333333333334em")
-                .setLabelCaption("psi/油霧分離器Pressure")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input888")
-                .setDataBinder("comdb")
-                .setDataField("C1#3")
-                .setLeft("37.40952380952381em")
-                .setTop("3.123809523809524em")
-                .setWidth("7.333333333333333em")
-                .setLabelSize("4em")
-                .setLabelCaption("psi△-P")
-            );
-            
-            host.block4.append(
                 xui.create("xui.UI.Label")
                 .setHost(host,"xui_ui_label471")
                 .setLeft("45.180952380952384em")
@@ -3485,18 +3404,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setCaption("psi")
                 .setHAlign("left")
                 .setVAlign("bottom")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input889")
-                .setDataBinder("comdb")
-                .setDataField("C1#4")
-                .setLeft("3.276190476190476em")
-                .setTop("5.257142857142857em")
-                .setWidth("17.066666666666666em")
-                .setLabelSize("10em")
-                .setLabelCaption("Return&ensp;Pressure")
             );
             
             host.block4.append(
@@ -3512,8 +3419,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             );
             
             host.block4.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input890")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"e")
                 .setDataBinder("comdb")
                 .setDataField("C1#5")
                 .setLeft("10.133333333333333em")
@@ -3521,6 +3428,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setWidth("10.209523809523809em")
                 .setLabelSize("3em")
                 .setLabelCaption("△-P")
+                .setHAlign("right")
+                .setType("input")
             );
             
             host.block4.append(
@@ -4108,6 +4017,65 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .onClick("_leader_onclick")
             );
             
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"a")
+                .setDataBinder("comdb")
+                .setDataField("C1#1")
+                .setLeft("1.7523809523809524em")
+                .setTop("2.9714285714285715em")
+                .setWidth("18.666666666666668em")
+                .setLabelSize("11.333333333333334em")
+                .setLabelCaption("1.Supply&ensp;Pressure")
+                .setHAlign("right")
+                .setType("input")
+                .afterUIValueSet("_a_afteruivalueset")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"b")
+                .setDataBinder("comdb")
+                .setDataField("C1#2")
+                .setLeft("20.266666666666666em")
+                .setTop("3.0476190476190474em")
+                .setWidth("17.333333333333332em")
+                .setLabelSize("11.333333333333334em")
+                .setLabelCaption("psi/油霧分離器Pressure")
+                .setHAlign("right")
+                .setType("input")
+                .afterUIValueSet("_b_afteruivalueset")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"c")
+                .setDataBinder("comdb")
+                .setDataField("C1#3")
+                .setLeft("37.40952380952381em")
+                .setTop("3.123809523809524em")
+                .setWidth("7.333333333333333em")
+                .setLabelSize("4em")
+                .setLabelCaption("psi△-P")
+                .setHAlign("right")
+                .setType("input")
+            );
+            
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"d")
+                .setDataBinder("comdb")
+                .setDataField("C1#4")
+                .setLeft("3.276190476190476em")
+                .setTop("5.257142857142857em")
+                .setWidth("17.066666666666666em")
+                .setLabelSize("10em")
+                .setLabelCaption("Return&ensp;Pressure")
+                .setHAlign("right")
+                .setType("input")
+                .afterUIValueSet("_d_afteruivalueset")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -4481,6 +4449,14 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             utils.calcMinute(ns.ct3, ns.ct2, ns.t14k);
             
         },
+        updateNumbers: function(){
+            var ns = this;
+            var a = ns.a.getUIValue(),b = ns.b.getUIValue(), d = ns.d.getUIValue();
+            if(a != "" && d != "")
+                ns.e.setUIValue(Number(a)-Number(d));
+            if(a != "" && b != "")
+                ns.c.setUIValue(Number(a)-Number(b));
+        },
         /**
          * Fired when control's inner value is changed!
          * @method onValueChange [xui.UI.ComboInput event]
@@ -4658,6 +4634,48 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             utils.outBtnClick(ns);
             
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _a_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateNumbers();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _d_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateNumbers();
+        },
+        /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _b_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateNumbers();
         }
         /*,
         // To determine how properties affects this module

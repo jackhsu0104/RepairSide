@@ -91,6 +91,17 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .onClick("_newtestbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"reportBtn")
+                .setAutoTips(false)
+                .setLeft("16.228571428571428em")
+                .setTop("0.8666666666666667em")
+                .setWidth("8em")
+                .setCaption("產生測試報告")
+                .onClick("_reportbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -584,8 +595,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                         "caption" : "9600S"
                     },
                     {
-                        "id" : "BC70",
-                        "caption" : "BC70"
+                        "id" : "HC70",
+                        "caption" : "HC70"
                     },
                     {
                         "id" : "8500",
@@ -1617,11 +1628,11 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
         _reportbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.saveChamber();
-            var id = ns.tabs.getValue();  
-            var rowid = ns.rowidList[id];  
-            if(rowid < 0)
-                return;
-            utils.createCryoTestReport(rowid);
+                ns.tdb.updateDataFromUI();
+                var data = ns.tdb.getData();
+                data = utils.testForm2ReportData(data);
+                utils.createCryopumpTestReport(data["登錄編號"],data);
+
         },
         /**
          * Fired after setUIValue is called

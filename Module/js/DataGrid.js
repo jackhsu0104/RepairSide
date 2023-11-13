@@ -326,41 +326,32 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         let item = {"id": col, "caption":caption, "width":fw+"em"};
                         if(col == "DelFlag" || col == "rowid")  //hide it
                             item.hidden = true;   
+
+                        let config = utils.getTableFieldConfig(tableName, col);
+                        if(config)
+                        {    
+                              let type = config.DATA_TYPE;  
+                              if(type == "datetime")
+                                type = "date";
+                              else if(type == "bit")
+                                type = "checkbox";
+                              else if(type == "int" && caption != "Year")
+                                type = "number";
+							  else if(type == "money")
+							  {
+								type = "currency";  
+								item.precision = 3;
+							  }								
+                              else 
+                                type = "input";
+                              item.type = type;
+                        }
+
                         if(prop.mode == "editor")
                         {    
                           let combo = utils.getTableFieldComboConfig(tableName, col);  
                           if(combo)
                             item.type = "popbox";    
-                          else
-                          {
-                            let config = utils.getTableFieldConfig(tableName, col);
-                            if(config)
-                            {    
-                              let type = config.DATA_TYPE;  
-                              if(type == "datetime")
-                                type = "date";
-                              else if(type == "bit")
-                                type = "checkbox";
-                              else 
-                                type = "input";
-                              item.type = type;
-                            }
-                          }
-                        }
-                        else
-                        {
-                            let config = utils.getTableFieldConfig(tableName, col);
-                            if(config)
-                            {
-                              let type = config.DATA_TYPE;  
-                              if(type == "datetime")
-                                type = "date";
-                              else if(type == "bit")
-                                type = "checkbox";
-                              else 
-                                type = "input";
-                              item.type = type;
-                            }
                         }
                         header.push(item);        
                       }
@@ -570,6 +561,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             };
             if(xui.isSet(recordId)){
                 mode = "edit"; 
+				fields = utils.getItemValue(ns.getUpdateTableName(), prop.keyid, fields[prop.keyid]);
                 var r = ns.fireEvent("onOpenRecord",[recordId,fields,updateRow]);
                 if(r)
                 {
@@ -616,6 +608,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 mod.setProperties("tableName", ns.getUpdateTableName());
                 if(prop.formCaption && prop.formCaption != "")
                     mod.dialog.setCaption(prop.formCaption);
+				utils.fixDate1900(fields);
                 db.setData(fields);
                 db.updateDataToUI();
                 if(mode && mode.includes("edit"))
@@ -672,7 +665,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 
             //ns.xui_msgs1.broadcast(ns.properties.outMsgType, "delete",  ids, '', cb);
         },
-        _copyRecords:function(ids){
+        _copyRecords:function(ids, count=1){
             var ns=this, grid=ns.grid,prop = ns.properties; 
             var cb=function(){
                 ns.deleteRows(ids);
@@ -700,7 +693,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 				  if(typeof v == "object" && v != null && "getDate" in v) //date time
 					  row[k] = utils.dateTimeToString(v);
 			  }
-              utils.insertTableItem(tableName, row);  
+			  for(cnt=0; cnt<count; cnt++)
+                utils.insertTableItem(tableName, row);  
             }
             xui.Dom.free();
             ns.refreshGrid();
@@ -1136,8 +1130,8 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 case "copy": 
                     var ids=ns.grid.getUIValue(true);
                     if(ids && ids.length != 0 && ids[0] != ""){
-                        xui.confirm("Confirm", "確定要複製"+ids.length+" 紀錄嗎?", function(){
-                            ns._copyRecords(ids);
+                        utils.askNumber("複製份數", function(number){
+                            ns._copyRecords(ids, number);
                         });
                     }else{
                         xui.message("請先選擇資料!");

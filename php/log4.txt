@@ -1,3 +1,3 @@
-SELECT [權限] FROM [BU3員工資料表] WHERE [員工代號]='0910171'
+SELECT * FROM [Module功能測試表] WHERE [登錄編號]='A2311R005'
 
-SELECT count(1) FROM [BU3員工資料表] WHERE [員工代號]='0910171'
+SELECT count(1) FROM [Module功能測試表] WHERE [登錄編號]='A2311R005'

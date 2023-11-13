@@ -1,1 +1,1 @@
-SELECT * FROM [站內物件查詢] WHERE 完工狀態 IN ('完工','不修','簡修完工')  ORDER BY [登錄編號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT count(*) FROM [CryopumpWarranty原因分析表] WHERE 維修狀態 = '通知測試' 

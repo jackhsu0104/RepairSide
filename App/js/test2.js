@@ -37,6 +37,11 @@ xui.Class('App.test2', 'xui.Module',{
             );
             
             host.form.append(
+                xui.create("xui.UI.MoudluePlaceHolder")
+                .setHost(host,"module_cryopumptestlayout1")
+            );
+            
+            host.form.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"xui_ui_button36")
                 .setLeft("6.666666666666667em")
@@ -75,7 +80,6 @@ xui.Class('App.test2', 'xui.Module',{
                 .setTop("49.523809523809526em")
                 .setWidth("5.485714285714286em")
                 .setHeight("2.057142857142857em")
-                .setSelMode("multi")
                 .setTagCmdsAlign("left")
                 .setLabelPos("none")
                 .setLabelGap("0em")
@@ -83,6 +87,7 @@ xui.Class('App.test2', 'xui.Module',{
                 .setLabelVAlign("")
                 .setCheckBox(true)
                 .setValue("")
+                .onClick("_xui_ui_radiobox3198_onclick")
                 .onItemSelected("_xui_ui_radiobox3198_onitemselected")
                 .setCustomStyle({
                     "ITEMS" : {
@@ -137,13 +142,14 @@ xui.Class('App.test2', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input7750")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"a")
                 .setLeft("18.666666666666668em")
                 .setTop("10em")
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("Input")
+                .setType("number")
                 .setExcelCellId("A1")
             );
             
@@ -226,14 +232,38 @@ xui.Class('App.test2', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("Module.CryopumpTestLayout", "xui.Module")
-                .setHost(host,"module_cryopumptestlayout1")
-                .setProperties({
-                    "keyid" : "rowid",
-                    "tableName" : "CryopumpTestForm",
-                    "datas" : null,
-                    "mode" : "new"
-                })
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox1184")
+                .setItems([
+                    {
+                        "id" : "a",
+                        "caption" : "item 1",
+                        "imageClass" : "xui-icon-number1"
+                    },
+                    {
+                        "id" : "b",
+                        "caption" : "item 2",
+                        "imageClass" : "xui-icon-number2"
+                    },
+                    {
+                        "id" : "c",
+                        "caption" : "item 3",
+                        "imageClass" : "xui-icon-number3"
+                    },
+                    {
+                        "id" : "d",
+                        "caption" : "item 4",
+                        "imageClass" : "xui-icon-number4",
+                        "disabled" : true
+                    }
+                ])
+                .setLeft("55.61904761904762em")
+                .setTop("19.047619047619047em")
+                .setLabelSize("1.5em")
+                .setLabelPos("top")
+                .setLabelCaption("RadioBox")
+                .setLabelHAlign("left")
+                .setValue("a")
             );
             
             append(
@@ -369,9 +399,9 @@ xui.Class('App.test2', 'xui.Module',{
         */
         _xui_ui_button36_onclick:function(profile, e, src, value){
             var ns = this;
-            ns.tabs.setItems([{"id":1, "caption":"CH1", "closeBtn":true}]);
-            ns.tabs.setValue("1");
-            
+           // ns.tabs.setItems([{"id":1, "caption":"CH1", "closeBtn":true}]);
+           // ns.tabs.setValue("1");
+            console.log(ns.a.getUIValue());
             //xui.alert("456");
             /*
             var ns = this, uictrl = profile.boxing();
@@ -428,7 +458,20 @@ xui.Class('App.test2', 'xui.Module',{
         */
             _xui_ui_popmenu430_onmenuselected:function(profile, item, src){
                 var ns = this, uictrl = profile.boxing();
-            }
+            },
+        /**
+         * Fired when a list item was clicked
+         * @method onClick [xui.UI.RadioBox event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {list} item  item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+        */
+        _xui_ui_radiobox3198_onclick:function(profile, item, e, src){
+            var ns = this, uictrl = profile.boxing();
+            if(uictrl.getUIValue() == item.id)
+                item.id = null;
+        }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

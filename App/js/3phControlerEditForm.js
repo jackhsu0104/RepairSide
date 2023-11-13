@@ -206,7 +206,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDataField("S/N")
                 .setLeft("14.476190476190476em")
                 .setTop("3.0476190476190474em")
-                .setWidth("10.666666666666666em")
+                .setWidth("12.866666666666667em")
                 .setLabelSize("3em")
                 .setLabelCaption("S/N")
                 .setMaxlength("20")
@@ -215,7 +215,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
             host.xui_ui_div165.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"repairBtn")
-                .setLeft("26.6em")
+                .setLeft("30em")
                 .setTop("2.8666666666666667em")
                 .setWidth("8.666666666666666em")
                 .setCaption("維修委託單")
@@ -226,7 +226,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"pickingBtn")
                 .setAutoTips(false)
-                .setLeft("36.666666666666664em")
+                .setLeft("40.06666666666667em")
                 .setTop("2.7333333333333334em")
                 .setWidth("8.666666666666666em")
                 .setCaption("領料報工單")
@@ -238,7 +238,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"optionBtn")
                 .setAutoTips(false)
-                .setLeft("46em")
+                .setLeft("49.4em")
                 .setTop("2.8666666666666667em")
                 .setWidth("9.333333333333334em")
                 .setCaption("Option零件更換表")
@@ -331,7 +331,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input476")
                 .setName("Remark")
                 .setDataBinder("rdb")
-                .setDataField("Pump")
+                .setDataField("Remark")
                 .setDock("top")
                 .setDockMargin({
                     "left" : 0,
@@ -428,7 +428,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("2.1333333333333333em")
                 .setTop("6.095238095238095em")
-                .setWidth("18em")
+                .setWidth("55em")
                 .setLabelSize("8em")
                 .setLabelCaption("上次故障原因")
                 .setMaxlength("200")
@@ -584,48 +584,6 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_div328.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input863")
-                .setDataBinder("rdb")
-                .setDataField("檢測時間起#1")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("30.476190476190474em")
-                .setTop("58.43809523809524em")
-                .setWidth("13.714285714285714em")
-                .setLabelSize("6.5em")
-                .setLabelCaption("維修時間&ensp;起")
-            );
-            
-            host.xui_ui_div328.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input864")
-                .setDataBinder("rdb")
-                .setDataField("訖#1")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("45.714285714285715em")
-                .setTop("58.43809523809524em")
-                .setWidth("7.314285714285714em")
-                .setLabelSize("1.5em")
-                .setLabelCaption("訖")
-            );
-            
-            host.xui_ui_div328.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input865")
-                .setDataBinder("rdb")
-                .setDataField("計#1")
-                .setDock("top")
-                .setDockStretch("fixed")
-                .setLeft("54.857142857142854em")
-                .setTop("58.43809523809524em")
-                .setWidth("7.771428571428571em")
-                .setLabelSize("1.5em")
-                .setLabelCaption("計")
-            );
-            
             host.block2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div329")
@@ -645,7 +603,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
                 .setTop("60.49523809523809em")
-                .setWidth("9.333333333333334em")
+                .setWidth("11em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
                 .setType("getter")

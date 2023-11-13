@@ -36,7 +36,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("16em")
                 .setTop("1.5238095238095237em")
-                .setWidth("48em")
+                .setWidth("52.666666666666664em")
                 .setHeight("36.57142857142857em")
                 .setCaption(" 額外Option零件更換表")
                 .setConLayoutColumns(null)
@@ -65,9 +65,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"cancelBtn")
-                .setDock("right")
-                .setLeft("23.16190476190476em")
-                .setTop("0.6857142857142857em")
+                .setLeft("45.333333333333336em")
+                .setTop("2em")
                 .setWidth("5.561904761904762em")
                 .setCaption("取消")
                 .onClick("_cancelbtn_onclick")
@@ -76,9 +75,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"saveBtn")
-                .setDock("right")
-                .setLeft("23.923809523809524em")
-                .setTop("0.6857142857142857em")
+                .setLeft("38.666666666666664em")
+                .setTop("2em")
                 .setWidth("5.561904761904762em")
                 .setCaption("儲存")
                 .onClick("_savebtn_onclick")
@@ -91,8 +89,8 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDataField("BenchName")
                 .setReadonly(true)
                 .setLeft("0.7619047619047619em")
-                .setTop("0.7619047619047619em")
-                .setWidth("9.447619047619048em")
+                .setTop("3.3333333333333335em")
+                .setWidth("9.933333333333334em")
                 .setLabelSize("4em")
                 .setLabelCaption("填寫人")
             );
@@ -103,9 +101,9 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDataBinder("opdb")
                 .setDataField("秘書確認")
                 .setLeft("1.5238095238095237em")
-                .setTop("3.0476190476190474em")
+                .setTop("0.6666666666666666em")
                 .setWidth("9.142857142857142em")
-                .setCaption("通知秘書確認")
+                .setCaption("通知組長確認")
                 .onClick("_confirmbtn_onclick")
             );
             
@@ -115,9 +113,9 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDataBinder("opdb")
                 .setDataField("組長確認")
                 .setReadonly(true)
-                .setLeft("9.904761904761905em")
-                .setTop("0.7619047619047619em")
-                .setWidth("10.666666666666666em")
+                .setLeft("10.666666666666666em")
+                .setTop("3.3333333333333335em")
+                .setWidth("12.066666666666666em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長確認")
                 .setType("getter")
@@ -130,13 +128,43 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDataBinder("opdb")
                 .setDataField("秘書確認")
                 .setReadonly(true)
-                .setLeft("20.571428571428573em")
-                .setTop("0.7619047619047619em")
-                .setWidth("10.666666666666666em")
+                .setLeft("22.666666666666668em")
+                .setTop("3.3333333333333335em")
+                .setWidth("13.333333333333334em")
                 .setLabelSize("5em")
                 .setLabelCaption("秘書確認")
                 .setType("getter")
                 .onClick("_confirm2_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairStatus")
+                .setDataBinder("opdb")
+                .setDataField("維修狀態")
+                .setAutoTips(false)
+                .setLeft("22.666666666666668em")
+                .setTop("0.6666666666666666em")
+                .setWidth("13.333333333333334em")
+                .setLabelSize("5em")
+                .setLabelCaption("維修狀態")
+                .setType("listbox")
+                .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "",
+                        "caption" : ""
+                    },
+                    {
+                        "id" : "確認維修",
+                        "caption" : "確認維修"
+                    },
+                    {
+                        "id" : "確認不修",
+                        "caption" : "確認不修"
+                    }
+                ])
+                .beforeComboPop("_repairstatus_beforecombopop")
             );
             
             host.dialog.append(
@@ -202,7 +230,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             
             host.xui_ui_div733.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1393")
+                .setHost(host,"repairNo")
                 .setDataBinder("opdb")
                 .setDataField("登錄編號")
                 .setDock("top")
@@ -595,6 +623,12 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
+            if(AppName == "RepairSide")
+            {
+              var data = ns.opdb.getData();
+              if(data["確認狀態"]=="秘書已確認,通知Bench")
+                ns.opdb.setData("確認狀態","秘書已確認");
+            }
             utils.saveForm(ns);
         },
 
@@ -609,7 +643,11 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
             // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
-        },
+              if(AppName == "RepairSide")
+              {
+                ns.repairStatus.setReadonly(true);        
+              }
+      },
             /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -632,6 +670,9 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            var rno = ns.repairNo.getUIValue();
+            if(uictrl.getCaption() == "通知秘書確認")
+                utils.modifyTableItem("Option零件更換表","登錄編號",rno, {"登錄編號":rno, "維修狀態":"報價待確認"});
             utils.confirmBtnClick(ns, uictrl);
         },
         /**
@@ -645,7 +686,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _confirm1_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "組長,主管");
+            utils.confirmNameClick(ns, uictrl, "組長,主管","待秘書確認");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -658,7 +699,33 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _confirm2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "秘書");
+            var rno = ns.repairNo.getUIValue();
+            var status = ns.repairStatus.getUIValue();
+            if(status == "")
+            {
+              utils.alert("請先選擇維修狀態,再確認!");
+              return;  
+            }
+            utils.confirmNameClick(ns, uictrl, "秘書","秘書已確認,通知Bench");
+            if(uictrl.getValue() != "")
+                utils.modifyTableItem("Option零件更換表","登錄編號",{"登錄編號":rno, "維修狀態": status});
+                
+        },
+        /**
+         * Fired before the pop-up window is created. If returns false, the default pop window will be ignored
+         * @method beforeComboPop [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {the} pos  mouse position
+         * @param {Event} e , Dom event object
+         * @param {String} src , the event source DOM element's xid
+        */
+        _repairstatus_beforecombopop:function(profile, pos, e, src){
+            var ns = this, uictrl = profile.boxing();
+            if(!LoginUser.Privilege.includes("秘書"))
+            {
+                utils.alert("秘書才能選擇!");
+                return false;
+            }
         }
         /*,
         // To determine how properties affects this module

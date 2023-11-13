@@ -39833,6 +39833,8 @@ xui.Class("xui.UI.ComboInput", "xui.UI.Input",{
                             if(box.get(0) && box.getUIValue() == item.id)
                                 box.onItemSelected(profile, item, e, src, 1);
                         }
+						else
+                            box.setUIValue(null,null,null,'click'); //jack
 
                         break;
                     }

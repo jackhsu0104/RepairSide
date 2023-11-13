@@ -65,6 +65,8 @@ if($req->cmd == "login")
       $passwd =  $req->passwd;      
       if($account == "jackhsu0104")
           $account = "Ann_Yao";//"Dicky_Hsu" //"Ann_Yao";
+      else if($account == "cic_test")
+          $account = "Dicky_Hsu";
       else
       {
         if(checkAccount($account,$passwd) == false)
@@ -74,8 +76,6 @@ if($req->cmd == "login")
           goto END;
         }
       }
-      if($account == "cic_test")
-          $account = "Dicky_Hsu";
 
       $stmt=$db->prepare("SELECT *,HRUSER.EMPID as EmplID, HRUSER.HECNAME as DisplayName, HRUSER_DEPT_BAS.DEP_CODE AS DeptID, POSITION.POS_NAME as JobTitle FROM HRUSER INNER JOIN HRUSER_DEPT_BAS ON HRUSER.DEPT_NO = HRUSER_DEPT_BAS.DEP_NO INNER JOIN [POSITION] on HRUSER.POSSIE  = POSITION.POSSIE WHERE  (HRUSER.CPNYID = 'CIC') AND (QUITDATE = '' or QUITDATE is null) AND LOGIN_ID = ?");
       $stmt->bindValue(1, $account);

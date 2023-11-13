@@ -308,7 +308,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             );
             
             host.block.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"a4")
                 .setDataBinder("pdb")
                 .setDataField("型號")
@@ -317,6 +317,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 .setWidth("14.4em")
                 .setLabelSize("6em")
                 .setLabelCaption("型號")
+                .setType("popbox")
+                .beforeComboPop("_a4_beforecombopop")
             );
             
             host.block.append(
@@ -544,7 +546,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 ns.a1.setDisabled(true);
                 ns.a2.setDisabled(true);
                 ns.a3.setDisabled(true);
-                ns.a4.setDisabled(true);
+                //ns.a4.setDisabled(true);
                 ns.a5.setDisabled(true);
                 ns.a6.setDisabled(true);
                 ns.a7.setDisabled(true);
@@ -732,9 +734,9 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
         },
         _mgrid_oninitnewdata:function(){
             var ns = this;
-            ns.pdb.updateDataFromUI();
-            var data = ns.pdb.getData();
-            return {"型號": data["型號"], "領料報工單號":data["領料報工單號"],"維修站別": SiteName};
+            var id = ns.id.getUIValue();
+            var model = ns.a4.getUIValue();
+            return {"型號": model, "領料報工單號": id,"維修站別": SiteName};
 
         },
         _mgrid_oncreaterecords:function(
@@ -747,7 +749,19 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                 utils.alert("請先按新增!")
                 return "noop";
             }
-        }
+        },
+            /**
+         * Fired before the pop-up window is created. If returns false, the default pop window will be ignored
+         * @method beforeComboPop [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {the} pos  mouse position
+         * @param {Event} e , Dom event object
+         * @param {String} src , the event source DOM element's xid
+        */
+            _a4_beforecombopop:function(profile, pos, e, src){
+                var ns = this, uictrl = profile.boxing();
+                ns.pdb.setData("SiteName",SiteName);
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

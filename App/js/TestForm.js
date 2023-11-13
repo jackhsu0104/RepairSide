@@ -109,7 +109,7 @@ xui.Class('App.TestForm', 'xui.Module',{
                 .setWidth("18em")
                 .setLabelSize("8em")
                 .setLabelCaption("客戶名稱")
-                .setMaxlength("32")
+                .setMaxlength(32)
             );
             
             host.form.append(

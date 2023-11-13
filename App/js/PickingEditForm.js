@@ -9,7 +9,6 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
 
         // To initialize properties
         properties : {
-            "keyid" : "",
             "tableName" : null,
             "datas" : null,
             "mode" : "new"
@@ -132,7 +131,8 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setLazyAppend(false)
+                .setValue("b")
             );
             
             host.mainTabs.append(
@@ -207,7 +207,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                         "id" : "領用庫別",
                         "caption" : "領用庫別",
                         "type" : "label",
-                        "width" : "5em"
+                        "width" : "5.0285714285714285em"
                     },
                     {
                         "id" : "品號",
@@ -248,7 +248,8 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                         "type" : "button",
                         "caption" : "清除"
                     }
-                ]),
+                ])
+                .onCmd("_grid2_oncmd"),
                 "b"
             );
             
@@ -397,7 +398,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
           }
           return rows;  
         },
-        getPickingItemCount: function(model,pn){
+        getPickingItemCount: function(model,pn, defValue = -1){
             var ns = this;
             if(typeof ns.pickingCountList == "undefined")
             {
@@ -412,9 +413,12 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             {
               var item = ns.pickingCountList[i];   
               if(pn == item["品號"] && model == item["型號"])
-                  return item["領料數量"];
+                  return Number(item["領料數量"]);
             }
-            return 0;
+            if(ns.pickingCountList.length == 0 && defValue != -1)
+                return Number(defValue);
+            else
+                return 0;
         },
         getStoreItemCount: function(pn){
             var ns = this;
@@ -423,12 +427,14 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
               ns.storeCountList = utils.getItemValue("erp.領料庫存查詢","庫別", ns.storeName,"*", true);    
               if(ns.storeCountList == "")
                   ns.storeCountList = [];
+              for(var i=0; i<ns.storeCountList.length; i++)
+                 ns.storeCountList[i]["品號"] = ns.storeCountList[i]["品號"].trim();     
             }
             for(var i=0; i<ns.storeCountList.length; i++)
             {
               var item = ns.storeCountList[i];   
               if(pn == item["品號"])
-                  return item["庫存數量"];
+                  return Number(item["庫存數量"]);
             }
             return 0;
         },
@@ -512,7 +518,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         },
         updateGridStoreCount: function(grid){
             var ns = this;
-            grid.render();
+//            grid.render();
             var rows = grid.getRows();
             for(var i=0; i<rows.length;i++)
             {
@@ -544,7 +550,9 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                   let item = items[i];
                   item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
                   item["領用庫別"] = ns.storeName;
-                  var value =  ns.getPickingItemCount(model, item["品號"]); 
+                  var value =  ns.getPickingItemCount(model, item["品號"], item["領料數量"]);  //default = item["領料數量"] 
+                  if(ns.pickingCountList.length == 0 && value > item["庫存數量"])  //no previous records
+                      value = item["庫存數量"];
                   item["領料數量"] = {"value": value, "max":Number(item["庫存數量"])};
                 }
                 ns.grid1.setRows(items);
@@ -566,8 +574,9 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
               for(var i=0; i<items.length; i++)
               {
                 let it = items[i];
+                it["品號"] = it["品號"].trim();
                 it["數量"] = 1;
-                it["品名"] = ns.getPnName(it["品號"]);  
+                //it["品名"] = ns.getPnName(it["品號"]);  
                 it["庫存數量"] = ns.getStoreItemCount(it["品號"]);  
                 it["型號"] = "其他";
                 var value =  ns.getPickingItemCount("其他", it["品號"]); 
@@ -761,6 +770,20 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             ns.updateGrid();
             ns.timer1.suspend();
         },
+        onClearCmd: function(item, uictrl){
+              if(item)  
+                uictrl.updateCell(item._cells["領料數量"], {"value":0});
+              else //clear all
+              {
+                var rows = uictrl.getRows();
+                for(var i=0; i<rows.length; i++)
+                {
+                    var r = rows[i];        
+                    uictrl.updateCell(r._cells["領料數量"], {"value":0});
+                }
+              }
+            
+        },
         /**
          * Fired when an inner command is clicked
          * @method onCmd [xui.UI.TreeGrid event]
@@ -772,11 +795,22 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         */
         _grid1_oncmd:function(profile, item, cmdKey, e, src){
             var ns = this, uictrl = profile.boxing();
-            if(item && cmdKey == "clear")
-            {
-              console.log(item); 
-              uictrl.updateCell(item._cells["領料數量"], {"value":0});  
-            }
+            if(cmdKey == "clear")
+                ns.onClearCmd(item,uictrl);
+        },
+        /**
+         * Fired when an inner command is clicked
+         * @method onCmd [xui.UI.TreeGrid event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {String} cmdKey , the command key
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+        */
+        _grid2_oncmd:function(profile, item, cmdKey, e, src){
+            var ns = this, uictrl = profile.boxing();
+            if(cmdKey == "clear")
+                ns.onClearCmd(item,uictrl);
         }
         /*,
         // To determine how properties affects this module

@@ -57,11 +57,15 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                     {
                         "id" : "d",
                         "caption" : "Compressor零件更換表"
+                    },
+                    {
+                        "id" : "f",
+                        "caption" : "Option零件更換表"
                     }
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("c")
             );
             
             host.stack.append(
@@ -124,6 +128,18 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                 "e"
             );
             
+            host.stack.append(
+                xui.create("xui.UI.List")
+                .setHost(host,"listf")
+                .setDock("fill")
+                .setLeft("6.095238095238095em")
+                .setTop("7.619047619047619em")
+                .setWidth("24.38095238095238em")
+                .setValue("a")
+                .onItemSelected("_listf_onitemselected"),
+                "f"
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -134,6 +150,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           ns.updateTestFormList();  //待測試
           ns.updateQuotationList();
           ns.updateNoRepairSheetList();
+          ns.updateOptionList();  
             
 // ns.updateHeaterList();
          // ns.updateOverhaulList();
@@ -209,11 +226,20 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
               ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,保養名稱","-待確認");
           ns.updateCaptionCount("d", list, "Compressor零件更換表");
         },
+        updateOptionList: function(){
+          var ns = this;  
+          var list = ns.listf;
+          list.clearItems();
+          ns.updateList2(list, "Option零件更換表", "確認狀態 = '秘書已確認,通知Bench'", "登錄編號,公司名稱","-秘書已確認");
+          if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))  
+              ns.updateList2(list, "Option零件更換表", "確認狀態 = '待組長確認'", "登錄編號,公司名稱","-待確認");
+          ns.updateCaptionCount("f", list, "Option零件更換表");
+        },
         updateNoRepairSheetList: function(){
           var ns = this;  
           var list = ns.listc;
           list.clearItems();
-          ns.updateList2(list, "維修站總資料表", "維修狀態='待維修'", "登錄編號,客戶名稱");
+          ns.updateList2(list, "站內物件查詢", "完工狀態='通知維修'", "登錄編號,客戶名稱,產品分類");
           ns.updateCaptionCount("c", list, "待維修案件");
         },
         updateUnitFormList: function(){
@@ -243,7 +269,8 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           var ns = this;  
           var list = ns.liste;  
           list.clearItems();
-          ns.updateList2(list, "維修站總資料表", "維修狀態='待測試'", "登錄編號,客戶名稱");
+          ns.updateList2(list, "CryopumpTestForm", "維修狀態='通知測試'", "登錄編號,Pump,P/N,S/N");
+          ns.updateList2(list, "CryopumpWarranty原因分析表", "維修狀態='通知測試'", "登錄編號,Pump,P/N,S/N","-保固");
           ns.updateCaptionCount("e", list, "待測試案件");
       },
         // Give a chance to determine which UI controls will be appended to parent container
@@ -406,16 +433,43 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
             var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rid);
             if(data != "")
             {
+                /*
                 MainPage.wrRepairNo.setValue(rid);
                 MainPage._wrrepairsearchbtn_onclick();
                 MainPage.mainPage.setValue("維修委託單/工單");
                 ns.destroy();
+                */
                 /*
                 var descb = function(){
                     ns.updateAllList();                
                 }
                 utils.showDataPage("NewWorkSheetForm", data, "newRepair", null, descb);
                 */
+                var sheets = utils.getItemValue("站內物件查詢","登錄編號", rid, "產品分類");
+                if(sheets.includes("Module"))
+                    utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rid, "維修狀態":"待拆解"});
+                if(sheets.includes("Crosshead"))
+                    utils.modifyTableItem("Crosshead維修工單","登錄編號",{"登錄編號":rid, "維修狀態":"待拆解"});
+                if(sheets.includes("Cryopump"))
+                    utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rid, "維修狀態":"待拆解"});
+                if(sheets.includes("Compressor"))
+                    utils.modifyTableItem("Compressor維修工單","登錄編號",{"登錄編號":rid, "維修狀態":"待維修"});
+                if(sheets.includes("Controller"))
+                    utils.modifyTableItem("3phControler維修工單","登錄編號",{"登錄編號":rid, "維修狀態":"待維修"});
+                if(sheets.includes("Heater"))
+                    utils.modifyTableItem("CylinderHeater維修工單","登錄編號",{"登錄編號":rid, "維修狀態":"待維修"});
+                if(sheets.includes("Cryopump"))
+                    ns.showPage("CryopumpEditForm", "Cryopump維修工單","登錄編號", rid);
+                else if(sheets.includes("Crosshead"))
+                    ns.showPage("CrossheadEditForm", "Crosshead維修工單","登錄編號", rid);
+                else if(sheets.includes("Module"))
+                    ns.showPage("ModuleTestForm", "Module功能測試表","登錄編號", rid);
+                else if(sheets.includes("Compressor"))
+                    ns.showPage("CompressorEditForm", "Compressor維修工單","登錄編號", rid);
+                else if(sheets.includes("Controller"))
+                    ns.showPage("3phControlerEditForm", "3phControler維修工單","登錄編號", rid);
+                else if(sheets.includes("Heater"))
+                    ns.showPage("CylinderHeaterEditForm", "CylinderHeater維修工單","登錄編號", rid);
             }
             else 
               xui.alert("查無登錄編號!");  
@@ -432,16 +486,44 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
         _liste_onitemselected:function(profile, item, e, src, type){
             var ns = this, uictrl = profile.boxing();
             var rid = item.id;
+            var caption = item.caption;
             var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rid);
             if(data != "")
             {
+                if(caption.includes("-保固"))
+                {
+                  utils.modifyTableItem("CryopumpWarranty原因分析表","登錄編號",{"登錄編號":rid, "維修狀態":"測試中"});
+                  ns.showPage("CryopumpWarrantyEditForm", "CryopumpWarranty原因分析表","登錄編號", rid);
+                }
+                else 
+                {
+                  utils.modifyTableItem("CryopumpTestForm","登錄編號",{"登錄編號":rid, "維修狀態":"測試中"});
+                  ns.showPage("CryopumpTestForm", "CryopumpTestForm","登錄編號", rid);
+                }
+                
+/*                
                 var descb = function(){
                     ns.destroy();
                 }
               utils.showDataPage("NewWorkSheetForm", data, "newTest",null, descb);
+*/
             }
             else 
               xui.alert("查無登錄編號!");  
+        },
+        /**
+         * Fired when list item is selected
+         * @method onItemSelected [xui.UI.List event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Object} item , list item Object
+         * @param {Event} e , the DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {} type:Number,0:noaffacted;1:checked;-1  unchecked
+        */
+        _listf_onitemselected:function(profile, item, e, src, type){
+            var ns = this, uictrl = profile.boxing();
+            ns.showPage("RepairOptionForm", "Option零件更換表","登錄編號", item.id);
+            uictrl.setValue("");
         }
         /*,
         // To determine how properties affects this module

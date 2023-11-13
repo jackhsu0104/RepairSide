@@ -95,6 +95,17 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .onClick("_newbtn_onclick")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"reportBtn")
+                .setAutoTips(false)
+                .setLeft("15.466666666666667em")
+                .setTop("0.8666666666666667em")
+                .setWidth("8em")
+                .setCaption("產生測試報告")
+                .onClick("_reportbtn_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -123,8 +134,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setDockOrder(1)
                 .setLeft("13.714285714285714em")
                 .setTop("6.095238095238095em")
-                .setWidth("67.8em")
-                .setHeight("29.133333333333333em")
+                .setWidth("67.58095238095238em")
+                .setHeight("29.104761904761904em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 14,
@@ -211,8 +222,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div414")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("67.66666666666667em")
-                .setHeight("1.9333333333333333em"),
+                .setWidth("66.05714285714286em")
+                .setHeight("2.2095238095238097em"),
                 "A1"
             );
             
@@ -312,15 +323,15 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div415")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("67.66666666666667em")
-                .setHeight("1.8666666666666667em")
+                .setWidth("66.05714285714286em")
+                .setHeight("2.1333333333333333em")
                 .setOverflow("hidden"),
                 "A2"
             );
             
             host.xui_ui_div415.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input632")
+                .setHost(host,"test")
                 .setDataBinder("tdb")
                 .setDataField("Test")
                 .setDock("top")
@@ -382,7 +393,7 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
             
             host.xui_ui_div415.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input634")
+                .setHost(host,"assyOk")
                 .setDataBinder("tdb")
                 .setDataField("AssyOK")
                 .setDock("top")
@@ -401,14 +412,14 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div423")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A3"
             );
             
             host.xui_ui_div423.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput533")
+                .setHost(host,"testDate")
                 .setDataBinder("tdb")
                 .setDataField("TestDate")
                 .setDock("top")
@@ -468,8 +479,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div424")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A4"
             );
             
@@ -494,8 +505,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                         "caption" : "9600S"
                     },
                     {
-                        "id" : "BC70",
-                        "caption" : "BC70"
+                        "id" : "HC70",
+                        "caption" : "HC70"
                     },
                     {
                         "id" : "8500",
@@ -577,8 +588,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div425")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A5"
             );
             
@@ -670,8 +681,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div455")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A6"
             );
             
@@ -708,8 +719,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div456")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A7"
             );
             
@@ -746,8 +757,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div457")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A8"
             );
             
@@ -782,8 +793,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div458")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A12"
             );
             
@@ -819,8 +830,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div459")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A13"
             );
             
@@ -856,8 +867,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div460")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A9"
             );
             
@@ -877,8 +888,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div461")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A10"
             );
             
@@ -943,8 +954,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div462")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em"),
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em"),
                 "A11"
             );
             
@@ -1009,8 +1020,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div463")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("1.8666666666666667em")
+                .setWidth("32.99047619047619em")
+                .setHeight("2.1333333333333333em")
                 .setOverflow("hidden"),
                 "A14"
             );
@@ -1070,8 +1081,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div592")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("11.666666666666666em"),
+                .setWidth("33.06666666666667em")
+                .setHeight("13.333333333333334em"),
                 "B3"
             );
             
@@ -1135,8 +1146,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div593")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.8em")
-                .setHeight("11.666666666666666em"),
+                .setWidth("33.06666666666667em")
+                .setHeight("13.333333333333334em"),
                 "B9"
             );
             
@@ -1267,7 +1278,7 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
         */
                 _xui_ui_input632_onclick:function(profile, e, src, value, n){
                     var ns = this, uictrl = profile.boxing();
-                    utils.signNameClick(null, uictrl, "維修");
+                    utils.signNameClick(ns.testDate, uictrl, "維修");
                 },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -1369,7 +1380,22 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
               ns.tdb.updateDataToUI();  
             }
             
-        }
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _reportbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                ns.tdb.updateDataFromUI();
+                var data = ns.tdb.getData();
+                data = utils.testForm2ReportData(data);
+                utils.createCryopumpTestReport(data["登錄編號"],data);
+            }
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){
