@@ -265,7 +265,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("b")
             );
             
             host.tabs.append(
@@ -450,12 +450,12 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setDataField("配件是否齊全")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }

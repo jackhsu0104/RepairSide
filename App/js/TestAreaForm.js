@@ -1549,7 +1549,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             var items = [];
             ns.rowidList = Array(ns.chamberCount).fill(-1);
             for(var i=0; i<ns.chamberCount; i++)
-              items.push({"id": i,"caption":"CH"+(i+1),"closeBtn":true});      
+              items.push({"id": i,"caption": (i+1).toString(),"closeBtn":true});      
             ns.tabs.setItems(items);
             ns.currentArea = "A";
             ns.loadTestArea("A");

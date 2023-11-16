@@ -1,3 +1,3 @@
-SELECT * FROM [Module功能測試表] WHERE [登錄編號]='A2311R005'
+SELECT [Running Time] FROM [Crosshead維修工單] WHERE [Crosshead編號]='A056'
 
-SELECT count(1) FROM [Module功能測試表] WHERE [登錄編號]='A2311R005'
+SELECT count(1) FROM [Crosshead維修工單] WHERE [Crosshead編號]='A056'

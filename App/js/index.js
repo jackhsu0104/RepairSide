@@ -29,7 +29,7 @@ xui.Class('App', 'xui.Module',{
             append(
                 xui.create("xui.Timer")
                 .setHost(host,"timer2")
-                .setInterval(5000)
+                .setInterval(10000)
                 .onTime("_timer2_ontime")
             );
             
@@ -2572,7 +2572,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231113-B1")
+                .setCaption("維修站管理系統-20231116")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")

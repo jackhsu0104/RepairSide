@@ -330,7 +330,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("c")
             );
             
             host.tabs.append(
@@ -556,12 +556,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A1#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -604,12 +604,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A2#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -644,12 +644,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A3#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -684,12 +684,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A4#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -724,12 +724,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A5#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -764,12 +764,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A6#4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -832,12 +832,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A7#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -880,12 +880,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A8#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -928,12 +928,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A9#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1038,12 +1038,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A10#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1103,12 +1103,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A11#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1182,12 +1182,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A13#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1276,11 +1276,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A14#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1326,11 +1326,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A15#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1500,11 +1500,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B1#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1551,11 +1551,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B2#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1599,11 +1599,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B3#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1647,11 +1647,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B4#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1695,11 +1695,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B5#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1743,11 +1743,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B6#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1791,11 +1791,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B7#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1839,11 +1839,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B8#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1887,11 +1887,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B9#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1935,11 +1935,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B10#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -1983,11 +1983,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B11#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2044,11 +2044,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B12#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2114,11 +2114,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B13#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2182,11 +2182,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B14#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2230,11 +2230,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B15#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2405,12 +2405,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B16#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2588,11 +2588,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("A17#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2640,11 +2640,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B6#ˇ")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2712,11 +2712,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("B20")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -2757,8 +2757,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_formlayout3")
                 .setLeft("4.038095238095238em")
                 .setTop("34.285714285714285em")
-                .setWidth("46.55238095238095em")
-                .setHeight("28.038095238095238em")
+                .setWidth("46.53333333333333em")
+                .setHeight("28.066666666666666em")
                 .setLayoutData({
                     "rows" : 7,
                     "cols" : 4,
@@ -2860,8 +2860,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div219")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.219047619047618em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.8em")
+                .setHeight("1.8666666666666667em"),
                 "D2"
             );
             
@@ -2921,8 +2921,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div220")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.219047619047618em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.8em")
+                .setHeight("1.8666666666666667em"),
                 "D3"
             );
             
@@ -2982,8 +2982,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div221")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.219047619047618em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.8em")
+                .setHeight("1.8666666666666667em"),
                 "D4"
             );
             
@@ -3043,8 +3043,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div222")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.219047619047618em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("8.8em")
+                .setHeight("1.8666666666666667em"),
                 "D5"
             );
             
@@ -3104,8 +3104,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div223")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("46.4em")
-                .setHeight("3.657142857142857em"),
+                .setWidth("46.333333333333336em")
+                .setHeight("3.2em"),
                 "A6"
             );
             
@@ -3165,8 +3165,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div224")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("46.4em")
-                .setHeight("11.276190476190477em"),
+                .setWidth("46.333333333333336em")
+                .setHeight("9.866666666666667em"),
                 "A7"
             );
             
@@ -3192,8 +3192,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div233")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "B2"
             );
             
@@ -3217,8 +3217,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div234")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "B3"
             );
             
@@ -3242,8 +3242,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div235")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "B4"
             );
             
@@ -3266,8 +3266,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div236")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "B5"
             );
             
@@ -3290,8 +3290,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div275")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "C4"
             );
             
@@ -3314,8 +3314,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div276")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em"),
                 "C5"
             );
             
@@ -3341,8 +3341,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#13")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.2095238095238097em")
+                .setWidth("9.133333333333333em")
+                .setHeight("1.9333333333333333em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct1_onvaluechange"),
@@ -3357,8 +3357,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#14")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct2_onvaluechange"),
@@ -3373,8 +3373,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C6#15")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("9.066666666666666em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("9.133333333333333em")
+                .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
                 .setType("time")
                 .onValueChange("_ct3_onvaluechange"),
@@ -3604,11 +3604,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C2#")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -3717,11 +3717,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C4#4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -3847,11 +3847,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C5#4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -3896,11 +3896,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C7#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])
@@ -3945,11 +3945,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("C8#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y"
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N"
                     }
                 ])

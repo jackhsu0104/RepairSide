@@ -385,12 +385,12 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setDataField("A1#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1365,12 +1365,12 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setDataField("B1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1530,12 +1530,12 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setDataField("B3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }

@@ -401,10 +401,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         "id" : "9.5mm",
                         "caption" : "9.5mm",
                         "imageClass" : ""
-                    },
-                    {
-                        "id" : "NA",
-                        "caption" : "N/A"
                     }
                 ])
                 .setDock("top")
@@ -514,12 +510,12 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("A2#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -650,12 +646,12 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("A3#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2943,7 +2939,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             host.xui_ui_block758.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"sn1")
-                .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("S/N")
                 .setLeft("22.095238095238095em")
@@ -3033,7 +3028,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("c")
             );
             
             host.tabs2.append(
@@ -3129,10 +3124,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                         "id" : "9.5mm",
                         "caption" : "9.5mm",
                         "imageClass" : ""
-                    },
-                    {
-                        "id" : "NA",
-                        "caption" : "N/A"
                     }
                 ])
                 .setDock("top")
@@ -3242,12 +3233,12 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("A2#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }

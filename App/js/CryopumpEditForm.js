@@ -425,7 +425,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("0em")
                 .setTop("0em")
                 .setHeight("19.35238095238095em")
-                .setValue("e")
+                .setValue("d")
             );
             
             host.tabs1.append(
@@ -648,12 +648,47 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("上次Diode Line更換日期")
                 .setAutoTips(false)
                 .setLeft("17em")
-                .setTop("29.2em")
+                .setTop("31.733333333333334em")
                 .setWidth("23.266666666666666em")
                 .setLabelSize("12em")
                 .setLabelCaption("上次Diode Line更換日期")
                 .setType("date")
                 .setMaxlength("null")
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"xui_ui_radiobox2749")
+                .setDataBinder("rdb")
+                .setDataField("Pump與Module是否相符")
+                .setItems([
+                    {
+                        "id" : "1",
+                        "caption" : "Y",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "0",
+                        "caption" : "N",
+                        "imageClass" : ""
+                    }
+                ])
+                .setAutoTips(false)
+                .setLeft("17.666666666666668em")
+                .setTop("20.533333333333335em")
+                .setWidth("19.733333333333334em")
+                .setHeight("1.7523809523809524em")
+                .setLabelSize("11em")
+                .setLabelGap("0em")
+                .setLabelCaption("Pump與Module是否相符")
+                .setLabelVAlign("middle")
+                .setCheckBox(true)
+                .setValue("")
+                .setCustomStyle({
+                    "ITEMS" : {
+                        "overflow" : "hidden"
+                    }
+                })
             );
             
             host.block1.append(
@@ -697,59 +732,24 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block1.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox2749")
-                .setDataBinder("rdb")
-                .setDataField("Pump與Module是否相符")
-                .setItems([
-                    {
-                        "id" : "Y",
-                        "caption" : "Y",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "N",
-                        "caption" : "N",
-                        "imageClass" : ""
-                    }
-                ])
-                .setAutoTips(false)
-                .setLeft("17.666666666666668em")
-                .setTop("32.53333333333333em")
-                .setWidth("19.733333333333334em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("11em")
-                .setLabelGap("0em")
-                .setLabelCaption("Pump與Module是否相符")
-                .setLabelVAlign("middle")
-                .setCheckBox(true)
-                .setValue("")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "overflow" : "hidden"
-                    }
-                })
-            );
-            
-            host.block1.append(
-                xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox2750")
                 .setDataBinder("rdb")
                 .setDataField("配件是否齊全")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
                 ])
                 .setAutoTips(false)
                 .setLeft("20.666666666666668em")
-                .setTop("24.266666666666666em")
+                .setTop("26.8em")
                 .setWidth("17.98095238095238em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("8em")
@@ -772,19 +772,19 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("上次維修有無更換Diode Lin")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
                 ])
                 .setAutoTips(false)
                 .setLeft("16.666666666666668em")
-                .setTop("30.533333333333335em")
+                .setTop("33.53333333333333em")
                 .setWidth("24.133333333333333em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("12em")
@@ -868,7 +868,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("Module Software")
                 .setAutoTips(false)
                 .setLeft("17.333333333333332em")
-                .setTop("20.666666666666668em")
+                .setTop("23.2em")
                 .setWidth("21.933333333333334em")
                 .setLabelSize("12em")
                 .setLabelCaption("Module Software")
@@ -916,7 +916,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("配件是否齊全#3")
                 .setAutoTips(false)
                 .setLeft("37.333333333333336em")
-                .setTop("24.6em")
+                .setTop("27.133333333333333em")
                 .setWidth("11.8em")
                 .setLabelCaption("Module對應Pump S/N")
                 .setMaxlength("200")
@@ -930,7 +930,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("Module Full Regen")
                 .setAutoTips(false)
                 .setLeft("17.333333333333332em")
-                .setTop("22.666666666666668em")
+                .setTop("25.2em")
                 .setWidth("21.933333333333334em")
                 .setLabelSize("12em")
                 .setLabelCaption("Module Full Regen")
@@ -961,7 +961,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 ])
                 .setAutoTips(false)
                 .setLeft("20.666666666666668em")
-                .setTop("26.6em")
+                .setTop("29.133333333333333em")
                 .setWidth("31.466666666666665em")
                 .setHeight("1.7523809523809524em")
                 .setLabelSize("8em")
@@ -975,6 +975,18 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                         "overflow" : "hidden"
                     }
                 })
+            );
+            
+            host.block1.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input6386")
+                .setDataBinder("rdb")
+                .setDataField("Module Software#2")
+                .setLeft("39.93333333333333em")
+                .setTop("23.266666666666666em")
+                .setWidth("10.533333333333333em")
+                .setHAlign("left")
+                .setMaxlength("10")
             );
             
             host.tabs1.append(
@@ -1187,12 +1199,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A1#4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1215,12 +1227,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A1#8")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1242,12 +1254,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A3#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1269,12 +1281,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A3#6")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1296,12 +1308,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A4#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1350,12 +1362,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A5#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1376,12 +1388,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A5#4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1430,12 +1442,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A6#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1485,12 +1497,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A7#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1512,12 +1524,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A8")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1649,12 +1661,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A14#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1676,12 +1688,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A14#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1720,12 +1732,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A15")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2342,12 +2354,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2376,12 +2388,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B2#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2410,12 +2422,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B3#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2444,12 +2456,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B3#6")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2477,12 +2489,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2511,12 +2523,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2545,12 +2557,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B6")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2589,12 +2601,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B7#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2622,12 +2634,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B10")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2656,12 +2668,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B11")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2690,12 +2702,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B12")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2724,12 +2736,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B13#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2758,12 +2770,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B14#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2935,12 +2947,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B6#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -2969,12 +2981,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B12#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3269,7 +3281,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C9#2")
                 .setLeft("19.333333333333332em")
                 .setTop("20.666666666666668em")
-                .setWidth("8.666666666666666em")
                 .setLabelSize("4em")
                 .setLabelCaption("Setting")
                 .setMaxlength("32")
@@ -3401,12 +3412,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3435,12 +3446,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C3#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3469,12 +3480,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C4#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3502,12 +3513,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C5#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3544,12 +3555,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C6#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3592,12 +3603,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C7#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3626,12 +3637,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C10#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3659,12 +3670,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C11")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -3726,12 +3737,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C13#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -4037,20 +4048,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input2818")
-                .setName("Setting")
-                .setDataBinder("rdb")
-                .setDataField("C9#3")
-                .setLeft("28.333333333333332em")
-                .setTop("20.666666666666668em")
-                .setWidth("7em")
-                .setLabelSize("1em")
-                .setLabelCaption("~")
-                .setMaxlength("32")
-            );
-            
-            host.block4.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2819")
                 .setName("Setting")
                 .setDataBinder("rdb")
@@ -4157,6 +4154,22 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .onValueChange("_xh1_onvaluechange")
             );
             
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_input2818")
+                .setName("Setting")
+                .setDataBinder("rdb")
+                .setDataField("C9#3")
+                .setLeft("29.8em")
+                .setTop("20.666666666666668em")
+                .setWidth("7.333333333333333em")
+                .setLabelSize("1em")
+                .setLabelCaption("~")
+                .setType("input")
+                .setMaxlength("32")
+                .setPrecision(3)
+            );
+            
             host.tabs1.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"block5")
@@ -4182,9 +4195,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             );
             
             host.block5.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_input2094")
-                .setName("Compressor Model")
                 .setDataBinder("rdb")
                 .setDataField("D3#1")
                 .setLeft("0.6666666666666666em")
@@ -4193,12 +4205,29 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLabelSize("10em")
                 .setLabelCaption("5.Compressor Model")
                 .setMaxlength("32")
+                .setItems([
+                    {
+                        "id" : "9600",
+                        "caption" : "9600"
+                    },
+                    {
+                        "id" : "9600S",
+                        "caption" : "9600S"
+                    },
+                    {
+                        "id" : "HC-70",
+                        "caption" : "HC-70"
+                    },
+                    {
+                        "id" : "8500",
+                        "caption" : "8500"
+                    }
+                ])
             );
             
             host.block5.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2095")
-                .setName("Start Cooldown#1")
                 .setDataBinder("rdb")
                 .setDataField("D3#2")
                 .setLeft("2.6666666666666665em")
@@ -4212,7 +4241,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             host.block5.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input2096")
-                .setName("Start Cooldown#2")
                 .setDataBinder("rdb")
                 .setDataField("D3#3")
                 .setLeft("15.333333333333334em")
@@ -4480,12 +4508,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("D5#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     },
@@ -4590,13 +4618,13 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox364")
                 .setDataBinder("rdb")
                 .setDataField("D7#1")
-                .setLeft("-0.3333333333333333em")
+                .setLeft("-0.13333333333333333em")
                 .setTop("25.933333333333334em")
-                .setWidth("22.666666666666668em")
+                .setWidth("20.2em")
                 .setHeight("1.1333333333333333em")
                 .setHAlign("right")
                 .setIconPos("right")
-                .setCaption("10.Test完成後，Vacuum Side Leak Test  Pass")
+                .setCaption("10.Test完成後，Vacuum Side Leak Test ")
             );
             
             host.block5.append(
@@ -4652,7 +4680,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("底溫#1")
                 .setDataBinder("rdb")
                 .setDataField("D7#3")
-                .setLeft("23.333333333333332em")
+                .setLeft("22.666666666666668em")
                 .setTop("25.866666666666667em")
                 .setWidth("5.466666666666667em")
                 .setHAlign("right")
@@ -4665,7 +4693,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("底溫#2")
                 .setDataBinder("rdb")
                 .setDataField("D7#4")
-                .setLeft("28.266666666666666em")
+                .setLeft("27.6em")
                 .setTop("25.933333333333334em")
                 .setWidth("5.333333333333333em")
                 .setLabelSize("2em")
@@ -4723,6 +4751,14 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setWidth("10.533333333333333em")
                 .setHAlign("left")
                 .setMaxlength("10")
+            );
+            
+            host.block5.append(
+                xui.create("xui.UI.Label")
+                .setHost(host,"xui_ui_label672")
+                .setLeft("20.133333333333333em")
+                .setTop("26.266666666666666em")
+                .setCaption("Pass")
             );
             
             host.tabs1.append(
@@ -5206,11 +5242,6 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                     {
                         "id" : "b",
                         "caption" : "OB/IS/P300",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "c",
-                        "caption" : "SHI",
                         "imageClass" : ""
                     },
                     {
@@ -6909,6 +6940,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"b1")
                 .setName("C12")
+                .setDataBinder("rdb")
                 .setDataField("E21")
                 .setLeft("0em")
                 .setTop("0em")
@@ -6972,7 +7004,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("f")
+                .setValue("b")
             );
             
             host.tabs2.append(
@@ -7128,12 +7160,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("配件是否齊全")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7458,12 +7490,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("SA1#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7484,12 +7516,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A4#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7537,12 +7569,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A5#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7590,12 +7622,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A6#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7705,12 +7737,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A14#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7731,12 +7763,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A14#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7773,12 +7805,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("A15")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -7888,12 +7920,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("SA5#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8282,12 +8314,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8316,12 +8348,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B2#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8350,12 +8382,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B4")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8384,12 +8416,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8418,12 +8450,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B6")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8462,12 +8494,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B7#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8495,12 +8527,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("B14#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8818,12 +8850,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8852,12 +8884,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C3#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8886,12 +8918,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C4#5")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8928,12 +8960,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C6#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -8976,12 +9008,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C7#3")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -9010,12 +9042,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("SC6#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -9044,12 +9076,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("C13#2")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -9670,12 +9702,12 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("D5#1")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -10970,7 +11002,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             }
             return true;
         },
-        writeModuleTestForm: function(db){
+        writeBack:function(db){
             var ns = this;
             db.updateDataFromUI();
             var d = db.getData();
@@ -10978,7 +11010,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                          "Module#2":d["Module2 Name"], "P/N#2":d["Module2 P/N"], "S/N#2":d["Module2 S/N"],
                          "登錄編號":d["登錄編號"]};
             utils.modifyTableItem("Module功能測試表","登錄編號", witem);
-
+            var citem = {"登錄編號":d["登錄編號"], "Running Time":d["Pump/Module ETM"],"S/N":d["A9#1"]};
+            utils.modifyTableItem("Crosshead維修工單","登錄編號", citem);
         },
         /**
          * Fired when user click it
@@ -11008,7 +11041,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             if(finishState == "完工" && ns.checkFinishState(db)==false)
                 return;
             utils.writeRepairStatus(ns);
-            ns.writeModuleTestForm(db);
+            ns.writeBack(db);
             utils.saveForm(ns,"","",null, db);
         },
 
@@ -11362,7 +11395,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         utils.calcMinute(ns.e1, ns.d1, ns.ed1);
         utils.calcMinute(ns.f1, ns.e1, ns.fe1);
         utils.calcMinute(ns.b1, ns.a1, ns.ba1);
-        utils.calcMinute(ns.b1, ns.c1, ns.cb1);
+        utils.calcMinute(ns.c1, ns.b1, ns.cb1);
         
         utils.calcMinute(ns.b2, ns.a2, ns.ba2);
     },    
@@ -11649,9 +11682,10 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             var sn = utils.getItemValue("未領用Crosshead編號查詢","Crosshead編號",xcode);
             if(sn != "")
             {
-              sn = sn["S/N"];  
-              if(sn["S/N#2"] && sn["S/N#2"] != "")
+              if(sn["S/N#2"] !== "")
                   sn = sn["S/N#2"];
+              else  
+                  sn = sn["S/N"];  
               uictrl.setValue(sn);  
             }
             var rtime = utils.getItemValue("Crosshead維修工單","Crosshead編號",xcode,"Running Time");
@@ -11815,7 +11849,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _depth_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
             var ns = this, uictrl = profile.boxing();
-            var v = Number(newValue) - 0.265;
+            var v = (Number(newValue) - 0.265).toFixed(3);
             ns.setting.setValue(v);
         },
         /**

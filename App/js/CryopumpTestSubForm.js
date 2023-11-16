@@ -134,8 +134,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setDockOrder(1)
                 .setLeft("13.714285714285714em")
                 .setTop("6.095238095238095em")
-                .setWidth("67.58095238095238em")
-                .setHeight("29.104761904761904em")
+                .setWidth("67.8em")
+                .setHeight("29.133333333333333em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 14,
@@ -222,8 +222,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div414")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("66.05714285714286em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("67.66666666666667em")
+                .setHeight("1.9333333333333333em"),
                 "A1"
             );
             
@@ -323,8 +323,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div415")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("66.05714285714286em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("67.66666666666667em")
+                .setHeight("1.8666666666666667em")
                 .setOverflow("hidden"),
                 "A2"
             );
@@ -412,8 +412,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div423")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A3"
             );
             
@@ -479,8 +479,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div424")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A4"
             );
             
@@ -588,8 +588,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div425")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A5"
             );
             
@@ -681,8 +681,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div455")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A6"
             );
             
@@ -719,8 +719,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div456")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A7"
             );
             
@@ -757,8 +757,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div457")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A8"
             );
             
@@ -793,8 +793,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div458")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A12"
             );
             
@@ -830,8 +830,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div459")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A13"
             );
             
@@ -867,8 +867,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div460")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A9"
             );
             
@@ -888,8 +888,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div461")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A10"
             );
             
@@ -954,8 +954,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div462")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em"),
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em"),
                 "A11"
             );
             
@@ -1020,8 +1020,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div463")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("32.99047619047619em")
-                .setHeight("2.1333333333333333em")
+                .setWidth("33.8em")
+                .setHeight("1.8666666666666667em")
                 .setOverflow("hidden"),
                 "A14"
             );
@@ -1081,8 +1081,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div592")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.06666666666667em")
-                .setHeight("13.333333333333334em"),
+                .setWidth("33.8em")
+                .setHeight("11.666666666666666em"),
                 "B3"
             );
             
@@ -1146,8 +1146,8 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div593")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("33.06666666666667em")
-                .setHeight("13.333333333333334em"),
+                .setWidth("33.8em")
+                .setHeight("11.666666666666666em"),
                 "B9"
             );
             

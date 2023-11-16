@@ -461,12 +461,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Pump與Module是否相符")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -692,12 +692,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Heater#3 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -718,12 +718,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Heater#4 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -744,12 +744,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Motor#5 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -770,12 +770,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Rough Valve#2 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -796,12 +796,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Purge Valve#2 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -822,12 +822,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Exhaust Valve#2 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -848,12 +848,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("Crosshead運作是否正常 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -999,12 +999,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("上架測試 Y/N")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }
@@ -1223,12 +1223,12 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
                 .setDataField("外觀配件是否完整")
                 .setItems([
                     {
-                        "id" : "Y",
+                        "id" : "1",
                         "caption" : "Y",
                         "imageClass" : ""
                     },
                     {
-                        "id" : "N",
+                        "id" : "0",
                         "caption" : "N",
                         "imageClass" : ""
                     }

@@ -809,7 +809,7 @@ utils = {
                    n.beforeComboPop("tableBox_beforecombopop");
                 }
               }
-			  if(n.setMaxlength)
+			  if(n.setMaxlength && maxlen >= 0)
 				n.setMaxlength(maxlen);
 			}
         }
@@ -1871,9 +1871,9 @@ utils = {
 	testForm2ReportData: function(data){
 		data["D2#1"] = data["Supply"];
 		data["D2#2"] = data["Return"];
-		data["Start Cooldown#3"] = data["Comp"];
-		data["Start Cooldown#2"] = data["Comp#3"];
-		data["Start Cooldown#1"] = data["Comp#2"];
+		data["D3#1"] = data["Comp"];
+		data["D3#2"] = data["Comp#3"];
+		data["D3#3"] = data["Comp#2"];
 		data["E5"] = data["Start Time"];
 		data["E6"] = data["20k/17k"];
 		data["E23"] = data["20k/17k#3"];
@@ -1885,6 +1885,7 @@ utils = {
 		data["E30"] = data["65k#2"];
 		data["E31"] = data["65k#3"];
 		data["E32"] = data["65k#4"];
+		data["E41"] = data["Warm Up"];
 		return data;
 	},
     createCryopumpTestReport: function(rno, data = null){
