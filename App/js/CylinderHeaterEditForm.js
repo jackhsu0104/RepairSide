@@ -528,7 +528,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             
             host.xui_ui_div470.append(
                 xui.create("xui.UI.RadioBox")
-                .setHost(host,"nameB")
+                .setHost(host,"radio8")
                 .setDataBinder("rdb")
                 .setDataField("A3#1")
                 .setItems([
@@ -863,6 +863,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setHost(host,"nameA")
                 .setDataBinder("rdb")
                 .setDataField("簽名A")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("34.59047619047619em")
@@ -999,6 +1000,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setHost(host,"nameC")
                 .setDataBinder("rdb")
                 .setDataField("簽名C")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
@@ -1015,6 +1017,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setHost(host,"dateC")
                 .setDataBinder("rdb")
                 .setDataField("日期C")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("44.34285714285714em")
@@ -1406,9 +1409,10 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             
             host.xui_ui_div820.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input1209")
+                .setHost(host,"nameB")
                 .setDataBinder("rdb")
                 .setDataField("簽名B")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
@@ -1605,7 +1609,11 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             console.log(cmd);
             ns.tabs.setValue("a");
             ns.prevRepairStatus = ns.repairStatus.getUIValue();
-
+            /*
+            utils.blockConfirmName(ns.nameA);
+            utils.blockConfirmName(ns.nameB);
+            utils.blockConfirmName(ns.nameC);
+*/
             //utils.updateFinishOutBtnCaption(ns);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -1659,6 +1667,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         _namea_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
             utils.signNameClick(ns.dateA, uictrl, "維修");
+            utils.blockConfirmName(uictrl);
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -1672,7 +1681,8 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         _xui_ui_input1209_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
             utils.signNameClick(ns.dateB, uictrl, "維修");
-        },
+             utils.blockConfirmName(uictrl);
+       },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
          * @method onClick [xui.UI.ComboInput event]
@@ -1685,6 +1695,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         _namec_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
             utils.signNameClick(ns.dateC, uictrl, "維修");
+             utils.blockConfirmName(uictrl);
         },
             /**
          * Fired when user click it

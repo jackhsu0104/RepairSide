@@ -205,6 +205,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
+                .setWidth("13em")
                 .setLabelSize("4em")
                 .setLabelCaption("Model")
             );
@@ -244,8 +245,28 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .setLeft("5.333333333333333em")
                 .setTop("0.7619047619047619em")
                 .setWidth("14em")
-                .setLabelSize("6em")
+                .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+            );
+            
+            host.xui_ui_div733.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input8536")
+                .setDataBinder("opdb")
+                .setDataField("公司名稱")
+                .setDock("top")
+                .setDockMargin({
+                    "left" : 0,
+                    "top" : 5,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setDockStretch("fixed")
+                .setLeft("6.095238095238095em")
+                .setTop("0.7619047619047619em")
+                .setWidth("14em")
+                .setLabelSize("5em")
+                .setLabelCaption("公司名稱")
             );
             
             host.form.append(
@@ -686,7 +707,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _confirm1_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "組長,主管","待秘書確認");
+            utils.confirmNameClick(ns, uictrl, "組長","通知秘書確認");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)

@@ -171,8 +171,9 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                     {
                         "id" : "庫存數量",
                         "caption" : "庫存數量",
-                        "type" : "number",
+                        "type" : "input",
                         "width" : "8em",
+                        "cellStyle" : "text-align: center;",
                         "readonly" : true
                     },
                     {
@@ -230,8 +231,9 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                     {
                         "id" : "庫存數量",
                         "caption" : "庫存數量",
-                        "type" : "number",
+                        "type" : "input",
                         "width" : "8em",
+                        "cellStyle" : "text-align: center;",
                         "readonly" : true
                     },
                     {
@@ -379,7 +381,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
           var ns = this;
           if(typeof ns.pnNameMap == "undefined")
           {
-              var items = utils.getItemValue("Bench領用料副資料表");
+              var items = utils.getItemValue("Bench領用料副資料表查詢");
               ns.pnNameMap = {};
               for(var i=0; i<items.length; i++)
               {
@@ -420,11 +422,30 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             else
                 return 0;
         },
+        getPickingItemNo: function(model,pn){
+            var ns = this;
+            if(typeof ns.pickingCountList == "undefined")
+            {
+              var data = ns.pdb2.getData();  
+              var id = data["領料報工單號"];  
+              ns.pickingCountList = utils.getItemValue("領料報工單子表","領料報工單號",id, "*", true);
+                
+              if(ns.pickingCountList == "")
+                  ns.pickingCountList = [];
+            }
+            for(var i=0; i<ns.pickingCountList.length; i++)
+            {
+              var item = ns.pickingCountList[i];   
+              if(pn == item["品號"] && model == item["型號"])
+                  return item["批號"];
+            }
+            return "";
+        },        
         getStoreItemCount: function(pn){
             var ns = this;
             if(typeof ns.storeCountList == "undefined")
             {
-              ns.storeCountList = utils.getItemValue("erp.領料庫存查詢","庫別", ns.storeName,"*", true);    
+              ns.storeCountList = utils.getItemValue("ERP領料庫存查詢","庫別", ns.storeName,"*", true);    
               if(ns.storeCountList == "")
                   ns.storeCountList = [];
               for(var i=0; i<ns.storeCountList.length; i++)
@@ -434,7 +455,12 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             {
               var item = ns.storeCountList[i];   
               if(pn == item["品號"])
-                  return Number(item["庫存數量"]);
+              {
+                  if(item["庫存數量"] == "N/A")
+                      return "N/A";
+                  else
+                      return Number(item["庫存數量"]);
+              }
             }
             return 0;
         },
@@ -508,7 +534,10 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 }
                 else {
                     input.setMin(0);
-                    input.setMax(data["庫存"]);
+                    if(data["庫存"] == "N/A")
+                      input.setMax(999999);
+                    else
+                      input.setMax(data["庫存"]);
                 }
                 layout.append(input,"D"+(i+2));
                 var btn = xui.create("xui.UI.Button").setHost(ns).onClick("_resetbtn_onclick").setCaption("").setImageClass("xui-uicmd-close");
@@ -548,17 +577,21 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 for(var i=0; i<items.length; i++)
                 {
                   let item = items[i];
-                  item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
+                  //item["庫存數量"] = ns.getStoreItemCount(item["品號"]);  
                   item["領用庫別"] = ns.storeName;
                   var value =  ns.getPickingItemCount(model, item["品號"], item["領料數量"]);  //default = item["領料數量"] 
                   if(ns.pickingCountList.length == 0 && value > item["庫存數量"])  //no previous records
                       value = item["庫存數量"];
-                  item["領料數量"] = {"value": value, "max":Number(item["庫存數量"])};
+                  if(item["庫存數量"] != "N/A")  
+                      item["領料數量"] = {"value": value, "max":Number(item["庫存數量"])};
+                  else
+                      item["領料數量"] = {"value": value, "max": 9999999999};                  value =  ns.getPickingItemNo(model, item["品號"]);  
+                  item["批號"] = value;
                 }
                 ns.grid1.setRows(items);
                 //ns.updateGridStoreCount(ns.grid1);
               };
-              let datas = utils.getTableItems({"tableName":"Bench領用料副資料表", "condition":condition, "orderby":"型號,品號"});
+              let datas = utils.getTableItems({"tableName":"Bench領用料副資料表查詢", "condition":condition, "orderby":"型號,品號"});
               cb(datas);
             }
             else 
@@ -577,16 +610,22 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 it["品號"] = it["品號"].trim();
                 it["數量"] = 1;
                 //it["品名"] = ns.getPnName(it["品號"]);  
-                it["庫存數量"] = ns.getStoreItemCount(it["品號"]);  
+                //it["庫存數量"] = ns.getStoreItemCount(it["品號"]);  
                 it["型號"] = "其他";
                 var value =  ns.getPickingItemCount("其他", it["品號"]); 
-                it["領料數量"] = {"value": value, "max":Number(it["庫存數量"])};
+                if(it["庫存數量"] != "N/A")  
+                  it["領料數量"] = {"value": value, "max":Number(it["庫存數量"])};
+                else
+                  it["領料數量"] = {"value": value, "max": 9999999999};
+                    
                 it["領用庫別"] = ns.storeName;
+                value =  ns.getPickingItemNo("其他", it["品號"]);  
+                it["批號"] = value;
               }
               ns.grid2.setRows(items);  
               //ns.updateGridStoreCount(ns.grid2);
             }
-            let datas2 = utils.getTableItems({"tableName":"erp.領料庫存查詢", "condition":condition2, "orderby":"品號"});
+            let datas2 = utils.getTableItems({"tableName":"ERP領料庫存查詢", "condition":condition2, "orderby":"品號"});
             cb2(datas2);
             
         },
@@ -619,7 +658,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
               var item = pdata[i];
               var pn = item["品號"];  
               var n = item["領料數量"];
-
+              var n2 = item["批號"];  
               var model = item["型號"]  
               if(model == "其他")
                 var grid = ns.grid2;
@@ -637,6 +676,8 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 {
                   var cellid = r._cells["領料數量"];
                   grid.updateCell(cellid, {"value":n});
+                  cellid = r._cells["批號"];
+                  grid.updateCell(cellid, {"value":n2});
                 }
                 
               }
@@ -661,7 +702,12 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 var pcount = r[5];
               if(pcount > 0)
               {    
-                let item = {"型號":model, "品號": r[1], "領料數量": pcount, "領料報工單號":data["領料報工單號"], "維修站別":data["維修站別"],"領用庫別":ns.storeName};
+                let item = {"型號":model, "品號": r[1], "品名":r[2],"批號":r[3],"領料數量": pcount, "領料報工單號":data["領料報工單號"], "維修站別":data["維修站別"],"領用庫別":ns.storeName};
+                if(r[4] == "N/A")
+                  item["不扣料"] = 1;
+                else  
+                  item["不扣料"] = 0;
+                 
                 items.push(item);
               }
             }
@@ -697,7 +743,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         },
         loadPickingData: function(site){
           var ns = this;
-          ns.pickingData = utils.getItemValue("Bench領用料副資料表","站別",site,"*",true);  
+          ns.pickingData = utils.getItemValue("Bench領用料副資料表查詢","站別",site,"*",true);  
             
         },
         /**
@@ -707,6 +753,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
         */
         _dialog_onshow:function(profile){
             var ns = this, prop=ns.properties;
+            ns.saveBtn.setCaption("儲存");
             var data = ns.pdb2.getData();
             var pno = data["領料報工單號"];
             ns.storeName = StoreName;

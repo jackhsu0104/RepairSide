@@ -5668,7 +5668,7 @@ xui.Class('App.CryopumpWarrantyEditForm', 'xui.Module',{
         */
                     _confirm1_onclick:function(profile, e, src, value, n){
                         var ns = this, uictrl = profile.boxing();
-                         utils.confirmNameClick(ns, uictrl, "組長,主管");
+                         utils.confirmNameClick(ns, uictrl, "組長");
                     },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)

@@ -265,7 +265,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("c")
             );
             
             host.tabs.append(
@@ -599,6 +599,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"nameB")
                 .setDataBinder("rdb")
                 .setDataField("簽名")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")
@@ -1066,6 +1067,7 @@ xui.Class('App.3phControlerEditForm', 'xui.Module',{
                 .setHost(host,"nameC")
                 .setDataBinder("rdb")
                 .setDataField("簽名#2")
+                .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")
                 .setLeft("35.352380952380955em")

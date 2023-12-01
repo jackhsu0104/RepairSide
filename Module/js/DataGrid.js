@@ -297,11 +297,16 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             GridDataCache[title] = data;
         },
         
-        loadGridData:function(page){
+        loadGridData:function(page, waitFlag = false){
             if(typeof size == "undefined")
                 size = 20;
             var ns=this, grid=ns.grid, prop = ns.properties;  
             var cb=function(data){
+				if(typeof data == "string")
+				{
+					utils.alert("讀取錯誤!");
+					return;
+				}
                     if(typeof prop.useCache != "undefined" && prop.useCache)
                         ns.writeToCache(prop, data);
                     var tableName = prop.tableName;
@@ -403,10 +408,18 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     else 
                       sql =  sql + " WHERE " + condition;  
                 }
-                utils.getPageQueryItems(sql,prop.orderby, page, prop.pageLength, cb);
+				if(waitFlag)
+				  cb(utils.getPageQueryItems(sql,prop.orderby, page, prop.pageLength));	
+				else 	
+                  utils.getPageQueryItems(sql,prop.orderby, page, prop.pageLength, cb);
               }
-              else  
-                utils.getPageTableItems({"tableName":prop.tableName, "orderby":prop.orderby, "pageno":page, "pagelen":prop.pageLength,"fields":fields,"condition":condition}, cb);
+              else
+			  {
+				if(waitFlag)
+                  cb(utils.getPageTableItems({"tableName":prop.tableName, "orderby":prop.orderby, "pageno":page, "pagelen":prop.pageLength,"fields":fields,"condition":condition}));
+				else	
+                  utils.getPageTableItems({"tableName":prop.tableName, "orderby":prop.orderby, "pageno":page, "pagelen":prop.pageLength,"fields":fields,"condition":condition}, cb);
+			  }
             }
             else 
             {
@@ -420,9 +433,19 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 else  
 				{
 				  if(prop.orderby != "")
-					utils.getTableItems({"tableName":prop.tableName, "condition":condition, "orderby":prop.orderby, "fields": fields},cb);
-				  else 			
-					utils.getTableItems({"tableName":prop.tableName, "condition":condition, "fields": fields},cb);
+				  {
+					if(waitFlag)  
+						cb(utils.getTableItems({"tableName":prop.tableName, "condition":condition, "orderby":prop.orderby, "fields": fields}));
+					else
+						utils.getTableItems({"tableName":prop.tableName, "condition":condition, "orderby":prop.orderby, "fields": fields},cb);
+				  }
+				  else 	
+				  {	
+					if(waitFlag)
+						cb(utils.getTableItems({"tableName":prop.tableName, "condition":condition, "fields": fields}));
+					else
+						utils.getTableItems({"tableName":prop.tableName, "condition":condition, "fields": fields},cb);
+				  }
 				}
               }
               else 
@@ -701,9 +724,9 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 
             //ns.xui_msgs1.broadcast(ns.properties.outMsgType, "delete",  ids, '', cb);
         },
-        refreshGrid : function(){
+        refreshGrid : function(waitFalg = false){
             var ns=this, pb=ns.pagebar;
-            ns.loadGridData(pb.getPage()-1);
+            ns.loadGridData(pb.getPage()-1, waitFalg);
         },
         downloadxlsx: function(filename, sheetname, data) {
             //儲存xlsx檔

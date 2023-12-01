@@ -159,12 +159,12 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setHost(host,"pump")
                 .setName("Pump")
                 .setDataBinder("crdb")
-                .setDataField("上次登錄編號")
+                .setDataField("安裝Pump登錄編號")
                 .setLeft("26em")
                 .setTop("0.6em")
                 .setWidth("16em")
                 .setLabelSize("9em")
-                .setLabelCaption("Pump上次登錄編號")
+                .setLabelCaption("安裝Pump登錄編號")
                 .setMaxlength("20")
             );
             
@@ -243,16 +243,6 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.xui_ui_div868.append(
                 xui.create("xui.UI.Button")
-                .setHost(host,"changeRepairBtn")
-                .setTips("更換登錄編號")
-                .setLeft("55.46666666666667em")
-                .setTop("0.6em")
-                .setCaption("▼")
-                .onClick("_changerepairbtn_onclick")
-            );
-            
-            host.xui_ui_div868.append(
-                xui.create("xui.UI.Button")
                 .setHost(host,"optionBtn")
                 .setAutoTips(false)
                 .setLeft("36.13333333333333em")
@@ -274,7 +264,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setWidth("13.266666666666667em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
-                .setType("input")
+                .setType("popbox")
                 .setMaxlength("20")
                 .onValueChange("_repairno_onvaluechange")
                 .onClick("_repairno_onclick")
@@ -2283,6 +2273,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("C組裝簽名")
                 .setDataBinder("crdb")
                 .setDataField("C組裝簽名")
+                .setReadonly(true)
                 .setLeft("7.466666666666667em")
                 .setTop("0.6857142857142857em")
                 .setWidth("17.333333333333332em")
@@ -2299,6 +2290,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("C組長覆核")
                 .setDataBinder("crdb")
                 .setDataField("C組長覆核")
+                .setReadonly(true)
                 .setLeft("7.466666666666667em")
                 .setTop("2.6666666666666665em")
                 .setWidth("17.333333333333332em")
@@ -2822,14 +2814,14 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.tabs1.append(
                 xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block758")
+                .setHost(host,"block0")
                 .setDock("fill")
                 .setLeft("12.666666666666666em")
                 .setTop("4.666666666666667em"),
                 "d"
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"model1")
                 .setDataBinder("crdb")
@@ -2889,7 +2881,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5913")
                 .setName("登錄編號")
@@ -2902,7 +2894,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox3492")
                 .setDataBinder("crdb")
@@ -2936,7 +2928,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"sn1")
                 .setDataBinder("crdb")
@@ -2949,7 +2941,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5915")
                 .setName("登錄編號")
@@ -2963,7 +2955,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"runtime")
                 .setDataBinder("crdb")
@@ -2976,7 +2968,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5920")
                 .setName("登錄編號")
@@ -2990,7 +2982,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block758.append(
+            host.block0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xhCode")
                 .setDataBinder("crdb")
@@ -3033,14 +3025,14 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.tabs2.append(
                 xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block385")
+                .setHost(host,"blockB1")
                 .setDock("fill")
                 .setLeft("16.761904761904763em")
                 .setTop("11.428571428571429em"),
                 "a"
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1049")
                 .setDock("top")
@@ -3146,7 +3138,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1050")
                 .setDock("top")
@@ -3271,7 +3263,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1051")
                 .setDock("top")
@@ -3361,7 +3353,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1052")
                 .setDock("top")
@@ -3444,7 +3436,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1053")
                 .setDock("top")
@@ -3557,7 +3549,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1054")
                 .setDock("top")
@@ -3669,7 +3661,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1055")
                 .setDock("top")
@@ -3737,7 +3729,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1056")
                 .setDock("top")
@@ -3843,7 +3835,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1057")
                 .setDock("top")
@@ -3897,7 +3889,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1058")
                 .setDock("top")
@@ -3963,7 +3955,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("mm")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1059")
                 .setDock("top")
@@ -4079,7 +4071,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1060")
                 .setDock("top")
@@ -4126,7 +4118,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("mm")
             );
             
-            host.xui_ui_block385.append(
+            host.blockB1.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1061")
                 .setDock("top")
@@ -4166,7 +4158,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.tabs2.append(
                 xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block386")
+                .setHost(host,"blockB2")
                 .setDock("fill")
                 .setLeft("11.428571428571429em")
                 .setTop("14.476190476190476em")
@@ -4179,7 +4171,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 "b"
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1062")
                 .setDock("top")
@@ -4299,7 +4291,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1063")
                 .setDock("top")
@@ -4345,7 +4337,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1064")
                 .setDock("top")
@@ -4388,7 +4380,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1065")
                 .setDock("top")
@@ -4434,7 +4426,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1066")
                 .setDock("top")
@@ -4480,7 +4472,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1067")
                 .setDock("top")
@@ -4520,7 +4512,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setVAlign("bottom")
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1068")
                 .setDock("top")
@@ -4566,7 +4558,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block386.append(
+            host.blockB2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1069")
                 .setDock("top")
@@ -4611,7 +4603,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.tabs2.append(
                 xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block387")
+                .setHost(host,"blockB3")
                 .setDock("fill")
                 .setLeft("16em")
                 .setTop("13.714285714285714em")
@@ -4624,7 +4616,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 "c"
             );
             
-            host.xui_ui_block387.append(
+            host.blockB3.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1070")
                 .setDock("top")
@@ -4667,7 +4659,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block387.append(
+            host.blockB3.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1071")
                 .setDock("top")
@@ -4710,7 +4702,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block387.append(
+            host.blockB3.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1072")
                 .setDock("top")
@@ -4753,7 +4745,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
-            host.xui_ui_block387.append(
+            host.blockB3.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div1073")
                 .setDock("top")
@@ -4769,6 +4761,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("C組裝簽名")
                 .setDataBinder("crdb2")
                 .setDataField("C組裝簽名")
+                .setReadonly(true)
                 .setLeft("7.466666666666667em")
                 .setTop("0.6857142857142857em")
                 .setWidth("17.333333333333332em")
@@ -4785,6 +4778,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("C組長覆核")
                 .setDataBinder("crdb2")
                 .setDataField("C組長覆核")
+                .setReadonly(true)
                 .setLeft("7.466666666666667em")
                 .setTop("2.6666666666666665em")
                 .setWidth("17.333333333333332em")
@@ -4831,7 +4825,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block387.append(
+            host.blockB3.append(
                 xui.create("xui.UI.FormLayout")
                 .setHost(host,"xui_ui_formlayout42")
                 .setDock("top")
@@ -5308,14 +5302,14 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             
             host.tabs2.append(
                 xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block764")
+                .setHost(host,"blockB0")
                 .setDock("fill")
                 .setLeft("13.40952380952381em")
                 .setTop("5.40952380952381em"),
                 "d"
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5934")
                 .setName("登錄編號")
@@ -5327,7 +5321,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox3498")
                 .setDataBinder("crdb2")
@@ -5361,7 +5355,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 })
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"sn2")
                 .setName("登錄編號")
@@ -5375,7 +5369,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5936")
                 .setName("登錄編號")
@@ -5389,7 +5383,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5937")
                 .setName("登錄編號")
@@ -5403,7 +5397,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5938")
                 .setName("登錄編號")
@@ -5417,7 +5411,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input5939")
                 .setName("登錄編號")
@@ -5431,7 +5425,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setMaxlength("20")
             );
             
-            host.xui_ui_block764.append(
+            host.blockB0.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"model2")
                 .setDataBinder("crdb2")
@@ -5496,6 +5490,11 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             var db = ns.crdb, dbname = "crdb";
+            if(ns.sheetType.getUIValue().includes("SHI"))
+            {
+                db = ns.crdb2;
+                dbname = "crdb2";
+            }
             if(prop.mode == "new") //新工單，新增維修站總資料表
             {
                 var rno = ns.repairNo.getUIValue();
@@ -5505,20 +5504,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                   utils.alert("登錄編號已存在，無法新增工單!");  
                   return;        
                 }
-                var model = ns.model1.getUIValue();
-                var sn = ns.sn1.getUIValue();
-                if(ns.sheetType.getUIValue().includes("SHI"))
-                {
-                  model = ns.model2.getUIValue();
-                  sn = ns.sn2.getUIValue();
-                }
-                var data = {"登錄編號":  rno ,"維修站名":"Crosshead","入站時間": utils.today(),"接收時間": utils.today(),"客戶名稱":  ns.customer.getUIValue(),"Model": model,"P/N":"","S/N": sn,"維修狀態":"已修復待出貨",};        
-                utils.insertTableItem("維修站總資料表", data);
-            }
-            if(ns.sheetType.getUIValue().includes("SHI"))
-            {
-                db = ns.crdb2;
-                dbname = "crdb2";
+                db.setData("維修站名",SiteName);
             }
             ns.customer.setDataBinder(dbname);
             ns.date.setDataBinder(dbname);
@@ -5544,6 +5530,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             var ns = this, prop = ns.properties;
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
+            if(prop.mode == "new")
+                ns.crdb.setData("維修站名",SiteName);
             var data = ns.crdb.getData();
             ns.crdb2.setData(data);
             ns.crdb2.updateDataToUI();
@@ -5554,7 +5542,19 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
 //            utils.readRepairStatus(ns);
  //           utils.updateFinishOutBtnCaption(ns); 
             ns.prevRepairStatus = ns.repairStatus.getUIValue();
-
+            /*
+            if(ns.leaderC.getUIValue() != "")
+            {
+                utils.setContainerDisabled(ns.block0, true);
+                utils.setContainerDisabled(ns.block1, true);
+                utils.setContainerDisabled(ns.block2, true);
+                utils.setContainerDisabled(ns.block3, true);
+                utils.setContainerDisabled(ns.blockB0, true);
+                utils.setContainerDisabled(ns.blockB1, true);
+                utils.setContainerDisabled(ns.blockB2, true);
+                utils.setContainerDisabled(ns.blockB3, true);
+            }
+            */
 
         },
             /**
@@ -5646,7 +5646,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
         */
         _leaderc_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(ns.dateLeaderC, uictrl,"組長,主管");
+            utils.signNameClick(ns.dateLeaderC, uictrl,"組長");
+            if(uictrl.getUIValue() != "")
+            {
+                utils.setContainerDisabled(ns.block0, true);
+                utils.setContainerDisabled(ns.block1, true);
+                utils.setContainerDisabled(ns.block2, true);
+                utils.setContainerDisabled(ns.block3, true);
+                utils.setContainerDisabled(ns.blockB0, true);
+                utils.setContainerDisabled(ns.blockB1, true);
+                utils.setContainerDisabled(ns.blockB2, true);
+                utils.setContainerDisabled(ns.blockB3, true);
+            }
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -5672,7 +5683,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
         */
         _leaderc2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(ns.dateLeaderC2, uictrl,"組長,主管");
+            utils.signNameClick(ns.dateLeaderC2, uictrl,"組長");
+            if(uictrl.getUIValue() != "")
+            {
+                utils.setContainerDisabled(ns.block0, true);
+                utils.setContainerDisabled(ns.block1, true);
+                utils.setContainerDisabled(ns.block2, true);
+                utils.setContainerDisabled(ns.block3, true);
+                utils.setContainerDisabled(ns.blockB0, true);
+                utils.setContainerDisabled(ns.blockB1, true);
+                utils.setContainerDisabled(ns.blockB2, true);
+                utils.setContainerDisabled(ns.blockB3, true);
+            }
         },
             /**
          * Fired when user click it

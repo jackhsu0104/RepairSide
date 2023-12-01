@@ -37,7 +37,10 @@ utils = {
                 if(typeof wait == "undefined")
                     wait = false;
                 var result = null;
-                xui.Ajax("php/login.php",hash,function(rsp){
+				var url = "php/login.php";
+				if(typeof DebugMode != "undefined")
+					url = "http://127.0.0.1/RepairSide/php/login.php";
+                xui.Ajax(url,hash,function(rsp){
                     var data =rsp;
                     if(!data)    alert("no data");
                     else
@@ -66,7 +69,10 @@ utils = {
                 if(onFinish)
                     wait = false;
                 var result = null;
-                xui.Ajax("php/data.php",hash,function(rsp){
+				var url = "php/data.php";
+				if(typeof DebugMode != "undefined")
+					url = "http://127.0.0.1/RepairSide/php/data.php";
+                xui.Ajax(url,hash,function(rsp){
                     var data =rsp;
                     if(!data){    alert("no data");
                         result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
@@ -89,7 +95,7 @@ utils = {
         if(prop.fields && prop.fields != "*" && prop.fields != "")
             hash.fields = utils.getProperFields(prop.fields);
         
-        utils.sendDataCmd(hash,  onFinish);
+        return utils.sendDataCmd(hash,  onFinish);
     }, 
     setFieldValue : function(srcui, dstui){
         if(srcui.updatingFieldValue)
@@ -251,13 +257,13 @@ utils = {
         var data = utils.removeInvalidFields(table, datas);
         key = utils.removeBracket(key);
         var hash={"cmd":"modifyTableItem","table":table, "key":key,"item":data};
-        utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish, wait);
     }, 
     modifyTableItem2 : function(table, key, keyValue, datas, onFinish,  wait){
         var data = utils.removeInvalidFields(table, datas);
         key = utils.removeBracket(key);
         var hash={"cmd":"modifyTableItem2","table":table, "key":key,"keyValue":keyValue, "item":data};
-        utils.sendDataCmd(hash,  onFinish, wait);
+        return utils.sendDataCmd(hash,  onFinish, wait);
     }, 
     removeInvalidFields: function(table, datas, action = ""){
         var data = utils.cloneObject(datas);
@@ -541,7 +547,7 @@ utils = {
                     onFinish(item);  
             }
             var datas = db.getData();
-			if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("主管")))
+			if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
 			{
 				utils.alert("組長才能修改完工工單");
 				return;
@@ -612,14 +618,20 @@ utils = {
             }
             else
             {
-               utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
+               var data = utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
+			   if(typeof data != "object")
+			   {
+				   utils.alert(data);
+				   return false;
+			   }
                if(onFinish)
                  onFinish();
 			   if(typeof SaveFormSilent != 'undefined' && SaveFormSilent)
 				   return true;
-			   if(AppName == "BU3")		
-                 mod.dialog.close();
-			   else 
+			   
+			   //if(AppName == "BU3")		
+               //  mod.dialog.close();
+			   //else 
 				 utils.alert("儲存完成!");  
             }    
             return true;
@@ -1189,7 +1201,8 @@ utils = {
                     }
                     var item = utils.getItemValue("Option零件更換表","登錄編號",id,"*");
                     if(item == "")
-                      utils.showDataPage("RepairOptionForm",{"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName}, "new");        
+                      utils.showDataPage("RepairOptionForm",{"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName,"CreateDate":utils.today(), "公司名稱":data["客戶名稱"]},
+										"new");        
                     else
                       utils.showDataPage("RepairOptionForm", item, "edit")  ;      
 
@@ -1269,7 +1282,7 @@ utils = {
         utils.showDataPage(pageName, item, "readonly", cb1, cb2);
         
     },
-    updateConfirmBtnCaption(mod, uictrl){
+    updateConfirmBtnCaption(mod, uictrl, caption = ""){
             var db = mod.getDataBinders();
             if(db.length > 0)
                db = db[0].boxing();
@@ -1279,18 +1292,21 @@ utils = {
             var confirm = data["確認狀態"];
             if(typeof confirm == "undefined")
                 confirm = "";
-            if(confirm == "待秘書確認")
-                  uictrl.setCaption("待秘書確認");
-            else if(confirm == "待組長確認")
-                  uictrl.setCaption("待組長確認");
-            else if(confirm == "通知秘書確認")
-                  uictrl.setCaption("通知秘書確認");
-            else if(confirm == "秘書已確認,通知Bench")
+            if(["待組長確認","待經理確認","待秘書確認"].includes(confirm))
+                  uictrl.setCaption(confirm);
+            else if(["通知組長確認","通知經理確認","通知秘書確認"].includes(confirm))
+                  uictrl.setCaption(confirm);
+            else if(confirm.includes("秘書已確認"))
                 uictrl.setCaption("秘書已確認");
-            else if(data["組長確認"] == "")
-                uictrl.setCaption("通知組長確認");
-            else if(data["秘書確認"] == "")
-                uictrl.setCaption("通知秘書確認");
+			else if(confirm == "組長已確認")
+			{
+				if(data["秘書確認"] === "") //有秘書確認欄位,並且為空
+					uictrl.setCaption("通知秘書確認");
+				else
+					uictrl.setCaption("組長已確認");
+			}
+			else if(caption != "")
+				uictrl.setCaption(caption);
             else if(confirm.includes("已確認"))
                 uictrl.setCaption(confirm);
     },
@@ -1328,6 +1344,13 @@ utils = {
               db.setData("確認狀態","待組長確認");   
               xui.alert("已通知組長確認!");        
               uictrl.setCaption("待組長確認");
+            }
+            else if(confirm == "通知經理確認")
+            {
+              utils.modifyTableItem(table, key, {[key]:id, "確認狀態":"待經理確認"});  
+              db.setData("確認狀態","待經理確認");   
+              xui.alert("已通知經理確認!");        
+              uictrl.setCaption("待經理確認");
             }
             else if(confirm == "秘書已確認<br>取消通知!")
             {
@@ -1394,6 +1417,11 @@ utils = {
 			utils.alert("請先新增表單!");
 			return;
 		}
+		if(uictrl.getUIValue() !== "")
+		{
+			utils.alert("已確認過了!");
+			return;
+		}
         var db = mod.getDataBinders();
         if(db.length > 0)
            db = db[0].boxing();
@@ -1431,6 +1459,11 @@ utils = {
                 confirmName =  "組長確認";
                 confirmState = "組長已確認";
             }
+            if(pri.includes("經理"))
+            {
+                confirmName =  "經理確認";
+                confirmState = "經理已確認";
+            }
             if(finishState != "")
 			{
                confirmState = finishState;
@@ -1438,10 +1471,13 @@ utils = {
 				   utils.alert("已通知組長!");
 			   if(finishState == "待秘書確認")
 				   utils.alert("已通知秘書!");
+			   if(finishState == "待經理確認")
+				   utils.alert("已通知經理!");
 			}			   
             if(confirmBtn)
                confirmBtn.setCaption(confirmState);  
             uictrl.setValue(name);    
+			db.setData(uictrl.getDataField(), name);
             if(saveFlag){
               utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
             }
@@ -1452,8 +1488,8 @@ utils = {
           }
           else
           {
-            utils.alert("請 '"+ pri + "' 確認!");
-            return false;
+              utils.alert("請 '"+ pri + "' 確認!");
+              return false;
           }
         }
     },
@@ -2095,5 +2131,22 @@ utils = {
 			  
 			}
 		}
+	},
+	setButtonFocused: function(btn){
+		var parent = btn.getParent();
+		var nodes = parent.getChildren(true,true).get();
+		for(var i=0; i<nodes.length; i++)
+		{
+			var n = nodes[i].boxing();
+			if(n.$key == "xui.UI.Button")
+				n.setFontWeight("normal");
+		}
+		btn.setFontWeight("800");
+	},
+	blockConfirmName: function(uictrl){
+		return;
+		var block = uictrl.getParent();
+		if(uictrl.getUIValue() != "")
+			utils.setContainerDisabled(block,true);
 	}
  };

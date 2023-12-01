@@ -2285,9 +2285,10 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1475")
+                .setHost(host,"customer")
                 .setDataBinder("mdb")
                 .setDataField("客戶名稱")
+                .setRequired(true)
                 .setLeft("0.7619047619047619em")
                 .setTop("0.7619047619047619em")
                 .setWidth("11.352380952380953em")
@@ -2297,7 +2298,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput991")
+                .setHost(host,"date0")
                 .setDataBinder("mdb")
                 .setDataField("日期")
                 .setLeft("13.714285714285714em")
@@ -2309,15 +2310,18 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             );
             
             host.xui_ui_block305.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairNo")
                 .setDataBinder("mdb")
                 .setDataField("登錄編號")
+                .setRequired(true)
                 .setLeft("25.752380952380953em")
                 .setTop("0.7619047619047619em")
                 .setWidth("13.333333333333334em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("popbox")
+                .onValueChange("_repairno_onvaluechange")
             );
             
             host.xui_ui_block305.append(
@@ -2333,7 +2337,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1477")
+                .setHost(host,"pump")
                 .setDataBinder("mdb")
                 .setDataField("Pump")
                 .setLeft("0.7619047619047619em")
@@ -2345,7 +2349,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1478")
+                .setHost(host,"pn")
                 .setDataBinder("mdb")
                 .setDataField("P/N")
                 .setLeft("13.714285714285714em")
@@ -2357,7 +2361,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1479")
+                .setHost(host,"sn")
                 .setDataBinder("mdb")
                 .setDataField("S/N")
                 .setLeft("27.80952380952381em")
@@ -2441,7 +2445,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1486")
+                .setHost(host,"remark")
                 .setDataBinder("mdb")
                 .setDataField("Remark")
                 .setLeft("15.238095238095237em")
@@ -2453,7 +2457,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             
             host.xui_ui_block305.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input1487")
+                .setHost(host,"pumpUnitId")
                 .setDataBinder("mdb")
                 .setDataField("Pump Unit ID")
                 .setLeft("-0.22857142857142856em")
@@ -2582,6 +2586,8 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             var ns = this, prop = ns.properties;
             ns.prevRepairStatus = ns.repairStatus.getUIValue();
+            if(prop.mode == "new")
+                ns.mdb.setData("維修站名", SiteName);
             //utils.updateFinishOutBtnCaption(ns);
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
@@ -2668,6 +2674,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
         */
         _deletebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            var rno = ns.repairNo.getUIValue();
             xui.confirm("訊息","是否刪除本Module功能測試表?", function(){
                 utils.removeTableItem("Module功能測試表","登錄編號", rno);
                 ns.destroy();
@@ -2710,6 +2717,29 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
         _sign2_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
              utils.signNameClick(ns.date2, uictrl, "維修");
+        },
+        /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+        _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+            var ns = this, uictrl = profile.boxing();
+            var data = utils.getItemValue("Cryopump維修工單","登錄編號",newValue);
+            if(data != "")
+            {
+              ns.customer.setUIValue(data["客戶名稱"]);
+              ns.pump.setUIValue(data["Pump"]);          
+              ns.pn.setUIValue(data["Pump P/N"]);          
+              ns.sn.setUIValue(data["Pump S/N"]);
+              ns.date0.setUIValue(data["日期"]);
+              ns.pumpUnitId.setUIValue(data["Unit ID"]);
+              ns.remark.setUIValue(data["進廠原因"]);
+            }
         }
         /*,
         // To determine how properties affects this module

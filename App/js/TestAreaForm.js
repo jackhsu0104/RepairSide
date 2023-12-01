@@ -95,11 +95,24 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"reportBtn")
                 .setAutoTips(false)
-                .setLeft("16.228571428571428em")
-                .setTop("0.8666666666666667em")
+                .setLeft("24.8em")
+                .setTop("0.9333333333333333em")
                 .setWidth("8em")
                 .setCaption("產生測試報告")
                 .onClick("_reportbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"testFormNo")
+                .setDataField("TestAreaFormNo")
+                .setLeft("14em")
+                .setTop("1.2em")
+                .setWidth("5.333333333333333em")
+                .setLabelSize("1em")
+                .setLabelCaption("#")
+                .setType("cmdbox")
+                .onValueChange("_testformno_onvaluechange")
             );
             
             host.dialog.append(
@@ -366,7 +379,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             );
             
             host.xui_ui_div1051.append(
-                xui.create("xui.UI.Input")
+                xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairNo")
                 .setDataBinder("tdb")
                 .setDataField("登錄編號")
@@ -376,9 +389,11 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setDockStretch("fixed")
                 .setLeft("3.8095238095238093em")
                 .setTop("0.7619047619047619em")
-                .setWidth("12em")
+                .setWidth("14em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
+                .setType("getter")
+                .onClick("_repairno_onclick")
             );
             
             host.xui_ui_div1051.append(
@@ -402,7 +417,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_checkbox1165")
                 .setDataBinder("tdb")
                 .setDataField("維修前測試")
-                .setLeft("51.93333333333333em")
+                .setLeft("54em")
                 .setTop("0.06666666666666667em")
                 .setWidth("12em")
                 .setCaption("維修前測試")
@@ -1732,6 +1747,41 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
               ns.tdb.updateDataToUI();  
               ns.rowidList[id] = data.rowid;  
             }
+},
+    /**
+         * Fired when control's inner value is changed!
+         * @method onValueChange [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue ,  old Value
+         * @param {String} newValue , new Value
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+        */
+    _testformno_onvaluechange:function(profile, oldValue, newValue, force, tag){
+        var ns = this, uictrl = profile.boxing();
+        ns.saveChamber();
+        var rno = ns.repairNo.getUIValue();
+        var condition = `登錄編號 = '${rno}' AND item = '${newValue}'`;
+        var rowid = utils.getItemValueByCondition("CryopumpTestForm",condition,"rowid");
+        var id = ns.tabs.getValue();  
+        ns.rowidList[id] = rowid;
+        ns.loadChamber();
+
+    },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _repairno_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            var rno = uictrl.getUIValue();
+            utils.showCryopumpEditForm(rno);
+            
         },        
         /*,
         // To determine how properties affects this module

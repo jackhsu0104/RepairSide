@@ -441,7 +441,7 @@ function prepareTableKey($table, $item)
             $d = date_format($d,"Ymd");
             $d = substr($d, 2);
             if($h2 == 'Robot')
-              $v = 'S0';
+              $v = 'S';
             else if($h2 == 'Special')
               $v = 'W';
             else  //NotRobot

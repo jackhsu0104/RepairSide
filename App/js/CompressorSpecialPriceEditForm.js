@@ -71,9 +71,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"cancelBtn")
-                .setDock("right")
-                .setLeft("23.16190476190476em")
-                .setTop("0.6857142857142857em")
+                .setLeft("58.8em")
+                .setTop("1.4666666666666666em")
                 .setWidth("5.561904761904762em")
                 .setCaption("取消")
                 .onClick("_cancelbtn_onclick")
@@ -82,9 +81,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"saveBtn")
-                .setDock("right")
-                .setLeft("23.923809523809524em")
-                .setTop("0.6857142857142857em")
+                .setLeft("52.8em")
+                .setTop("1.4666666666666666em")
                 .setWidth("5.561904761904762em")
                 .setCaption("儲存")
                 .onClick("_savebtn_onclick")
@@ -123,9 +121,10 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"confirmBtn")
+                .setTag("秘書")
                 .setDataBinder("opdb")
                 .setDataField("秘書確認")
-                .setLeft("31.333333333333332em")
+                .setLeft("30.666666666666668em")
                 .setTop("1.4em")
                 .setWidth("8.2em")
                 .setCaption("通知組長確認")
@@ -169,6 +168,21 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                         "caption" : "確認不修"
                     }
                 ])
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm3")
+                .setDataBinder("cdb")
+                .setDataField("經理確認")
+                .setReadonly(true)
+                .setLeft("-0.0761904761904762em")
+                .setTop("0.6666666666666666em")
+                .setWidth("12.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("經理確認")
+                .setType("getter")
+                .onClick("_confirm3_onclick")
             );
             
             host.dialog.append(
@@ -461,7 +475,6 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             
             host.block1.append(
                 xui.create("xui.UI.ComboInput")
-                .setType("currency")
                 .setHost(host,"estimatePrice")
                 .setName("客戶名稱")
                 .setDataBinder("cdb")
@@ -471,6 +484,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setWidth("14.476190476190476em")
                 .setLabelSize("5em")
                 .setLabelCaption("預估金額")
+                .setType("currency")
                 .setMaxlength("32")
             );
             
@@ -598,12 +612,14 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
            // console.log(utils.createDDL(ns.dialog,"Compressor Heater Fail/ Motor Fail零件更換表"));
             utils.installConfirmNameButtonOnClick(ns);
             ns.tabs.setValue('a');
-            utils.updateConfirmBtnCaption(ns, ns.confirmBtn);
+            utils.updateConfirmBtnCaption(ns, ns.confirmBtn, "工程師請簽名");
             ns.initFlag = false; 
             if(AppName == "RepairSide")
             {
                 ns.repairStatus.setReadonly(true);        
             }
+            if(ns.confirm2.getUIValue() != "") //秘書已確認
+                ns.saveBtn.setDisabled(true);
         },
             /**
          * Fired when user click it
@@ -633,7 +649,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                         utils.alert("請工程師簽名");
                         return;
                     }
-                      utils.confirmNameClick(ns, uictrl, "組長,主管","待秘書確認");
+                      utils.confirmNameClick(ns, uictrl, "組長","通知經理確認");
                 },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -655,7 +671,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             }
             utils.confirmNameClick(ns, uictrl, "秘書","秘書已確認,通知Bench");
             if(uictrl.getValue() != "")
-              utils.modifyTableItem("Compressor零件更換表","登錄編號",rno, {"登錄編號":rno, "維修狀態": status});
+              utils.modifyTableItem("Compressor零件更換表","登錄編號",{"登錄編號":rno, "維修狀態": status});
         },
         /**
          * Fired when user click it
@@ -667,6 +683,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
         */
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            var rno = ns.repairNo.getUIValue();
             if(ns.sign1.getUIValue() == "")
             {
               utils.alert("請工程師簽名!");
@@ -735,8 +752,17 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
          * @param {}  
         */
         _sign1_onclick:function(profile, e, src, value, n){
-            var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "維修","待組長確認");
+            var ns = this, uictrl = profile.boxing(), prop=ns.properties;
+            if(prop.mode.includes("new"))
+            {
+                utils.alert("請先新增表單!");
+                return;
+            }
+            if(utils.signNameClick(null, uictrl, "維修"))
+            {
+                utils.modifyTableItem(prop.tableName, "登錄編號",{"登錄編號":ns.repairNo.getUIValue(),"確認狀態":"通知組長確認"});
+                ns.confirmBtn.setCaption("通知組長確認");
+            }
         },
         /**
          * Fired when a tab is selected
@@ -765,6 +791,24 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 }
                    
             }
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm3_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+                    if(ns.confirm1.getUIValue() == "")
+                    {
+                        utils.alert("請組長先確認!");
+                        return;
+                    }
+                    utils.confirmNameClick(ns, uictrl, "經理","待秘書確認");
         },
 
         /*,

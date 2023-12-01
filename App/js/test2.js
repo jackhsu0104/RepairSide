@@ -42,228 +42,29 @@ xui.Class('App.test2', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"xui_ui_button36")
-                .setLeft("6.666666666666667em")
-                .setTop("2.6666666666666665em")
-                .setWidth("8.733333333333333em")
-                .setCaption("Button")
-                .onClick("_xui_ui_button36_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox3198")
-                .setDataBinder("rdb")
-                .setDataField("E4")
-                .setIsFormField(false)
-                .setItems([
-                    {
-                        "id" : "Pass",
-                        "caption" : "P",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "Fail",
-                        "caption" : "F",
-                        "imageClass" : ""
-                    }
-                ])
-                .setDock("top")
-                .setDockMargin({
-                    "left" : 4,
-                    "top" : 2,
-                    "right" : 0,
-                    "bottom" : 0
+                xui.create("Module.DataGrid", "xui.Module")
+                .setHost(host,"module_datagrid13")
+                .setProperties({
+                    "tableName" : "BU3員工資料表",
+                    "insertTableName" : "",
+                    "displayFields" : "",
+                    "condition" : "",
+                    "condition2" : "",
+                    "orderby" : "",
+                    "fieldWidths" : null,
+                    "fieldCaptions" : null,
+                    "pageLength" : 100,
+                    "keyid" : "員工代號",
+                    "openPageName" : "",
+                    "mode" : "normal",
+                    "enableCopyButton" : false,
+                    "formCaption" : "",
+                    "newDatas" : null,
+                    "binder" : "",
+                    "useCache" : false,
+                    "saveIgnoreFields" : "",
+                    "excelFileName" : ""
                 })
-                .setLeft("83.04761904761905em")
-                .setTop("49.523809523809526em")
-                .setWidth("5.485714285714286em")
-                .setHeight("2.057142857142857em")
-                .setTagCmdsAlign("left")
-                .setLabelPos("none")
-                .setLabelGap("0em")
-                .setLabelHAlign("left")
-                .setLabelVAlign("")
-                .setCheckBox(true)
-                .setValue("")
-                .onClick("_xui_ui_radiobox3198_onclick")
-                .onItemSelected("_xui_ui_radiobox3198_onitemselected")
-                .setCustomStyle({
-                    "ITEMS" : {
-                        "margin" : "4px 0px 0px 8px",
-                        "overflow" : "hidden"
-                    },
-                    "ITEM" : {
-                        "padding" : "0px 0px 0px 4px",
-                        "margin" : "0px 0px 0px -7px"
-                    },
-                    "CAPTION" : {
-                        "margin" : "0px 0px 0px -7px"
-                    }
-                })
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput7025")
-                .setLeft("40em")
-                .setTop("3.3333333333333335em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("t1")
-                .setType("time")
-                .setExcelCellId("D1")
-                .setValue("00:15")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput7026")
-                .setLeft("40.333333333333336em")
-                .setTop("6.266666666666667em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("t2")
-                .setType("time")
-                .setExcelCellId("E1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput7028")
-                .setLeft("39.666666666666664em")
-                .setTop("10.266666666666667em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("t")
-                .setType("input")
-                .setExcelCellFormula("=D1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"a")
-                .setLeft("18.666666666666668em")
-                .setTop("10em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Input")
-                .setType("number")
-                .setExcelCellId("A1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input7751")
-                .setLeft("18.6em")
-                .setTop("14em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Input")
-                .setExcelCellId("B1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input7752")
-                .setLeft("18.6em")
-                .setTop("18.666666666666668em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Input")
-                .setExcelCellFormula("=D1-E1")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput7800")
-                .setName("Pump S/N")
-                .setDataBinder("comdb")
-                .setDataField("附屬配件")
-                .setLeft("18.6em")
-                .setTop("6em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("附屬配件")
-                .setMaxlength("32")
-                .setItems([
-                    {
-                        "id" : "N/A",
-                        "caption" : "N/A"
-                    }
-                ])
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input14498")
-                .setLeft("20em")
-                .setTop("28em")
-                .setWidth("18em")
-                .setHeight("10em")
-                .setResizer(true)
-                .setLabelSize("8em")
-                .setLabelCaption("Text Area")
-                .setMultiLines(true)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Tabs")
-                .setHost(host,"tabs")
-                .setItems([
-                    {
-                        "id" : "12",
-                        "caption" : "CH12",
-                        "imageClass" : "",
-                        "closeBtn" : true
-                    }
-                ])
-                .setDock("none")
-                .setLeft("7em")
-                .setTop("22.933333333333334em")
-                .setWidth("41em")
-                .setHeight("2.6666666666666665em")
-                .setNoPanel(true)
-                .setValue("1")
-                .beforeUIValueSet("_tabs_beforeuivalueset")
-                .beforePageClose("_tabs_beforepageclose")
-                .onItemSelected("_tabs_onitemselected")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"xui_ui_radiobox1184")
-                .setItems([
-                    {
-                        "id" : "a",
-                        "caption" : "item 1",
-                        "imageClass" : "xui-icon-number1"
-                    },
-                    {
-                        "id" : "b",
-                        "caption" : "item 2",
-                        "imageClass" : "xui-icon-number2"
-                    },
-                    {
-                        "id" : "c",
-                        "caption" : "item 3",
-                        "imageClass" : "xui-icon-number3"
-                    },
-                    {
-                        "id" : "d",
-                        "caption" : "item 4",
-                        "imageClass" : "xui-icon-number4",
-                        "disabled" : true
-                    }
-                ])
-                .setLeft("55.61904761904762em")
-                .setTop("19.047619047619047em")
-                .setLabelSize("1.5em")
-                .setLabelPos("top")
-                .setLabelCaption("RadioBox")
-                .setLabelHAlign("left")
-                .setValue("a")
             );
             
             append(
@@ -471,6 +272,13 @@ xui.Class('App.test2', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             if(uictrl.getUIValue() == item.id)
                 item.id = null;
+        },
+            events:{
+                "onReady" : "_page_onready"
+            },
+        _page_onready:function(e,i){
+            DebugMode = true;
+
         }
         /*,
         // To determine how properties affects this module

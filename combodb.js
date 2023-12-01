@@ -15,10 +15,14 @@ TableComboConfigs = {
         "維修狀況":"1001,維修狀況代號副資料表:維修狀況敘述:::17",
         "維修狀態":"1001,維修狀況代號副資料表:維修狀況敘述::::顯示= 1",
         "型號":"SELECT DISTINCT 產品型號 FROM crm.產品型號查詢:產品型號:產品型號:::",
+       "TestAreaFormNo":"CryopumpTestForm,item ASC:item:item:#::登錄編號 = {登錄編號} AND item != {item}",
       
   },
    "App.CrossheadEditForm": {
-        "登錄編號":"新增Crosshead維修工單查詢:登錄編號",
+        "登錄編號":"新增Crosshead工單查詢:登錄編號",
+   },
+   "App.ModuleTestForm": {
+        "登錄編號":"新增Module功能測試表查詢:登錄編號",
    },
    "App.CryopumpEditForm": {
         "Crosshead編號":"未領用Crosshead編號查詢:Crosshead編號:S/N,S/N#2,Crosshead編號:::Model = {Crosshead Model} AND 維修狀態 IN ('完工','簡修完工')",

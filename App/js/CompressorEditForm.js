@@ -330,7 +330,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setLazyAppend(false)
+                .setValue("b")
             );
             
             host.tabs.append(
@@ -1393,9 +1394,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"nameA")
                 .setDataBinder("comdb")
                 .setDataField("A簽名")
-                .setLeft("30.2em")
-                .setTop("32.076190476190476em")
-                .setWidth("9.333333333333334em")
+                .setReadonly(true)
+                .setLeft("34em")
+                .setTop("28.133333333333333em")
+                .setWidth("10.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
                 .setType("getter")
@@ -1404,12 +1406,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.block2.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"dateLeaderA")
+                .setHost(host,"dateA")
                 .setDataBinder("comdb")
                 .setDataField("檢測日期A")
-                .setLeft("52em")
-                .setTop("32.076190476190476em")
-                .setWidth("9.333333333333334em")
+                .setLeft("45.333333333333336em")
+                .setTop("28.2em")
+                .setWidth("11.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
@@ -1420,9 +1422,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"leaderA")
                 .setDataBinder("comdb")
                 .setDataField("A組長覆核")
-                .setLeft("39.333333333333336em")
-                .setTop("32.06666666666667em")
-                .setWidth("12em")
+                .setReadonly(true)
+                .setLeft("32em")
+                .setTop("31.466666666666665em")
+                .setWidth("12.666666666666666em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長覆核")
                 .setType("getter")
@@ -1471,6 +1474,19 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLeft("20.933333333333334em")
                 .setTop("12.6em")
                 .setCaption("A")
+            );
+            
+            host.block2.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"leaderDateA")
+                .setDataBinder("comdb")
+                .setDataField("覆核日期A")
+                .setLeft("45.333333333333336em")
+                .setTop("31.533333333333335em")
+                .setWidth("11.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.tabs.append(
@@ -2544,10 +2560,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"nameB")
                 .setDataBinder("comdb")
-                .setDataField("簽名B")
+                .setDataField("B簽名")
+                .setReadonly(true)
                 .setLeft("32em")
                 .setTop("68.8em")
-                .setWidth("9.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
                 .setType("getter")
@@ -2556,10 +2572,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.block3.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"dateLeaderB")
+                .setHost(host,"dateB")
                 .setDataBinder("comdb")
                 .setDataField("日期B")
-                .setLeft("41em")
+                .setLeft("42.666666666666664em")
                 .setTop("68.8em")
                 .setWidth("10.4em")
                 .setLabelSize("3em")
@@ -2741,6 +2757,34 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHeight("1.5em")
                 .setCaption("19.外觀清潔")
                 .setVAlign("bottom")
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"leaderB")
+                .setDataBinder("comdb")
+                .setDataField("B組長覆核")
+                .setReadonly(true)
+                .setLeft("30em")
+                .setTop("70.86666666666666em")
+                .setWidth("12em")
+                .setLabelSize("5em")
+                .setLabelCaption("組長覆核")
+                .setType("getter")
+                .onClick("_leaderb_onclick")
+            );
+            
+            host.block3.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"leaderDateB")
+                .setDataBinder("comdb")
+                .setDataField("覆核日期B")
+                .setLeft("42.666666666666664em")
+                .setTop("70.93333333333334em")
+                .setWidth("10.4em")
+                .setLabelSize("3em")
+                .setLabelCaption("日期")
+                .setType("date")
             );
             
             host.tabs.append(
@@ -3981,9 +4025,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"name")
                 .setDataBinder("comdb")
                 .setDataField("C簽名")
+                .setReadonly(true)
                 .setLeft("2.1333333333333333em")
                 .setTop("67.58095238095238em")
-                .setWidth("9.333333333333334em")
+                .setWidth("9.866666666666667em")
                 .setLabelSize("3em")
                 .setLabelCaption("簽名")
                 .setType("getter")
@@ -3995,8 +4040,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"dateLeader")
                 .setDataBinder("comdb")
                 .setDataField("日期C#2")
-                .setLeft("24.666666666666668em")
-                .setTop("67.58095238095238em")
+                .setReadonly(true)
+                .setLeft("13.333333333333334em")
+                .setTop("69.66666666666667em")
                 .setWidth("10.666666666666666em")
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
@@ -4005,11 +4051,12 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             
             host.block4.append(
                 xui.create("xui.UI.ComboInput")
-                .setHost(host,"leader")
+                .setHost(host,"leaderC")
                 .setDataBinder("comdb")
                 .setDataField("C組長覆核")
-                .setLeft("12em")
-                .setTop("67.6em")
+                .setReadonly(true)
+                .setLeft("0em")
+                .setTop("69.66666666666667em")
                 .setWidth("12em")
                 .setLabelSize("5em")
                 .setLabelCaption("組長覆核")
@@ -4076,6 +4123,20 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .afterUIValueSet("_d_afteruivalueset")
             );
             
+            host.block4.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"dateC")
+                .setDataBinder("comdb")
+                .setDataField("日期C#3")
+                .setReadonly(true)
+                .setLeft("13.333333333333334em")
+                .setTop("67.73333333333333em")
+                .setWidth("10.666666666666666em")
+                .setLabelSize("3em")
+                .setLabelCaption("日期")
+                .setType("date")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
         },
@@ -4124,7 +4185,11 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
 //            utils.readRepairStatus(ns);
 //            utils.updateFinishOutBtnCaption(ns);
             ns.prevRepairStatus = ns.repairStatus.getUIValue();
-
+            /*
+            utils.blockConfirmName(ns.leaderA);
+            utils.blockConfirmName(ns.leaderB);
+            utils.blockConfirmName(ns.leaderC);
+            */
            // ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -4251,7 +4316,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _name_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(null, uictrl, "維修");
+            utils.signNameClick(ns.dateC, uictrl, "維修");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -4264,7 +4329,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _leader_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(ns.dateLeader, uictrl, "組長,主管");
+            utils.signNameClick(ns.dateLeader, uictrl, "組長");
+            utils.blockConfirmName(uictrl);
         },
             /**
          * Fired when user click it
@@ -4507,7 +4573,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _namea_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(null, uictrl, "維修");
+            utils.signNameClick(ns.dateA, uictrl, "維修");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -4520,7 +4586,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _leadera_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(ns.dateLeaderA, uictrl, "組長,主管");
+            utils.signNameClick(ns.leaderDateA, uictrl, "組長");
+             utils.blockConfirmName(uictrl);
+       
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -4533,7 +4601,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         */
         _nameb_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.signNameClick(ns.dateLeaderB, uictrl, "維修");
+            utils.signNameClick(ns.dateB, uictrl, "維修");
         },
             /**
          * Fired when user click it
@@ -4676,6 +4744,20 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
         _b_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
             var ns = this, uictrl = profile.boxing();
             ns.updateNumbers();
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _leaderb_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+            utils.signNameClick(ns.leaderDateB, uictrl, "組長");
+             utils.blockConfirmName(uictrl);
         }
         /*,
         // To determine how properties affects this module

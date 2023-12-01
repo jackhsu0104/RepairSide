@@ -65,6 +65,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
+                .setLazyAppend(false)
                 .setValue("c")
             );
             
@@ -222,8 +223,10 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           var list = ns.listd;
           list.clearItems();
           ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '秘書已確認,通知Bench'", "登錄編號,客戶名稱,保養名稱","-秘書已確認");
-          if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))  
-              ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,保養名稱","-待確認");
+          if(LoginUser.Privilege.includes("組長"))  
+              ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待組長確認'", "登錄編號,客戶名稱,保養名稱","-待組長確認");
+          if(LoginUser.Privilege.includes("經理"))  
+              ns.updateList2(list, "Compressor零件更換表", "確認狀態 = '待經理確認'", "登錄編號,客戶名稱,保養名稱","-待經理確認");
           ns.updateCaptionCount("d", list, "Compressor零件更換表");
         },
         updateOptionList: function(){
@@ -231,8 +234,10 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
           var list = ns.listf;
           list.clearItems();
           ns.updateList2(list, "Option零件更換表", "確認狀態 = '秘書已確認,通知Bench'", "登錄編號,公司名稱","-秘書已確認");
-          if(LoginUser.Privilege.includes("組長") || LoginUser.Privilege.includes("主管"))  
-              ns.updateList2(list, "Option零件更換表", "確認狀態 = '待組長確認'", "登錄編號,公司名稱","-待確認");
+          if(LoginUser.Privilege.includes("組長"))  
+              ns.updateList2(list, "Option零件更換表", "確認狀態 = '待組長確認'", "登錄編號,公司名稱","-待組長確認");
+          if(LoginUser.Privilege.includes("經理"))  
+              ns.updateList2(list, "Option零件更換表", "確認狀態 = '待經理確認'", "登錄編號,公司名稱","-待經理確認");
           ns.updateCaptionCount("f", list, "Option零件更換表");
         },
         updateNoRepairSheetList: function(){

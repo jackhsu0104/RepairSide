@@ -135,7 +135,7 @@ xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
                 .setLeft("13.714285714285714em")
                 .setTop("6.095238095238095em")
                 .setWidth("67.8em")
-                .setHeight("29.133333333333333em")
+                .setHeight("35.8em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 14,
