@@ -582,10 +582,14 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                   var value =  ns.getPickingItemCount(model, item["品號"], item["領料數量"]);  //default = item["領料數量"] 
                   if(ns.pickingCountList.length == 0 && value > item["庫存數量"])  //no previous records
                       value = item["庫存數量"];
-                  if(item["庫存數量"] != "N/A")  
+                  if(item["庫存數量"] != "N/A") 
+                  {
                       item["領料數量"] = {"value": value, "max":Number(item["庫存數量"])};
+                      item["庫存數量"] = Math.round(item["庫存數量"]).toString();
+                  }
                   else
-                      item["領料數量"] = {"value": value, "max": 9999999999};                  value =  ns.getPickingItemNo(model, item["品號"]);  
+                      item["領料數量"] = {"value": value, "max": 9999999999};      
+                  value =  ns.getPickingItemNo(model, item["品號"]);  
                   item["批號"] = value;
                 }
                 ns.grid1.setRows(items);
@@ -613,8 +617,11 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 //it["庫存數量"] = ns.getStoreItemCount(it["品號"]);  
                 it["型號"] = "其他";
                 var value =  ns.getPickingItemCount("其他", it["品號"]); 
-                if(it["庫存數量"] != "N/A")  
+                if(it["庫存數量"] != "N/A") 
+                {    
                   it["領料數量"] = {"value": value, "max":Number(it["庫存數量"])};
+                  it["庫存數量"] = Math.round(it["庫存數量"]).toString();
+                }
                 else
                   it["領料數量"] = {"value": value, "max": 9999999999};
                     

@@ -115,6 +115,7 @@ if(isset($req->table) && str_contains($req->table, "MIS_AccountingCloseDate"))
 if(isset($req->query) && str_contains($req->query, "MIS_AccountingCloseDate"))
     execsql("USE DSCSYS");
 //$adminuser =  $_SESSION ["adminuser"]; //true or false
+execsql("SET ANSI_WARNINGS OFF");
 
 function IsCRM($value)
 {

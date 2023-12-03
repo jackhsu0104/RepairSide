@@ -426,7 +426,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setHeight("19.35238095238095em")
                 .setLazyAppend(false)
-                .setValue("c")
+                .setValue("d")
             );
             
             host.tabs1.append(
@@ -3253,10 +3253,10 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("Seal 推")
                 .setDataBinder("rdb")
                 .setDataField("C8#3")
-                .setLeft("22em")
+                .setLeft("24em")
                 .setTop("18em")
-                .setWidth("7.4em")
-                .setLabelSize("3em")
+                .setWidth("6.2em")
+                .setLabelSize("2em")
                 .setLabelCaption("/推")
                 .setMaxlength("32")
             );
@@ -3267,7 +3267,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setName("Seal 拉")
                 .setDataBinder("rdb")
                 .setDataField("C8#4")
-                .setLeft("28.666666666666668em")
+                .setLeft("30em")
                 .setTop("18em")
                 .setWidth("6.666666666666667em")
                 .setLabelSize("2em")

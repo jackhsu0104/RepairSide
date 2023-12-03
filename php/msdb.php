@@ -265,7 +265,6 @@ function DBCRM() {
     try {
         $db = new PDO ( "sqlsrv:server=(local), 63937; database = GDCRM", "jack", "3f18681868" );
         $db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-
     } catch ( PDOException $e ) {
          echo $e->getMessage();
     }

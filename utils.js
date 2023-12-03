@@ -345,10 +345,19 @@ utils = {
                 utils.showDataPage(pagename, item, mode, onload, ondestroy);        
             }
     },
+	getRandomDbName:function(){
+		return "db999" + Math.floor(Math.random() * 99999);
+	},
+	changeDbName: function(db){
+		db.setName(this.getRandomDbName());
+	},
     showDataPage : function(pagename, item, mode = "edit", onload,  ondestroy){
 		if(item)
 		  this.fixDate1900(item);
         var cb2 = function(mod){
+			//if(typeof ChangeDbName != "undefined" && ChangeDbName)
+			//	utils.changeDbName(mod);
+			//ChangeDbName = false; //auto reset
             var db = mod.getDataBinders();
             if(db.length > 0)
               db = db[0].boxing();
@@ -614,14 +623,20 @@ utils = {
             if(prop.mode.includes("new"))
             {
               var data = utils.insertTableItem(prop.tableName,  datas); //wait 
-              newcb(data);
+			  if(typeof data == "undefined")
+			  {
+				   utils.alert("新增錯誤!");
+				   return false;
+			  }
+			  else		
+                newcb(data);
             }
             else
             {
                var data = utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
-			   if(typeof data != "object")
+			   if(data.result == "ERROR")
 			   {
-				   utils.alert(data);
+				   utils.alert("儲存錯誤!");
 				   return false;
 			   }
                if(onFinish)
@@ -874,7 +889,7 @@ utils = {
         var cols = utils.getTableConfig(table);
         for(var i=0; i<cols.length; i++)
         {
-			if(cols[i].DATA_TYPE == "datetime")
+			if(cols[i].DATA_TYPE.includes("datetime"))
               fields.push(cols[i].COLUMN_NAME);
         }
         return fields;
@@ -1537,8 +1552,6 @@ utils = {
           n.setMonth(n.getMonth()+1);
           n.setDate(1);
       }
-      else
-          n.setDate(CloseDate);
             
       return xui.Date.format(n,"yyyy-mm-dd");
     },
@@ -1697,7 +1710,7 @@ utils = {
 						pn = data["變更後P/N"];
 						sn = data["變更後S/N"];
 					}
-                    var item = {"維修單別":"B200","維修部門":"902","維修站別":"902","產品品號":pn, "產品品名":data["型號(EX form)"],"產品序號": sn,"單據日期":utils.today(),
+                    var item = {"維修單別":"B200","維修部門":"902","維修站別":"902","產品品號":pn, "產品品名":data["型號(EX form)"],"產品序號": sn,"單據日期":utils.getCloseDate(),
                         "登錄編號":rno, "Creator": LoginUser.EmplID,"型號": model};
                     var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
                     if(data2 != "")

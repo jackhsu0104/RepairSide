@@ -210,9 +210,10 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 .setDataBinder("mdb")
                 .setDataField("維修狀況")
                 .setDock("top")
+                .setDockStretch("fixed")
                 .setLeft("0.7619047619047619em")
                 .setTop("0.7619047619047619em")
-                .setWidth("11.352380952380953em")
+                .setWidth("30em")
                 .setLabelSize("5em")
                 .setLabelCaption("維修狀況")
                 .setItems([

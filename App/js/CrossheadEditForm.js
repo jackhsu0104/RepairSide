@@ -3020,7 +3020,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("d")
             );
             
             host.tabs2.append(
@@ -5537,8 +5537,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.crdb2.updateDataToUI();
             ns.updateSheetType(ns.sheetType.getUIValue());
             console.log(utils.createDDL(ns.dialog,"Crosshead維修工單", true));
-            ns.tabs1.setValue("a");
-            ns.tabs2.setValue("a");
+            ns.tabs1.setValue("d");
+            ns.tabs2.setValue("d");
 //            utils.readRepairStatus(ns);
  //           utils.updateFinishOutBtnCaption(ns); 
             ns.prevRepairStatus = ns.repairStatus.getUIValue();

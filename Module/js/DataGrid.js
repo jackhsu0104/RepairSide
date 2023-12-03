@@ -336,7 +336,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         if(config)
                         {    
                               let type = config.DATA_TYPE;  
-                              if(type == "datetime")
+                              if(type.includes("datetime"))
                                 type = "date";
                               else if(type == "bit")
                                 type = "checkbox";

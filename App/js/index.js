@@ -109,7 +109,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修委託單/工單")
+                .setValue("維修工單")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -319,7 +319,7 @@ xui.Class('App', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Crosshead")
+                .setValue("Cryopump")
                 .onItemSelected("_repairtabs_onitemselected"),
                 "維修工單"
             );
@@ -373,6 +373,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtn1_onclick")
             );
             
@@ -611,6 +612,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("7.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtn3_onclick")
             );
             
@@ -804,6 +806,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtn5_onclick")
             );
             
@@ -1028,6 +1031,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("4.6em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtn6_onclick")
             );
             
@@ -1252,6 +1256,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.333333333333333em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtn7_onclick")
             );
             
@@ -1632,6 +1637,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.333333333333333em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontWeight("800")
                 .onClick("_unfinishbtnheater_onclick")
             );
             
@@ -2398,7 +2404,7 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "維修工單列表",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "維修狀態 NOT IN ('出貨','完工','簡修完工','不修')",
+                    "condition" : "維修狀態 NOT IN ('出貨','完工','簡修完工','不修','入庫')",
                     "condition2" : "",
                     "orderby" : "登錄編號 DESC",
                     "fieldWidths" : null,
@@ -3044,18 +3050,18 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     //ns.initCodeReader();        
                     Logined = 0;
                     AppName = "RepairSide";
-             xui.Ajax.method = "POST";
-            xui.Ajax.timeout = 15000;
-            xui.Ajax.retry = 3;
+                    StoreNameList = {"拆解站":"1102-1","Vacuum side":"1102-3","Helium side":"1102-4","Compressor":"1102-7", "Crosshead":"1102-2","Module":"1102-5","測試站":"1102-6","Charcoal":"1102-8","Displacer":"1102-9"};
+                    SiteName = "拆解站";
+                    ns.repairdb1.setData("SiteName",SiteName);
+                     xui.Ajax.method = "POST";
+                    xui.Ajax.timeout = 15000;
+                    xui.Ajax.retry = 3;
    
                     utils.installModuleTableBoxHooks(ns);
                     xui.setLang("tw");
-                    StoreNameList = {"拆解站":"1102-1","Vacuum side":"1102-3","Helium side":"1102-4","Compressor":"1102-7", "Crosshead":"1102-2","Module":"1102-5","測試站":"1102-6","Charcoal":"1102-8","Displacer":"1102-9"};
-                    SiteName = "拆解站";
                     ns.siteTabs.setValue(SiteName);
                     ns.siteName.setCaption(SiteName);
                     ns.updateRepairSiteTabs();
-                    ns.repairdb1["SiteName"] = SiteName;
                     console.log("CloseDate:",utils.getCloseDate());
                     MainPage = ns;
                     Pages = {};
@@ -3475,7 +3481,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         },
 
         _pickinggrid2_oninitnewdata:function(){
-            var data = {"型號":"","產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05, "維修單別":"B200","維修站別":"902","維修部門":"902","單據日期":utils.today()};
+            var data = {"型號":"","產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05, "維修單別":"B200","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate()};
             return data;
         },
            /**
@@ -3721,6 +3727,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtn1_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.repairGrid1, ns.repair1);
+             utils.setButtonFocused(uictrl); 
 
         },
         /**
@@ -3734,7 +3741,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtn1_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.unfinishRepairGrid(ns.repairGrid1, ns.repair3, ns.xh3);
-        },
+              utils.setButtonFocused(uictrl); 
+       },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -3746,6 +3754,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtn3_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3770,6 +3779,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtn3_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.unfinishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3794,7 +3804,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtn5_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.repairGrid5, ns.repair5);
-        },
+              utils.setButtonFocused(uictrl); 
+       },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -3806,6 +3817,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtn5_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.unfinishRepairGrid(ns.repairGrid5, ns.repair5);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3830,6 +3842,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtn6_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.repairGrid6, ns.repair6);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3842,6 +3855,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtn6_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.unfinishRepairGrid(ns.repairGrid6, ns.repair6);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3866,6 +3880,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtn7_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.repairGrid7, ns.repair7);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3878,6 +3893,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtn7_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.unfinishRepairGrid(ns.repairGrid7, ns.repair7);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3902,6 +3918,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _finishbtnheater_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.finishRepairGrid(ns.heaterGrid, ns.repairHeater);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3914,6 +3931,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _unfinishbtnheater_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
              ns.unfinishRepairGrid(ns.heaterGrid, ns.repairHeater);
+             utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when a tab is selected
