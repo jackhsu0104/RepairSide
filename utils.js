@@ -68,6 +68,8 @@ utils = {
                 var wait = true;
                 if(onFinish)
                     wait = false;
+				if(ShowDataCommand === true)
+					console.log(hash);
                 var result = null;
 				var url = "php/data.php";
 				if(typeof DebugMode != "undefined")
@@ -78,6 +80,7 @@ utils = {
                         result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
                     }
                     else if(typeof data == "string") {
+						console.log(data);
                         result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
                     }//alert("ERROR");
                     else
@@ -536,6 +539,9 @@ utils = {
 		SaveFormSilent = false;
 	},
     saveForm: function(mod, ignoreFields, extDatas, onFinish, db){
+			if(mod.inSaveFormFlag === true)
+				return;
+			mod.inSaveFormFlag = true;
             var prop = mod.properties;
             if(typeof db == "undefined")
             {
@@ -543,11 +549,17 @@ utils = {
               if(db.length > 0)
                 db = db[0].boxing();
               else
+			  {
+				mod.inSaveFormFlag = false;
                 return false;
+			  }
             }
                 
             if(db && db.updateDataFromUI() == false)
+			{
+				mod.inSaveFormFlag = false;
                 return false;
+			}
             var newcb = function(item){
                   db.setData(item).updateDataToUI();
                   prop.mode = prop.mode.replaceAll("new","edit");
@@ -626,6 +638,7 @@ utils = {
 			  if(typeof data == "undefined")
 			  {
 				   utils.alert("新增錯誤!");
+				   mod.inSaveFormFlag = false;
 				   return false;
 			  }
 			  else		
@@ -637,18 +650,23 @@ utils = {
 			   if(data.result == "ERROR")
 			   {
 				   utils.alert("儲存錯誤!");
+				   mod.inSaveFormFlag = false;
 				   return false;
 			   }
                if(onFinish)
                  onFinish();
 			   if(typeof SaveFormSilent != 'undefined' && SaveFormSilent)
+			   {
+				    mod.inSaveFormFlag = false;
 				   return true;
+			   }
 			   
 			   //if(AppName == "BU3")		
                //  mod.dialog.close();
 			   //else 
 				 utils.alert("儲存完成!");  
             }    
+			mod.inSaveFormFlag = false;
             return true;
     },
     updateModuleTableBoxCaption : function(mod){
@@ -719,20 +737,33 @@ utils = {
            var nodes = mod.mainPage.getChildren(true,true).get();
         var formTableName = mod.key;   
         var showCombo = function(uictrl){
-                var db = mod.getDataBinders();
-                if(db.length > 0)
+                var dbs = mod.getDataBinders();
+				var db = null;
+                if(dbs.length > 0)
                 {
-                   if(typeof mod.db == "string" && mod.db != "")
+/*                   if(typeof mod.db == "string" && mod.db != "")
 				   {
 					   for(var i=0; i<db.length; i++)
 					   {
 						 if(db[i].alias == mod.db)  
-                         db = db[i].boxing();
-						 break; 
+						 {
+                           db = db[i].boxing();
+						   break;
+						 }						   
 					   }
 				   }
                    else
                      db = db[0].boxing();
+*/
+					db = dbs[0].boxing();
+					for(var i=0; i<dbs.length; i++)
+					{
+					  if(dbs[i].alias == uictrl.getDataBinder())  
+					  {
+                        db = dbs[i].boxing();
+					    break;
+					  }						   
+					}
                        
                    db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
                    var comboDatas = db.getData(); 
@@ -2152,9 +2183,15 @@ utils = {
 		{
 			var n = nodes[i].boxing();
 			if(n.$key == "xui.UI.Button")
+			{
 				n.setFontWeight("normal");
+				if(AppName == "RepairSide")
+					n.setFontColor("white");//#90EE90
+			}
 		}
 		btn.setFontWeight("800");
+		if(AppName == "RepairSide")
+			btn.setFontColor("#90EE90");//#90EE90
 	},
 	blockConfirmName: function(uictrl){
 		return;

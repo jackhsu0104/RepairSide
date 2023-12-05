@@ -577,6 +577,9 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 		},
         _openForm:function(recordId, fields){
             var ns = this, mode="";
+			if(ns.openFormShowing === true)
+				return;
+			
             var prop=ns.properties,updateRow=function(){
                 ns.updateRow.apply(ns,arguments);
             },addRow=function(){
@@ -608,6 +611,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 pagename = "DataInputDialog";
             DataPageTheme = DataPageThemeNames[DataPageThemeIndex++];
             xui.showModule("App."+ pagename,function(mod){
+			ns.openFormShowing = true;
             if(DataPageTheme != "")
                 mod.dialog.setSandboxTheme(DataPageTheme);
                 mod.dialog.setModal(true);
@@ -645,6 +649,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                     if(DataPageThemeIndex < 0)
                         DataPageThemeIndex = 0;
                     ns.refreshGrid();
+					ns.openFormShowing = false;
                 });
                 
             },null, null, false);  //not cached            

@@ -115,7 +115,7 @@ if(isset($req->table) && str_contains($req->table, "MIS_AccountingCloseDate"))
 if(isset($req->query) && str_contains($req->query, "MIS_AccountingCloseDate"))
     execsql("USE DSCSYS");
 //$adminuser =  $_SESSION ["adminuser"]; //true or false
-execsql("SET ANSI_WARNINGS OFF");
+//execsql("SET ANSI_WARNINGS OFF");
 
 function IsCRM($value)
 {
@@ -570,6 +570,18 @@ else  if($req->cmd == "modifyTableItem")
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem($table, $key, $item);
+    $RES->result = "OK";
+}
+else  if($req->cmd == "modifyTableItem2")
+{
+    $key = $req->key; 
+    $keyValue = $req->keyValue; 
+    $table = $req->table;
+    $item = json_decode($req->item);
+
+    if($table == "[CTI Control Number總資料庫]")
+      unset($item->type);  //no use    
+    $res = modifyTableItem2($table, $key, $keyValue, $item);
     $RES->result = "OK";
 }
 else if($req->cmd == "insertTableItem")

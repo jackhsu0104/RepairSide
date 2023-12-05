@@ -109,7 +109,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修工單")
+                .setValue("站內物件列表")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -373,6 +373,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn1_onclick")
             );
@@ -612,6 +613,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("7.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn3_onclick")
             );
@@ -806,6 +808,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.266666666666667em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn5_onclick")
             );
@@ -1031,6 +1034,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("4.6em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn6_onclick")
             );
@@ -1256,6 +1260,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.333333333333333em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn7_onclick")
             );
@@ -1328,8 +1333,8 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "8em"
                                     },
                                     {
-                                        "id" : "Pump",
-                                        "caption" : "Model",
+                                        "id" : "Module#1",
+                                        "caption" : "Module",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
@@ -1340,14 +1345,14 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "8em"
                                     },
                                     {
-                                        "id" : "P/N",
-                                        "caption" : "P/N",
+                                        "id" : "P/N#1",
+                                        "caption" : "Module P/N",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
                                     {
-                                        "id" : "S/N",
-                                        "caption" : "S/N",
+                                        "id" : "S/N#1",
+                                        "caption" : "Module S/N",
                                         "type" : "input",
                                         "width" : "8em"
                                     },
@@ -1637,6 +1642,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("5.333333333333333em")
                 .setWidth("7.066666666666666em")
                 .setCaption("未完工")
+                .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtnheater_onclick")
             );
@@ -2566,7 +2572,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231201")
+                .setCaption("維修站管理系統-20231205")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -3048,6 +3054,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 _page_onready:function(e,i){
                     var ns = this;
                     //ns.initCodeReader();        
+                    ShowDataCommand = true;
                     Logined = 0;
                     AppName = "RepairSide";
                     StoreNameList = {"拆解站":"1102-1","Vacuum side":"1102-3","Helium side":"1102-4","Compressor":"1102-7", "Crosshead":"1102-2","Module":"1102-5","測試站":"1102-6","Charcoal":"1102-8","Displacer":"1102-9"};
@@ -3315,6 +3322,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                  ns.messageCountIndex++;
                  if(ns.messageCountIndex >= ns.messageCountMax)
                  {
+                   ShowDataCommand = true;  
                    ns.message.setItems([
                       {
                         "id" : "a",
@@ -3341,6 +3349,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                  ns.messageCountIndex++;
                  if(ns.messageCountIndex >= ns.messageCountMax)
                  {
+                   ShowDataCommand = true; 
                    ns.message.setItems([
                       {
                         "id" : "a",
@@ -3426,6 +3435,11 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             {
                // if(ns.newUnitServiceForm(id) == false)
                //     return;
+                    if(item["ERP維修單號"] == "")
+                    {
+                      utils.alert("沒有ERP維修單號,無法入庫!");    
+                      return;
+                    }
                     utils.writeRepairStatus(id,"入庫");
                     ns.outGrid.refreshGrid();
                     ns.outHistoryGrid.refreshGrid();
@@ -3450,6 +3464,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var ns = this, uictrl = profile.boxing();
              if(Logined != 2)
                 return;
+            ShowDataCommand = false;    
             var privilege = LoginUser["Privilege"];
             if(typeof privilege != "undefined" && (privilege.includes("組長")||privilege.includes("經理")))
             {

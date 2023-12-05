@@ -6584,7 +6584,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox1526")
                 .setDataBinder("rdb")
-                .setDataField("E41")
+                .setDataField("E41#3")
                 .setIsFormField(false)
                 .setItems([
                     {
@@ -7026,7 +7026,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setLeft("0em")
                 .setTop("0em")
                 .setLazyAppend(false)
-                .setValue("e")
+                .setValue("d")
             );
             
             host.tabs2.append(
@@ -9876,8 +9876,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDock("fill")
                 .setLeft("7.466666666666667em")
                 .setTop("5.40952380952381em")
-                .setWidth("8.533333333333333em")
-                .setHeight("0em")
+                .setWidth("66.8em")
+                .setHeight("15.333333333333334em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 16,
@@ -10177,7 +10177,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div468")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("43.13333333333333em")
+                .setWidth("65.46666666666667em")
                 .setHeight("1.9333333333333333em"),
                 "A1"
             );
@@ -10217,7 +10217,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div469")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("43.13333333333333em")
+                .setWidth("65.46666666666667em")
                 .setHeight("1.8666666666666667em"),
                 "A2"
             );
@@ -10261,7 +10261,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div470")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
+                .setWidth("6.866666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "D4"
             );
@@ -10322,7 +10322,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div471")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
+                .setWidth("6.866666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "D6"
             );
@@ -10383,7 +10383,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div472")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
+                .setWidth("6.866666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "D15"
             );
@@ -10393,7 +10393,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div473")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
+                .setWidth("19.2em")
                 .setHeight("1.8666666666666667em"),
                 "B6"
             );
@@ -10416,7 +10416,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div474")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.333333333333332em")
+                .setWidth("38.4em")
                 .setHeight("1.8666666666666667em"),
                 "B8"
             );
@@ -10506,8 +10506,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div475")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.333333333333332em")
-                .setHeight("2.4em"),
+                .setWidth("38.4em")
+                .setHeight("1.8666666666666667em"),
                 "B12"
             );
             
@@ -10551,8 +10551,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div476")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.333333333333332em")
-                .setHeight("2.4em"),
+                .setWidth("38.4em")
+                .setHeight("1.8666666666666667em"),
                 "B13"
             );
             
@@ -10597,7 +10597,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataBinder("rdb2")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("38.6em")
+                .setWidth("58.53333333333333em")
                 .setHeight("1.8666666666666667em"),
                 "A15"
             );
@@ -10658,7 +10658,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div478")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("43.13333333333333em")
+                .setWidth("65.46666666666667em")
                 .setHeight("16.533333333333335em"),
                 "A16"
             );
@@ -10702,7 +10702,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div479")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
+                .setWidth("6.866666666666666em")
                 .setHeight("5.8em"),
                 "D7"
             );
@@ -10763,7 +10763,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div480")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("25.333333333333332em")
+                .setWidth("38.4em")
                 .setHeight("1.8666666666666667em"),
                 "B10"
             );
@@ -10788,7 +10788,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div481")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
+                .setWidth("6.866666666666666em")
                 .setHeight("1.8666666666666667em"),
                 "D10"
             );
@@ -10849,8 +10849,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div482")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("4.466666666666667em")
-                .setHeight("7.2em"),
+                .setWidth("6.866666666666666em")
+                .setHeight("5.8em"),
                 "D11"
             );
             
@@ -10910,7 +10910,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div6056")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
+                .setWidth("19.2em")
                 .setHeight("1.8666666666666667em"),
                 "B4"
             );
@@ -10951,7 +10951,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("E5")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
+                .setWidth("19.2em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
                 .setType("time"),
@@ -10966,7 +10966,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setDataField("E7")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
+                .setWidth("19.2em")
                 .setHeight("1.8666666666666667em")
                 .setLabelPos("none")
                 .setType("time")
@@ -10979,8 +10979,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block219")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
-                .setHeight("10.733333333333333em")
+                .setWidth("19.2em")
+                .setHeight("8.533333333333333em")
                 .setBorderType("none"),
                 "B14"
             );
@@ -10990,8 +10990,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_block220")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("12.666666666666666em")
-                .setHeight("10.733333333333333em")
+                .setWidth("19.2em")
+                .setHeight("8.533333333333333em")
                 .setBorderType("none"),
                 "C14"
             );
@@ -11055,7 +11055,13 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             var citem = {"登錄編號":d["登錄編號"], "Running Time":d["Pump/Module ETM"],"S/N":d["A9#1"]};
             utils.modifyTableItem("Crosshead維修工單","登錄編號", citem);
             if(d["Crosshead編號"] != "")
-                utils.modifyTableItem("Crosshead維修工單","Crosshead編號",{"Crosshead編號": d["Crosshead編號"], "已安裝Pump登錄編號":ns.repairNo.getUIValue()});
+            {
+                var rno = ns.repairNo.getUIValue();
+                //first empty any Crosshead with RepairNo
+                utils.modifyTableItem2("Crosshead維修工單","已安裝Pump登錄編號", rno, {"已安裝Pump登錄編號": ""});
+                //2nd, write correct 
+                utils.modifyTableItem("Crosshead維修工單","Crosshead編號",{"Crosshead編號": d["Crosshead編號"], "已安裝Pump登錄編號": rno});
+            }
 
         },
         /**
