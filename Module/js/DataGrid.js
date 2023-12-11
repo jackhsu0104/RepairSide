@@ -579,6 +579,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             var ns = this, mode="";
 			if(ns.openFormShowing === true)
 				return;
+			ns.openFormShowing = true;
 			
             var prop=ns.properties,updateRow=function(){
                 ns.updateRow.apply(ns,arguments);
@@ -601,7 +602,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 mode = "new";
                 var r = ns.fireEvent("onCreateRecords",[addRow, updateRow]);
                 if(r === "noop")
+				{
+					ns.openFormShowing = false;
                     return;
+				}
                 if(r && r != "")
                     mode = r;
                 fields = ns.prepareNewDatas();
@@ -611,10 +615,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                 pagename = "DataInputDialog";
             DataPageTheme = DataPageThemeNames[DataPageThemeIndex++];
             xui.showModule("App."+ pagename,function(mod){
-			ns.openFormShowing = true;
             if(DataPageTheme != "")
                 mod.dialog.setSandboxTheme(DataPageTheme);
                 mod.dialog.setModal(true);
+				
                 utils.disableAutoTips(mod);
                var db = mod.getDataBinders();
                 if(db.length > 0)

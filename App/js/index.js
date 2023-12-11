@@ -2572,7 +2572,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231205")
+                .setCaption("維修站管理系統-20231210")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -3091,6 +3091,9 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
           ns.updateAllGrids();
           ns.mainPage.setValue("維修工單");
           utils.toggleFullScreen("body");
+          value = utils.getItemValue("crm.Employee","EmplID", LoginUser.EmplID, "DeptID");
+          if(value != "")
+              LoginUser.DeptID = value;
             
         },
 

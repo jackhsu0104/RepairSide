@@ -1,1 +1,1 @@
-SELECT count(*) FROM [CryopumpWarranty原因分析表] WHERE 維修狀態 = '通知測試' 
+SELECT * FROM [Cryopump維修工單查詢] WHERE 維修站名 = '拆解站' AND 維修狀態 NOT IN ('出貨','入庫') AND 維修狀態 NOT IN ('完工','不修','簡修完工')   ORDER BY 登錄編號 DESC  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY

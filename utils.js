@@ -635,10 +635,10 @@ utils = {
             if(prop.mode.includes("new"))
             {
               var data = utils.insertTableItem(prop.tableName,  datas); //wait 
+			  mod.inSaveFormFlag = false;
 			  if(typeof data == "undefined")
 			  {
 				   utils.alert("新增錯誤!");
-				   mod.inSaveFormFlag = false;
 				   return false;
 			  }
 			  else		
@@ -653,11 +653,12 @@ utils = {
 				   mod.inSaveFormFlag = false;
 				   return false;
 			   }
+			   //set flag before onFinish
+			   mod.inSaveFormFlag = false;
                if(onFinish)
                  onFinish();
 			   if(typeof SaveFormSilent != 'undefined' && SaveFormSilent)
 			   {
-				    mod.inSaveFormFlag = false;
 				   return true;
 			   }
 			   
@@ -666,8 +667,8 @@ utils = {
 			   //else 
 				 utils.alert("儲存完成!");  
             }    
-			mod.inSaveFormFlag = false;
-            return true;
+		   mod.inSaveFormFlag = false;
+           return true;
     },
     updateModuleTableBoxCaption : function(mod){
         if(mod.dialog)

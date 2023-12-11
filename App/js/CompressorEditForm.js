@@ -330,7 +330,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setLazyAppend(false)
                 .setValue("b")
             );
             
