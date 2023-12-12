@@ -256,24 +256,10 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataBinder("comdb")
                 .setDataField("Compressor P/N")
                 .setLeft("0.8em")
-                .setTop("5.866666666666666em")
-                .setWidth("14.533333333333333em")
+                .setTop("6.019047619047619em")
+                .setWidth("19.80952380952381em")
                 .setLabelSize("8em")
                 .setLabelCaption("Compressor P/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_div571.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input3458")
-                .setName("Compressor P/N")
-                .setDataBinder("comdb")
-                .setDataField("Compressor P/N")
-                .setLeft("16em")
-                .setTop("5.933333333333334em")
-                .setWidth("14.533333333333333em")
-                .setLabelSize("8em")
-                .setLabelCaption("Compressor S/N")
                 .setMaxlength("32")
             );
             
@@ -4134,6 +4120,20 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelSize("3em")
                 .setLabelCaption("日期")
                 .setType("date")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input3458")
+                .setName("Compressor P/N")
+                .setDataBinder("comdb")
+                .setDataField("Compressor P/N")
+                .setLeft("22.095238095238095em")
+                .setTop("6.019047619047619em")
+                .setWidth("19.885714285714286em")
+                .setLabelSize("8em")
+                .setLabelCaption("Compressor S/N")
+                .setMaxlength("32")
             );
             
             return children;
