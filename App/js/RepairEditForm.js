@@ -62,127 +62,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setHost(host,"dialog")
                 .setLeft("16em")
                 .setTop("1.5238095238095237em")
-                .setWidth("52.57142857142857em")
+                .setWidth("56.38095238095238em")
                 .setHeight("51.04761904761905em")
                 .setCaption("CIC WorkBench維修委託單 ")
                 .setConLayoutColumns(null)
                 .onShow("_dialog_onshow")
-            );
-            
-            host.dialog.append(
-                xui.create("xui.UI.Block")
-                .setHost(host,"xui_ui_block103")
-                .setDock("bottom")
-                .setLeft("13.333333333333334em")
-                .setTop("20.723809523809525em")
-                .setHeight("3.8857142857142857em")
-                .setConDockPadding({
-                    "left" : 0,
-                    "top" : 10,
-                    "right" : 20,
-                    "bottom" : 10
-                })
-                .setConDockSpacing({
-                    "width" : 10,
-                    "height" : 0
-                })
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"cancelBtn")
-                .setDock("right")
-                .setLeft("23.16190476190476em")
-                .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
-                .setCaption("取消")
-                .onClick("_cancelbtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"saveBtn")
-                .setDock("right")
-                .setLeft("23.923809523809524em")
-                .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
-                .setCaption("儲存")
-                .onClick("_savebtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"printBtn")
-                .setDock("left")
-                .setDockMargin({
-                    "left" : 20,
-                    "top" : 0,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("24.685714285714287em")
-                .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
-                .setCaption("列印")
-                .onClick("_printbtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"messageBtn")
-                .setDock("left")
-                .setDockMargin({
-                    "left" : 10,
-                    "top" : 0,
-                    "right" : 0,
-                    "bottom" : 0
-                })
-                .setLeft("25.447619047619046em")
-                .setTop("0.6857142857142857em")
-                .setWidth("7.390476190476191em")
-                .setCaption("進Bench維修")
-                .onClick("_messagebtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"testMessageBtn")
-                .setDock("left")
-                .setLeft("26.20952380952381em")
-                .setTop("0.6857142857142857em")
-                .setWidth("7.619047619047619em")
-                .setCaption("進Bench測試")
-                .onClick("_testmessagebtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"confirmBtn")
-                .setDock("left")
-                .setLeft("26.97142857142857em")
-                .setTop("0.6857142857142857em")
-                .setWidth("7.619047619047619em")
-                .setCaption("通知秘書確認")
-                .onClick("_confirmbtn_onclick")
-            );
-            
-            host.xui_ui_block103.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"confirmName")
-                .setName("上次Pump出廠CN")
-                .setDataBinder("rdb")
-                .setDataField("秘書確認")
-                .setReadonly(true)
-                .setDock("left")
-                .setLeft("25.904761904761905em")
-                .setTop("0.7619047619047619em")
-                .setWidth("11.428571428571429em")
-                .setHeight("2em")
-                .setLabelSize("4.5em")
-                .setLabelCaption("秘書確認")
-                .setLabelVAlign("middle")
-                .setType("getter")
-                .onClick("_confirmname_onclick")
             );
             
             host.dialog.append(
@@ -207,63 +91,6 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             
             host.form.append(
                 xui.create("xui.UI.Input")
-                .setHost(host,"workid")
-                .setName("工號")
-                .setDataBinder("rdb")
-                .setDataField("工號")
-                .setReadonly(true)
-                .setLeft("2em")
-                .setTop("6.095238095238095em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("工號")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"companyName")
-                .setName("客戶名稱")
-                .setDataBinder("rdb")
-                .setDataField("客戶名稱")
-                .setReadonly(true)
-                .setLeft("18.285714285714285em")
-                .setTop("6.171428571428572em")
-                .setWidth("15.314285714285715em")
-                .setLabelSize("5em")
-                .setLabelCaption("客戶名稱")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"outsn")
-                .setName("Out S/N")
-                .setDataBinder("rdb")
-                .setDataField("Out S/N")
-                .setLeft("34.51428571428571em")
-                .setTop("13.028571428571428em")
-                .setWidth("16.60952380952381em")
-                .setLabelSize("8em")
-                .setLabelCaption("Exg Out S/N")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"insn")
-                .setName("In S/N")
-                .setDataBinder("rdb")
-                .setDataField("In S/N")
-                .setRequired(true)
-                .setTips("輸入S/N")
-                .setLeft("37.40952380952381em")
-                .setTop("15.238095238095237em")
-                .setWidth("13.714285714285714em")
-                .setLabelSize("5em")
-                .setLabelCaption("入廠S/N")
-                .onChange("_insn_onchange")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
                 .setHost(host,"repairNo")
                 .setName("登錄編號")
                 .setDataBinder("rdb")
@@ -284,427 +111,13 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"lastcn")
-                .setName("上次Pump出廠CN")
-                .setDataBinder("rdb")
-                .setDataField("上次Pump出廠CN")
-                .setReadonly(true)
-                .setLeft("2em")
-                .setTop("8.380952380952381em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("上次出廠CN")
-                .setType("getter")
-                .onClick("_lastcn_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox141")
-                .setName("上次沒有保固標籤")
-                .setDataBinder("rdb")
-                .setDataField("上次沒有保固標籤")
-                .setLeft("19.047619047619047em")
-                .setTop("8.380952380952381em")
-                .setWidth("18em")
-                .setCaption("上次沒有保固標籤")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"lastWarrantyDate")
-                .setName("上次CN保固截止日期")
-                .setDataBinder("rdb")
-                .setDataField("上次CN保固截止日期")
-                .setLeft("0em")
-                .setTop("10.666666666666666em")
-                .setWidth("18.20952380952381em")
-                .setLabelSize("10em")
-                .setLabelCaption("上次CN保固截止日期")
-                .setType("date")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_input586")
-                .setName("Sponser")
-                .setDataBinder("rdb")
-                .setDataField("Sponser")
-                .setLeft("34.285714285714285em")
-                .setTop("6.171428571428572em")
-                .setWidth("15.238095238095237em")
-                .setLabelSize("8em")
-                .setLabelCaption("Field負責工程師")
-                .setType("cmdbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"lastRepairNo")
-                .setName("上次登錄編號")
-                .setDataBinder("rdb")
-                .setDataField("上次登錄編號")
-                .setReadonly(true)
-                .setLeft("2em")
-                .setTop("3.8095238095238093em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("上次登錄編號")
-                .setType("getter")
-                .onClick("_lastrepairno_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"xui_ui_comboinput420")
-                .setName("Date Received")
-                .setDataBinder("rdb")
-                .setDataField("Date Received")
-                .setLeft("2em")
-                .setTop("22.095238095238095em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("入廠登錄日期")
-                .setType("date")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.CheckBox")
-                .setHost(host,"xui_ui_checkbox145")
-                .setName("SL是否需維修報告")
-                .setDataBinder("rdb")
-                .setDataField("SL是否需維修報告")
-                .setLeft("2em")
-                .setTop("40.99047619047619em")
-                .setWidth("18em")
-                .setCaption("客戶需要維修報告")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input593")
-                .setName("SL入廠原因附註")
-                .setDataBinder("rdb")
-                .setDataField("SL入廠原因附註")
-                .setLeft("19.047619047619047em")
-                .setTop("29.714285714285715em")
-                .setWidth("29.714285714285715em")
-                .setHeight("6.095238095238095em")
-                .setLabelSize("8em")
-                .setLabelCaption("入廠原因附註")
-                .setMultiLines(true)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input595")
-                .setName("SL維修注意事項")
-                .setDataBinder("rdb")
-                .setDataField("SL維修注意事項")
-                .setLeft("1.980952380952381em")
-                .setTop("36.57142857142857em")
-                .setWidth("46.78095238095238em")
-                .setHeight("4.114285714285714em")
-                .setLabelSize("8em")
-                .setLabelCaption("維修注意事項")
-                .setMultiLines(true)
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.RadioBox")
-                .setHost(host,"testFirst")
-                .setName("SL是否要測試")
-                .setDataBinder("rdb")
-                .setDataField("SL是否要測試")
-                .setItems([
-                    {
-                        "id" : "0",
-                        "caption" : "直接維修",
-                        "imageClass" : ""
-                    },
-                    {
-                        "id" : "1",
-                        "caption" : "先測試，不直接維修",
-                        "imageClass" : ""
-                    }
-                ])
-                .setLeft("3.8095238095238093em")
-                .setTop("28.952380952380953em")
-                .setWidth("15.619047619047619em")
-                .setHeight("6.704761904761905em")
-                .setBorderType("flat")
-                .setLabelSize("1.5em")
-                .setLabelPos("top")
-                .setLabelCaption("直接維修或先行測試")
-                .setLabelHAlign("left")
-                .setCheckBox(true)
-                .setValue("")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"serviceBtn")
-                .setLeft("35.04761904761905em")
-                .setTop("3.0476190476190474em")
-                .setWidth("13.790476190476191em")
-                .setCaption("CRM 服務紀錄")
-                .setType("drop")
-                .onClick("_servicebtn_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"outmodel")
-                .setName("型號(EX form)")
-                .setDataBinder("rdb")
-                .setDataField("型號(EX form)")
-                .setReadonly(true)
-                .setAutoTips(false)
-                .setTips("請選取Floating ID#")
-                .setLeft("2em")
-                .setTop("12.952380952380953em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("Exg Out型號")
-                .setType("popbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"inmodel")
-                .setName("In Model")
-                .setDataBinder("rdb")
-                .setDataField("In Model")
-                .setRequired(true)
-                .setLeft("1.980952380952381em")
-                .setTop("15.314285714285715em")
-                .setWidth("16.304761904761904em")
-                .setLabelSize("8em")
-                .setLabelCaption("入廠型號")
-                .setType("popbox")
-                .setCaption("inmodel")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"process")
-                .setName("Process")
-                .setDataBinder("rdb")
-                .setDataField("Process")
-                .setLeft("2em")
-                .setTop("19.80952380952381em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("Process")
-                .setType("popbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"exf")
-                .setName("EX/F分類")
-                .setDataBinder("rdb")
-                .setDataField("EX/F分類")
-                .setLeft("1.980952380952381em")
-                .setTop("24.38095238095238em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("維修分類歸屬")
-                .setType("popbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"errorCode")
-                .setName("SL入廠原因")
-                .setDataBinder("rdb")
-                .setDataField("SL入廠原因")
-                .setAutoTips(false)
-                .setLeft("2em")
-                .setTop("26.97142857142857em")
-                .setWidth("16.228571428571428em")
-                .setLabelSize("8em")
-                .setLabelCaption("入廠原因代碼")
-                .setType("popbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"unitId")
-                .setName("Unit ID")
-                .setDataBinder("rdb")
-                .setDataField("Unit ID")
-                .setLeft("17.523809523809526em")
-                .setTop("22.095238095238095em")
-                .setWidth("17.523809523809526em")
-                .setLabelSize("8em")
-                .setLabelCaption("Floating ID#")
-                .setType("popbox")
-                .onValueChange("_unitid_onvaluechange")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"repairOutsideBtn")
-                .setName("上次登錄編號")
-                .setDataBinder("rdb")
-                .setDataField("委外單號")
-                .setLeft("18.285714285714285em")
-                .setTop("3.8095238095238093em")
-                .setWidth("15.314285714285715em")
-                .setLabelSize("5em")
-                .setLabelCaption("委外單號")
-                .setType("getter")
-                .onClick("_repairoutsidebtn_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"incidentBtn")
-                .setLeft("32.857142857142854em")
-                .setTop("0.7619047619047619em")
-                .setWidth("12.857142857142858em")
-                .setHeight("1.7523809523809524em")
-                .setLabelSize("5em")
-                .setLabelCaption("CRM案件")
-                .setType("getter")
-                .onClick("_incidentbtn_onclick")
-                .setCustomStyle({
-                    "KEY" : {
-                        "font-size" : "14px"
-                    }
-                })
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"changedModel")
-                .setName("In Model")
-                .setDataBinder("rdb")
-                .setDataField("變更後型號")
-                .setLeft("1.980952380952381em")
-                .setTop("17.6em")
-                .setWidth("16.304761904761904em")
-                .setLabelSize("8em")
-                .setLabelCaption("變更後型號")
-                .setType("popbox")
-                .setCaption("inmodel")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"changedSn")
-                .setDataBinder("rdb")
-                .setDataField("變更後S/N")
-                .setTips("輸入S/N")
-                .setLeft("37.40952380952381em")
-                .setTop("17.752380952380953em")
-                .setWidth("13.714285714285714em")
-                .setLabelSize("5em")
-                .setLabelCaption("變更後S/N")
-                .onChange("_changedsn_onchange")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"cnCode")
-                .setName("CN分類碼")
-                .setDataBinder("rdb")
-                .setDataField("CN分類碼")
-                .setLeft("17.523809523809526em")
-                .setTop("19.80952380952381em")
-                .setWidth("17.523809523809526em")
-                .setLabelSize("8em")
-                .setLabelCaption("CN分類碼")
-                .setType("popbox")
-                .setMaxlength("5")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"changedPn")
-                .setName("In P/N")
-                .setDataBinder("rdb")
-                .setDataField("變更後P/N")
-                .setLeft("20.571428571428573em")
-                .setTop("17.523809523809526em")
-                .setWidth("14.476190476190476em")
-                .setLabelSize("5em")
-                .setLabelCaption("變更後P/N")
-                .setType("popbox")
-                .setCaption("")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"inpn")
-                .setDataBinder("rdb")
-                .setDataField("In P/N")
-                .setRequired(true)
-                .setLeft("20.571428571428573em")
-                .setTop("15.238095238095237em")
-                .setWidth("14.476190476190476em")
-                .setLabelSize("5em")
-                .setLabelCaption("入廠P/N")
-                .setType("popbox")
-                .setCaption("")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.ComboInput")
-                .setHost(host,"outpn")
-                .setName("Out P/N")
-                .setDataBinder("rdb")
-                .setDataField("Out P/N")
-                .setReadonly(true)
-                .setTips("請選取Floating ID#")
-                .setLeft("17.676190476190477em")
-                .setTop("13.028571428571428em")
-                .setWidth("17.37142857142857em")
-                .setLabelSize("8em")
-                .setLabelCaption("Exg Out P/N")
-                .setType("popbox")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"plusBtn1")
-                .setLeft("18.590476190476192em")
-                .setTop("15.238095238095237em")
-                .setHeight("1.9047619047619047em")
-                .setCaption("+")
-                .onClick("_plusbtn1_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"plusBtn2")
-                .setLeft("35.50476190476191em")
-                .setTop("15.161904761904761em")
-                .setHeight("1.9047619047619047em")
-                .setCaption("+")
-                .onClick("_plusbtn2_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"plusBtn3")
-                .setLeft("18.590476190476192em")
-                .setTop("17.6em")
-                .setHeight("1.9047619047619047em")
-                .setCaption("+")
-                .onClick("_plusbtn3_onclick")
-            );
-            
-            host.form.append(
-                xui.create("xui.UI.Button")
-                .setHost(host,"plusBtn4")
-                .setLeft("35.50476190476191em")
-                .setTop("17.523809523809526em")
-                .setHeight("1.9047619047619047em")
-                .setCaption("+")
-                .onClick("_plusbtn4_onclick")
+                xui.create("xui.UI.Label")
+                .setHost(host,"errorContent")
+                .setLeft("19.80952380952381em")
+                .setTop("27.428571428571427em")
+                .setWidth("25.447619047619046em")
+                .setCaption("Label")
+                .setHAlign("left")
             );
             
             host.form.append(
@@ -715,6 +128,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 .setLeft("13.3em")
                 .setTop("0.5em")
                 .setWidth("8.7em")
+                .setTabindex(2)
                 .setLabelSize("1em")
                 .setLabelCaption("-")
                 .setType("listbox")
@@ -744,13 +158,640 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             );
             
             host.form.append(
-                xui.create("xui.UI.Label")
-                .setHost(host,"errorContent")
-                .setLeft("19.80952380952381em")
-                .setTop("27.428571428571427em")
-                .setWidth("25.447619047619046em")
-                .setCaption("Label")
-                .setHAlign("left")
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"incidentBtn")
+                .setLeft("32.857142857142854em")
+                .setTop("0.7619047619047619em")
+                .setWidth("12.857142857142858em")
+                .setHeight("1.7523809523809524em")
+                .setTabindex(3)
+                .setLabelSize("5em")
+                .setLabelCaption("CRM案件")
+                .setType("getter")
+                .onClick("_incidentbtn_onclick")
+                .setCustomStyle({
+                    "KEY" : {
+                        "font-size" : "14px"
+                    }
+                })
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"serviceBtn")
+                .setLeft("35.04761904761905em")
+                .setTop("3.0476190476190474em")
+                .setWidth("13.790476190476191em")
+                .setTabindex(4)
+                .setCaption("CRM 服務紀錄")
+                .setType("drop")
+                .onClick("_servicebtn_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"lastRepairNo")
+                .setName("上次登錄編號")
+                .setDataBinder("rdb")
+                .setDataField("上次登錄編號")
+                .setLeft("1.0666666666666667em")
+                .setTop("3.8095238095238093em")
+                .setWidth("16.99047619047619em")
+                .setTabindex(5)
+                .setLabelSize("9em")
+                .setLabelCaption("上次入廠登錄編號")
+                .setType("getter")
+                .onClick("_lastrepairno_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"workid")
+                .setName("工號")
+                .setDataBinder("rdb")
+                .setDataField("工號")
+                .setReadonly(true)
+                .setLeft("2em")
+                .setTop("6.095238095238095em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(6)
+                .setLabelSize("8em")
+                .setLabelCaption("工號")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"companyName")
+                .setName("客戶名稱")
+                .setDataBinder("rdb")
+                .setDataField("客戶名稱")
+                .setReadonly(true)
+                .setLeft("18.285714285714285em")
+                .setTop("6.171428571428572em")
+                .setWidth("15.314285714285715em")
+                .setTabindex(7)
+                .setLabelSize("5em")
+                .setLabelCaption("客戶名稱")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_input586")
+                .setName("Sponser")
+                .setDataBinder("rdb")
+                .setDataField("Sponser")
+                .setLeft("34.285714285714285em")
+                .setTop("6.171428571428572em")
+                .setWidth("15.238095238095237em")
+                .setTabindex(8)
+                .setLabelSize("8em")
+                .setLabelCaption("Field負責工程師")
+                .setType("cmdbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"lastcn")
+                .setName("上次Pump出廠CN")
+                .setDataBinder("rdb")
+                .setDataField("上次Pump出廠CN")
+                .setLeft("2em")
+                .setTop("8.380952380952381em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(9)
+                .setLabelSize("8em")
+                .setLabelCaption("上次出廠CN")
+                .setType("getter")
+                .onClick("_lastcn_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox141")
+                .setName("上次沒有保固標籤")
+                .setDataBinder("rdb")
+                .setDataField("上次沒有保固標籤")
+                .setLeft("19.047619047619047em")
+                .setTop("8.380952380952381em")
+                .setWidth("18em")
+                .setTabindex(10)
+                .setCaption("上次沒有保固標籤")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"lastWarrantyDate")
+                .setName("上次CN保固截止日期")
+                .setDataBinder("rdb")
+                .setDataField("上次CN保固截止日期")
+                .setLeft("3.8095238095238093em")
+                .setTop("10.666666666666666em")
+                .setWidth("21.333333333333332em")
+                .setTabindex(11)
+                .setLabelSize("12em")
+                .setLabelCaption("上次出廠CN保固截止日期")
+                .setType("date")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"outmodel")
+                .setName("型號(EX form)")
+                .setDataBinder("rdb")
+                .setDataField("型號(EX form)")
+                .setReadonly(true)
+                .setAutoTips(false)
+                .setTips("請選取Floating ID#")
+                .setLeft("2em")
+                .setTop("12.952380952380953em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(12)
+                .setLabelSize("8em")
+                .setLabelCaption("Exg Out型號")
+                .setType("popbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"outpn")
+                .setName("Out P/N")
+                .setDataBinder("rdb")
+                .setDataField("Out P/N")
+                .setReadonly(true)
+                .setTips("請選取Floating ID#")
+                .setLeft("17.676190476190477em")
+                .setTop("13.028571428571428em")
+                .setWidth("19.65714285714286em")
+                .setTabindex(13)
+                .setLabelSize("8em")
+                .setLabelCaption("Exg Out P/N")
+                .setType("popbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"outsn")
+                .setName("Out S/N")
+                .setDataBinder("rdb")
+                .setDataField("Out S/N")
+                .setLeft("37.333333333333336em")
+                .setTop("13.028571428571428em")
+                .setWidth("17.523809523809526em")
+                .setTabindex(14)
+                .setLabelSize("8em")
+                .setLabelCaption("Exg Out S/N")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"inmodel")
+                .setName("In Model")
+                .setDataBinder("rdb")
+                .setDataField("In Model")
+                .setRequired(true)
+                .setLeft("1.980952380952381em")
+                .setTop("15.314285714285715em")
+                .setWidth("16.304761904761904em")
+                .setTabindex(15)
+                .setLabelSize("8em")
+                .setLabelCaption("入廠型號")
+                .setType("popbox")
+                .setCaption("inmodel")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"plusBtn1")
+                .setLeft("18.590476190476192em")
+                .setTop("15.238095238095237em")
+                .setHeight("1.9047619047619047em")
+                .setTabindex(16)
+                .setCaption("+")
+                .onClick("_plusbtn1_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"inpn")
+                .setDataBinder("rdb")
+                .setDataField("In P/N")
+                .setRequired(true)
+                .setLeft("20.571428571428573em")
+                .setTop("15.238095238095237em")
+                .setWidth("16.761904761904763em")
+                .setTabindex(17)
+                .setLabelSize("5em")
+                .setLabelCaption("入廠P/N")
+                .setType("popbox")
+                .setCaption("")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"plusBtn2")
+                .setLeft("37.63809523809524em")
+                .setTop("15.161904761904761em")
+                .setHeight("1.9047619047619047em")
+                .setTabindex(18)
+                .setCaption("+")
+                .onClick("_plusbtn2_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"insn")
+                .setName("In S/N")
+                .setDataBinder("rdb")
+                .setDataField("In S/N")
+                .setRequired(true)
+                .setTips("輸入S/N")
+                .setLeft("40.22857142857143em")
+                .setTop("15.238095238095237em")
+                .setWidth("14.628571428571428em")
+                .setTabindex(19)
+                .setLabelSize("5em")
+                .setLabelCaption("入廠S/N")
+                .afterUIValueSet("_insn_afteruivalueset")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"changedModel")
+                .setName("In Model")
+                .setDataBinder("rdb")
+                .setDataField("變更後型號")
+                .setLeft("1.980952380952381em")
+                .setTop("17.6em")
+                .setWidth("16.304761904761904em")
+                .setTabindex(20)
+                .setLabelSize("8em")
+                .setLabelCaption("變更後型號")
+                .setType("popbox")
+                .setCaption("inmodel")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"plusBtn3")
+                .setLeft("18.590476190476192em")
+                .setTop("17.6em")
+                .setHeight("1.9047619047619047em")
+                .setTabindex(21)
+                .setCaption("+")
+                .onClick("_plusbtn3_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"changedPn")
+                .setName("In P/N")
+                .setDataBinder("rdb")
+                .setDataField("變更後P/N")
+                .setLeft("20.571428571428573em")
+                .setTop("17.523809523809526em")
+                .setWidth("16.761904761904763em")
+                .setTabindex(22)
+                .setLabelSize("5em")
+                .setLabelCaption("變更後P/N")
+                .setType("popbox")
+                .setCaption("")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"plusBtn4")
+                .setLeft("37.63809523809524em")
+                .setTop("17.523809523809526em")
+                .setHeight("1.9047619047619047em")
+                .setTabindex(23)
+                .setCaption("+")
+                .onClick("_plusbtn4_onclick")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"changedSn")
+                .setDataBinder("rdb")
+                .setDataField("變更後S/N")
+                .setTips("輸入S/N")
+                .setLeft("40.22857142857143em")
+                .setTop("17.752380952380953em")
+                .setWidth("14.628571428571428em")
+                .setTabindex(24)
+                .setLabelSize("5em")
+                .setLabelCaption("變更後S/N")
+                .onChange("_changedsn_onchange")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"process")
+                .setName("Process")
+                .setDataBinder("rdb")
+                .setDataField("Process")
+                .setLeft("2em")
+                .setTop("19.80952380952381em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(25)
+                .setLabelSize("8em")
+                .setLabelCaption("Process")
+                .setType("popbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"cnCode")
+                .setName("CN分類碼")
+                .setDataBinder("rdb")
+                .setDataField("CN分類碼")
+                .setLeft("17.523809523809526em")
+                .setTop("19.80952380952381em")
+                .setWidth("17.523809523809526em")
+                .setTabindex(26)
+                .setLabelSize("8em")
+                .setLabelCaption("CN分類碼")
+                .setType("popbox")
+                .setMaxlength("5")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"xui_ui_comboinput420")
+                .setName("Date Received")
+                .setDataBinder("rdb")
+                .setDataField("Date Received")
+                .setLeft("2em")
+                .setTop("22.095238095238095em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(27)
+                .setLabelSize("8em")
+                .setLabelCaption("入廠登錄日期")
+                .setType("date")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"unitId")
+                .setName("Unit ID")
+                .setDataBinder("rdb")
+                .setDataField("Unit ID")
+                .setLeft("17.523809523809526em")
+                .setTop("22.095238095238095em")
+                .setWidth("17.523809523809526em")
+                .setTabindex(28)
+                .setLabelSize("8em")
+                .setLabelCaption("Floating ID#")
+                .setType("popbox")
+                .onValueChange("_unitid_onvaluechange")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"exf")
+                .setName("EX/F分類")
+                .setDataBinder("rdb")
+                .setDataField("EX/F分類")
+                .setLeft("1.980952380952381em")
+                .setTop("24.38095238095238em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(29)
+                .setLabelSize("8em")
+                .setLabelCaption("維修分類歸屬")
+                .setType("popbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"errorCode")
+                .setName("SL入廠原因")
+                .setDataBinder("rdb")
+                .setDataField("SL入廠原因")
+                .setAutoTips(false)
+                .setLeft("2em")
+                .setTop("26.97142857142857em")
+                .setWidth("16.228571428571428em")
+                .setTabindex(30)
+                .setLabelSize("8em")
+                .setLabelCaption("入廠原因代碼")
+                .setType("popbox")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.RadioBox")
+                .setHost(host,"testFirst")
+                .setName("SL是否要測試")
+                .setDataBinder("rdb")
+                .setDataField("SL是否要測試")
+                .setItems([
+                    {
+                        "id" : "0",
+                        "caption" : "直接維修",
+                        "imageClass" : ""
+                    },
+                    {
+                        "id" : "1",
+                        "caption" : "先測試，不直接維修",
+                        "imageClass" : ""
+                    }
+                ])
+                .setLeft("3.8095238095238093em")
+                .setTop("28.952380952380953em")
+                .setWidth("15.619047619047619em")
+                .setHeight("6.704761904761905em")
+                .setTabindex(31)
+                .setBorderType("flat")
+                .setLabelSize("1.5em")
+                .setLabelPos("top")
+                .setLabelCaption("直接維修或先行測試")
+                .setLabelHAlign("left")
+                .setCheckBox(true)
+                .setValue("")
+                .onChange("_testfirst_onchange")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input593")
+                .setName("SL入廠原因附註")
+                .setDataBinder("rdb")
+                .setDataField("SL入廠原因附註")
+                .setLeft("19.047619047619047em")
+                .setTop("29.714285714285715em")
+                .setWidth("29.714285714285715em")
+                .setHeight("6.095238095238095em")
+                .setTabindex(32)
+                .setLabelSize("8em")
+                .setLabelCaption("入廠原因附註")
+                .setMultiLines(true)
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input595")
+                .setName("SL維修注意事項")
+                .setDataBinder("rdb")
+                .setDataField("SL維修注意事項")
+                .setLeft("1.980952380952381em")
+                .setTop("36.57142857142857em")
+                .setWidth("46.78095238095238em")
+                .setHeight("4.114285714285714em")
+                .setTabindex(33)
+                .setLabelSize("8em")
+                .setLabelCaption("維修注意事項")
+                .setMultiLines(true)
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.CheckBox")
+                .setHost(host,"xui_ui_checkbox145")
+                .setName("SL是否需維修報告")
+                .setDataBinder("rdb")
+                .setDataField("SL是否需維修報告")
+                .setLeft("2em")
+                .setTop("40.99047619047619em")
+                .setWidth("18em")
+                .setTabindex(34)
+                .setCaption("客戶需要維修報告")
+            );
+            
+            host.form.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"repairOutsideBtn")
+                .setName("上次登錄編號")
+                .setDataBinder("rdb")
+                .setDataField("委外單號")
+                .setLeft("18.285714285714285em")
+                .setTop("3.8095238095238093em")
+                .setWidth("15.314285714285715em")
+                .setTabindex(42)
+                .setLabelSize("5em")
+                .setLabelCaption("委外單號")
+                .setType("getter")
+                .onClick("_repairoutsidebtn_onclick")
+            );
+            
+            host.dialog.append(
+                xui.create("xui.UI.Block")
+                .setHost(host,"xui_ui_block103")
+                .setDock("bottom")
+                .setLeft("13.333333333333334em")
+                .setTop("20.723809523809525em")
+                .setHeight("3.8857142857142857em")
+                .setTabindex(2)
+                .setConDockPadding({
+                    "left" : 0,
+                    "top" : 10,
+                    "right" : 20,
+                    "bottom" : 10
+                })
+                .setConDockSpacing({
+                    "width" : 10,
+                    "height" : 0
+                })
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"printBtn")
+                .setDock("left")
+                .setDockMargin({
+                    "left" : 20,
+                    "top" : 0,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("24.685714285714287em")
+                .setTop("0.6857142857142857em")
+                .setWidth("5.561904761904762em")
+                .setTabindex(35)
+                .setCaption("列印")
+                .onClick("_printbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"messageBtn")
+                .setDock("left")
+                .setDockMargin({
+                    "left" : 10,
+                    "top" : 0,
+                    "right" : 0,
+                    "bottom" : 0
+                })
+                .setLeft("25.447619047619046em")
+                .setTop("0.6857142857142857em")
+                .setWidth("7.390476190476191em")
+                .setTabindex(36)
+                .setCaption("進Bench維修")
+                .onClick("_messagebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"testMessageBtn")
+                .setDock("left")
+                .setLeft("26.20952380952381em")
+                .setTop("0.6857142857142857em")
+                .setWidth("7.619047619047619em")
+                .setTabindex(37)
+                .setCaption("進Bench測試")
+                .onClick("_testmessagebtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"confirmBtn")
+                .setDock("left")
+                .setLeft("26.97142857142857em")
+                .setTop("0.6857142857142857em")
+                .setWidth("7.619047619047619em")
+                .setTabindex(38)
+                .setCaption("通知秘書確認")
+                .onClick("_confirmbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirmName")
+                .setName("上次Pump出廠CN")
+                .setDataBinder("rdb")
+                .setDataField("秘書確認")
+                .setReadonly(true)
+                .setDock("left")
+                .setLeft("25.904761904761905em")
+                .setTop("0.7619047619047619em")
+                .setWidth("11.428571428571429em")
+                .setHeight("2em")
+                .setTabindex(39)
+                .setLabelSize("4.5em")
+                .setLabelCaption("秘書確認")
+                .setLabelVAlign("middle")
+                .setType("getter")
+                .onClick("_confirmname_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"cancelBtn")
+                .setDock("right")
+                .setLeft("23.16190476190476em")
+                .setTop("0.6857142857142857em")
+                .setWidth("5.561904761904762em")
+                .setTabindex(40)
+                .setCaption("取消")
+                .onClick("_cancelbtn_onclick")
+            );
+            
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"saveBtn")
+                .setDock("right")
+                .setLeft("23.923809523809524em")
+                .setTop("0.6857142857142857em")
+                .setWidth("5.561904761904762em")
+                .setTabindex(41)
+                .setCaption("儲存")
+                .onClick("_savebtn_onclick")
             );
             
             append(
@@ -812,6 +853,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             }
             else if(prop.mode  ==  "newExchange") //exchange
               ns.rdb.setData("type","E");  
+            ns.writeBackWorkSheets();
+    
             var ignoreFields =  ["維修報告"]; //binary, need convert
             utils.saveForm(ns, ignoreFields);
         },
@@ -891,6 +934,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             }
             if(AppName == "BU3")
                 ns.errorContent.hide();
+            ns.showMessageBtns();
             //ns.db.setData(prop.datas).updateDataToUI().getUI().setDisabled(false);
           //  xui.alert("onShowDialog");  
         },
@@ -906,12 +950,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 var ns = this, uictrl = profile.boxing();
                 ns.dialog.close();
             },
-            _insn_onchange:function(profile, value, o, t, a, r){
-                var ns = this;
-                ns.updateLastCnRepairNo();
 
-
-            },
         updateIncidentBtn : function(){
             var ns = this;
             var repairNo = ns.repairNo.getValue();
@@ -987,11 +1026,11 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
           ns.rdb.updateDataFromUI();  
           var data = ns.rdb.getData();
           var work = utils.getItemValue("工號登錄總資料表","工號", data["工號"], "*");
-          var today = xui.Date.format(new Date(),"yyyy-mm-dd");
+          var today = utils.dateTimeToString(utils.addHours(new Date(), -8));
           var loadcb = function(mod){
             var item1 = {"WorkOrder":data["工號"],"FixOrderNo": data["登錄編號"], "CompanyID":work["CompanyID"], "DeptID":LoginUser["DeptID"], "ServiceEmplID":LoginUser["EmplID"],
-                         "StartDate": today, "CreateDeptID":LoginUser["DeptID"], "CreatorID":LoginUser["EmplID"], "CreateDate":today, "OwnerDeptID":LoginUser["DeptID"], "OwnerID":LoginUser["EmplID"],
-                         "ContactID":work["ContactID"], "ContactName": work["連絡人"], "CompanyName": work["客戶資料"], "ProductNo": data["Out S/N"], "ProductID":data["Out P/N"],
+                         "CreateDeptID":LoginUser["DeptID"], "CreatorID":LoginUser["EmplID"], "CreateDate":today, "OwnerDeptID":LoginUser["DeptID"], "OwnerID":LoginUser["EmplID"],
+                         "ContactID":work["ContactID"], "ContactName": work["連絡人"], "CompanyName": work["客戶資料"], "ProductNo": data["In S/N"], "ProductID":data["In P/N"],
                          "Description":work["狀況簡述"]};
             mod.idb.setData(item1);
             mod.idb.updateDataToUI();
@@ -1019,6 +1058,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
         */
         _servicemenu_onmenuselected:function(profile, item, src){
             var ns = this, uictrl = profile.boxing();
+            var today = utils.dateTimeToString(utils.addHours(new Date(), -8));
+            
             var repairNo = ns.repairNo.getValue();
             if( repairNo == "")
             {
@@ -1029,6 +1070,18 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             if(value == "new")
             {
               var incidentId = ns.incidentBtn.getValue();
+              var idata = utils.getItemValue("crm.Incident","IncidentID", incidentId);  
+                
+              if(idata["ErpType"] == "1")
+              {
+                utils.alert("CRM案件已拋轉!");
+                return;  
+              }
+              if(idata["Status"] == "4")
+              {
+                utils.alert("CRM案件已結案!");
+                return;  
+              }
               if(incidentId == "" && repairNo.includes("E"))
               {
                 ns.newIncidentAndServiceRecord();  
@@ -1039,15 +1092,22 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
               var data = utils.getItemValue("crm.Incident","IncidentID", incidentId);
               if(data != "")
               {
-                  var item = {"IncidentID": incidentId,"CreateDeptID":LoginUser["DeptID"], "CreatorID":LoginUser["EmplID"], "CreateDate":utils.today(), "OwnerDeptID":LoginUser["DeptID"],
+                  var item = {"IncidentID": incidentId,"CreateDeptID":LoginUser["DeptID"], "CreatorID":LoginUser["EmplID"], "CreateDate": today, "OwnerDeptID":LoginUser["DeptID"],
                              "DeptID":LoginUser["DeptID"], "ServiceEmplID":LoginUser["EmplID"], "ProductNo": data["ProductNo"], "ProductID":data["ProductID"],
-                             "ProblemDescription":data["Description"], "Subject":data["IncidentName"], "StartTime":utils.now()};  
+                             "ProblemDescription":data["Description"], "Subject":data["IncidentName"], "StartTime":utils.now(), "OwnerID":LoginUser["EmplID"]};  
                   item.FixOrderNo = data.FixOrderNo;
                   item.CompanyID = data.CompanyID;
                   item.ContactID = data.ContactID;
                   item.ContactName = data.ContactName; 
                   item.WorkOrder = data.WorkOrder;
                   item.Process = rdata["Process"];
+                  if(repairNo.includes("E"))
+                  {
+                      item["BU3_ProductNo"] = rdata["Out S/N"];
+                      item["BU3_ProductID"] = rdata["Out P/N"];
+                      item["BU3_ID"] = rdata["Unit ID"];
+                  }
+
                   var loadcb = function(mod){
                       mod.sdb.setData(item);
                       mod.sdb.updateDataToUI();
@@ -1158,6 +1218,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
         */
         _incidentbtn_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
+            var today = utils.dateTimeToString(utils.addHours(new Date(), -8));
             var repairNo = ns.repairNo.getValue();
             if(repairNo == "")
             {
@@ -1173,8 +1234,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                  return;        
                }              
               //repair sheet  
+                
                var workid = ns.workid.getValue();
                var work = utils.getItemValue("工號登錄總資料表","工號",workid);
+/*               
                var prodoctNo = ns.outsn.getValue();
                var productid = ns.outpn.getValue(); 
                 if(prodoctNo == "")
@@ -1182,11 +1245,14 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                    prodoctNo = ns.insn.getValue(); 
                    productid = ns.inpn.getValue(); 
                 }
+*/                
+               prodoctNo = ns.insn.getValue(); 
+               productid = ns.inpn.getValue(); 
                var item = {"FixOrderNo":repairNo,"ServiceEmplID":LoginUser.EmplID, "DeptID":LoginUser["DeptID"],"CreateDeptID":LoginUser["DeptID"], "CreatorID":LoginUser["EmplID"],
-                           "StartDate":utils.today(),"CreateDate":utils.today(), "OwnerDeptID":LoginUser["DeptID"],"OwnerID":LoginUser["EmplID"],
+                           "CreateDate": today, "OwnerDeptID":LoginUser["DeptID"],"OwnerID":LoginUser["EmplID"],
                            "ProductNo": prodoctNo, "ProductID": productid, "Description":work["狀況簡述"]};
                var condition = `工號='${workid}'`; 
-
+/*
                var inmodel = ns.inmodel.getUIValue();
                if(inmodel != "")
                {
@@ -1197,7 +1263,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                    item["ProductNameCHT"] = pdata["ProductNameCHT"];  
                  }
                }
-               
+*/               
                var data = utils.getItemValue("工號登錄總資料表","工號",workid);
                item.WorkOrder = workid;  
                if(data != "")
@@ -1307,13 +1373,35 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             var item = utils.getItemValue(table, "登錄編號", rid);
             if(item == "")
             {
-                utils.insertTableItem(table, data);
+                item = utils.insertTableItem(table, data);
                 xui.message(`${table} ${rid} 已新增!`);
             }
             else
                 xui.message(`${table} ${rid} 已經存在!`);
+            return item;
         },
-        
+        writeBackWorkSheets:function(){
+             var ns = this;
+            var item = utils.getDataFromUI(ns.rdb, false); //no check
+            var model = item["In Model"], pn = item["In P/N"], sn = item["In S/N"];
+            if(item["變更後型號"] != "")
+            {
+                model = item["變更後型號"];
+                pn = item["變更後P/N"];
+                sn = item["變更後S/N"];
+            }
+            
+            var data = {"登錄編號":item["登錄編號"], "Model": model, "P/N": pn, "S/N": sn, "Compressor P/N":pn, "Compressor S/N":sn,
+                        "Pump": model, "Pump P/N": pn,  "Pump S/N": sn, "Pump Unit ID": item["Unit ID"], "Report":item["SL是否需維修報告"],"進廠原因":item["SL入廠原因附註"],
+                        "保固期":item["上次CN保固截止日期"]};
+            utils.modifyTableItem("Cryopump維修工單","登錄編號",data);
+            utils.modifyTableItem("Compressor維修工單","登錄編號",data);
+            utils.modifyTableItem("Module功能測試表","登錄編號",data);
+            utils.modifyTableItem("3phControler維修工單","登錄編號",data);
+            utils.modifyTableItem("CylinderHeater維修工單","登錄編號",data);
+            //utils.modifyTableItem("Crosshead維修工單","登錄編號",data);
+            
+        },
         newRepairWorkSheets: function(doTest){
             var ns = this;
             var now = utils.now();
@@ -1329,52 +1417,91 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             }
             
             var data = {"登錄編號":item["登錄編號"], "Model": model, "P/N": pn, "S/N": sn,"客戶名稱": item["客戶名稱"], "日期":utils.today(),
-                           "保固期":item["保固期"],"上次登錄編號":item["上次登錄編號"], "上次登錄時間":item["上次登錄時間"],"上次故障原因":item["上次故障原因"],
-                          "Pump": model, "Pump P/N": pn,  "Pump S/N": sn, "入站時間": now};
-            var sheet = utils.getItemValue("CN分類碼副資料庫","CN分類碼",cncode, "工單");
-            if(sheet.includes("Cryopump"))
+                           "保固期":item["上次CN保固截止日期"],"上次登錄編號":item["上次登錄編號"], 
+                          "Pump": model, "Pump P/N": pn,  "Pump S/N": sn, "入站時間": now, "Pump Unit ID": item["Unit ID"], "Report":item["SL是否需維修報告"],
+                           "Compressor P/N":pn, "Compressor S/N":sn, "進廠原因":item["SL入廠原因附註"]};
+            var lastRno = data["上次登錄編號"];
+            if( lastRno != "" && lastRno != "N/A")  //帶入上次工單
             {
-                data["維修站名"] = "拆解站";
-                data["維修狀態"] = "待拆解";
-                ns.newRepairSheetOne("Cryopump維修工單", data);
+                var lastItem = utils.getItemValue("CTI Control Number總資料庫","登錄編號", lastRno);
+                if(lastItem != "")
+                {
+                  data["上次登錄時間"] = lastItem["Date Received"];
+                  data["上次故障原因"] = lastItem["SL入廠原因附註"]; 
+                }
             }
+            var sheet = utils.getItemValue("CN分類碼副資料庫","CN分類碼",cncode, "工單");
             if(sheet.includes("Crosshead"))
             {
-                data["維修站名"] = "Crosshead站";
-                data["維修狀態"] = "待維修";
-                ns.newRepairSheetOne("Crosshead維修工單", data);
+                data["工單類別"] = "Crosshead";
+                if(!sheet.includes("Cryopump")) //主單
+                    data["維修站名"] = "Crosshead";
+                else    
+                    data["維修站名"] = "拆解站";
+                data["維修狀態"] = "通知維修";
+                var bak = data["S/N"];
+                var bak2 = data["Modedl"];
+                data["S/N"] = "";
+                data["Model"] = "";
+                var xdata  = ns.newRepairSheetOne("Crosshead維修工單", data);
+                data["S/N"] = bak;
+                data["Model"] = bak2;
+            }
+            if(sheet.includes("Cryopump"))
+            {
+                //if(sheet.includes("Crosshead") && xdata) //write xhcode
+                //    data["Crosshead編號"] = xdata["Crosshead編號"];
+                data["工單類別"] = "Cryo Pump";
+                if(doTest)
+                {
+                  data["維修站名"] = "拆解站";
+                  data["維修狀態"] = "通知測試";
+                }
+                else 
+                {
+                  data["維修站名"] = "拆解站";
+                  data["維修狀態"] = "通知維修";
+                }
+                ns.newRepairSheetOne("Cryopump維修工單", data);
             }
             if(sheet.includes("Compressor"))
             {
                 data["維修站名"] = "Compressor";
-                data["維修狀態"] = "待維修";
+                data["維修狀態"] = "通知維修";
                 ns.newRepairSheetOne("Compressor維修工單", data);
             }
             if(sheet.includes("Module"))
             {
-                data["維修站名"] = "Module站";
-                data["維修狀態"] = "待維修";
+                if(!sheet.includes("Cryopump")) //主單
+                    data["維修站名"] = "Module";
+                else    
+                    data["維修站名"] = "拆解站";
+                data["維修狀態"] = "通知維修";
+                var bak1 = data["Pump S/N"];
+                data["Pump S/N"] = "";
                 ns.newRepairSheetOne("Module功能測試表", data);
+                data["Pump S/N"] = bak1;
             }
             if(sheet.includes("Cylinder/Heater"))
             {
                 data["維修站名"] = "Heater";
-                data["維修狀態"] = "待維修";
+                data["維修狀態"] = "通知維修";
                 ns.newRepairSheetOne("CylinderHeater維修工單", data);
             }
             if(sheet.includes("Controller"))
             {
                 data["維修站名"] = "Controller";
-                data["維修狀態"] = "待維修";
+                data["維修狀態"] = "通知維修";
                 ns.newRepairSheetOne("3phControler維修工單", data);
             }
-            if(doTest)
+            if(sheet.includes("Cryopump") && doTest)
             {
+              data["Type"] = "維修前測試";  
+              data["維修站名"] = "測試站";
+              data["維修狀態"] = "通知測試";  
               var exf = ns.exf.getUIValue();
               if(exf.startsWith("S"))
                  ns.newRepairSheetOne("CryopumpWarranty原因分析表", data);    
-              data["Type"] = "維修前測試";  
-              data["維修站名"] = "拆解站";
               ns.newRepairSheetOne("CryopumpTestForm", data);    
             }
         },
@@ -1385,20 +1512,18 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             var state = "";
             if(doTest)
             {
-                state = "A00Y,維修前測試--Pump/Controller";
-                if(sheet.includes("Compressor"))
-                    state = "C20Y,維修前測試--Compressor";
+                state = "測試中";
             }
             else if(sheet.includes("Cryopump"))
-                state = "A00,待修區--Pump/Controller";
+                state = "待維修";
             else if(sheet.includes("Crosshead"))
-                state = "A00,待修區--Pump/Controller";
+                state = "待維修";
             else if(sheet.includes("Compressor"))
-                state = "C20,待修區--Compressor";
+                state = "待維修";
             else if(sheet.includes("Module"))
-                state = "A00,待修區--Pump/Controller";
+                state = "待維修";
             else if(sheet.includes("Cylinder/Heater"))
-                state = "A00,待修區--Pump/Controller";
+                state = "待維修";
             var rno = ns.repairNo.getUIValue();
             var data = {"登錄編號":rno,"維修狀況":state};
             utils.modifyTableItem("CTI Control Number總資料庫", "登錄編號", data);
@@ -1425,9 +1550,17 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
            utils.alert("請輸入CN分類碼!");
            return; 
         }
+        if(ns.exf.getUIValue() == "")
+        {
+           utils.alert("請輸入維修分類歸屬!");
+           return; 
+        }        
+            var ignoreFields =  ["維修報告"]; //binary, need convert
+            utils.saveFormSilent(ns, ignoreFields);
         if(uictrl.getCaption() == "進Bench維修")
         {
-            ns.rdb.updateDataFromUI();
+            if(ns.rdb.updateDataFromUI() == false)  //check In P/N, S/N, Model
+                return;
             var data = ns.rdb.getData();
             var item = utils.getItemValue("Cryopump維修工單","登錄編號", ns.repairNo.getValue());
             if(item != "")
@@ -1460,24 +1593,37 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             var prop = ns.properties;
             if(prop.mode.includes("new"))
             {
-                xui.alert("訊息","請先按新增");
+                utils.alert("請先按新增");
                 return;
             }    
+            var cncode = ns.cnCode.getUIValue();
+            if(cncode == "")
+            {
+               utils.alert("請輸入CN分類碼!");
+               return; 
+            }
+            if(ns.exf.getUIValue() == "")
+            {
+                utils.alert("請先填寫維修分類歸屬!");
+                return;
+            }
+            var ignoreFields =  ["維修報告"]; //binary, need convert
+            utils.saveFormSilent(ns, ignoreFields);
+
             if(ns.testFirst.getValue() == "1")
             {
-                ns.rdb.updateDataFromUI();
+                if(ns.rdb.updateDataFromUI() == false)
+                    return;
                 var data = ns.rdb.getData();
-                var item = utils.getItemValue("維修站總資料表","登錄編號", ns.repairNo.getValue());
+                var item = utils.getItemValue("站內物件查詢","登錄編號", ns.repairNo.getValue());
                 if(item != "")
                 {
-                    if(item["維修站名"] == "已入庫")
-                        xui.alert("已入庫");
-                    else 
-                        xui.alert("測試中!");
+                    utils.alert("已經在維修站了!");
+                    return;
                 }
-                else 
-                  utils.insertTableItem("維修站總資料表",{"登錄編號": data["登錄編號"],"維修站名":"拆解站", "客戶名稱":data["客戶名稱"], "Model":data["Model"], "P/N":data["In P/N"], "S/N":data["In S/N"],
-                                                  "維修狀態":"待測試","入站時間":utils.now()});        
+//                else 
+//                  utils.insertTableItem("維修站總資料表",{"登錄編號": data["登錄編號"],"維修站名":"拆解站", "客戶名稱":data["客戶名稱"], "Model":data["Model"], "P/N":data["In P/N"], "S/N":data["In S/N"],
+//                                                  "維修狀態":"待測試","入站時間":utils.now()});        
                 
                 ns.newRepairWorkSheets(true);  //create test form
                 ns.updateRepairState(true);  //do test
@@ -1498,6 +1644,12 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
               }
               else     
               {
+                if(insn == "NA" || insn == "N/A")
+                {
+                    ns.lastRepairNo.setValue("NA");
+                    ns.lastcn.setValue("NA");
+                    return;      
+                }
 /*                  
                 var condition = `[Out S/N] = '${insn}' AND [登錄編號] LIKE '%E%' AND [Log date] < '${logdate}' ORDER BY [Log date] DESC`;  
                 var item1 = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
@@ -1519,34 +1671,24 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                 var condition = `[In S/N] = '${insn}' AND [Log date] < '${logdate}' ORDER BY [Log date] DESC`;  
                 var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
                 if(item == "")
+                    ns.lastRepairNo.setValue("NA");
+                else
                 {
-                    ns.lastcn.setValue("N/A");
-                    ns.lastRepairNo.setValue("N/A");
+                //    ns.inpn.setValue(item["In P/N"]);
+                //    ns.inmodel.setValue(item["In Model"]);
+                    ns.lastRepairNo.setValue(item["登錄編號"]);
+                }
+                var condition = `[Out S/N] = '${insn}' AND [Log date] < '${logdate}' ORDER BY [Log date] DESC`;  
+                var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
+                if(item == "")
+                {
+                    ns.lastcn.setValue("NA");
                     ns.lastWarrantyDate.setValue(null);
                 }
                 else 
                 {
                     ns.lastcn.setValue(item["CN#"]);
-                    ns.lastRepairNo.setValue(item["登錄編號"]);
-                    ns.inpn.setValue(item["In P/N"]);
-                    ns.inmodel.setValue(item["In Model"]);
                     ns.lastWarrantyDate.setValue(item["保固期限"]);
- /*
-                    if(prop.mode.includes["Repair"])
-                    {    
-                      if(ns.inpn.getValue() == "")  
-                        ns.inpn.setValue(item["In P/N"]);
-                      if(ns.inmodel.getValue() == "")  
-                        ns.inmodel.setValue(item["In Model"]);
-                    }
-                    else 
-                    {
-                      if(ns.inpn.getValue() == "")  
-                        ns.inpn.setValue(item["Out P/N"]);
-                      if(ns.inmodel.getValue() == "")  
-                        ns.inmodel.setValue(item["型號(EX form)"]);
-                    }
-*/                    
                 }    
               }
             
@@ -1570,12 +1712,8 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
                     var dialog = mod.dialog;
                     dialog.setSandboxTheme("Army");
                 };
-                var databak = ns.rdb.getData();
-                var descb = function(mod){
-                    ns.rdb.setData(databak);
-                    ns.rdb.updateDataToUI();
-                };
-                utils.showItemPage("CTI Control Number總資料庫", "登錄編號", n, "RepairEditForm","edit", loadcb, descb);
+                utils.changeDbName(ns.rdb);  //要開一樣的視窗,先換 db name
+                utils.showItemPage("CTI Control Number總資料庫", "登錄編號", n, "RepairEditForm","edit", loadcb);
             }
         },
         /**
@@ -1589,9 +1727,10 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
         */
         _lastcn_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            if(n == "")
-                ns.updateLastCnRepairNo();
-            else if(n != "N/A")
+            
+            //if(n == "")
+            //    ns.updateLastCnRepairNo();
+            if(n != "N/A")
             {
                 var loadcb = function(mod){
                     var dialog = mod.dialog;
@@ -1634,6 +1773,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
         */
         _confirmbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+  
             utils.confirmBtnClick(ns, uictrl);
         },
         /**
@@ -1646,7 +1786,25 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
          * @param {}  
         */
         _confirmname_onclick:function(profile, e, src, value, n){
-            var ns = this, uictrl = profile.boxing();
+            var ns = this, uictrl = profile.boxing(), prop = ns.properties;
+            if(prop.mode.includes("new"))
+            {
+                utils.alert("請先按新增");
+                return;
+            }    
+            if(ns.rdb.updateDataFromUI() == false)  //check In P/N, S/N, Model
+                return;
+            var cncode = ns.cnCode.getUIValue();
+            if(cncode == "")
+            {
+               utils.alert("請輸入CN分類碼!");
+               return; 
+            }
+            if(ns.exf.getUIValue() == "")
+            {
+               utils.alert("請輸入維修分類歸屬!");
+               return; 
+            }      
             utils.confirmNameClick(ns,uictrl,"秘書");
         },
             /**
@@ -1660,6 +1818,7 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
         */
             _unitid_onvaluechange:function(profile, oldValue, newValue, force, tag){
                 var ns = this, uictrl = profile.boxing();
+                uictrl.setValue(newValue.trim());
                 var id = newValue;
                 var data = utils.getItemValue("erp.BU3_ID_最新異動日期","ID", id);
                 if(data != "")
@@ -1717,6 +1876,57 @@ xui.Class('App.RepairEditForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             utils.showTableCombo(ns.changedPn, "變更後P/N#2");
         },
+
+        showMessageBtns: function(){
+            var ns = this;
+            var value = ns.testFirst.getUIValue();
+            ns.messageBtn.hide();
+            ns.testMessageBtn.hide();
+            
+            if(!LoginUser.Privilege.includes("秘書") && !LoginUser.Privilege.includes("主管"))
+                return;
+            if(value == "0")
+                ns.messageBtn.show();
+            else if(value == "1")
+                ns.testMessageBtn.show();
+        },
+        /**
+         * Fired when control's UI value is changed!
+         * @method onChange [xui.UI.RadioBox event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+        _testfirst_onchange:function(profile, oldValue, newValue, force, tag, tagVar){
+            var ns = this, uictrl = profile.boxing();
+            ns.showMessageBtns();
+        },
+            /**
+         * Fired after setUIValue is called
+         * @method afterUIValueSet [xui.UI.Input event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {String} oldValue , old UIValue
+         * @param {String} newValue , new UIValue
+         * @param {Boolean} force , force to call or not
+         * @param {call} tag  extra info
+         * @param {Ojbect} tagVar , value's corresponding object, if exists
+        */
+            _insn_afteruivalueset:function(profile, oldValue, newValue, force, tag, tagVar){
+                var ns = this, uictrl = profile.boxing();
+                 var sn= ns.insn.getUIValue();
+                if(sn == "" || sn == "NA")
+                {
+                    sn = "NA";
+                    ns.lastRepairNo.setValue(sn);
+                    ns.lastcn.setValue(sn);
+                    return;
+                }
+                else
+                  ns.updateLastCnRepairNo();
+            },
 
 
         /*,

@@ -37,9 +37,9 @@ utils = {
                 if(typeof wait == "undefined")
                     wait = false;
                 var result = null;
-				var url = "php/login.php";
-				if(typeof DebugMode != "undefined")
-					url = "http://127.0.0.1/RepairSide/php/login.php";
+                var url = "php/login.php";
+                if(typeof DebugMode != "undefined")
+                    url = "http://127.0.0.1/RepairSide/php/login.php";
                 xui.Ajax(url,hash,function(rsp){
                     var data =rsp;
                     if(!data)    alert("no data");
@@ -68,19 +68,19 @@ utils = {
                 var wait = true;
                 if(onFinish)
                     wait = false;
-				if(ShowDataCommand === true)
-					console.log(hash);
+                if(ShowDataCommand === true)
+                    console.log(hash);
                 var result = null;
-				var url = "php/data.php";
-				if(typeof DebugMode != "undefined")
-					url = "http://127.0.0.1/RepairSide/php/data.php";
+                var url = "php/data.php";
+                if(typeof DebugMode != "undefined")
+                    url = "http://127.0.0.1/RepairSide/php/data.php";
                 xui.Ajax(url,hash,function(rsp){
                     var data =rsp;
                     if(!data){    alert("no data");
                         result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
                     }
                     else if(typeof data == "string") {
-						console.log(data);
+                        console.log(data);
                         result = {"columns":[], "result":"ERROR", "rows":[], "totalRowCount":0};
                     }//alert("ERROR");
                     else
@@ -206,9 +206,9 @@ utils = {
         }
         return table;
     },
-	getItemValueList: function(table, key, keyValue, orderby = ""){
-		return utils.getItemValue(table, key, keyValue,"*", true, orderby);
-	},
+    getItemValueList: function(table, key, keyValue, orderby = ""){
+        return utils.getItemValue(table, key, keyValue,"*", true, orderby);
+    },
     getItemValue: function(table, key, keyValue,  getField="*", allRows = false, orderby = "")
     {
         getField = utils.getProperFields(getField);
@@ -223,8 +223,8 @@ utils = {
           key = utils.getProperFields(key);
           var query = `SELECT ${getField} FROM ${table} WHERE ${key}='${keyValue}'`;
         }
-		if(orderby != "")
-			query += " ORDER BY " + orderby;
+        if(orderby != "")
+            query += " ORDER BY " + orderby;
         var hash={"cmd":"getQueryItems","query":query};
         var datas = utils.sendDataCmd(hash);
         if(datas.rows.length > 0)
@@ -243,9 +243,9 @@ utils = {
         else 
           return "";    
     },
-	cloneObject: function(obj){
-		return JSON.parse(JSON.stringify(obj));
-	},
+    cloneObject: function(obj){
+        return JSON.parse(JSON.stringify(obj));
+    },
     checkItemExists: function(table, field, value)
     {
         var query = `SELECT ${field} FROM ${table} WHERE ${field}='${value}'`;
@@ -270,28 +270,28 @@ utils = {
     }, 
     removeInvalidFields: function(table, datas, action = ""){
         var data = utils.cloneObject(datas);
-		if(data.ETD)
-		  data.ETS = data.ETD;
-	    var dateFields = utils.getDateFieldNames(table);
+        if(data.ETD)
+          data.ETS = data.ETD;
+        var dateFields = utils.getDateFieldNames(table);
         var fields = utils.getTableFieldNames(table);
         var keys = Object.keys(data);     
         for(let i=0; i<keys.length; i++)
         {
-		   var k = keys[i];	
+           var k = keys[i];    
            if(!fields.includes(k))
               delete data[k];
-		   else if(dateFields.includes(k))
-		   {
-			   var v = data[k];
-			   if(typeof v == "string" && (v == "" || v.includes("1900-01-01")))
-				   data[k] = null;
-		   }
-					
+           else if(dateFields.includes(k))
+           {
+               var v = data[k];
+               if(typeof v == "string" && (v == "" || v.includes("1900-01-01")))
+                   data[k] = null;
+           }
+                    
         }
         if(action == "insert")
         {
-		  delete data["rowid"];
-		  delete data["CreateTime"];
+          delete data["rowid"];
+          delete data["CreateTime"];
           if(table == "CTI Control Number總資料庫")
           {
             delete data["維修報告"];
@@ -348,19 +348,19 @@ utils = {
                 utils.showDataPage(pagename, item, mode, onload, ondestroy);        
             }
     },
-	getRandomDbName:function(){
-		return "db999" + Math.floor(Math.random() * 99999);
-	},
-	changeDbName: function(db){
-		db.setName(this.getRandomDbName());
-	},
+    getRandomDbName:function(){
+        return "db999" + Math.floor(Math.random() * 99999);
+    },
+    changeDbName: function(db){
+        db.setName(this.getRandomDbName());
+    },
     showDataPage : function(pagename, item, mode = "edit", onload,  ondestroy){
-		if(item)
-		  this.fixDate1900(item);
+        if(item)
+          this.fixDate1900(item);
         var cb2 = function(mod){
-			//if(typeof ChangeDbName != "undefined" && ChangeDbName)
-			//	utils.changeDbName(mod);
-			//ChangeDbName = false; //auto reset
+            //if(typeof ChangeDbName != "undefined" && ChangeDbName)
+            //    utils.changeDbName(mod);
+            //ChangeDbName = false; //auto reset
             var db = mod.getDataBinders();
             if(db.length > 0)
               db = db[0].boxing();
@@ -513,35 +513,35 @@ utils = {
           config.condition = s[5];
         return config;
     },
-	checkRepairStatus: function(datas){
-		var status = datas["維修狀態"];
-		if(["完工","不修","簡修完工"].includes(status))
-		{
-			datas["完工確認"] = LoginUser.DisplayName;
-		}
-	},
-	fixDate1900:function(datas){
-		var keys = Object.keys(datas);
-		for(var i=0; i<keys.length; i++)
-		{
-			var k = keys[i];
-			if(k.includes("Date") || k.includes("Time") || k.includes("日期") || k.includes("時間")|| k.includes("保固期"))
-			{
-				var d= datas[k];
-				if(typeof d == "string" && d!=null && (d == "" || d.includes("1900-01-01")))
-				  datas[k] = null;
-			}
-		}
-	},
-	saveFormSilent: function(mod, ignoreFields, extDatas, onFinish, db){
-		SaveFormSilent = true;
-		utils.saveForm(mod, ignoreFields, extDatas, onFinish, db);
-		SaveFormSilent = false;
-	},
+    checkRepairStatus: function(datas){
+        var status = datas["維修狀態"];
+        if(["完工","不修","簡修完工"].includes(status))
+        {
+            datas["完工確認"] = LoginUser.DisplayName;
+        }
+    },
+    fixDate1900:function(datas){
+        var keys = Object.keys(datas);
+        for(var i=0; i<keys.length; i++)
+        {
+            var k = keys[i];
+            if(k.includes("Date") || k.includes("Time") || k.includes("日期") || k.includes("時間")|| k.includes("保固期"))
+            {
+                var d= datas[k];
+                if(typeof d == "string" && d!=null && (d == "" || d.includes("1900-01-01")))
+                  datas[k] = null;
+            }
+        }
+    },
+    saveFormSilent: function(mod, ignoreFields, extDatas, onFinish, db){
+        SaveFormSilent = true;
+        utils.saveForm(mod, ignoreFields, extDatas, onFinish, db);
+        SaveFormSilent = false;
+    },
     saveForm: function(mod, ignoreFields, extDatas, onFinish, db){
-			if(mod.inSaveFormFlag === true)
-				return;
-			mod.inSaveFormFlag = true;
+            if(mod.inSaveFormFlag === true)
+                return;
+            mod.inSaveFormFlag = true;
             var prop = mod.properties;
             if(typeof db == "undefined")
             {
@@ -549,17 +549,17 @@ utils = {
               if(db.length > 0)
                 db = db[0].boxing();
               else
-			  {
-				mod.inSaveFormFlag = false;
+              {
+                mod.inSaveFormFlag = false;
                 return false;
-			  }
+              }
             }
                 
             if(db && db.updateDataFromUI() == false)
-			{
-				mod.inSaveFormFlag = false;
+            {
+                mod.inSaveFormFlag = false;
                 return false;
-			}
+            }
             var newcb = function(item){
                   db.setData(item).updateDataToUI();
                   prop.mode = prop.mode.replaceAll("new","edit");
@@ -568,14 +568,14 @@ utils = {
                     onFinish(item);  
             }
             var datas = db.getData();
-			if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
-			{
-				utils.alert("組長才能修改完工工單");
-				return;
-			}
+            if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
+            {
+                utils.alert("組長才能修改完工工單");
+                return;
+            }
             if(mod.prevRepairStatus && mod.prevRepairStatus != datas["維修狀態"])
-				utils.checkRepairStatus(datas);
-					
+                utils.checkRepairStatus(datas);
+                    
             if(typeof datas.__row__id  != "undefined")
                 delete datas.__row__id;
             if(prop.tableName == "工號登錄總資料表")
@@ -630,44 +630,44 @@ utils = {
               if(typeof datas[k] == "string" && datas[k].includes("1900-01-01"))
                   datas[k] = null;
             }
-			datas["修改人員"] = LoginUser.DisplayName;
-			datas["修改時間"] = utils.now();
+            datas["修改人員"] = LoginUser.DisplayName;
+            datas["修改時間"] = utils.now();
             if(prop.mode.includes("new"))
             {
               var data = utils.insertTableItem(prop.tableName,  datas); //wait 
-			  mod.inSaveFormFlag = false;
-			  if(typeof data == "undefined")
-			  {
-				   utils.alert("新增錯誤!");
-				   return false;
-			  }
-			  else		
+              mod.inSaveFormFlag = false;
+              if(typeof data == "undefined")
+              {
+                   utils.alert("新增錯誤!");
+                   return false;
+              }
+              else        
                 newcb(data);
             }
             else
             {
                var data = utils.modifyTableItem(prop.tableName, prop.keyid, datas); //wait
-			   if(data.result == "ERROR")
-			   {
-				   utils.alert("儲存錯誤!");
-				   mod.inSaveFormFlag = false;
-				   return false;
-			   }
-			   //set flag before onFinish
-			   mod.inSaveFormFlag = false;
+               if(data.result == "ERROR")
+               {
+                   utils.alert("儲存錯誤!");
+                   mod.inSaveFormFlag = false;
+                   return false;
+               }
+               //set flag before onFinish
+               mod.inSaveFormFlag = false;
                if(onFinish)
                  onFinish();
-			   if(typeof SaveFormSilent != 'undefined' && SaveFormSilent)
-			   {
-				   return true;
-			   }
-			   
-			   //if(AppName == "BU3")		
+               if(typeof SaveFormSilent != 'undefined' && SaveFormSilent)
+               {
+                   return true;
+               }
+               
+               //if(AppName == "BU3")        
                //  mod.dialog.close();
-			   //else 
-				 utils.alert("儲存完成!");  
+               //else 
+                 utils.alert("儲存完成!");  
             }    
-		   mod.inSaveFormFlag = false;
+           mod.inSaveFormFlag = false;
            return true;
     },
     updateModuleTableBoxCaption : function(mod){
@@ -711,12 +711,12 @@ utils = {
         mod._db_afterupdatedatafromui = function (profile,dataFromUI){
                       var ns = this, uictrl = profile.boxing();
                       xui.each(dataFromUI,function(o,i){
-							if(xui.isDate(o))
-							{
-								dataFromUI[i] = xui.Date.format(o,"yyyy-mm-dd hh:nn:ss");
-								if(dataFromUI[i].includes("1900-01-01"))
-									dataFromUI[i] = null;
-							}
+                            if(xui.isDate(o))
+                            {
+                                dataFromUI[i] = xui.Date.format(o,"yyyy-mm-dd hh:nn:ss");
+                                if(dataFromUI[i].includes("1900-01-01"))
+                                    dataFromUI[i] = null;
+                            }
                       });
         }
         // console.log("nodes:",nodes); 
@@ -727,7 +727,7 @@ utils = {
          } 
     }, 
     installModuleTableBoxHooks : function(mod){
-		var modprop = mod.properties;
+        var modprop = mod.properties;
         var root = mod.getRoot();
         console.log("root:", root);
         if(mod.dialog)
@@ -739,32 +739,32 @@ utils = {
         var formTableName = mod.key;   
         var showCombo = function(uictrl){
                 var dbs = mod.getDataBinders();
-				var db = null;
+                var db = null;
                 if(dbs.length > 0)
                 {
 /*                   if(typeof mod.db == "string" && mod.db != "")
-				   {
-					   for(var i=0; i<db.length; i++)
-					   {
-						 if(db[i].alias == mod.db)  
-						 {
+                   {
+                       for(var i=0; i<db.length; i++)
+                       {
+                         if(db[i].alias == mod.db)  
+                         {
                            db = db[i].boxing();
-						   break;
-						 }						   
-					   }
-				   }
+                           break;
+                         }                           
+                       }
+                   }
                    else
                      db = db[0].boxing();
 */
-					db = dbs[0].boxing();
-					for(var i=0; i<dbs.length; i++)
-					{
-					  if(dbs[i].alias == uictrl.getDataBinder())  
-					  {
+                    db = dbs[0].boxing();
+                    for(var i=0; i<dbs.length; i++)
+                    {
+                      if(dbs[i].alias == uictrl.getDataBinder())  
+                      {
                         db = dbs[i].boxing();
-					    break;
-					  }						   
-					}
+                        break;
+                      }                           
+                    }
                        
                    db.updateDataFromUI(true,false,false,null,null,true); //ignore alert
                    var comboDatas = db.getData(); 
@@ -846,13 +846,13 @@ utils = {
         for(var i=0; i< nodes.length; i++)
         {
             let n = nodes[i].boxing();
-			if(n.getDataField)
-			{
-			  var field = n.getDataField();
-			  var maxlen = -1;
-			  var fc = utils.getTableFieldConfig(modprop.tableName, field);  
-			  if(fc)
-			      maxlen = fc.CHARACTER_MAXIMUM_LENGTH;
+            if(n.getDataField)
+            {
+              var field = n.getDataField();
+              var maxlen = -1;
+              var fc = utils.getTableFieldConfig(modprop.tableName, field);  
+              if(fc)
+                  maxlen = fc.CHARACTER_MAXIMUM_LENGTH;
               if(n.KEY == 'xui.UI.ComboInput')
               {
                 
@@ -868,9 +868,9 @@ utils = {
                    n.beforeComboPop("tableBox_beforecombopop");
                 }
               }
-			  if(n.setMaxlength && maxlen >= 0)
-				n.setMaxlength(maxlen);
-			}
+              if(n.setMaxlength && maxlen >= 0)
+                n.setMaxlength(maxlen);
+            }
         }
     },
     updateTableNamesCombo: function(combo,  database){
@@ -916,12 +916,12 @@ utils = {
         }
         return TableConfigs[table];
     }, 
-	getDateFieldNames: function(table){
+    getDateFieldNames: function(table){
         var fields = [];
         var cols = utils.getTableConfig(table);
         for(var i=0; i<cols.length; i++)
         {
-			if(cols[i].DATA_TYPE.includes("datetime"))
+            if(cols[i].DATA_TYPE.includes("datetime"))
               fields.push(cols[i].COLUMN_NAME);
         }
         return fields;
@@ -952,12 +952,12 @@ utils = {
             mod.askData(config, cb);
         });        
     },
-	askNumber: function(caption, cb){
-		var cb2 = function(data){
-			cb(data.Number);
-		}
-		utils.askData({"Number": caption},cb2);
-	},
+    askNumber: function(caption, cb){
+        var cb2 = function(data){
+            cb(data.Number);
+        }
+        utils.askData({"Number": caption},cb2);
+    },
     createTableControls : function(table, key, thepage, onFinish){
         var form = thepage.form;
         var cb = function(items){
@@ -1066,7 +1066,14 @@ utils = {
     },     
     dateTimeToString: function(d){
         return xui.Date.format(d,"yyyy-mm-dd hh:nn:ss");
-    },     
+    },   
+    addHours: function(d, n){
+            if(d != null)
+            {
+              d.setTime(d.getTime() + n * 60 * 60 * 1000);
+            }
+            return d;
+    },    
     formatString: function(fmt, item, quoteFlag = true){
         var cb = function(match,offset,str)
         {
@@ -1119,6 +1126,13 @@ utils = {
         var canvas = document.createElement("canvas");
         JsBarcode(canvas, text, {format: "CODE128",width:2});
         return canvas.toDataURL("image/png");
+    },
+    showServiceRecordForm: function(item, mode){
+                  var loadcb = function(mod){
+                      mod.sdb.setData(item);
+                      mod.sdb.updateDataToUI();
+                  }
+                  utils.showDataPage("CrmEditForm",null, mode, loadcb);  
     },
     showWarrantyEditForm: function(id){
                     if(id == "")
@@ -1237,7 +1251,7 @@ utils = {
                       utils.showDataPage("CryopumpTestSubForm", item, "edit");      
 
     },   
-	showRepairOptionForm: function(db){
+    showRepairOptionForm: function(db){
                     db.updateDataFromUI();
                     var data = db.getData();
                     var id = data["登錄編號"];
@@ -1249,7 +1263,7 @@ utils = {
                     var item = utils.getItemValue("Option零件更換表","登錄編號",id,"*");
                     if(item == "")
                       utils.showDataPage("RepairOptionForm",{"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName,"CreateDate":utils.today(), "公司名稱":data["客戶名稱"]},
-										"new");        
+                                        "new");        
                     else
                       utils.showDataPage("RepairOptionForm", item, "edit")  ;      
 
@@ -1275,7 +1289,49 @@ utils = {
                     if(item != "")
                       utils.showDataPage("RepairEditForm", item, "edit", cb)  ;      
 
-    },    
+    },
+    showWorkSheet: function(rno, readonly = false){
+				  var loadcb = function(mod){
+					  if(readonly)
+						  mod.saveBtn.setDisabled(true);
+				  };					  
+                  var item =utils.getItemValue("Cryopump維修工單","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("CryopumpEditForm", item, "edit", loadcb);
+                      return;
+                  }
+                  item =utils.getItemValue("Crosshead維修工單","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("CrossheadEditForm", item, "edit", loadcb);
+                      return;
+                  }
+                  item =utils.getItemValue("3phControler維修工單","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("3phControlerEditForm", item, "edit", loadcb);
+                      return;
+                  }
+                  item =utils.getItemValue("CylinderHeater維修工單","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("CylinderHeaterEditForm", item, "edit", loadcb);
+                      return;
+                  }
+                  item =utils.getItemValue("Compressor維修工單","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("CompressorEditForm", item, "edit", loadcb);
+                      return;
+                  }
+                  item =utils.getItemValue("Module功能測試表","登錄編號",rno);
+                  if(item != "")
+                  {
+                      utils.showDataPage("ModuleTestForm", item, "edit", loadcb);
+                      return;
+                  }   
+  },        
     updateNewWorkSheetValue: function(db, rno){
         db.updateDataFromUI();
         var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno,"*");
@@ -1337,7 +1393,7 @@ utils = {
                return; 
             var data = db.getData();
             var confirm = data["確認狀態"];
-            if(typeof confirm == "undefined")
+            if(typeof confirm == "undefined" || confirm == null)
                 confirm = "";
             if(["待組長確認","待經理確認","待秘書確認"].includes(confirm))
                   uictrl.setCaption(confirm);
@@ -1345,15 +1401,15 @@ utils = {
                   uictrl.setCaption(confirm);
             else if(confirm.includes("秘書已確認"))
                 uictrl.setCaption("秘書已確認");
-			else if(confirm == "組長已確認")
-			{
-				if(data["秘書確認"] === "") //有秘書確認欄位,並且為空
-					uictrl.setCaption("通知秘書確認");
-				else
-					uictrl.setCaption("組長已確認");
-			}
-			else if(caption != "")
-				uictrl.setCaption(caption);
+            else if(confirm == "組長已確認")
+            {
+                if(data["秘書確認"] === "") //有秘書確認欄位,並且為空
+                    uictrl.setCaption("通知秘書確認");
+                else
+                    uictrl.setCaption("組長已確認");
+            }
+            else if(caption != "")
+                uictrl.setCaption(caption);
             else if(confirm.includes("已確認"))
                 uictrl.setCaption(confirm);
     },
@@ -1407,7 +1463,7 @@ utils = {
               uictrl.setCaption("秘書已確認");
             }               
     },
-    signNameClick: function(datectrl, uictrl, pri, saveFlag=true){
+    signNameClick: function(datectrl, uictrl, pri, saveFlag=false){
         var mod = uictrl.getModule();
         var dbname = uictrl.getDataBinder();
         var db = xui.DataBinder.getFromName(dbname);
@@ -1457,18 +1513,18 @@ utils = {
           }
         }
     },
-    confirmNameClick: function(mod, uictrl, pri, finishState = "", saveFlag=true){
-		var prop = mod.properties;
-		if(prop.mode.includes("new"))
-		{
-			utils.alert("請先新增表單!");
-			return;
-		}
-		if(uictrl.getUIValue() !== "")
-		{
-			utils.alert("已確認過了!");
-			return;
-		}
+    confirmNameClick: function(mod, uictrl, pri, finishState = "", saveFlag=false){
+        var prop = mod.properties;
+        if(prop.mode.includes("new"))
+        {
+            utils.alert("請先新增表單!");
+            return;
+        }
+        if(uictrl.getUIValue() !== "")
+        {
+            utils.alert("已確認過了!");
+            return;
+        }
         var db = mod.getDataBinders();
         if(db.length > 0)
            db = db[0].boxing();
@@ -1512,19 +1568,19 @@ utils = {
                 confirmState = "經理已確認";
             }
             if(finishState != "")
-			{
+            {
                confirmState = finishState;
-			   if(finishState == "待組長確認")
-				   utils.alert("已通知組長!");
-			   if(finishState == "待秘書確認")
-				   utils.alert("已通知秘書!");
-			   if(finishState == "待經理確認")
-				   utils.alert("已通知經理!");
-			}			   
+               if(finishState == "待組長確認")
+                   utils.alert("已通知組長!");
+               if(finishState == "待秘書確認")
+                   utils.alert("已通知秘書!");
+               if(finishState == "待經理確認")
+                   utils.alert("已通知經理!");
+            }               
             if(confirmBtn)
                confirmBtn.setCaption(confirmState);  
             uictrl.setValue(name);    
-			db.setData(uictrl.getDataField(), name);
+            db.setData(uictrl.getDataField(), name);
             if(saveFlag){
               utils.modifyTableItem(table, key, {[key]:id, [confirmName]:name, "確認狀態": confirmState});
             }
@@ -1717,6 +1773,7 @@ utils = {
     },
     showPickingSheetMenu: function(uictrl, rno, model = ""){
             var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
+            ns.model = model;
             var data = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
             if(data == "")
             {
@@ -1727,21 +1784,23 @@ utils = {
             {
               ns._pickingmenu_onmenuselected = function(profile, item, src){
                   let ns = this;
+                var model = ns.model;  
                 if(item.id == "new")
                 {
                   var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
                   if(data != "")
                   {   
-					if(model == "")
-						model = data["In Model"];
-					var pn = data["In P/N"];
-					var sn = data["In S/N"];
-					if(data["變更後型號"] != "")
-					{
-						model = data["變更後型號"];
-						pn = data["變更後P/N"];
-						sn = data["變更後S/N"];
-					}
+                    if(model == "")
+                        model = data["In Model"];
+                    var pn = data["In P/N"];
+                    var sn = data["In S/N"];
+                    if(data["變更後型號"] != "")
+                    {
+                        if(model == "")
+                          model = data["變更後型號"];
+                        pn = data["變更後P/N"];
+                        sn = data["變更後S/N"];
+                    }
                     var item = {"維修單別":"B200","維修部門":"902","維修站別":"902","產品品號":pn, "產品品名":data["型號(EX form)"],"產品序號": sn,"單據日期":utils.getCloseDate(),
                         "登錄編號":rno, "Creator": LoginUser.EmplID,"型號": model};
                     var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
@@ -1794,10 +1853,10 @@ utils = {
                   let ns = this;
                 if(item.id == "new")
                 {
-                  var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+                  var data = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
                   if(data != "")
                   {   
-                    var item = {"Pump":data["In Model"],"P/N":data["In P/N"], "S/N":data["型號(EX form)"],"S/N":data["In S/N"],"TestDate":utils.today(),
+                    var item = {"Pump":data["Pump"],"P/N":data["Pump P/N"], "S/N":data["Pump S/N"],"TestDate":utils.today(),
                         "登錄編號":rno};
                     utils.showDataPage("CryopumpTestSubForm", item, "new");
                   }                   
@@ -1819,10 +1878,10 @@ utils = {
                  if(rows[i])
                  {
                    var r = rows[i];
-				   var postfix = r[1];
-				   if(r[2] == 1)
-					   postfix = "維修前測試";
-					   
+                   var postfix = r[1];
+                   if(r[2] == 1)
+                       postfix = "維修前測試";
+                       
                    let caption = (rows.length-i) + ": " + postfix;
                    items.push({"id" : r[0], "caption" : caption}); 
                  }
@@ -1832,58 +1891,74 @@ utils = {
             };
             utils.getTableItems({"tableName":"CryopumpTestForm","condition":condition, "fields":"rowid,Fail 原因,維修前測試", "orderby":"rowid DESC"}, cb);
     },
-	updateNextStationStatus:function(tableName, site, rno){
-		var state = "";
-		if(site == "Vacuum side" || site == "Helium side")
-			state = "組裝中";
-		else if(site == "測試站")
-			state = "測試中";
-		else if(site == "拆解站")
-			state = "待拆解";
-		else
-			state = "待維修";
-			
+    updateNextStationStatus:function(tableName, site, rno){
+        var state = "";
+        if(site == "Vacuum side" || site == "Helium side")
+            state = "組裝中";
+        else if(site == "測試站")
+            state = "測試中";
+        else if(site == "拆解站")
+            state = "待拆解";
+        else
+            state = "待維修";
+            
         var data = {"登錄編號":rno,"維修狀態":state};
         utils.modifyTableItem(tableName, "登錄編號", data);
-	},
+
+		var data = {"登錄編號":rno,"維修狀況":state};
+		if(tableName == "Crosshead維修工單")
+		{
+			var item = utils.getItemValue("Crosshead主工單查詢","登錄編號", rno);
+			if(item != "")
+				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+		}
+		if(tableName == "Module功能測試表")
+		{
+			var item = utils.getItemValue("Module主工單查詢","登錄編號", rno);
+			if(item != "")
+				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+		}
+		else
+				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+    },
     nextStation: function(uictrl, sites){
             var ns = uictrl.getModule(), items = [];
-	  if(ns.prevRepairStatus && ["完工","不修","簡修完工"].includes(ns.prevRepairStatus))
-	  {
-		  utils.alert("完工狀態,無法過站!");
-		  return;
-	  }		  
-	  for(var i=0; i<sites.length; i++)
-	  {
-		var s = sites[i];
-		if(s == SiteName)
-			continue;
-		if(s == "拆解站")
-		  items.push({"id" : "拆解站","caption" : "拆解站"});
-		else if(s == "Vacuum side")
-		  items.push({"id" : "Vacuum side","caption" : "Vacuum站"});
-		else if(s == "Helium side")
-		  items.push({"id" : "Helium side","caption" : "Helium"});
-		//else if(s == "Compressor")
-		//  items.push({"id" : "Compressor站","caption" : "Compressor站站"});
-		else if(s == "Crosshead")
-		  items.push({"id" : "Crosshead","caption" : "Crosshead站"});
-		else if(s == "Module")
-		  items.push({"id" : "Module","caption" : "Module站"});
-		else if(s == "測試站")
-		  items.push({"id" : "測試站","caption" : "測試站"});
-	  }
-	  var tableName = ns.properties.tableName;
-	  
+      if(ns.prevRepairStatus && ["完工","不修","簡修完工"].includes(ns.prevRepairStatus))
+      {
+          utils.alert("完工狀態,無法過站!");
+          return;
+      }          
+      for(var i=0; i<sites.length; i++)
+      {
+        var s = sites[i];
+        if(s == SiteName)
+            continue;
+        if(s == "拆解站")
+          items.push({"id" : "拆解站","caption" : "拆解站"});
+        else if(s == "Vacuum side")
+          items.push({"id" : "Vacuum side","caption" : "Vacuum站"});
+        else if(s == "Helium side")
+          items.push({"id" : "Helium side","caption" : "Helium"});
+        //else if(s == "Compressor")
+        //  items.push({"id" : "Compressor站","caption" : "Compressor站站"});
+        else if(s == "Crosshead")
+          items.push({"id" : "Crosshead","caption" : "Crosshead站"});
+        else if(s == "Module")
+          items.push({"id" : "Module","caption" : "Module站"});
+        else if(s == "測試站")
+          items.push({"id" : "測試站","caption" : "測試站"});
+      }
+      var tableName = ns.properties.tableName;
+      
             var rno = ns.repairNo.getUIValue();
             if(typeof ns.nextMenu == "undefined")
             {
               ns._nextmenu_onmenuselected = function(profile, item, src){
                   let ns = this;
                   utils.modifyTableItem(tableName,"登錄編號",{"登錄編號":rno, "維修站名": item.id});
-				  utils.updateNextStationStatus(tableName, item.id, rno);
+                  utils.updateNextStationStatus(tableName, item.id, rno);
                   utils.alert("維修工單:" + rno + "已放入 " + item.caption);
-				  ns.destroy();
+                  ns.destroy();
               }  
               var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"nextMenu").onMenuSelected("_nextmenu_onmenuselected");
               ns.AddComponents(menu);
@@ -1901,7 +1976,7 @@ utils = {
               }
               var ndata = {"登錄編號":rno, "Pump":rdata["In Model"], "P/N":rdata["In P/N"], "S/N":rdata["In S/N"], "TestDate":utils.today()};
               var data = utils.insertTableItem("CryopumpTestForm", ndata);
-			  return data;
+              return data;
     },
     pad: function(num, size) {
         num = num.toString();
@@ -1912,15 +1987,15 @@ utils = {
             xui.Dom.busy(null, "產生報告中...");
               const { PDFDocument,StandardFonts } = PDFLib
               const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
-			  if(typeof PdfFontBytes == 'undefined')
-				PdfFontBytes = await fetch("U30-L.ttf").then(res => res.arrayBuffer())
+              if(typeof PdfFontBytes == 'undefined')
+                PdfFontBytes = await fetch("U30-L.ttf").then(res => res.arrayBuffer())
           // Load a PDF with form fields
               const pdfDoc = await PDFDocument.load(formPdfBytes)
-		  // Register the `fontkit` instance	
-			  pdfDoc.registerFontkit(fontkit)
+          // Register the `fontkit` instance    
+              pdfDoc.registerFontkit(fontkit)
 
       // Embed our custom font in the document
-			 const customFont = await pdfDoc.embedFont(PdfFontBytes)              // Get the form containing all the fields
+             const customFont = await pdfDoc.embedFont(PdfFontBytes)              // Get the form containing all the fields
               const form = pdfDoc.getForm()
 
           // Get all fields in the PDF by their names
@@ -1933,60 +2008,60 @@ utils = {
                   if(field)
                   {
                     field.setText(data[name]);
-					field.updateAppearances(customFont);
-					field.enableReadOnly();
+                    field.updateAppearances(customFont);
+                    field.enableReadOnly();
                   }
-				  else
-					console.log(name, "not found!");  
+                  else
+                    console.log(name, "not found!");  
                 }
                 catch(e){
                 }
               }
-				
+                
              // Serialize the PDFDocument to bytes (a Uint8Array)
               const pdfBytes = await pdfDoc.save()
-			  xui.Dom.free();
+              xui.Dom.free();
               // Trigger the browser to download the PDF document
               download(pdfBytes, fileName, "application/pdf");
     },
-	testForm2ReportData: function(data){
-		data["D2#1"] = data["Supply"];
-		data["D2#2"] = data["Return"];
-		data["D3#1"] = data["Comp"];
-		data["D3#2"] = data["Comp#3"];
-		data["D3#3"] = data["Comp#2"];
-		data["E5"] = data["Start Time"];
-		data["E6"] = data["20k/17k"];
-		data["E23"] = data["20k/17k#3"];
-		data["E7"] = data["20k/17k#2"];
-		data["E24"] = data["20k/17k#4"];
-		data["E26"] = data["底溫1st"];
-		data["E27"] = data["底溫2nd"];
-		data["E29"] = data["65k#1"];
-		data["E30"] = data["65k#2"];
-		data["E31"] = data["65k#3"];
-		data["E32"] = data["65k#4"];
-		data["E41"] = data["Warm Up"];
-		return data;
-	},
+    testForm2ReportData: function(data){
+        data["D2#1"] = data["Supply"];
+        data["D2#2"] = data["Return"];
+        data["D3#1"] = data["Comp"];
+        data["D3#2"] = data["Comp#3"];
+        data["D3#3"] = data["Comp#2"];
+        data["E5"] = data["Start Time"];
+        data["E6"] = data["20k/17k"];
+        data["E23"] = data["20k/17k#3"];
+        data["E7"] = data["20k/17k#2"];
+        data["E24"] = data["20k/17k#4"];
+        data["E26"] = data["底溫1st"];
+        data["E27"] = data["底溫2nd"];
+        data["E29"] = data["65k#1"];
+        data["E30"] = data["65k#2"];
+        data["E31"] = data["65k#3"];
+        data["E32"] = data["65k#4"];
+        data["E41"] = data["Warm Up"];
+        return data;
+    },
     createCryopumpTestReport: function(rno, data = null){
-	        var rdata = utils.getItemValue("Cryopump維修工單","登錄編號", rno);
-			if(rdata == "")
-				return;
-			if(data == null)
-			{
-				data  = rdata;
-				data["AssyOK"] = data["Assy OK"];
-			}
-			else  //room temperature
-			{
-				data["E15"] = rdata["E15"];
-				data["E16"] = rdata["E16"];
-			}
+            var rdata = utils.getItemValue("Cryopump維修工單","登錄編號", rno);
+            if(rdata == "")
+                return;
+            if(data == null)
+            {
+                data  = rdata;
+                data["AssyOK"] = data["Assy OK"];
+            }
+            else  //room temperature
+            {
+                data["E15"] = rdata["E15"];
+                data["E16"] = rdata["E16"];
+            }
             if(data != "")
             {
-			  data["D2#3"] = (Number(data["D2#1"]) - Number(data["D2#2"])).toString();	
-			  data["TestDate"] = data["TestDate"].substring(0,10);
+              data["D2#3"] = (Number(data["D2#1"]) - Number(data["D2#2"])).toString();    
+              data["TestDate"] = data["TestDate"].substring(0,10);
               var fname = rno +"_CryopumpTestReport.pdf";   
               this.createPdfReport("./TestData.pdf", data, fname);
             }
@@ -2015,189 +2090,224 @@ utils = {
     readRepairStatus:function(ns){
         var rno = ns.repairNo.getUIValue();
         var r = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno, "維修狀況");
-		if(r == null)
-			r = "";
+        if(r == null)
+            r = "";
         var uictrl = ns.repairStatus;
-		if(uictrl)
+        if(uictrl)
           uictrl.setValue(r);
-		return r;
+        return r;
     },
     writeRepairStatus:function(ns, status){
-		
-		if(typeof ns == "string")
-			rno = ns;
-		else
-			rno = ns.repairNo.getUIValue();
-		if(typeof status == "undefined")
-		  status = ns.repairStatus.getUIValue();
-		
-		if(typeof ns.prevRepairStatus != 'undefined')
-		{
-			if(ns.prevRepairStatus == status)
-				return;
-		}
-		if(typeof ns.alias == "string" && ns.alias.includes("app_crossheadeditform"))
-		{
-			var item = utils.getItemValue("Crosshead主工單查詢","登錄編號",rno);
-			if(item == "")
-				return;
-		}
-		if(typeof ns.alias == "string" && ns.alias.includes("app_moduletestform"))
-		{
-			var item = utils.getItemValue("Module主工單查詢","登錄編號",rno);
-			if(item == "")
-				return;
-		}
-		var items = utils.getItemValueList("維修工單列表","登錄編號", rno);
-		if(items != "")
-		{	
-		  for(var i=0; i<items.length; i++)
-		  {			  
-            var data = {"登錄編號":rno,"維修狀況":status};
-			var tableName = items[i]["維修工單"];
-			if(tableName.includes("Controller"))
-				tableName = "3phControler維修工單";
-		    if(status == "完工")  
-		    {
-			  data["Date Complete"] = utils.today();
-              utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
-		    }
-            data = {"登錄編號":rno, "維修狀態": status};
-            utils.modifyTableItem(tableName,"登錄編號", data);
+        
+        if(typeof ns == "string")
+            rno = ns;
+        else
+            rno = ns.repairNo.getUIValue();
+        if(typeof status == "undefined")
+          status = ns.repairStatus.getUIValue();
+        
+        if(typeof ns.prevRepairStatus != 'undefined')
+        {
+            if(ns.prevRepairStatus == status)
+                return;
+        }
+        if(typeof ns.alias == "string" && ns.alias.includes("app_crossheadeditform"))
+        {
+            var item = utils.getItemValue("Crosshead主工單查詢","登錄編號",rno);
+            if(item == "")
+                return;
+        }
+        if(typeof ns.alias == "string" && ns.alias.includes("app_moduletestform"))
+        {
+            var item = utils.getItemValue("Module主工單查詢","登錄編號",rno);
+            if(item == "")
+                return;
+        }
+        var items = utils.getItemValueList("維修工單列表","登錄編號", rno);
+        if(items != "")
+        {    
+		  var writecn = false; 
+          var data = {"登錄編號":rno,"維修狀態":status};
+		  if(items.length == 1)
+		  {
+            var tableName = items[0]["維修工單"];
+            if(tableName.includes("Controller"))
+                tableName = "3phControler維修工單";
+			if(tableName == "Crosshead維修工單")
+			{
+				var item = utils.getItemValue("Crosshead主工單查詢","登錄編號",rno);
+				if(item != "")
+					writecn = true;
+			}
+			else if(tableName == "Module功能測試表")
+			{
+				var item = utils.getItemValue("Module主工單查詢","登錄編號",rno);
+				if(item != "")
+					writecn = true;
+			}
+			else
+				writecn = true;
 		  }
-		}
+		  else
+		  {
+			tableName = "Cryopump維修工單";	
+			writecn = true;
+		  }
+          utils.modifyTableItem(tableName,"登錄編號", data);
+		  if(status == "入庫" && tableName == "Cryopump維修工單") //write Module and Crosshead
+		  {
+			utils.modifyTableItem("Module功能測試表","登錄編號", data);
+			item = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
+			if(item != "")
+			{
+			  var data2 = {"Crosshead編號":item["Crosshead編號"], "維修狀態":status}
+			  utils.modifyTableItem("Crosshead維修工單","Crosshead編號", data2);
+			}
+		  }
+		  
+		  if(writecn)
+		  {
+			  if(status == "完工")
+			  {
+//              data["Date Complete"] = utils.today();
+                data["完工日期"] = utils.today();
+			  }				  
+			  data["維修狀況"] = status;
+              utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
+		  }
+       }
     },
-	updateDataBinder: function(ns, data)
-	{
-		var dbs = ns.getDataBinders();
-		for(var i=0; i<dbs.length; i++)
-		{
-			var db = dbs[i].boxing();
-			var keys = Object.keys(data);
-			for(var k=0; k<keys.length; k++)
-			  db.setData(keys[k], data[keys[k]]);	
-		}
-	},
+    updateDataBinder: function(ns, data)
+    {
+        var dbs = ns.getDataBinders();
+        for(var i=0; i<dbs.length; i++)
+        {
+            var db = dbs[i].boxing();
+            var keys = Object.keys(data);
+            for(var k=0; k<keys.length; k++)
+              db.setData(keys[k], data[keys[k]]);    
+        }
+    },
     putInStorehouse:function(ns,tableName = ""){
         var rno = ns.repairNo.getUIValue();
-		if(tableName == "")
-		  tableName = ns.properties.tableName;
+        if(tableName == "")
+          tableName = ns.properties.tableName;
         var data = {"登錄編號":rno, "維修站名": "已入庫", "維修狀態":"完工", "入庫時間":utils.now()};
         utils.modifyTableItem(tableName,"登錄編號", data);
-		utils.updateDataBinder(ns, data);
+        utils.updateDataBinder(ns, data);
     },
-	isSubSheets:function(ns){
-			var rno = ns.repairNo.getUIValue();
-			var tableName = ns.properties.tableName;
-			if(tableName == "Crosshead維修工單" || tableName == "Module功能測試表")
-			{
-				var items = utils.getItemValue("維修工單列表","登錄編號",rno, "*", true);
-				if(items.length >= 2) //子工單,不須通知秘書
-					return true;
-			}
-			return false;
-	},
-	finishBtnClick: function(ns){
-				var uictrl = ns.finishBtn;
-				var prop = ns.properties, tableName = prop.tableName;
-				if(uictrl.getCaption() == "已入庫")
+    isSubSheets:function(ns){
+            var rno = ns.repairNo.getUIValue();
+            var tableName = ns.properties.tableName;
+            if(tableName == "Crosshead維修工單" || tableName == "Module功能測試表")
+            {
+                var items = utils.getItemValue("維修工單列表","登錄編號",rno, "*", true);
+                if(items.length >= 2) //子工單,不須通知秘書
+                    return true;
+            }
+            return false;
+    },
+    finishBtnClick: function(ns){
+                var uictrl = ns.finishBtn;
+                var prop = ns.properties, tableName = prop.tableName;
+                if(uictrl.getCaption() == "已入庫")
                     return;
                 if(tableName == "Cryopump維修工單" && !ns.checkSubSheetFinish())
                     return;
-				var text = "已入庫!\n並設定維修狀況為A10.";
-				if(!utils.isSubSheets(ns)) //主工單
-				{
-				  if(tableName == "Compressor維修工單")
-				  {
+                var text = "已入庫!\n並設定維修狀況為A10.";
+                if(!utils.isSubSheets(ns)) //主工單
+                {
+                  if(tableName == "Compressor維修工單")
+                  {
                     ns.repairStatus.setValue("C30,入庫--Compressor");
-					text = "已入庫!\n並設定維修狀況為C30.";
-				  }
-				  else	
+                    text = "已入庫!\n並設定維修狀況為C30.";
+                  }
+                  else    
                     ns.repairStatus.setValue("A10,入庫--Pump/Controller");
                   utils.writeRepairStatus(ns);
-				}
-				else 
-					text = "已完工入庫!";  //子工單完工
+                }
+                else 
+                    text = "已完工入庫!";  //子工單完工
                 utils.putInStorehouse(ns);
                 uictrl.setCaption("已入庫");
                 utils.alert(text);
-	},
-	outBtnClick(ns){
-			var prop = ns.properties, tableName = prop.tableName;
-			var uictrl = ns.outBtn;
-			if(uictrl.getCaption().includes("已通知"))
-				return;
-			if(utils.isSubSheets(ns))
-			{
-				utils.alert("子工單,不通知出貨!");
-				return;
-			}
+    },
+    outBtnClick(ns){
+            var prop = ns.properties, tableName = prop.tableName;
+            var uictrl = ns.outBtn;
+            if(uictrl.getCaption().includes("已通知"))
+                return;
+            if(utils.isSubSheets(ns))
+            {
+                utils.alert("子工單,不通知出貨!");
+                return;
+            }
             if(tableName == "Cryopump維修工單" && !ns.checkSubSheetFinish())
                 return;
-			var text = "已通知秘書入庫/出貨!\n並設定維修狀況為A08.";
-			if(tableName == "Compressor維修工單")
-			{
-				ns.repairStatus.setValue("C28,待入庫/待出貨--Compressor");
-				text = "已通知秘書入庫/出貨!\n並設定維修狀況為C28.";
-			}
-			else
-				ns.repairStatus.setValue("A08,待入庫/待出貨--Pump/Controller");
+            var text = "已通知秘書入庫/出貨!\n並設定維修狀況為A08.";
+            if(tableName == "Compressor維修工單")
+            {
+                ns.repairStatus.setValue("C28,待入庫/待出貨--Compressor");
+                text = "已通知秘書入庫/出貨!\n並設定維修狀況為C28.";
+            }
+            else
+                ns.repairStatus.setValue("A08,待入庫/待出貨--Pump/Controller");
             utils.writeRepairStatus(ns);
             uictrl.setCaption("已通知出貨");
             utils.alert(text);
-	},
-	updateFinishOutBtnCaption: function(ns){
-		var prop = ns.properties, tableName = prop.tableName;
-		var status = utils.readRepairStatus(ns);
-		var rno = ns.repairNo.getUIValue();
-		if(status.includes("A08") || status.includes("C28"))
-		{
-			if(ns.outBtn)
-				ns.outBtn.setCaption("已通知出貨");
-		}
-		if(status.includes("A08") || status.includes("C28"))
-		{
-			if(ns.finishBtn)
-				ns.finishBtn.setCaption("已入庫");
-		}
-		if(utils.isSubSheets(ns)) //cehck if need outBtn
-		{
-			if(ns.outBtn)
-				ns.outBtn.hide();
-			if(ns.repairStatus)
-				ns.repairStatus.hide();
-			var db = ns.getDataBinders();
-			if(db.length > 0)
-			{
-			  db = db[0].boxing();
-			  var data = db.getData();
-			if(ns.finishBtn && data["維修狀態"] == "已完工")
-				ns.finishBtn.setCaption("已入庫");
-			  
-			}
-		}
-	},
-	setButtonFocused: function(btn){
-		var parent = btn.getParent();
-		var nodes = parent.getChildren(true,true).get();
-		for(var i=0; i<nodes.length; i++)
-		{
-			var n = nodes[i].boxing();
-			if(n.$key == "xui.UI.Button")
-			{
-				n.setFontWeight("normal");
-				if(AppName == "RepairSide")
-					n.setFontColor("white");//#90EE90
-			}
-		}
-		btn.setFontWeight("800");
-		if(AppName == "RepairSide")
-			btn.setFontColor("#90EE90");//#90EE90
-	},
-	blockConfirmName: function(uictrl){
-		return;
-		var block = uictrl.getParent();
-		if(uictrl.getUIValue() != "")
-			utils.setContainerDisabled(block,true);
-	}
+    },
+    updateFinishOutBtnCaption: function(ns){
+        var prop = ns.properties, tableName = prop.tableName;
+        var status = utils.readRepairStatus(ns);
+        var rno = ns.repairNo.getUIValue();
+        if(status.includes("A08") || status.includes("C28"))
+        {
+            if(ns.outBtn)
+                ns.outBtn.setCaption("已通知出貨");
+        }
+        if(status.includes("A08") || status.includes("C28"))
+        {
+            if(ns.finishBtn)
+                ns.finishBtn.setCaption("已入庫");
+        }
+        if(utils.isSubSheets(ns)) //cehck if need outBtn
+        {
+            if(ns.outBtn)
+                ns.outBtn.hide();
+            if(ns.repairStatus)
+                ns.repairStatus.hide();
+            var db = ns.getDataBinders();
+            if(db.length > 0)
+            {
+              db = db[0].boxing();
+              var data = db.getData();
+            if(ns.finishBtn && data["維修狀態"] == "已完工")
+                ns.finishBtn.setCaption("已入庫");
+              
+            }
+        }
+    },
+    setButtonFocused: function(btn){
+        var parent = btn.getParent();
+        var nodes = parent.getChildren(true,true).get();
+        for(var i=0; i<nodes.length; i++)
+        {
+            var n = nodes[i].boxing();
+            if(n.$key == "xui.UI.Button")
+            {
+                n.setFontWeight("normal");
+                if(AppName == "RepairSide")
+                    n.setFontColor("white");//#90EE90
+            }
+        }
+        btn.setFontWeight("800");
+        if(AppName == "RepairSide")
+            btn.setFontColor("#90EE90");//#90EE90
+    },
+    blockConfirmName: function(uictrl){
+        return;
+        var block = uictrl.getParent();
+        if(uictrl.getUIValue() != "")
+            utils.setContainerDisabled(block,true);
+    }
  };

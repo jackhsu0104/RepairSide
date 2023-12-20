@@ -1451,7 +1451,7 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox668")
                 .setDataBinder("mdb")
-                .setDataField("Prgram Pass")
+                .setDataField("Program Pass")
                 .setDock("top")
                 .setDockOrder(3)
                 .setDockMargin({

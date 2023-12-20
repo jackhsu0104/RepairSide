@@ -566,11 +566,19 @@ else  if($req->cmd == "modifyTableItem")
     $key = $req->key; 
     $table = $req->table;
     $item = json_decode($req->item);
-
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ").$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    try{
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem($table, $key, $item);
     $RES->result = "OK";
+    }
+    catch(PDOException $e)
+    {
+        $errorMessage = $e->getMessage();
+        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
+        echo $errorMessage;
+    }
 }
 else  if($req->cmd == "modifyTableItem2")
 {
@@ -578,11 +586,21 @@ else  if($req->cmd == "modifyTableItem2")
     $keyValue = $req->keyValue; 
     $table = $req->table;
     $item = json_decode($req->item);
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ").$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    try{
 
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem2($table, $key, $keyValue, $item);
     $RES->result = "OK";
+    }
+    catch(PDOException $e)
+    {
+        $errorMessage = $e->getMessage();
+        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
+        echo $errorMessage;
+    }
+
 }
 else if($req->cmd == "insertTableItem")
 {

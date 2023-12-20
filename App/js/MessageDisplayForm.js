@@ -66,7 +66,7 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                 .setLeft("0em")
                 .setTop("0em")
                 .setLazyAppend(false)
-                .setValue("c")
+                .setValue("f")
             );
             
             host.stack.append(

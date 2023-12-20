@@ -12071,6 +12071,8 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
         _nextbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
+            if(ns.saveBtn.getDisabled() == true)
+                return;
             utils.nextStation(uictrl,["拆解站","Vacuum side","Helium side","測試站"]);
         },
         /**

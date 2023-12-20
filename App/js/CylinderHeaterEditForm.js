@@ -357,7 +357,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("a")
             );
             
             host.tabs.append(

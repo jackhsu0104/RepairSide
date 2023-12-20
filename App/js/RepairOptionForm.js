@@ -167,6 +167,21 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 .beforeComboPop("_repairstatus_beforecombopop")
             );
             
+            host.xui_ui_block103.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"confirm3")
+                .setDataBinder("cdb")
+                .setDataField("經理確認")
+                .setReadonly(true)
+                .setLeft("10.666666666666666em")
+                .setTop("0.7333333333333333em")
+                .setWidth("12.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("經理確認")
+                .setType("getter")
+                .onClick("_confirm3_onclick")
+            );
+            
             host.dialog.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"form")
@@ -707,7 +722,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
         */
         _confirm1_onclick:function(profile, e, src, value, n){
             var ns = this, uictrl = profile.boxing();
-            utils.confirmNameClick(ns, uictrl, "組長","通知秘書確認");
+            utils.confirmNameClick(ns, uictrl, "組長","通知經理確認");
         },
         /**
          * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
@@ -747,6 +762,24 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 utils.alert("秘書才能選擇!");
                 return false;
             }
+        },
+        /**
+         * Fired when the control's pop button is clicked. (Only for 'popbox' or 'getter' type)
+         * @method onClick [xui.UI.ComboInput event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , DOM event Object
+         * @param {String} src , the event source DOM element's xid
+         * @param {String} value , control's UI value
+         * @param {}  
+        */
+        _confirm3_onclick:function(profile, e, src, value, n){
+            var ns = this, uictrl = profile.boxing();
+                    if(ns.confirm1.getUIValue() == "")
+                    {
+                        utils.alert("請組長先確認!");
+                        return;
+                    }
+                    utils.confirmNameClick(ns, uictrl, "經理","待秘書確認");
         }
         /*,
         // To determine how properties affects this module
