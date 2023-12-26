@@ -72,9 +72,15 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"cancelBtn")
                 .setDock("right")
+                .setDockMargin({
+                    "left" : 20,
+                    "top" : 0,
+                    "right" : 0,
+                    "bottom" : 0
+                })
                 .setLeft("23.16190476190476em")
                 .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
+                .setWidth("4.266666666666667em")
                 .setCaption("取消")
                 .onClick("_cancelbtn_onclick")
             );
@@ -157,9 +163,8 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             host.xui_ui_div868.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"pump")
-                .setName("Pump")
                 .setDataBinder("crdb")
-                .setDataField("安裝Pump登錄編號")
+                .setDataField("已安裝Pump登錄編號")
                 .setLeft("26em")
                 .setTop("0.6em")
                 .setWidth("16em")
@@ -295,7 +300,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -931,7 +936,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("9.523809523809524em")
                 .setWidth("6.095238095238095em")
                 .setIconPos("right")
-                .setCaption("/ 剛套")
+                .setCaption("/ 鋼套")
             );
             
             host.xui_ui_div963.append(
@@ -1064,7 +1069,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("9.523809523809524em")
                 .setWidth("6.095238095238095em")
                 .setIconPos("right")
-                .setCaption("/ 剛套")
+                .setCaption("/ 鋼套")
             );
             
             host.xui_ui_div971.append(
@@ -3020,7 +3025,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("a")
             );
             
             host.tabs2.append(
@@ -3500,7 +3505,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("9.523809523809524em")
                 .setWidth("5em")
                 .setIconPos("right")
-                .setCaption("/ 剛套")
+                .setCaption("/ 鋼套")
             );
             
             host.xui_ui_div1053.append(
@@ -3612,7 +3617,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("9.523809523809524em")
                 .setWidth("5em")
                 .setIconPos("right")
-                .setCaption("/ 剛套")
+                .setCaption("/ 鋼套")
             );
             
             host.xui_ui_div1054.append(

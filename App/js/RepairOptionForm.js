@@ -470,7 +470,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox534")
-                .setDataBinder("rdb")
+                .setDataBinder("opdb")
                 .setDataField("Displacer 1st New")
                 .setItems([
                     {
@@ -504,7 +504,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             host.block2.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox535")
-                .setDataBinder("rdb")
+                .setDataBinder("opdb")
                 .setDataField("Displacer 1st New")
                 .setItems([
                     {

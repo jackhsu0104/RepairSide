@@ -132,67 +132,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                 .setLeft("0em")
                 .setTop("0em")
                 .setLazyAppend(false)
-                .setValue("b")
-            );
-            
-            host.mainTabs.append(
-                xui.create("xui.UI.TreeGrid")
-                .setHost(host,"grid1")
-                .setLeft("0em")
-                .setTop("0em")
-                .setRowNumbered(true)
-                .setEditable(true)
-                .setRowHandler(false)
-                .setHeader([
-                    {
-                        "id" : "領用庫別",
-                        "caption" : "領用庫別",
-                        "type" : "label",
-                        "width" : "5.0285714285714285em"
-                    },
-                    {
-                        "id" : "品號",
-                        "caption" : "品號",
-                        "type" : "label",
-                        "width" : "8em"
-                    },
-                    {
-                        "id" : "品名",
-                        "caption" : "品名",
-                        "type" : "label",
-                        "width" : "16em"
-                    },
-                    {
-                        "id" : "批號",
-                        "caption" : "批號",
-                        "type" : "popbox",
-                        "width" : "8em"
-                    },
-                    {
-                        "id" : "庫存數量",
-                        "caption" : "庫存數量",
-                        "type" : "input",
-                        "width" : "8em",
-                        "cellStyle" : "text-align: center;",
-                        "readonly" : true
-                    },
-                    {
-                        "id" : "領料數量",
-                        "caption" : "領料數量",
-                        "type" : "counter",
-                        "width" : "8em",
-                        "min" : 0
-                    }
-                ])
-                .setTagCmds([
-                    {
-                        "id" : "clear",
-                        "type" : "button",
-                        "caption" : "清除"
-                    }
-                ])
-                .onCmd("_grid1_oncmd"),
-                "a"
+                .setValue("a")
             );
             
             host.mainTabs.append(
@@ -248,11 +188,73 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
                     {
                         "id" : "clear",
                         "type" : "button",
-                        "caption" : "清除"
+                        "caption" : "清除",
+                        "itemStyle" : "margin-left: 2em;"
                     }
                 ])
                 .onCmd("_grid2_oncmd"),
                 "b"
+            );
+            
+            host.mainTabs.append(
+                xui.create("xui.UI.TreeGrid")
+                .setHost(host,"grid1")
+                .setLeft("0em")
+                .setTop("0em")
+                .setRowNumbered(true)
+                .setEditable(true)
+                .setRowHandler(false)
+                .setHeader([
+                    {
+                        "id" : "領用庫別",
+                        "caption" : "領用庫別",
+                        "type" : "label",
+                        "width" : "5.0285714285714285em"
+                    },
+                    {
+                        "id" : "品號",
+                        "caption" : "品號",
+                        "type" : "label",
+                        "width" : "8em"
+                    },
+                    {
+                        "id" : "品名",
+                        "caption" : "品名",
+                        "type" : "label",
+                        "width" : "16em"
+                    },
+                    {
+                        "id" : "批號",
+                        "caption" : "批號",
+                        "type" : "popbox",
+                        "width" : "8em"
+                    },
+                    {
+                        "id" : "庫存數量",
+                        "caption" : "庫存數量",
+                        "type" : "input",
+                        "width" : "8em",
+                        "cellStyle" : "text-align: center;",
+                        "readonly" : true
+                    },
+                    {
+                        "id" : "領料數量",
+                        "caption" : "領料數量",
+                        "type" : "counter",
+                        "width" : "8em",
+                        "min" : 0
+                    }
+                ])
+                .setTagCmds([
+                    {
+                        "id" : "clear",
+                        "type" : "button",
+                        "caption" : "清除",
+                        "itemStyle" : "margin-left: 2em;"
+                    }
+                ])
+                .onCmd("_grid1_oncmd"),
+                "a"
             );
             
             return children;

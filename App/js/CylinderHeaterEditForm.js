@@ -27,8 +27,8 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             
             append(
                 xui.create("xui.DataBinder")
-                .setHost(host,"rdb")
-                .setName("rdb")
+                .setHost(host,"chdb")
+                .setName("chdb")
             );
             
             append(
@@ -87,7 +87,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairStatus")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("維修狀態")
                 .setAutoTips(false)
                 .setLeft("16.076190476190476em")
@@ -132,7 +132,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input462")
                 .setName("客戶名稱")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("客戶名稱")
                 .setLeft("2.4em")
                 .setTop("0.6em")
@@ -146,7 +146,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput290")
                 .setName("日期")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("日期")
                 .setLeft("16.2em")
                 .setTop("0.7333333333333333em")
@@ -160,7 +160,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div165.append(
                 xui.create("xui.UI.CheckBox")
                 .setHost(host,"xui_ui_checkbox61")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("Report")
                 .setLeft("54em")
                 .setTop("3em")
@@ -172,7 +172,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input465")
                 .setName("Pump")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("Cylinder S/N")
                 .setLeft("28em")
                 .setTop("3.066666666666667em")
@@ -185,7 +185,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div165.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox170")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("Type")
                 .setItems([
                     {
@@ -220,7 +220,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div165.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox171")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("Model")
                 .setItems([
                     {
@@ -314,7 +314,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"repairNo")
                 .setName("登錄編號")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("登錄編號")
                 .setLeft("29.133333333333333em")
                 .setTop("0.7333333333333333em")
@@ -381,7 +381,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div174.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox200")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A1#1")
                 .setItems([
                     {
@@ -418,7 +418,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input690")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A1#2")
                 .setDock("top")
                 .setDockMargin({
@@ -445,7 +445,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div468.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox187")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A2")
                 .setItems([
                     {
@@ -529,7 +529,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div470.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"radio8")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A3#1")
                 .setItems([
                     {
@@ -566,7 +566,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input679")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A3#2")
                 .setDock("top")
                 .setDockMargin({
@@ -593,7 +593,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div472.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox191")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A3#3")
                 .setItems([
                     {
@@ -630,7 +630,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input680")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A3#4")
                 .setDock("top")
                 .setDockMargin({
@@ -657,7 +657,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div489.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox202")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A4#1")
                 .setItems([
                     {
@@ -694,7 +694,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input735")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A4#2")
                 .setDock("top")
                 .setDockMargin({
@@ -721,7 +721,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div490.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox207")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A5#5")
                 .setItems([
                     {
@@ -765,7 +765,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput378")
                 .setName("Heater 1st")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A5#1")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -784,7 +784,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput379")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A5#2")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -803,7 +803,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput382")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A5#3")
                 .setDock("top")
                 .setDockOrder(3)
@@ -828,7 +828,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput383")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("A5#4")
                 .setDock("top")
                 .setDockOrder(4)
@@ -861,7 +861,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div510.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"nameA")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("簽名A")
                 .setReadonly(true)
                 .setDock("top")
@@ -878,7 +878,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div510.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"dateA")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("日期A")
                 .setReadonly(true)
                 .setDock("top")
@@ -894,7 +894,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div510.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input783")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("RemarkA")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -933,7 +933,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div411.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox332")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C1#1")
                 .setItems([
                     {
@@ -970,7 +970,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1087")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C1#2")
                 .setDock("top")
                 .setDockMargin({
@@ -998,7 +998,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div412.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"nameC")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("簽名C")
                 .setReadonly(true)
                 .setDock("top")
@@ -1015,7 +1015,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div412.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"dateC")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("日期C")
                 .setReadonly(true)
                 .setDock("top")
@@ -1047,7 +1047,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div639.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox333")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C2#1")
                 .setItems([
                     {
@@ -1084,7 +1084,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1088")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C2#2")
                 .setDock("top")
                 .setDockMargin({
@@ -1118,7 +1118,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div655.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox349")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C3#5")
                 .setItems([
                     {
@@ -1162,7 +1162,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput556")
                 .setName("Heater 1st")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C3#1")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -1181,7 +1181,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput557")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C3#2")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -1200,7 +1200,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput558")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C3#3")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -1224,7 +1224,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"xui_ui_comboinput559")
                 .setName("Heater 2nd")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C3#4")
                 .setDock("top")
                 .setDockStretch("fixed")
@@ -1263,7 +1263,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div656.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox350")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C4")
                 .setItems([
                     {
@@ -1316,7 +1316,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1103")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("C5")
                 .setDock("top")
                 .setDockMargin({
@@ -1364,7 +1364,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div819.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox456")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("B1")
                 .setItems([
                     {
@@ -1410,7 +1410,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div820.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"nameB")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("簽名B")
                 .setReadonly(true)
                 .setDock("top")
@@ -1427,7 +1427,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div820.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"dateB")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("日期B")
                 .setReadonly(true)
                 .setDock("top")
@@ -1459,7 +1459,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div821.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox457")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("B2#1")
                 .setItems([
                     {
@@ -1496,7 +1496,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1210")
                 .setName("上次故障原因")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("B2#2")
                 .setDock("top")
                 .setDockMargin({
@@ -1530,7 +1530,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
             host.xui_ui_div825.append(
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox460")
-                .setDataBinder("rdb")
+                .setDataBinder("chdb")
                 .setDataField("B3")
                 .setItems([
                     {
@@ -1641,7 +1641,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         */
                 _repairno_onvaluechange:function(profile, oldValue, newValue, force, tag){
                     var ns = this, uictrl = profile.boxing();
-                    utils.updateNewWorkSheetValue(ns.rdb, newValue);
+                    utils.updateNewWorkSheetValue(ns.chdb, newValue);
                 },
                     /**
          * Fired when user click it

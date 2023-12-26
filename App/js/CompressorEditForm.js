@@ -66,9 +66,15 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"cancelBtn")
                 .setDock("right")
+                .setDockMargin({
+                    "left" : 20,
+                    "top" : 0,
+                    "right" : 0,
+                    "bottom" : 0
+                })
                 .setLeft("23.16190476190476em")
                 .setTop("0.6857142857142857em")
-                .setWidth("5.561904761904762em")
+                .setWidth("4.666666666666667em")
                 .setCaption("取消")
                 .onClick("_cancelbtn_onclick")
             );
@@ -316,7 +322,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("a")
             );
             
             host.tabs.append(
@@ -382,34 +388,6 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setLabelSize("8em")
                 .setLabelCaption("進廠原因")
                 .setMaxlength("200")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input499")
-                .setName("Compressor P/N")
-                .setDataBinder("comdb")
-                .setDataField("Compressor P/N")
-                .setLeft("-2.8em")
-                .setTop("7.542857142857143em")
-                .setWidth("22.133333333333333em")
-                .setLabelSize("12em")
-                .setLabelCaption("Compressor P/N")
-                .setMaxlength("32")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input500")
-                .setName("Compressor S/N")
-                .setDataBinder("comdb")
-                .setDataField("Compressor S/N")
-                .setLeft("1.3333333333333333em")
-                .setTop("9.933333333333334em")
-                .setWidth("18em")
-                .setLabelSize("8em")
-                .setLabelCaption("Compressor S/N")
-                .setMaxlength("32")
             );
             
             host.xui_ui_block246.append(
@@ -4125,9 +4103,8 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
             host.form.append(
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input3458")
-                .setName("Compressor P/N")
                 .setDataBinder("comdb")
-                .setDataField("Compressor P/N")
+                .setDataField("Compressor S/N")
                 .setLeft("22.095238095238095em")
                 .setTop("6.019047619047619em")
                 .setWidth("19.885714285714286em")

@@ -221,7 +221,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("b")
                 .onItemSelected("_tabs_onitemselected")
             );
             

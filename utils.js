@@ -20,7 +20,9 @@ utils = {
                                 if(value && value.endsWith(" 00:00:00.000"))
                                     value = value.slice(0,-13);
                                 if(value && value == ".0000")
-                                    value = "";
+                                    value = "0";
+                                else if(value && value.endsWith(".0000"))
+                                    value = value.slice(0,-2);
                                 row[cols[i]] = value||"";
                             }
                             rows.push(row);
@@ -1357,9 +1359,9 @@ utils = {
         return item;
     },
     showLastWorkSheet: function(mod,pageName, table, keysn, keyDate = '日期'){
-        var db = mod.getDataBinders();
-        if(db.length > 0)
-           db = db[0].boxing();
+        var dbs = mod.getDataBinders();
+        if(dbs.length > 0)
+           var db = dbs[0].boxing();
         else
            return; 
         db.updateDataFromUI();
@@ -1382,6 +1384,8 @@ utils = {
            db.setData(data);
            db.updateDataToUI(); 
         }
+		for(var i=0;i<dbs.length;i++)
+			utils.changeDbName(dbs[i].boxing());
         utils.showDataPage(pageName, item, "readonly", cb1, cb2);
         
     },
@@ -2167,7 +2171,7 @@ utils = {
 		  
 		  if(writecn)
 		  {
-			  if(status == "完工")
+			  if(status.includes("完工") || status == "不修")
 			  {
 //              data["Date Complete"] = utils.today();
                 data["完工日期"] = utils.today();

@@ -319,7 +319,7 @@ xui.Class('App', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Cryopump")
+                .setValue("Crosshead")
                 .onItemSelected("_repairtabs_onitemselected"),
                 "維修工單"
             );
@@ -577,7 +577,7 @@ xui.Class('App', 'xui.Module',{
             host.rtopblock2.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"rsearchBtn2")
-                .setLeft("22em")
+                .setLeft("37.333333333333336em")
                 .setTop("2.2857142857142856em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
@@ -593,7 +593,7 @@ xui.Class('App', 'xui.Module',{
                 .setTop("4.495238095238095em")
                 .setWidth("18em")
                 .setLabelSize("8em")
-                .setLabelCaption("Crosshead編號")
+                .setLabelCaption("Crosshead XH")
             );
             
             host.rtopblock2.append(
@@ -616,6 +616,18 @@ xui.Class('App', 'xui.Module',{
                 .setFontColor("#90EE90")
                 .setFontWeight("800")
                 .onClick("_unfinishbtn3_onclick")
+            );
+            
+            host.rtopblock2.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"sn3")
+                .setDataBinder("repairdb2")
+                .setDataField("Crosshead編號")
+                .setLeft("18.666666666666668em")
+                .setTop("4.6em")
+                .setWidth("18em")
+                .setLabelSize("8em")
+                .setLabelCaption("Crosshead S/N")
             );
             
             host.repairTabs.append(
@@ -681,7 +693,7 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "8em"
                                     },
                                     {
-                                        "id" : "S/N",
+                                        "id" : "更換後S/N",
                                         "caption" : "S/N",
                                         "type" : "input",
                                         "width" : "8em"
@@ -2402,7 +2414,7 @@ xui.Class('App', 'xui.Module',{
             host.wrtopblock.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"wrRepairSearchBtn")
-                .setLeft("34.666666666666664em")
+                .setLeft("47.333333333333336em")
                 .setTop("1.5238095238095237em")
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
@@ -2448,11 +2460,35 @@ xui.Class('App', 'xui.Module',{
                 .setHost(host,"wrSn")
                 .setDataBinder("repairdb1")
                 .setDataField("登錄編號")
-                .setLeft("19.333333333333332em")
+                .setLeft("20.666666666666668em")
                 .setTop("4em")
                 .setWidth("12.333333333333334em")
                 .setLabelSize("3em")
                 .setLabelCaption("S/N")
+            );
+            
+            host.wrtopblock.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"wrModel")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("20.666666666666668em")
+                .setTop("1.6666666666666667em")
+                .setWidth("12.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("Model")
+            );
+            
+            host.wrtopblock.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"wrID")
+                .setDataBinder("repairdb1")
+                .setDataField("登錄編號")
+                .setLeft("33.733333333333334em")
+                .setTop("1.7333333333333334em")
+                .setWidth("12.333333333333334em")
+                .setLabelSize("3em")
+                .setLabelCaption("ID")
             );
             
             host.mainPage.append(
@@ -2508,14 +2544,26 @@ xui.Class('App', 'xui.Module',{
                                         "width" : "16em"
                                     },
                                     {
+                                        "id" : "Model",
+                                        "caption" : "Model",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
                                         "id" : "P/N",
                                         "caption" : "P/N",
-                                        "width" : "8em",
-                                        "type" : "input"
+                                        "type" : "input",
+                                        "width" : "8em"
                                     },
                                     {
                                         "id" : "S/N",
                                         "caption" : "S/N",
+                                        "type" : "input",
+                                        "width" : "8em"
+                                    },
+                                    {
+                                        "id" : "ID",
+                                        "caption" : "ID",
                                         "width" : "8em",
                                         "type" : "input"
                                     }
@@ -2636,7 +2684,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231220")
+                .setCaption("維修站管理系統-20231224")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -3677,6 +3725,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var rno = ns.wrRepairNo.getUIValue();            
                 var pn = ns.wrPn.getUIValue();
                 var sn = ns.wrSn.getUIValue();
+                var model = ns.wrModel.getUIValue();
+                var id = ns.wrID.getUIValue();
                 var grid = ns.wrGrid;
                 grid.properties["condition2"] = "";
                 if(rno != "")
@@ -3685,6 +3735,10 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
                 if(sn != "")
                     grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                if(model != "")
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                if(id != "")
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
                 grid.refreshGrid();       
 
         },
@@ -3754,9 +3808,11 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             value = localStorage.getItem("RepairSide_Password");
             ns.password.setValue(value);
         },
-        searchRepairGrid: function(grid, rnoctrl, xhctrl = null){
+        searchRepairGrid: function(grid, rnoctrl, xhctrl = null, snctrl = null){
                 var rno = rnoctrl.getUIValue();            
-                var xh = "";
+                var xh = "", sn = "";
+                if(snctrl)
+                    sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
                 if(rno != "")
@@ -3766,12 +3822,16 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
 
                 if(xh != "")
                     grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                if(sn != "")
+                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
                 
                 grid.refreshGrid();
         },
-        finishRepairGrid:function(grid, rnoctrl, xhctrl = null){
+        finishRepairGrid:function(grid, rnoctrl, xhctrl = null, snctrl = null){
                 var rno = rnoctrl.getUIValue();            
-                var xh = "";
+                var xh = "", sn = "";
+                if(snctrl)
+                    sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
                 if(rno != "")
@@ -3780,15 +3840,19 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = "";
                 if(xh != "")
                     grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                if(sn != "")
+                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
                 grid.properties["condition2"] += "維修狀態 IN ('完工','不修','簡修完工')";
                 grid.refreshGrid();
             
         },
-        unfinishRepairGrid:function(grid, rnoctrl, xhctrl = null){
+        unfinishRepairGrid:function(grid, rnoctrl, xhctrl = null, snctrl=null){
                 var rno = rnoctrl.getUIValue();            
-                var xh = "";
+                var xh = "", sn = "";
+                if(snctrl)
+                    sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
                 if(rno != "")
@@ -3797,6 +3861,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = "";
                 if(xh != "")
                     grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                if(sn != "")
+                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
                 grid.properties["condition2"] += "維修狀態 NOT IN ('完工','不修','簡修完工')";
@@ -3852,7 +3918,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         */
         _finishbtn3_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+            ns.finishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3, ns.sn3);
              utils.setButtonFocused(uictrl); 
         },
         /**
@@ -3865,7 +3931,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         */
         _rsearchbtn2_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            ns.searchRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+            ns.searchRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3, ns.sn3);
         },
         /**
          * Fired when user click it
@@ -3877,7 +3943,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         */
         _unfinishbtn3_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            ns.unfinishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3);
+            ns.unfinishRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3, ns.sn3);
              utils.setButtonFocused(uictrl); 
         },
         /**
@@ -4091,7 +4157,9 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var rno = ns.wrRepairNo.getUIValue();            
                 var pn = ns.wrPn.getUIValue();
                 var sn = ns.wrSn.getUIValue();
-                var grid = ns.wrGrid;
+                var model = ns.wrModel.getUIValue();
+                 var id = ns.wrID.getUIValue();
+               var grid = ns.wrGrid;
                 grid.properties["condition2"] = "";
                 if(rno != "")
                     grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%'`;
@@ -4099,10 +4167,15 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
                 if(sn != "")
                     grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                if(model != "")
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                if(id != "")
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
                 grid.properties["condition2"] += "維修狀態 IN ('完工','不修','簡修完工')";
-                grid.refreshGrid();            
+                grid.refreshGrid();       
+                utils.setButtonFocused(uictrl);
         },
         /**
          * Fired when user click it
@@ -4117,6 +4190,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var rno = ns.wrRepairNo.getUIValue();            
                 var pn = ns.wrPn.getUIValue();
                 var sn = ns.wrSn.getUIValue();
+                var model = ns.wrModel.getUIValue();
+                 var id = ns.wrID.getUIValue();
                 var grid = ns.wrGrid;
                 grid.properties["condition2"] = "";
                 if(rno != "")
@@ -4125,10 +4200,17 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
                 if(sn != "")
                     grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                if(model != "")
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                if(id != "")
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
+            
                 if(grid.properties["condition2"] != "")
                     grid.properties["condition2"] += " AND ";
                 grid.properties["condition2"] += "維修狀態 NOT IN ('完工','不修','簡修完工')";
-                grid.refreshGrid();       
+                grid.refreshGrid();    
+                utils.setButtonFocused(uictrl);
+
         },
         /**
          * Fired when user click it
