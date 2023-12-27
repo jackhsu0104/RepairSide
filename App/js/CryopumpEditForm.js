@@ -483,7 +483,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("29.933333333333334em")
                 .setWidth("13.4em")
                 .setHeight("1.3333333333333333em")
-                .setCaption("-------------------->250 ±5 Psi")
+                .setCaption("-------------------->200 ±5 Psi")
                 .setHAlign("left")
             );
             
@@ -494,7 +494,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("31.866666666666667em")
                 .setWidth("13.4em")
                 .setHeight("1.3333333333333333em")
-                .setCaption("-------------------->300 ±5 Psi")
+                .setCaption("-------------------->330 ±5 Psi")
                 .setHAlign("left")
             );
             

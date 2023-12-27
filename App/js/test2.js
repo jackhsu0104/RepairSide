@@ -278,6 +278,7 @@ xui.Class('App.test2', 'xui.Module',{
             },
         _page_onready:function(e,i){
             DebugMode = true;
+            ShowDataCommand = true;
 
         }
         /*,
