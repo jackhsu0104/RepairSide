@@ -191,7 +191,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             host.xui_ui_div868.append(
                 xui.create("xui.UI.Button")
                 .setHost(host,"lastWorkSheetBtn")
-                .setLeft("47.333333333333336em")
+                .setLeft("48.666666666666664em")
                 .setTop("3.2666666666666666em")
                 .setWidth("8em")
                 .setCaption("上次維修工單")
@@ -238,10 +238,10 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"pickingBtn")
                 .setAutoTips(false)
-                .setLeft("26.666666666666668em")
+                .setLeft("26em")
                 .setTop("3.1333333333333333em")
-                .setWidth("8.666666666666666em")
-                .setCaption("領料報工單")
+                .setWidth("10.666666666666666em")
+                .setCaption("廠內領料報工單")
                 .setType("drop")
                 .onClick("_pickingbtn_onclick")
             );
@@ -250,7 +250,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"optionBtn")
                 .setAutoTips(false)
-                .setLeft("36.13333333333333em")
+                .setLeft("38em")
                 .setTop("3.2em")
                 .setWidth("9.333333333333334em")
                 .setCaption("Option零件更換表")
@@ -300,7 +300,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("d")
             );
             
             host.tabs1.append(
@@ -5726,7 +5726,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                     var model = ns.model1.getUIValue();
                     if(ns.sheetType.getUIValue().includes("SHI"))
                         model = ns.model2.getUIValue();
-                    utils.showPickingSheetMenu(uictrl, ns.repairNo.getUIValue(), model);
+                    utils.showCrossheadPickingSheetMenu(uictrl, ns.xhCode.getUIValue(), model);
                 },
                     /**
          * Fired when user click it

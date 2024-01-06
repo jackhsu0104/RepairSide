@@ -2032,7 +2032,7 @@ xui.Class('App', 'xui.Module',{
                         "grid" : {
                             "properties" : {
                                 "dirtyMark" : true,
-                                "rowHandlerWidth" : "8em",
+                                "rowHandlerWidth" : "12em",
                                 "header" : [
                                     {
                                         "id" : "ERP維修單號",
@@ -2184,7 +2184,8 @@ xui.Class('App', 'xui.Module',{
                 })
                 .setEvents({
                     "onCmdClick" : "_outgrid_oncmdclick",
-                    "onSelectCell" : "_outgrid_onselectcell"
+                    "onSelectCell" : "_outgrid_onselectcell",
+                    "onRender" : null
                 })
             );
             
@@ -2684,7 +2685,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20231224")
+                .setCaption("維修站管理系統-20240104")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -3623,7 +3624,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         },
 
         _pickinggrid2_oninitnewdata:function(){
-            var data = {"型號":"","產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05, "維修單別":"B200","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate()};
+            var data = {"型號":"","產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05, "維修單別":"B201","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate()};
             return data;
         },
            /**
@@ -3730,15 +3731,17 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var grid = ns.wrGrid;
                 grid.properties["condition2"] = "";
                 if(rno != "")
-                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%'`;
+                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%' AND `;
                 if(pn != "")
-                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
+                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%' AND `;
                 if(model != "")
-                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%' AND `;
                 if(id != "")
-                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%' AND `;
+                grid.properties["condition2"] = grid.properties["condition2"].slice(0, -4);
+            
                 grid.refreshGrid();       
 
         },
@@ -3815,16 +3818,16 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
+                var cond = "";
                 if(rno != "")
-                    grid.properties["condition2"] = ` 登錄編號 LIKE '%${rno}%'`;
-                else
-                    grid.properties["condition2"] = "";
-
+                    cond += ` 登錄編號 LIKE '%${rno}%' AND `;
+  
                 if(xh != "")
-                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                    cond += ` Crosshead編號 LIKE '%${xh}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
-                
+                    cond += ` [更換後S/N] LIKE '%${sn}%' AND `;
+                cond = cond.slice(0, -4);
+                grid.properties["condition2"] = cond;
                 grid.refreshGrid();
         },
         finishRepairGrid:function(grid, rnoctrl, xhctrl = null, snctrl = null){
@@ -3834,17 +3837,18 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
+                var cond = "";
                 if(rno != "")
-                    grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
-                else
-                    grid.properties["condition2"] = "";
+                    cond += ` 登錄編號 LIKE '%${rno}%' AND `;
+  
                 if(xh != "")
-                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                    cond += ` Crosshead編號 LIKE '%${xh}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
-                if(grid.properties["condition2"] != "")
-                    grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 IN ('完工','不修','簡修完工')";
+                    cond += ` [更換後S/N] LIKE '%${sn}%' AND `;
+                cond += "維修狀態 IN ('完工','不修','簡修完工') AND";
+                cond = cond.slice(0, -4);
+                grid.properties["condition2"] = cond;
+            
                 grid.refreshGrid();
             
         },
@@ -3855,17 +3859,17 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     sn = snctrl.getUIValue();
                 if(xhctrl)
                     xh = xhctrl.getUIValue();
+                var cond = "";
                 if(rno != "")
-                    grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
-                else
-                    grid.properties["condition2"] = "";
+                    cond += ` 登錄編號 LIKE '%${rno}%' AND `;
+  
                 if(xh != "")
-                    grid.properties["condition2"] += ` Crosshead編號 LIKE '%${xh}%'`;
+                    cond += ` Crosshead編號 LIKE '%${xh}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [更換後S/N] LIKE '%${sn}%'`;
-                if(grid.properties["condition2"] != "")
-                    grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 NOT IN ('完工','不修','簡修完工')";
+                    cond += ` [更換後S/N] LIKE '%${sn}%' AND `;
+                cond += "維修狀態 NOT IN ('完工','不修','簡修完工') AND";
+                cond = cond.slice(0, -4);
+                grid.properties["condition2"] = cond;
                 grid.refreshGrid();
             
         },        
@@ -4160,21 +4164,19 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var model = ns.wrModel.getUIValue();
                  var id = ns.wrID.getUIValue();
                var grid = ns.wrGrid;
-                grid.properties["condition2"] = "";
+                grid.properties["condition2"] = "維修狀態 IN ('完工','不修','簡修完工') AND ";
                 if(rno != "")
-                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%'`;
+                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%' AND `;
                 if(pn != "")
-                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
+                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%' AND `;
                 if(model != "")
-                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%' AND `;
                 if(id != "")
-                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
-                if(grid.properties["condition2"] != "")
-                    grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 IN ('完工','不修','簡修完工')";
-                grid.refreshGrid();       
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%' AND `;
+                 grid.properties["condition2"] = grid.properties["condition2"].slice(0, -4);
+               grid.refreshGrid();       
                 utils.setButtonFocused(uictrl);
         },
         /**
@@ -4193,21 +4195,20 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 var model = ns.wrModel.getUIValue();
                  var id = ns.wrID.getUIValue();
                 var grid = ns.wrGrid;
-                grid.properties["condition2"] = "";
+                grid.properties["condition2"] = "維修狀態 NOT IN ('完工','不修','簡修完工') AND ";
                 if(rno != "")
-                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%'`;
+                    grid.properties["condition2"] += ` 登錄編號 LIKE '%${rno}%' AND `;
                 if(pn != "")
-                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%'`;
+                    grid.properties["condition2"] += ` [P/N] LIKE '%${pn}%' AND `;
                 if(sn != "")
-                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%'`;
+                    grid.properties["condition2"] += ` [S/N] LIKE '%${sn}%' AND `;
                 if(model != "")
-                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%'`;
+                    grid.properties["condition2"] += ` [Model] LIKE '%${model}%' AND `;
                 if(id != "")
-                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%'`;
+                    grid.properties["condition2"] += ` [ID] LIKE '%${id}%' AND `;
             
-                if(grid.properties["condition2"] != "")
-                    grid.properties["condition2"] += " AND ";
-                grid.properties["condition2"] += "維修狀態 NOT IN ('完工','不修','簡修完工')";
+
+                 grid.properties["condition2"] = grid.properties["condition2"].slice(0, -4);
                 grid.refreshGrid();    
                 utils.setButtonFocused(uictrl);
 
@@ -4230,6 +4231,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = "";
                 grid.refreshGrid();
         },
+
 
 
         /*,

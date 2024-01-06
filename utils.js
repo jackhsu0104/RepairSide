@@ -570,7 +570,8 @@ utils = {
                     onFinish(item);  
             }
             var datas = db.getData();
-            if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
+            //if(mod.prevRepairStatus && ["完工","不修","簡修完工"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
+            if(mod.prevRepairStatus && ["完工","不修"].includes(mod.prevRepairStatus) && (!LoginUser.Privilege.includes("組長") && !LoginUser.Privilege.includes("經理")))
             {
                 utils.alert("組長才能修改完工工單");
                 return;
@@ -977,9 +978,9 @@ utils = {
                 s += "\nhost.form.append("; 
                 if(type.includes("varchar")){
                    input = xui.create("xui.UI.Input");
-                   s += 'xui.create("xui.UI.Input")'; 
+                   s += 'xui.create("xui.UI.ComboInput").setType("input")'; 
                 }
-                if(type.includes("varbinary")){
+                else if(type.includes("varbinary")){
                    input = xui.create("xui.UI.Input");
                    s += 'xui.create("xui.UI.Input")'; 
                 }
@@ -1006,11 +1007,11 @@ utils = {
                 }
                 else if(type.includes("ntext")){
                    input = xui.create("xui.UI.Input");
-                   s += 'xui.create("xui.UI.Input")'; 
+                   s += 'xui.create("xui.UI.ComboInput").setType("input")'; 
                 }
                 else {
                    input = xui.create("xui.UI.Input");
-                   s += 'xui.create("xui.UI.Input")'; 
+                   s += 'xui.create("xui.UI.ComboInput").setType("input")'; 
                 }
                   
                 
@@ -1126,7 +1127,7 @@ utils = {
     },
     textToBase64Barcode: function (text){
         var canvas = document.createElement("canvas");
-        JsBarcode(canvas, text, {format: "CODE128",width:2});
+        JsBarcode(canvas, text, {format: "CODE39",width:1, height:30, displayValue:false});
         return canvas.toDataURL("image/png");
     },
     showServiceRecordForm: function(item, mode){
@@ -1775,6 +1776,64 @@ utils = {
     getEmployeeData: function(emplID){
         return utils.getItemValue("crm.Employee","EmplID", emplID);
     },
+	
+    showCrossheadPickingSheetMenu: function(uictrl, xhno, model = ""){
+            var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
+            ns.model = model;
+			/*
+            var data = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
+            if(data == "")
+            {
+              utils.alert("ERP查無此登錄編號: "+ rno);
+              return;  
+            }
+			*/
+            if(typeof ns.pickingMenu == "undefined")
+            {
+              ns._pickingmenu_onmenuselected = function(profile, item, src){
+                  let ns = this;
+                var model = ns.model;  
+                if(item.id == "new")
+                {
+                  var data = utils.getItemValue("Crosshead維修工單","Crosshead編號",xhno);
+                  if(data != "")
+                  {   
+                    if(model == "")
+                        model = data["Model"];
+
+					var item = {"型號":model,"產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05,
+								"維修單別":"B201","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate(),"Crosshead編號":xhno};
+
+                    utils.showDataPage("ErpPickingForm", item, "newFactory");
+                  }                   
+                }
+                else
+                {
+                  var data = utils.getItemValue("領料報工單","領料報工單號", item.id);  
+                  utils.showDataPage("ErpPickingForm", data, "editFactory");
+                }                  
+              }  
+              var menu =  xui.create("xui.UI.PopMenu").setHost(ns,"pickingMenu").onMenuSelected("_pickingmenu_onmenuselected");
+              ns.AddComponents(menu);
+            }
+            var condition = `[Crosshead編號] = '${xhno}'`; 
+            var cb = function(datas){
+               var rows = datas.rows;   
+               for(var i=0; i<rows.length; i++)
+               {
+                 if(rows[i])
+                 {
+                   var r = rows[i];
+                   let empl = utils.getEmployeeData(r[1]);
+                   let caption = r[0] + "  " + empl.DisplayName;
+                   items.push({"id" : r[0], "caption" : caption}); 
+                 }
+               }
+               ns.pickingMenu.setItems(items);
+               ns.pickingMenu.popUp(uictrl); 
+            };
+            utils.getTableItems({"tableName":"領料報工單","condition":condition, "fields":"領料報工單號,Creator"}, cb);
+    },	
     showPickingSheetMenu: function(uictrl, rno, model = ""){
             var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
             ns.model = model;
@@ -2313,5 +2372,23 @@ utils = {
         var block = uictrl.getParent();
         if(uictrl.getUIValue() != "")
             utils.setContainerDisabled(block,true);
-    }
+    },
+	checkSaveSimpleFinish: function(statusCtrl,rno)
+	{
+		if(statusCtrl.getUIValue() == "簡修完工" && statusCtrl.getDirtyMark() == true)
+		{
+		  var cb = function(){	
+		    var data = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
+		    if(data != "")
+		    {
+			  var xh = data["Crosshed編號"];
+			  if(xh != "")
+			    utils.modifyTableItem("Crosshead維修工單","Crosshead編號",{"Crosshead編號":xh, "維修狀態":"簡修完工"});
+			  utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
+			  utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
+		    }
+		  }
+		  xui.confirm("確認","是否將相關工單設為簡修完工?", cb);
+		}		  
+	},
  };

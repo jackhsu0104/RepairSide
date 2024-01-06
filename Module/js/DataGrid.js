@@ -298,8 +298,6 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         },
         
         loadGridData:function(page, waitFlag = false){
-            if(typeof size == "undefined")
-                size = 20;
             var ns=this, grid=ns.grid, prop = ns.properties;  
             var cb=function(data){
 				if(typeof data == "string")
@@ -519,7 +517,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             var ns=this,  prop=ns.properties;
             ns.grid.setEditable(false);
             if(mode=="readonly"){
-                ns.grid.setSelMode("none").setRowHandler(true);
+                ns.grid.setSelMode("multi").setRowHandler(true);
                 ns.newBtn.hide();
                 ns.deleteBtn.hide();
 				ns.openBtn.hide();
@@ -823,6 +821,40 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 
 
         },        
+		loadAllData:function(pagelen=1000){
+			var ns = this, prop=ns.properties;
+            var condition = ns.prepareCondition();
+            var fields = prop.displayFields;
+			var datas = null;
+            if(fields ==  "")
+                fields = "*";
+            if(prop.tableName.startsWith('SELECT '))
+			{
+                if(condition != "")
+                {
+                    if(sql.indexOf(" WHERE ") != -1)
+                      sql =  sql +  " AND " + condition;
+                    else 
+                      sql =  sql + " WHERE " + condition;  
+                }				
+                datas = utils.getPageQueryItems(prop.tableName, 0, prop.orderby, pagelen);
+			}
+            else  
+			{
+				if(prop.orderby != "")
+				{
+					datas = utils.getPageTableItems({"tableName":prop.tableName, "condition":condition, "orderby":prop.orderby, "pageno": 0, "pagelen": pagelen, "fields": fields});
+				}
+				else 	
+				{	
+					datas = utils.getPageTableItems({"tableName":prop.tableName, "condition":condition, "fields": fields});
+				}
+			}
+			if(datas == null)
+				return [];
+			else
+			    return utils.getRowMap(datas);
+		},
         downloadExcel: function(){
                     var ns = this, prop=ns.properties;
                     var ids=ns.grid.getUIValue(true);
@@ -834,14 +866,29 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         delete r.__row__id;
                         var keys = Object.keys(r);
                         rows.push(keys);
-                        for(var i=0; i<ids.length;i++)
-                        {
+						if(ns.selectAllClickCount % 2 == 1)  //select all
+						{
+							var datas = ns.loadAllData();
+                            for(var i=0; i<datas.length && i<1000;i++)
+                            {
+                              var a = [];
+                              r = datas[i];
+                              for(var j=0;j<keys.length;j++)
+                                a.push(r[keys[j]]);
+                              rows.push(a);
+                            }
+						}
+						else
+						{
+                          for(var i=0; i<ids.length;i++)
+                          {
                             var a = [];
                             r = ns.grid.getRowMap(ids[i]);
                             for(var j=0;j<keys.length;j++)
                               a.push(r[keys[j]]);
                             rows.push(a);
-                        }
+                          }
+						}
                         var filename = "試算表.xlsx";
                         if(prop["excelFileName"] != "")
                                 filename = prop["excelFileName"] + ".xlsx";
