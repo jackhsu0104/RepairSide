@@ -2576,6 +2576,11 @@ xui.Class('App.ModuleTestForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
 //            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始測試");
             utils.saveForm(ns);
+            var d = ns.mdb.getData();
+            var data = {"登錄編號":d["登錄編號"],"A1#1":d["1st Diode S/N"],"A1#2":d["1st Diode S/N#2"], "A1#5":d["2nd Diode S/N"], "A1#6":d["2nd Diode S/N#2"]};
+            utils.modifyTableItem("Cryopump維修工單","登錄編號",data);
+            utils.checkSaveSimpleFinish(ns, ns.repairNo.getUIValue());
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();            
         },
 
         /**

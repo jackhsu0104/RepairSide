@@ -302,7 +302,7 @@ function prepareTableKey($table, $item)
         $d=date_create();
         $d = date_format($d,"Y");
         $d = substr($d, 2);
-        $items = execquery("SELECT TOP 1  [出貨單號] FROM [L10300,出貨單總資料庫] WHERE [出貨單號] LIKE '$d%' ORDER BY [出貨單號] DESC");
+        $items = execquery("SELECT TOP 1  [出貨單號] FROM [L10300,出貨單總資料庫] WHERE [出貨單號] LIKE '".$d."____' ORDER BY [出貨單號] DESC");
         if(count($items)  > 0)
         {
             $value = $items[0]["出貨單號"];
@@ -311,6 +311,8 @@ function prepareTableKey($table, $item)
         }        
         $value = sprintf("%s%04d",$d,$n);
         $item->出貨單號 = $value;
+        //file_put_contents("log41.txt", print_r($items, true));   
+        //file_put_contents("log41.txt", $item->出貨單號 , FILE_APPEND);   
         
     }
     else if($table == "[CryopumpTestForm]")
@@ -566,19 +568,11 @@ else  if($req->cmd == "modifyTableItem")
     $key = $req->key; 
     $table = $req->table;
     $item = json_decode($req->item);
-    file_put_contents("modify.txt", date("Y-m-d H:i:s ").$table."\r\n".$req->item."\r\n", FILE_APPEND);   
-    try{
+
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem($table, $key, $item);
     $RES->result = "OK";
-    }
-    catch(PDOException $e)
-    {
-        $errorMessage = $e->getMessage();
-        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
-        echo $errorMessage;
-    }
 }
 else  if($req->cmd == "modifyTableItem2")
 {
@@ -586,21 +580,11 @@ else  if($req->cmd == "modifyTableItem2")
     $keyValue = $req->keyValue; 
     $table = $req->table;
     $item = json_decode($req->item);
-    file_put_contents("modify.txt", date("Y-m-d H:i:s ").$table."\r\n".$req->item."\r\n", FILE_APPEND);   
-    try{
 
     if($table == "[CTI Control Number總資料庫]")
       unset($item->type);  //no use    
     $res = modifyTableItem2($table, $key, $keyValue, $item);
     $RES->result = "OK";
-    }
-    catch(PDOException $e)
-    {
-        $errorMessage = $e->getMessage();
-        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
-        echo $errorMessage;
-    }
-
 }
 else if($req->cmd == "insertTableItem")
 {

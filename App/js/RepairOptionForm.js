@@ -162,6 +162,10 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                     {
                         "id" : "確認不修",
                         "caption" : "確認不修"
+                    },
+                    {
+                        "id" : "待客戶確認",
+                        "caption" : "待客戶確認"
                     }
                 ])
                 .beforeComboPop("_repairstatus_beforecombopop")
@@ -170,7 +174,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             host.xui_ui_block103.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"confirm3")
-                .setDataBinder("cdb")
+                .setDataBinder("opdb")
                 .setDataField("經理確認")
                 .setReadonly(true)
                 .setLeft("10.666666666666666em")
@@ -737,11 +741,11 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing();
             var rno = ns.repairNo.getUIValue();
             var status = ns.repairStatus.getUIValue();
-            if(status == "")
+            if(status != "確認維修" && status != "確認不修")
             {
-              utils.alert("請先選擇維修狀態,再確認!");
+              utils.alert("請先選擇維修或不修,再確認!");
               return;  
-            }
+            }            
             utils.confirmNameClick(ns, uictrl, "秘書","秘書已確認,通知Bench");
             if(uictrl.getValue() != "")
                 utils.modifyTableItem("Option零件更換表","登錄編號",{"登錄編號":rno, "維修狀態": status});

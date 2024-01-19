@@ -241,8 +241,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setDockOrder(1)
                 .setLeft("14.476190476190476em")
                 .setTop("6.857142857142857em")
-                .setWidth("101.4095238095238em")
-                .setHeight("35.352380952380955em")
+                .setWidth("88.66666666666667em")
+                .setHeight("35.333333333333336em")
                 .setDefaultRowHeight(30)
                 .setLayoutData({
                     "rows" : 14,
@@ -329,8 +329,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1051")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("101.25714285714285em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("88.46666666666667em")
+                .setHeight("1.9333333333333333em"),
                 "A1"
             );
             
@@ -406,7 +406,6 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"repairNo")
                 .setDataBinder("tdb")
                 .setDataField("登錄編號")
-                .setReadonly(true)
                 .setDock("top")
                 .setDockOrder(4)
                 .setDockStretch("fixed")
@@ -437,8 +436,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1052")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("101.25714285714285em")
-                .setHeight("2.2095238095238097em")
+                .setWidth("88.46666666666667em")
+                .setHeight("1.8666666666666667em")
                 .setOverflow("hidden"),
                 "A2"
             );
@@ -529,8 +528,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1053")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A3"
             );
             
@@ -600,8 +599,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1054")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A4"
             );
             
@@ -713,8 +712,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1055")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A5"
             );
             
@@ -810,8 +809,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1056")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A6"
             );
             
@@ -850,8 +849,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1057")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A7"
             );
             
@@ -890,8 +889,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1058")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A8"
             );
             
@@ -928,8 +927,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1059")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A12"
             );
             
@@ -967,8 +966,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1060")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A13"
             );
             
@@ -1006,8 +1005,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1061")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A9"
             );
             
@@ -1027,8 +1026,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1062")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A10"
             );
             
@@ -1097,8 +1096,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1063")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em"),
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em"),
                 "A11"
             );
             
@@ -1167,8 +1166,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1064")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("2.2095238095238097em")
+                .setWidth("44.2em")
+                .setHeight("1.8666666666666667em")
                 .setOverflow("hidden"),
                 "A14"
             );
@@ -1230,8 +1229,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1065")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("13.638095238095238em"),
+                .setWidth("44.266666666666666em")
+                .setHeight("11.666666666666666em"),
                 "B3"
             );
             
@@ -1298,8 +1297,8 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"xui_ui_div1067")
                 .setLeft("0em")
                 .setTop("0em")
-                .setWidth("50.59047619047619em")
-                .setHeight("13.638095238095238em"),
+                .setWidth("44.266666666666666em")
+                .setHeight("11.666666666666666em"),
                 "B9"
             );
             

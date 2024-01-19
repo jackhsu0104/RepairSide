@@ -109,7 +109,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("維修委託單/工單")
+                .setValue("已入庫清單")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -319,7 +319,7 @@ xui.Class('App', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("Crosshead")
+                .setValue("CylinderHeater")
                 .onItemSelected("_repairtabs_onitemselected"),
                 "維修工單"
             );
@@ -2228,7 +2228,7 @@ xui.Class('App', 'xui.Module',{
                     "tableName" : "站內物件查詢2",
                     "insertTableName" : "",
                     "displayFields" : "",
-                    "condition" : "完工狀態 = '入庫' ",
+                    "condition" : "完工狀態 IN ('入庫','出貨' )",
                     "condition2" : "",
                     "orderby" : "",
                     "fieldWidths" : null,
@@ -2685,7 +2685,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240104")
+                .setCaption("維修站管理系統-20240118")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -2801,6 +2801,16 @@ xui.Class('App', 'xui.Module',{
                 .setFontColor("#FF4500")
                 .setFontSize("18px")
                 .setFontWeight("bold")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"fullScreenBtn")
+                .setLeft("39.333333333333336em")
+                .setTop("0em")
+                .setWidth("6.066666666666666em")
+                .setCaption("全螢幕")
+                .onClick("_fullscreenbtn_onclick")
             );
             
             append(
@@ -3884,7 +3894,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
             _rsearchbtn1_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
                 ns.searchRepairGrid(ns.repairGrid1, ns.repair1);
-            },
+               utils.setButtonFocused(uictrl); 
+           },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -3936,6 +3947,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _rsearchbtn2_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.searchRepairGrid(ns.repairGrid3, ns.repair3, ns.xh3, ns.sn3);
+              utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -3961,7 +3973,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _rsearchbtn5_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.searchRepairGrid(ns.repairGrid5, ns.repair5);
-        },
+               utils.setButtonFocused(uictrl); 
+       },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -3999,7 +4012,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _rsearchbtn6_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.searchRepairGrid(ns.repairGrid6, ns.repair6);
-        },
+               utils.setButtonFocused(uictrl); 
+       },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -4037,7 +4051,8 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _rsearchbtn7_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.searchRepairGrid(ns.repairGrid7, ns.repair7);
-        },
+               utils.setButtonFocused(uictrl); 
+       },
         /**
          * Fired when user click it
          * @method onClick [xui.UI.Button event]
@@ -4075,6 +4090,7 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
         _rsearchheaterbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
             ns.searchRepairGrid(ns.heaterGrid, ns.repairHeater);
+              utils.setButtonFocused(uictrl); 
         },
         /**
          * Fired when user click it
@@ -4231,6 +4247,19 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = "";
                 grid.refreshGrid();
         },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _fullscreenbtn_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                utils.toggleFullScreen("body");
+
+            },
 
 
 

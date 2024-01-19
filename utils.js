@@ -1228,7 +1228,7 @@ utils = {
                       utils.showDataPage("CylinderHeaterEditForm", item, "edit");      
 
     },    
-    showModuleTestForm: function(id){
+    showModuleTestForm: function(id, cb1, cb2){
                     if(id == "")
                     {
                       xui.alert("請先指定登錄編號!");
@@ -1238,7 +1238,7 @@ utils = {
                     if(item == "")
                       utils.alert("查無表單!");        
                     else
-                      utils.showDataPage("ModuleTestForm", item, "edit");      
+                      utils.showDataPage("ModuleTestForm", item, "edit", cb1, cb2);      
 
     },    
     showCryopumpTestForm: function(id){
@@ -1294,10 +1294,10 @@ utils = {
 
     },
     showWorkSheet: function(rno, readonly = false){
-				  var loadcb = function(mod){
-					  if(readonly)
-						  mod.saveBtn.setDisabled(true);
-				  };					  
+                  var loadcb = function(mod){
+                      if(readonly)
+                          mod.saveBtn.setDisabled(true);
+                  };                      
                   var item =utils.getItemValue("Cryopump維修工單","登錄編號",rno);
                   if(item != "")
                   {
@@ -1385,8 +1385,8 @@ utils = {
            db.setData(data);
            db.updateDataToUI(); 
         }
-		for(var i=0;i<dbs.length;i++)
-			utils.changeDbName(dbs[i].boxing());
+        for(var i=0;i<dbs.length;i++)
+            utils.changeDbName(dbs[i].boxing());
         utils.showDataPage(pageName, item, "readonly", cb1, cb2);
         
     },
@@ -1776,18 +1776,18 @@ utils = {
     getEmployeeData: function(emplID){
         return utils.getItemValue("crm.Employee","EmplID", emplID);
     },
-	
+    
     showCrossheadPickingSheetMenu: function(uictrl, xhno, model = ""){
             var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
             ns.model = model;
-			/*
+            /*
             var data = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
             if(data == "")
             {
               utils.alert("ERP查無此登錄編號: "+ rno);
               return;  
             }
-			*/
+            */
             if(typeof ns.pickingMenu == "undefined")
             {
               ns._pickingmenu_onmenuselected = function(profile, item, src){
@@ -1801,8 +1801,8 @@ utils = {
                     if(model == "")
                         model = data["Model"];
 
-					var item = {"型號":model,"產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05,
-								"維修單別":"B201","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate(),"Crosshead編號":xhno};
+                    var item = {"型號":model,"產品品號":"SVC-04","客戶代號":"190026","客戶簡稱":"佳霖","發票地址一":"新竹縣竹北市泰和路21號","課稅別":2, "營業稅率":0.05,
+                                "維修單別":"B201","維修站別":"902","維修部門":"902","單據日期":utils.getCloseDate(),"Crosshead編號":xhno};
 
                     utils.showDataPage("ErpPickingForm", item, "newFactory");
                   }                   
@@ -1833,7 +1833,7 @@ utils = {
                ns.pickingMenu.popUp(uictrl); 
             };
             utils.getTableItems({"tableName":"領料報工單","condition":condition, "fields":"領料報工單號,Creator"}, cb);
-    },	
+    },    
     showPickingSheetMenu: function(uictrl, rno, model = ""){
             var ns = uictrl.getModule(), items = [{"id" : "new", "caption" : "新增領料報工單"}];
             ns.model = model;
@@ -1859,8 +1859,7 @@ utils = {
                     var sn = data["In S/N"];
                     if(data["變更後型號"] != "")
                     {
-                        if(model == "")
-                          model = data["變更後型號"];
+                        model = data["變更後型號"];
                         pn = data["變更後P/N"];
                         sn = data["變更後S/N"];
                     }
@@ -1968,21 +1967,21 @@ utils = {
         var data = {"登錄編號":rno,"維修狀態":state};
         utils.modifyTableItem(tableName, "登錄編號", data);
 
-		var data = {"登錄編號":rno,"維修狀況":state};
-		if(tableName == "Crosshead維修工單")
-		{
-			var item = utils.getItemValue("Crosshead主工單查詢","登錄編號", rno);
-			if(item != "")
-				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
-		}
-		if(tableName == "Module功能測試表")
-		{
-			var item = utils.getItemValue("Module主工單查詢","登錄編號", rno);
-			if(item != "")
-				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
-		}
-		else
-				utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+        var data = {"登錄編號":rno,"維修狀況":state};
+        if(tableName == "Crosshead維修工單")
+        {
+            var item = utils.getItemValue("Crosshead主工單查詢","登錄編號", rno);
+            if(item != "")
+                utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+        }
+        if(tableName == "Module功能測試表")
+        {
+            var item = utils.getItemValue("Module主工單查詢","登錄編號", rno);
+            if(item != "")
+                utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
+        }
+        else
+                utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",data);
     },
     nextStation: function(uictrl, sites){
             var ns = uictrl.getModule(), items = [];
@@ -2093,10 +2092,10 @@ utils = {
         data["D3#1"] = data["Comp"];
         data["D3#2"] = data["Comp#3"];
         data["D3#3"] = data["Comp#2"];
-        data["E5"] = data["Start Time"];
-        data["E6"] = data["20k/17k"];
+        data["E18"] = data["Start Time"];
+        data["E20"] = data["20k/17k"];
         data["E23"] = data["20k/17k#3"];
-        data["E7"] = data["20k/17k#2"];
+        data["E21"] = data["20k/17k#2"];
         data["E24"] = data["20k/17k#4"];
         data["E26"] = data["底溫1st"];
         data["E27"] = data["底溫2nd"];
@@ -2123,8 +2122,11 @@ utils = {
             }
             if(data != "")
             {
-              data["D2#3"] = (Number(data["D2#1"]) - Number(data["D2#2"])).toString();    
-              data["TestDate"] = data["TestDate"].substring(0,10);
+              data["D2#3"] = (Number(data["D2#1"]) - Number(data["D2#2"])).toString();   
+              if(data["TestDate"])    
+                data["TestDate"] = data["TestDate"].substring(0,10);
+              else
+                data["TestDate"] = "";  
               var fname = rno +"_CryopumpTestReport.pdf";   
               this.createPdfReport("./TestData.pdf", data, fname);
             }
@@ -2189,55 +2191,55 @@ utils = {
         var items = utils.getItemValueList("維修工單列表","登錄編號", rno);
         if(items != "")
         {    
-		  var writecn = false; 
+          var writecn = false; 
           var data = {"登錄編號":rno,"維修狀態":status};
-		  if(items.length == 1)
-		  {
+          if(items.length == 1)
+          {
             var tableName = items[0]["維修工單"];
             if(tableName.includes("Controller"))
                 tableName = "3phControler維修工單";
-			if(tableName == "Crosshead維修工單")
-			{
-				var item = utils.getItemValue("Crosshead主工單查詢","登錄編號",rno);
-				if(item != "")
-					writecn = true;
-			}
-			else if(tableName == "Module功能測試表")
-			{
-				var item = utils.getItemValue("Module主工單查詢","登錄編號",rno);
-				if(item != "")
-					writecn = true;
-			}
-			else
-				writecn = true;
-		  }
-		  else
-		  {
-			tableName = "Cryopump維修工單";	
-			writecn = true;
-		  }
+            if(tableName == "Crosshead維修工單")
+            {
+                var item = utils.getItemValue("Crosshead主工單查詢","登錄編號",rno);
+                if(item != "")
+                    writecn = true;
+            }
+            else if(tableName == "Module功能測試表")
+            {
+                var item = utils.getItemValue("Module主工單查詢","登錄編號",rno);
+                if(item != "")
+                    writecn = true;
+            }
+            else
+                writecn = true;
+          }
+          else
+          {
+            tableName = "Cryopump維修工單";    
+            writecn = true;
+          }
           utils.modifyTableItem(tableName,"登錄編號", data);
-		  if(status == "入庫" && tableName == "Cryopump維修工單") //write Module and Crosshead
-		  {
-			utils.modifyTableItem("Module功能測試表","登錄編號", data);
-			item = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
-			if(item != "")
-			{
-			  var data2 = {"Crosshead編號":item["Crosshead編號"], "維修狀態":status}
-			  utils.modifyTableItem("Crosshead維修工單","Crosshead編號", data2);
-			}
-		  }
-		  
-		  if(writecn)
-		  {
-			  if(status.includes("完工") || status == "不修")
-			  {
+          if(status == "入庫" && tableName == "Cryopump維修工單") //write Module and Crosshead
+          {
+            utils.modifyTableItem("Module功能測試表","登錄編號", data);
+            item = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
+            if(item != "")
+            {
+              var data2 = {"Crosshead編號":item["Crosshead編號"], "維修狀態":status}
+              utils.modifyTableItem("Crosshead維修工單","Crosshead編號", data2);
+            }
+          }
+          
+          if(writecn)
+          {
+              if(status.includes("完工") || status == "不修")
+              {
 //              data["Date Complete"] = utils.today();
                 data["完工日期"] = utils.today();
-			  }				  
-			  data["維修狀況"] = status;
+              }                  
+              data["維修狀況"] = status;
               utils.modifyTableItem("CTI Control Number總資料庫","登錄編號", data);
-		  }
+          }
        }
     },
     updateDataBinder: function(ns, data)
@@ -2373,22 +2375,49 @@ utils = {
         if(uictrl.getUIValue() != "")
             utils.setContainerDisabled(block,true);
     },
-	checkSaveSimpleFinish: function(statusCtrl,rno)
-	{
-		if(statusCtrl.getUIValue() == "簡修完工" && statusCtrl.getDirtyMark() == true)
-		{
-		  var cb = function(){	
-		    var data = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
-		    if(data != "")
-		    {
-			  var xh = data["Crosshed編號"];
-			  if(xh != "")
-			    utils.modifyTableItem("Crosshead維修工單","Crosshead編號",{"Crosshead編號":xh, "維修狀態":"簡修完工"});
-			  utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
-			  utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
-		    }
-		  }
-		  xui.confirm("確認","是否將相關工單設為簡修完工?", cb);
-		}		  
+    checkSaveSimpleFinish: function(ns,rno)
+    {
+        var value = ns.repairStatus.getUIValue();
+        if(value == "簡修完工" && (value != ns.prevRepairStatus))
+        {
+          var cb = function(){    
+            var data = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
+            if(data != "")
+            {
+              var xh = data["Crosshead編號"];
+              if(typeof xh != "undefined" && xh != "")
+                utils.modifyTableItem("Crosshead維修工單","Crosshead編號",{"Crosshead編號":xh, "維修狀態":"簡修完工"});
+              utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
+              utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno, "維修狀態":"簡修完工"});
+            }
+          }
+          xui.confirm("確認","是否將相關工單設為簡修完工?", cb);
+        }          
+    },
+	getLastRepairDatas: function(insn, rno=""){
+				var R = {"上次登錄編號":"NA", "上次Pump出廠CN":"NA", "上次CN保固截止日期":null};
+                if(insn == "" || insn == "NA" || insn == "N/A")
+                    return R;     
+                  
+                var condition = `[In S/N] = '${insn}' AND 登錄編號 != '${rno}' ORDER BY [Log date] DESC`;  
+                var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
+                if(item == "")
+                    R["上次登錄編號"] = "NA";
+                else
+                    R["上次登錄編號"] = item["登錄編號"];
+                var condition = `[Out S/N] = '${insn}' AND 登錄編號 != '${rno}' ORDER BY [Log date] DESC`;  
+                var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
+                if(item == "")
+                {
+                    R["上次Pump出廠CN"] = "NA";
+                    R["上次CN保固截止日期"] = null;
+                }
+                else 
+                {
+                    R["上次Pump出廠CN"] = item["CN#"];
+                    R["上次CN保固截止日期"] = item["保固期限"];
+                }    
+				return R;
 	},
+	
  };

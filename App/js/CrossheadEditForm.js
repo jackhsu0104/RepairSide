@@ -5520,10 +5520,14 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             //utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
             utils.writeRepairStatus(ns);
             db.updateDataFromUI();
-            var d = db.getData();
-            var data = {"Crosshead編號":d["Crosshead編號"], "Pump/Module ETM":d["Running Time"]};
-            utils.modifyTableItem("Cryopump維修工單","Crosshead編號", data);
+            //var d = db.getData();
+            //var data = {"Crosshead編號":d["Crosshead編號"], "Pump/Module ETM":d["Running Time"]};
+            //utils.modifyTableItem("Cryopump維修工單","Crosshead編號", data);
             utils.saveForm(ns,"","",null, db);
+            var rno = ns.pump.getUIValue();
+            if(rno != "")
+              utils.checkSaveSimpleFinish(ns, rno);
+            ns.prevRepairStatus = ns.repairStatus.getUIValue();            
        },
 
         /**
