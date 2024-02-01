@@ -222,7 +222,7 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setLeft("0em")
                 .setTop("0em")
                 .setLazyAppend(false)
-                .setValue("a")
+                .setValue("b")
                 .onItemSelected("_tabs_onitemselected")
             );
             
@@ -259,6 +259,19 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 .setLabelCaption("零件表分類")
                 .setType("popbox")
                 .onValueChange("_name_onvaluechange")
+            );
+            
+            host.topBlock.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"exportBtn")
+                .setTag("秘書")
+                .setDataBinder("opdb")
+                .setDataField("秘書確認")
+                .setLeft("31.466666666666665em")
+                .setTop("1.2190476190476192em")
+                .setWidth("8.2em")
+                .setCaption("匯出試算表")
+                .onClick("_exportbtn_onclick")
             );
             
             host.block2.append(
@@ -812,6 +825,45 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                         return;
                     }
                     utils.confirmNameClick(ns, uictrl, "經理","待秘書確認");
+        },
+        /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+        _exportbtn_onclick:function(profile, e, src, value){
+            var ns = this, uictrl = profile.boxing();
+            ns.updateUIToContent();
+            var data = ns.cdb.getData();
+            var items = JSON.parse(data["保養內容"]);
+            if(items.length == 0)
+            {
+              utils.alert("無零件資料!");
+              return;  
+            }
+            items = [];
+            var rows = ns.partsGrid.getRows("value");
+            for(var i=0; i<rows.length; i++)
+            {
+                var row = rows[i];
+                if(row[2] != 0 && row[2] != null)  
+                    items.push(row);
+            }
+             
+            var rows = [[ns.name.getUIValue()],[]];
+            var keys = ["建議數量","數量","領料料號","說明","Price(NT)","小計"];
+            rows.push(keys);
+            for(var i=0;i<items.length;i++)
+            {
+               var r = items[i];
+               r.shift(); 
+               rows.push(r);
+            }
+            var filename = ns.repairNo.getUIValue() + "_Compressor零件更換表.xlsx"
+            utils.downloadxlsx(filename, "工作表",rows);                        
         },
 
         /*,
