@@ -1130,6 +1130,19 @@ utils = {
         JsBarcode(canvas, text, {format: "CODE39",width:1, height:30, displayValue:false});
         return canvas.toDataURL("image/png");
     },
+    textToBase64QRcode: function (text){
+        var c = document.createElement("canvas");
+		let canvas = bwipjs.toCanvas(c, {
+			bcid: "qrcode", // Barcode type
+			text: text, // Text to encode
+	//		scale: 3, // 3x scaling factor
+			height: 12, // Bar height, in millimeters
+	//		padding: 5,
+    // rotate: 'R',
+			includetext: false, // Show human-readable text
+		});
+        return canvas.toDataURL("image/png");
+    },
     showServiceRecordForm: function(item, mode){
                   var loadcb = function(mod){
                       mod.sdb.setData(item);
@@ -1335,7 +1348,31 @@ utils = {
                       return;
                   }   
   },        
-    updateNewWorkSheetValue: function(db, rno){
+    showWorkSheet2: function(tableName, rno, readonly = false){
+                  var loadcb = function(mod){
+                      if(readonly)
+                          mod.saveBtn.setDisabled(true);
+                  };
+				  var formMap = {"Cryopump維修工單":"CryopumpEditForm", "Crosshead維修工單":"CrossheadEditForm","3phControler維修工單":"3phControlerEditForm","CylinderHeater維修工單":"CylinderHeaterEditForm",
+								"Compressor維修工單":"CompressorEditForm","Module功能測試表":"ModuleTestForm"};	
+                  var item =utils.getItemValue(tableName,"登錄編號",rno);
+                  if(item != "")
+                  {
+					  if(item["維修站名"] != SiteName || utils.repairFinishStates().includes(item["維修狀態"]))
+					  {
+						  var s = `登錄編號: ${item["登錄編號"]}<br>所在站名: ${item["維修站名"]}<br>維修狀態: ${item["維修狀態"]}<br>`
+						  utils.alert(s,"物件狀態");
+						  return;
+					  }
+					  else
+                        utils.showDataPage(formMap[tableName], item, "edit", loadcb);
+                      return;
+                  }
+				  else
+					  utils.alert("查無此工單!  " + rno);
+     
+  },   
+  updateNewWorkSheetValue: function(db, rno){
         db.updateDataFromUI();
         var item = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno,"*");
         if(item == "")
@@ -2090,8 +2127,8 @@ utils = {
         data["D2#1"] = data["Supply"];
         data["D2#2"] = data["Return"];
         data["D3#1"] = data["Comp"];
-        data["D3#2"] = data["Comp#3"];
-        data["D3#3"] = data["Comp#2"];
+        data["D3#2"] = data["Comp#2"];
+        data["D3#3"] = data["Comp#3"];
         data["E18"] = data["Start Time"];
         data["E20"] = data["20k/17k"];
         data["E23"] = data["20k/17k#3"];
@@ -2136,6 +2173,8 @@ utils = {
             var data = utils.getItemValue("Compressor維修工單","登錄編號", rno)
             if(data != "")
             {
+              if(data["日期C"])    
+                data["日期C"] = data["日期C"].substring(0,10);
               var fname = rno +"_CompressorTestReport.pdf";   
               this.createPdfReport("./CompressorTestData.pdf", data, fname);
             }
@@ -2396,8 +2435,10 @@ utils = {
     },
 	getLastRepairDatas: function(insn, rno=""){
 				var R = {"上次登錄編號":"NA", "上次Pump出廠CN":"NA", "上次CN保固截止日期":null};
-                if(insn == "" || insn == "NA" || insn == "N/A")
-                    return R;     
+                if(insn == "NA" || insn == "N/A")
+                    return R; 
+				if(insn == "")
+					return {"上次登錄編號":"", "上次Pump出廠CN":"", "上次CN保固截止日期":null};		
                   
                 var condition = `[In S/N] = '${insn}' AND 登錄編號 != '${rno}' ORDER BY [Log date] DESC`;  
                 var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
@@ -2419,5 +2460,46 @@ utils = {
                 }    
 				return R;
 	},
-	
+	startCodeRead:function(tableName){
+		//utils.alert("還未完成");
+		//return;
+		var cb = function(rno){
+			//utils.alert(rno);
+			utils.showWorkSheet2(tableName, rno);
+		}
+		if(typeof tableName == 'function')
+			cb = tableName;
+		
+		var cb2 = function(mod){
+			mod.onCodeRead = cb;
+            mod.dialog.setModal(true);            
+		};
+        xui.showModule("App.ScanForm", cb2, null, null, false);
+		
+	},
+	repairFinishStates:function(){
+		return ["出貨","完工","簡修完工","入庫","不修"];
+	},
+	writeRepairShipped: function(rno){
+		var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+		var code = data["CN分類碼"];
+		if(code == "CON")
+			utils.modifyTableItem("3phControler維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+		if(code == "CYL")
+			utils.modifyTableItem("CylinderHeater維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+		if(code == "EFC")
+			utils.modifyTableItem("Compressor維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+		if(code == "EFM")
+			utils.modifyTableItem("Crosshead維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+		if(code == "EFP")
+		{
+			utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+			utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+		}
+		if(code == "MOD")
+			utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+
+		utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",{"登錄編號":rno,"維修狀況":"出貨"});
+		
+	},
  };

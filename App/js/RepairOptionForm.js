@@ -309,7 +309,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("c")
             );
             
             host.xui_ui_tabs19.append(
@@ -403,7 +403,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 xui.create("xui.UI.Input")
                 .setHost(host,"xui_ui_input1418")
                 .setDataBinder("opdb")
-                .setDataField("其他附註1")
+                .setDataField("其他附註")
                 .setLeft("-1.5238095238095237em")
                 .setTop("12.876190476190477em")
                 .setWidth("36.57142857142857em")
@@ -475,7 +475,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox534")
                 .setDataBinder("opdb")
-                .setDataField("Displacer 1st New")
+                .setDataField("更換前軸心規格")
                 .setItems([
                     {
                         "id" : "12.6mm",
@@ -509,7 +509,7 @@ xui.Class('App.RepairOptionForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox535")
                 .setDataBinder("opdb")
-                .setDataField("Displacer 1st New")
+                .setDataField("更換後軸心規格")
                 .setItems([
                     {
                         "id" : "12.6mm",

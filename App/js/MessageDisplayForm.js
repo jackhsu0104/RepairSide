@@ -37,18 +37,21 @@ xui.Class('App.MessageDisplayForm', 'xui.Module',{
                     {
                         "id" : "a",
                         "caption" : "維修工單確認",
-                        "imageClass" : ""
+                        "imageClass" : "",
+                        "hidden" : true
                     },
                     {
                         "id" : "b",
                         "caption" : "CryoPumpTestForm確認",
                         "closeBtn" : false,
                         "optBtn" : false,
-                        "popBtn" : false
+                        "popBtn" : false,
+                        "hidden" : true
                     },
                     {
                         "id" : "c",
-                        "caption" : "待維修案件"
+                        "caption" : "待維修案件",
+                        "hidden" : true
                     },
                     {
                         "id" : "e",

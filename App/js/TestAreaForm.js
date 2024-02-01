@@ -147,7 +147,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setHost(host,"repairNo2")
                 .setDataField("測試區登錄編號")
                 .setLeft("6em")
-                .setTop("4.133333333333334em")
+                .setTop("3.933333333333333em")
                 .setWidth("13.733333333333333em")
                 .setLabelSize("5em")
                 .setLabelCaption("登錄編號")
@@ -158,7 +158,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 xui.create("xui.UI.Button")
                 .setHost(host,"loadBtn")
                 .setLeft("20.666666666666668em")
-                .setTop("4em")
+                .setTop("3.8em")
                 .setWidth("8.8em")
                 .setHeight("2em")
                 .setCaption("載入Test Form")
@@ -186,6 +186,17 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
                 .setNoPanel(true)
                 .setValue("A")
                 .afterValueSet("_areatabs_aftervalueset")
+            );
+            
+            host.xui_ui_block36.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"qrcode")
+                .setLeft("34em")
+                .setTop("3.3333333333333335em")
+                .setWidth("8.133333333333333em")
+                .setHeight("2.8666666666666667em")
+                .setCaption("QR Code")
+                .onClick("_qrcode_onclick")
             );
             
             host.form.append(
@@ -1577,7 +1588,7 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
          * @param {} value  Object
         */
         _loadbtn_onclick:function(profile, e, src, value){
-            var ns = this, uictrl = profile.boxing();
+            var ns = this;
             var rno = ns.repairNo2.getUIValue();
             if(rno == "")
             {
@@ -1589,10 +1600,22 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
               utils.alert(rno + " 已經在架上!");
               return;  
             }    
-            var rdata = utils.getItemValue("CTI Control Number總資料庫","登錄編號", rno);
+            var rdata = utils.getItemValue("Cryopump維修工單","登錄編號", rno);
             if(rdata == "")
             {
                 utils.alert("查無此登錄編號!");
+                return;
+            }
+            else if(utils.repairFinishStates().includes(rdata["維修狀態"]))
+            {
+                var s = `登錄編號: ${rdata["登錄編號"]}<br>所在站名: ${rdata["維修站名"]}<br>維修狀態: ${rdata["維修狀態"]}<br>`
+                utils.alert(s,"物件狀態");
+                return;
+            }
+            if(rdata["維修站名"] != "測試站")
+            {
+                var s = `登錄編號: ${rdata["登錄編號"]}<br>所在站名: ${rdata["維修站名"]}<br>維修狀態: ${rdata["維修狀態"]}<br>`
+                utils.alert(s,"物件狀態");
                 return;
             }
             var data = utils.getItemValueList("CryopumpTestForm", "登錄編號", rno,"rowid DESC");
@@ -1831,7 +1854,23 @@ xui.Class('App.TestAreaForm', 'xui.Module',{
             var rno = uictrl.getUIValue();
             utils.showCryopumpEditForm(rno);
             
-        },        
+        },
+            /**
+         * Fired when user click it
+         * @method onClick [xui.UI.Button event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+         * @param {} value  Object
+        */
+            _qrcode_onclick:function(profile, e, src, value){
+                var ns = this, uictrl = profile.boxing();
+                var cb = function(rno){
+                    ns.repairNo2.setValue(rno);
+                    ns._loadbtn_onclick();
+                };
+                utils.startCodeRead(cb);
+            },        
         /*,
         // To determine how properties affects this module
         propSetAction : function(prop){

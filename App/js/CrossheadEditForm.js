@@ -300,7 +300,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("d")
+                .setValue("c")
             );
             
             host.tabs1.append(
@@ -1713,6 +1713,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setCaption("PASS")
             );
             
+            host.xui_ui_div119.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input669")
+                .setName("登錄編號")
+                .setDataBinder("crdb")
+                .setDataField("B1#5")
+                .setLeft("32.666666666666664em")
+                .setTop("0em")
+                .setLabelCaption("登錄編號")
+                .setMaxlength("20")
+            );
+            
             host.block2.append(
                 xui.create("xui.UI.Div")
                 .setHost(host,"xui_ui_div186")
@@ -1772,6 +1784,18 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setWidth("6.095238095238095em")
                 .setCaption("PASS")
+            );
+            
+            host.xui_ui_div186.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input670")
+                .setName("登錄編號")
+                .setDataBinder("crdb")
+                .setDataField("B1#6")
+                .setLeft("32.666666666666664em")
+                .setTop("0em")
+                .setLabelCaption("登錄編號")
+                .setMaxlength("20")
             );
             
             host.block2.append(
@@ -2662,7 +2686,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setLeft("3.8095238095238093em")
                 .setTop("9.142857142857142em")
                 .setWidth("18em")
-                .setHeight("4.266666666666667em")
+                .setHeight("12.666666666666666em")
                 .setLabelSize("2em")
                 .setLabelPos("top")
                 .setLabelCaption("異常原因")
@@ -2707,7 +2731,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setLeft("9.904761904761905em")
                 .setTop("7.619047619047619em")
                 .setWidth("18em")
-                .setHeight("4.266666666666667em")
+                .setHeight("12.666666666666666em")
                 .setLabelSize("2em")
                 .setLabelPos("top")
                 .setLabelCaption("維修處理")
@@ -2940,7 +2964,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("S/N")
                 .setLeft("22.095238095238095em")
                 .setTop("5.533333333333333em")
-                .setWidth("14.476190476190476em")
+                .setWidth("17.266666666666666em")
                 .setLabelSize("8em")
                 .setLabelCaption("Crosshead S/N")
                 .setMaxlength("20")
@@ -2952,9 +2976,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("登錄編號")
                 .setDataBinder("crdb")
                 .setDataField("S/N#2")
-                .setLeft("36.57142857142857em")
+                .setLeft("39.333333333333336em")
                 .setTop("5.533333333333333em")
-                .setWidth("8.380952380952381em")
+                .setWidth("11.333333333333334em")
                 .setLabelSize("1em")
                 .setLabelCaption("/")
                 .setMaxlength("20")
@@ -3025,7 +3049,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("c")
             );
             
             host.tabs2.append(
@@ -5150,7 +5174,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setLeft("3.8095238095238093em")
                 .setTop("9.142857142857142em")
                 .setWidth("18em")
-                .setHeight("4em")
+                .setHeight("11.933333333333334em")
                 .setLabelSize("2em")
                 .setLabelPos("top")
                 .setLabelCaption("異常原因")
@@ -5195,7 +5219,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setLeft("9.904761904761905em")
                 .setTop("7.619047619047619em")
                 .setWidth("18em")
-                .setHeight("4em")
+                .setHeight("11.933333333333334em")
                 .setLabelSize("2em")
                 .setLabelPos("top")
                 .setLabelCaption("維修處理")
@@ -5368,7 +5392,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDataField("S/N")
                 .setLeft("22.095238095238095em")
                 .setTop("2.933333333333333em")
-                .setWidth("14.476190476190476em")
+                .setWidth("17.266666666666666em")
                 .setLabelSize("8em")
                 .setLabelCaption("Crosshead S/N")
                 .setMaxlength("20")
@@ -5380,9 +5404,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setName("登錄編號")
                 .setDataBinder("crdb2")
                 .setDataField("S/N#2")
-                .setLeft("36.57142857142857em")
+                .setLeft("39.333333333333336em")
                 .setTop("2.933333333333333em")
-                .setWidth("8.380952380952381em")
+                .setWidth("11.4em")
                 .setLabelSize("1em")
                 .setLabelCaption("/")
                 .setMaxlength("20")

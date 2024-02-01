@@ -105,16 +105,16 @@ function jsonResponse($outputData, $status = "ok") {
 
 function myStartSession() {
     session_start ();
-    global $Member;
+    global $LoginUser;
     global $StartLogin;
     
     if (! isset ( $_SESSION ["username"] )) {
         if (isset ( $StartLogin ))
             return;
         else
-            exit ();
+            return;//exit ();
     }
-    $Member = $_SESSION ["username"];
+    $LoginUser = $_SESSION ["username"];
     
 }
 function myDestroySession() {
@@ -278,7 +278,7 @@ else
     $OS = "LINUX";
 
 
-//myStartSession (); // exit immediately if not login
+myStartSession (); // exit immediately if not login
 
 // error_reporting(0);
 

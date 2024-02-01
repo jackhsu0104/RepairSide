@@ -568,11 +568,19 @@ else  if($req->cmd == "modifyTableItem")
     $key = $req->key; 
     $table = $req->table;
     $item = json_decode($req->item);
-
-    if($table == "[CTI Control Number總資料庫]")
-      unset($item->type);  //no use    
-    $res = modifyTableItem($table, $key, $item);
-    $RES->result = "OK";
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    try{
+      if($table == "[CTI Control Number總資料庫]")
+        unset($item->type);  //no use    
+      $res = modifyTableItem($table, $key, $item);
+      $RES->result = "OK";
+    }
+    catch(PDOException $e)
+    {
+        $errorMessage = $e->getMessage();
+        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
+        echo $errorMessage;
+    }
 }
 else  if($req->cmd == "modifyTableItem2")
 {
@@ -580,11 +588,20 @@ else  if($req->cmd == "modifyTableItem2")
     $keyValue = $req->keyValue; 
     $table = $req->table;
     $item = json_decode($req->item);
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    try{
+      if($table == "[CTI Control Number總資料庫]")
+        unset($item->type);  //no use    
+      $res = modifyTableItem2($table, $key, $keyValue, $item);
+      $RES->result = "OK";
+    }
+    catch(PDOException $e)
+    {
+        $errorMessage = $e->getMessage();
+        file_put_contents("modify.txt", $errorMessage."\r\n", FILE_APPEND);   
+        echo $errorMessage;
+    }
 
-    if($table == "[CTI Control Number總資料庫]")
-      unset($item->type);  //no use    
-    $res = modifyTableItem2($table, $key, $keyValue, $item);
-    $RES->result = "OK";
 }
 else if($req->cmd == "insertTableItem")
 {
@@ -592,6 +609,8 @@ else if($req->cmd == "insertTableItem")
     $item = json_decode($req->item);
     prepareTableKey($table,$item);
     //print_r($item);
+    file_put_contents("insert.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+
     if(str_contains($table,"[ServiceRecord]") || str_contains($table,"[Incident]"))
     {
       $res = insertTableItem2($table,$item); //no OUTPUT inserted.* or there is trigger error
@@ -625,6 +644,7 @@ else  if($req->cmd == "deleteTableItem")
           myDeleteTableItem("[CTI Control Number總資料庫]", $rid, $it[$rid]);  
         }
     }
+    file_put_contents("delete.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n"."key:$key  value:$value"."\r\n", FILE_APPEND);   
     $res = myDeleteTableItem($table, $key, $value);
     $RES->result = "OK";
 }

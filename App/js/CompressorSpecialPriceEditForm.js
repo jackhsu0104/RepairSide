@@ -221,7 +221,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setLazyAppend(false)
+                .setValue("a")
                 .onItemSelected("_tabs_onitemselected")
             );
             
@@ -620,6 +621,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             }
             if(ns.confirm2.getUIValue() != "") //秘書已確認
                 ns.saveBtn.setDisabled(true);
+            ns.updatePartsGrid();
+            ns.updateContentToUI();            
         },
             /**
          * Fired when user click it

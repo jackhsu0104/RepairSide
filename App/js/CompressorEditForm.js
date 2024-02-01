@@ -322,7 +322,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("a")
+                .setValue("b")
             );
             
             host.tabs.append(
@@ -605,7 +605,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 xui.create("xui.UI.RadioBox")
                 .setHost(host,"xui_ui_radiobox148")
                 .setDataBinder("comdb")
-                .setDataField("A3#2")
+                .setDataField("A3#4")
                 .setItems([
                     {
                         "id" : "1",
@@ -1400,7 +1400,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input9133")
                 .setName("Rough Valve")
                 .setDataBinder("comdb")
-                .setDataField("A6#2")
+                .setDataField("A3#2")
                 .setLeft("16.8em")
                 .setTop("5.533333333333333em")
                 .setWidth("3.7333333333333334em")
@@ -1414,7 +1414,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setHost(host,"xui_ui_input9134")
                 .setName("Rough Valve")
                 .setDataBinder("comdb")
-                .setDataField("A6#3")
+                .setDataField("A3#3")
                 .setLeft("20.733333333333334em")
                 .setTop("5.533333333333333em")
                 .setWidth("3.7333333333333334em")
