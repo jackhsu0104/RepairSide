@@ -696,9 +696,19 @@ else  if($req->cmd == "newCnNumber")
     if($value != "")
     {    
       $datas = new stdClass;
-      $datas->登錄編號 = $value;
       $datas->$key = $nbr;
-      modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
+	  if(is_numeric($value))
+	  {
+        $datas->rowid = $value;
+        modifyTableItem("[CTI Control Number總資料庫]", "rowid", $datas); //wait
+		$RES->type = "rowid";
+	  }
+	  else
+	  {		  
+        $datas->登錄編號 = $value;
+        modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
+		$RES->type = "RepairNo";
+	  }
     }
     $RES->$key = $nbr;
     $RES->result = "OK";

@@ -307,8 +307,6 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
             host.bottomBlock.append(
                 xui.create("xui.UI.ComboInput")
                 .setHost(host,"sum")
-                .setDataBinder("cdb")
-                .setDataField("其他附註")
                 .setReadonly(true)
                 .setDock("top")
                 .setDockStretch("fixed")

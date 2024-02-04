@@ -30,6 +30,6 @@ TableComboConfigs = {
    },
     "App.ErpPickingForm": {
         "登錄編號":"站內資料表查詢:登錄編號",
-         "型號":"SELECT DISTINCT 型號 FROM Bench領用料副資料表:型號:型號:::站別={SiteName}",
+         "型號":"SELECT DISTINCT 型號 FROM Bench領用料副資料表:型號:型號::17:站別={SiteName}",
   },
 };

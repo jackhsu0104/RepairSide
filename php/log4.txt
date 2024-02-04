@@ -1,3 +1,3 @@
-SELECT * FROM [Crosshead維修工單] WHERE [Crosshead編號]='J238'
+SELECT [DeptID] FROM GDCRM.dbo.[Employee] WHERE [EmplID]='0870059'
 
-SELECT count(1) FROM [Crosshead維修工單] WHERE [Crosshead編號]='J238'
+SELECT count(1) FROM GDCRM.dbo.[Employee] WHERE [EmplID]='0870059'

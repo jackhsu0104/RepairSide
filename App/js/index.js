@@ -113,7 +113,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("已入庫清單")
+                .setValue("已出貨清單")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -2066,6 +2066,28 @@ xui.Class('App', 'xui.Module',{
                 .onClick("_outsearchbtn_onclick")
             );
             
+            host.xui_ui_block398.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"startDate1")
+                .setLeft("3.6em")
+                .setTop("4.666666666666667em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("開始日期")
+                .setType("date")
+            );
+            
+            host.xui_ui_block398.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"endDate1")
+                .setLeft("20.666666666666668em")
+                .setTop("4.666666666666667em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("結束日期")
+                .setType("date")
+            );
+            
             host.mainPage.append(
                 xui.create("xui.UI.Block")
                 .setHost(host,"xui_ui_block399")
@@ -2289,6 +2311,28 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("10.666666666666666em")
                 .setCaption("查詢")
                 .onClick("_xui_ui_button1534_onclick")
+            );
+            
+            host.xui_ui_block710.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"startDate2")
+                .setLeft("4.3428571428571425em")
+                .setTop("5.40952380952381em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("開始日期")
+                .setType("date")
+            );
+            
+            host.xui_ui_block710.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"endDate2")
+                .setLeft("21.409523809523808em")
+                .setTop("5.40952380952381em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("結束日期")
+                .setType("date")
             );
             
             host.mainPage.append(
@@ -2746,6 +2790,28 @@ xui.Class('App', 'xui.Module',{
                 .onClick("_shipsearchbtn_onclick")
             );
             
+            host.xui_ui_block157.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"startDate3")
+                .setLeft("4.3428571428571425em")
+                .setTop("5.40952380952381em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("開始日期")
+                .setType("date")
+            );
+            
+            host.xui_ui_block157.append(
+                xui.create("xui.UI.ComboInput")
+                .setHost(host,"endDate3")
+                .setLeft("21.409523809523808em")
+                .setTop("5.40952380952381em")
+                .setWidth("15.066666666666666em")
+                .setLabelSize("5em")
+                .setLabelCaption("結束日期")
+                .setType("date")
+            );
+            
             host.mainPage.append(
                 xui.create("Module.DataGrid", "xui.Module")
                 .setHost(host,"shipGrid")
@@ -2973,7 +3039,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240131")
+                .setCaption("維修站管理系統-20240204")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -4454,6 +4520,25 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
                 else
                     grid.properties["condition2"] = "";
+                var sdate = ns.startDate2.getUIValue();
+                var edate = ns.endDate2.getUIValue();
+                if(sdate != null || edate != null)
+                {
+                    if(sdate == null)
+                        sdate = '2000-01-01';
+                    else 
+                        sdate = utils.dateToString(sdate);
+                    if(edate == null)
+                        edate = '9999-01-01';
+                    else 
+                        edate = utils.dateToString(edate);
+                    var condition2 = grid.properties["condition2"];
+                    if(condition2 != "")
+                      condition2 += " AND ";  
+                    condition2 += `日期 >= '${sdate}' AND 日期 <= '${edate}'`;
+                    grid.properties["condition2"] = condition2;
+                }
+        
                 grid.refreshGrid();
     },
         /**
@@ -4537,6 +4622,25 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
                 else
                     grid.properties["condition2"] = "";
+                var sdate = ns.startDate1.getUIValue();
+                var edate = ns.endDate1.getUIValue();
+                if(sdate != null || edate != null)
+                {
+                    if(sdate == null)
+                        sdate = '2000-01-01';
+                    else 
+                        sdate = utils.dateToString(sdate);
+                    if(edate == null)
+                        edate = '9999-01-01';
+                    else 
+                        edate = utils.dateToString(edate);
+                    var condition2 = grid.properties["condition2"];
+                    if(condition2 != "")
+                      condition2 += " AND ";  
+                    condition2 += `日期 >= '${sdate}' AND 日期 <= '${edate}'`;
+                    grid.properties["condition2"] = condition2;
+                }
+            
                 grid.refreshGrid();
         },
             /**
@@ -4703,6 +4807,25 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                     grid.properties["condition2"] = `登錄編號 LIKE '%${rno}%'`;
                 else
                     grid.properties["condition2"] = "";
+                var sdate = ns.startDate3.getUIValue();
+                var edate = ns.endDate3.getUIValue();
+                if(sdate != null || edate != null)
+                {
+                    if(sdate == null)
+                        sdate = '2000-01-01';
+                    else 
+                        sdate = utils.dateToString(sdate);
+                    if(edate == null)
+                        edate = '9999-01-01';
+                    else 
+                        edate = utils.dateToString(edate);
+                    var condition2 = grid.properties["condition2"];
+                    if(condition2 != "")
+                      condition2 += " AND ";  
+                    condition2 += `日期 >= '${sdate}' AND 日期 <= '${edate}'`;
+                    grid.properties["condition2"] = condition2;
+                }
+            
                 grid.refreshGrid();
         },
 

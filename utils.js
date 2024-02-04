@@ -1666,7 +1666,7 @@ utils = {
             }
         }       
     },
-    getCloseDate: function(){
+    getCloseDate: function(ddd = null){
       if(typeof CloseDate == "undefined")
       {
         var d = utils.getItemValue("erp.MIS_AccountingCloseDate","Start", 1, "CloseDate");
@@ -1675,12 +1675,15 @@ utils = {
         else 
           CloseDate = 26;  
       }
+	  
       var n = new Date();
+	  if(ddd != null)
+		  n = new Date(ddd);
       var d = n.getDate();
       if(d >= CloseDate)  
       {
+          n.setDate(1); //set date first to prevent full days increase month
           n.setMonth(n.getMonth()+1);
-          n.setDate(1);
       }
             
       return xui.Date.format(n,"yyyy-mm-dd");

@@ -611,8 +611,10 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var ns = this;
             var rno = ns.repairNo.getUIValue();
             ns.pdb.updateDataFromUI();
-            var d1 = ns.pdb.getData(); 
-            var date = d1["單據日期"].replaceAll("-","").substring(0,9);
+            var d1 = ns.pdb.getData();
+            var pdate = utils.getCloseDate(d1["單據日期"]);
+            ns.date.setValue(pdate);
+            var date = pdate.replaceAll("-","").substring(0,9);
             if(rno != "")
             {    
               var hdata = utils.getItemValue("erp.領料報工表單查詢", "登錄編號", rno);
@@ -716,7 +718,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
               ns.uploadBtn.setDisabled(true);
               ns.deleteBtn.setDisabled(true);  
               ns.pdb.setData("已上傳", true);  
-              data = {"領料報工單號":  ns.id.getUIValue(), "已上傳":1};  
+              data = {"領料報工單號":  ns.id.getUIValue(), "已上傳":1, "單據日期":ns.date.getUIValue()};  
               utils.modifyTableItem("領料報工單","領料報工單號", data);  
               ns.mgrid.setMode("readonly");  
               utils.setContainerDisabled(ns.block, true);  
@@ -740,7 +742,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
               var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
               if(data != "")
               {   
-                var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.today(),
+                var item = {"維修單別":"B200","維修站別":"902","產品品號":data["In P/N"], "產品品名":data["型號(EX form)"],"產品序號":data["In S/N"],"單據日期":utils.getCloseDate(),
                         "登錄編號":rno, "Creator": LoginUser.EmplID,"型號":data["In Model"]};
                 var data2 = utils.getItemValue("erp.領料報工表單查詢","登錄編號",rno); 
                 if(data2 != "")
