@@ -3039,7 +3039,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240204")
+                .setCaption("維修站管理系統-20240205")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")

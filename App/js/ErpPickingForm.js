@@ -630,7 +630,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                             "RMATC007": d1["客戶代號"].trim(),                 
                             "RMATC008": d1["產品品號"].trim(),                
                             "RMATC026": d1["工時"],                
-                            "RMATC226": StoreNameList[SiteName].trim(),                  
+                            //"RMATC226": StoreNameList[SiteName].trim(),                  
+                            "RMATC226": d1["領料報工單號"],                  
                             "CREATOR":  d1["Creator"]
                        };
             }
@@ -646,7 +647,8 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                             "RMATC007": d1["客戶代號"].trim(),                 
                             "RMATC008": d1["產品品號"].trim(),                
                             "RMATC026": d1["工時"],                
-                            "RMATC226": StoreNameList[SiteName].trim(),                  
+                            //"RMATC226": StoreNameList[SiteName].trim(),                  
+                            "RMATC226": d1["領料報工單號"],                  
                             "CREATOR":  d1["Creator"]
                        };
             }
