@@ -851,7 +851,13 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                     items.push(row);
             }
              
-            var rows = [[ns.name.getUIValue()],[]];
+            var rows = [];
+            rows.push(["客戶名稱: "+data["客戶名稱"],"","ATTN: "+data["ATTN"],"","登錄編號: "+data["登錄編號"]]);
+            rows.push(["Model: "+data["Model"],"","S/N: "+data["S/N"],"","ETM: "+data["ETM"]]);
+            rows.push(["預估金額: "+data["預估金額"]]);
+            rows.push(["故障問題簡述: "+data["故障問題簡述"]]);
+            rows.push(["保養名稱: "+data["保養名稱"]]);
+            rows.push([]);
             var keys = ["建議數量","數量","領料料號","說明","Price(NT)","小計"];
             rows.push(keys);
             for(var i=0;i<items.length;i++)
@@ -860,6 +866,8 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                r.shift(); 
                rows.push(r);
             }
+            rows.push([]);
+            rows.push(["其他附註: " + data["其他附註"]]);
             var filename = ns.repairNo.getUIValue() + "_Compressor零件更換表.xlsx"
             utils.downloadxlsx(filename, "工作表",rows);                        
         },
