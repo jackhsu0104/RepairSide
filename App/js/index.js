@@ -2984,7 +2984,8 @@ xui.Class('App', 'xui.Module',{
                     }
                 })
                 .setEvents({
-                    "onCmdClick" : "_shipgrid_oncmdclick"
+                    "onCmdClick" : "_shipgrid_oncmdclick",
+                    "onSelectCell" : "_shipgrid_onselectcell"
                 }),
                 "已出貨清單"
             );
@@ -3039,7 +3040,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240205")
+                .setCaption("維修站管理系統-20240215")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")
@@ -4827,6 +4828,14 @@ _xui_ui_comboinput531_beforecombopop:function(profile, pos, e, src){
                 }
             
                 grid.refreshGrid();
+        },
+        _shipgrid_onselectcell:function(id/*String, value*/,value/*String, caption */,cell/*Hash, record fields map*/){
+                if(id == "登錄編號")
+                {
+                  var rno = value;  
+                  utils.showWorkSheet(rno, true);            //readonly         
+                }
+
         },
 
 

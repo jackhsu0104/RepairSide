@@ -444,7 +444,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setHeight("19.35238095238095em")
                 .setLazyAppend(false)
-                .setValue("d")
+                .setValue("b")
             );
             
             host.tabs1.append(
