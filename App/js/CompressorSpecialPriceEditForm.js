@@ -166,6 +166,10 @@ xui.Class('App.CompressorSpecialPriceEditForm', 'xui.Module',{
                     {
                         "id" : "確認不修",
                         "caption" : "確認不修"
+                    },
+                    {
+                        "id" : "待客戶確認",
+                        "caption" : "待客戶確認"
                     }
                 ])
             );
