@@ -1,5 +1,13 @@
-// The default code is a module class (inherited from xui.Module)
-// Ensure that all the value of "key/value pair" does not refer to external variables
+/*************************************************************************************************
+ 程式代號：RepairSide
+ 程式名稱：App/js/ErpPickingForm.js
+ 系統版本：企業版(for SQL Server)
+*************************************************************************************************
+ 程式版本：1.0
+ 修改日期：2024/03/02
+ 修改人員：Jack Hsu
+ 修改說明：(1). 初始版本
+*************************************************************************************************/
 xui.Class('App.ErpPickingForm', 'xui.Module',{
     Instance:{
         // Dependency classes
@@ -652,7 +660,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                             "CREATOR":  d1["Creator"]
                        };
             }
-            var dat = {"DoAction":1, "LoginID":LoginUser.EmplID, "CompanyID":"CICTEST", "head":head};   
+            var dat = {"DoAction":1, "LoginID":LoginUser.EmplID, "CompanyID":"CIC", "head":head};   
 
             return dat;
         },
@@ -677,7 +685,6 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var datas = utils.getItemValue("領料報工單子表","領料報工單號",id,"*",true);
             if(datas != "")
             {
-              edata["DoAction"] = 2; //picking & workhour
               var hdr = "";
               //if(edata.head.RMATC005 != "")
               //  hdr = edata.head.RMATC005 + "-" + edata.head.RMATC006 + "-";  
@@ -694,6 +701,11 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
                   body.push(d2);
                 }
               }
+              if(body.length > 0)
+                edata["DoAction"] = 2; //picking & workhour
+              else
+                body = [{}];  
+                  
             }
             else 
                var body = [{}];

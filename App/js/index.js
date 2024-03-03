@@ -1,5 +1,13 @@
-// The default code is a module class (inherited from xui.Module)
-// Ensure that all the value of "key/value pair" does not refer to external variables
+/*************************************************************************************************
+ 程式代號：RepairSide
+ 程式名稱：App/js/index.js
+ 系統版本：企業版(for SQL Server)
+*************************************************************************************************
+ 程式版本：1.0
+ 修改日期：2024/03/02
+ 修改人員：Jack Hsu
+ 修改說明：(1). 初始版本
+*************************************************************************************************/
 xui.Class('App', 'xui.Module',{
     Instance:{
         // Dependency classes
@@ -3040,7 +3048,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240215")
+                .setCaption("維修站管理系統-20240229")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")

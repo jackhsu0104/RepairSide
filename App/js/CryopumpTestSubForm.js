@@ -1,5 +1,13 @@
-// The default code is a module class (inherited from xui.Module)
-// Ensure that all the value of "key/value pair" does not refer to external variables
+/*************************************************************************************************
+ 程式代號：RepairSide
+ 程式名稱：App/js/CryopumpTestSubForm.js
+ 系統版本：企業版(for SQL Server)
+*************************************************************************************************
+ 程式版本：1.0
+ 修改日期：2024/03/02
+ 修改人員：Jack Hsu
+ 修改說明：(1). 初始版本
+*************************************************************************************************/
 xui.Class('App.CryopumpTestSubForm', 'xui.Module',{
     Instance:{
         // Dependency classes

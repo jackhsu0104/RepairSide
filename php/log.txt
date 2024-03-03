@@ -1,1 +1,1 @@
-SELECT * FROM [領料報工單] WHERE 客戶代號 = '190026'  ORDER BY [領料報工單號]  OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
+SELECT count(*) FROM [CryopumpWarranty原因分析表] WHERE 維修狀態 = '通知測試' 

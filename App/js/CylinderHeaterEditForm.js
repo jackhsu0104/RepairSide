@@ -1,5 +1,13 @@
-// The default code is a module class (inherited from xui.Module)
-// Ensure that all the value of "key/value pair" does not refer to external variables
+/*************************************************************************************************
+ 程式代號：RepairSide
+ 程式名稱：App/js/CylinderHeaterEditForm.js
+ 系統版本：企業版(for SQL Server)
+*************************************************************************************************
+ 程式版本：1.0
+ 修改日期：2024/03/02
+ 修改人員：Jack Hsu
+ 修改說明：(1). 初始版本
+*************************************************************************************************/
 xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
     Instance:{
         // Dependency classes
@@ -335,6 +343,20 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
                 .setTop("0.6em")
                 .setCaption("▼")
                 .onClick("_changerepairbtn_onclick")
+            );
+            
+            host.xui_ui_div165.append(
+                xui.create("xui.UI.Button")
+                .setHost(host,"repairBtn")
+                .setAutoTips(false)
+                .setTips("Warranty原因分析表")
+                .setLeft("51.333333333333336em")
+                .setTop("7.933333333333334em")
+                .setWidth("8.666666666666666em")
+                .setHeight("1.9333333333333333em")
+                .setTabindex(14)
+                .setCaption("維修委託單")
+                .onClick("_repairbtn_onclick")
             );
             
             host.form.append(
@@ -1707,6 +1729,7 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         */
             _repairbtn_onclick:function(profile, e, src, value){
                 var ns = this, uictrl = profile.boxing();
+                utils.showRepairEditForm(ns.repairNo.getUIValue(), true);  //true, readonly
             },
                 /**
          * Fired when user click it

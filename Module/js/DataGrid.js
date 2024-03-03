@@ -359,6 +359,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         header.push(item);        
                       }
                       grid.setHeader(header);  
+                      ns.fireEvent("onGridHeaderLoaded");
                     }
                     utils.setGridData(data, ns.grid);
                     var pagelen = 100;
@@ -1302,6 +1303,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 */        
         // export events
         $EventHandlers:{
+            onGridHeaderLoaded:function(){},
             onGridDataLoaded:function(){},
             onListRecords:function(page/*Number, page number*/, 
                                     size/*Number, record count of a page*/, 

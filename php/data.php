@@ -393,13 +393,14 @@ function prepareTableKey($table, $item)
               $h = chr(ord($h)+1);
             }
             $value = sprintf("%s%03d",$h,$n);
+            $value = strtoupper($value);
             $key = "Crosshead編號";
             $item->$key = $value;
         }
         else
         {
             $key = "Crosshead編號";
-            $item->$key = "A001";
+            $item->$key = "L001";
         }
             
     }
@@ -697,18 +698,18 @@ else  if($req->cmd == "newCnNumber")
     {    
       $datas = new stdClass;
       $datas->$key = $nbr;
-	  if(is_numeric($value))
-	  {
+      if(is_numeric($value))
+      {
         $datas->rowid = $value;
         modifyTableItem("[CTI Control Number總資料庫]", "rowid", $datas); //wait
-		$RES->type = "rowid";
-	  }
-	  else
-	  {		  
+        $RES->type = "rowid";
+      }
+      else
+      {          
         $datas->登錄編號 = $value;
         modifyTableItem("[CTI Control Number總資料庫]", "登錄編號", $datas); //wait
-		$RES->type = "RepairNo";
-	  }
+        $RES->type = "RepairNo";
+      }
     }
     $RES->$key = $nbr;
     $RES->result = "OK";
