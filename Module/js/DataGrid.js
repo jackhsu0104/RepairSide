@@ -859,6 +859,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         downloadExcel: function(){
                     var ns = this, prop=ns.properties;
                     var ids=ns.grid.getUIValue(true);
+					var rowDatas = ns.grid.getRows();
 					var tableName = prop.tableName;
                     if(ids&&ids.length){
                         var rows =[];
@@ -868,7 +869,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         delete r.__row__id;
                         var keys = Object.keys(r);
                         rows.push(keys);
-						if(ns.selectAllClickCount % 2 == 1)  //select all
+						if(ns.selectAllClickCount % 2 == 1 && ids.length == rowDatas.length)  //select all
 						{
 							var datas = ns.loadAllData();
                             for(var i=0; i<datas.length && i<1000;i++)
