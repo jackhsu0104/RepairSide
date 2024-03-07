@@ -121,7 +121,7 @@ xui.Class('App', 'xui.Module',{
                 .setWidth("67.5047619047619em")
                 .setBarLocation("left")
                 .setBarSize("12em")
-                .setValue("已出貨清單")
+                .setValue("站內物件列表")
                 .onItemSelected("_mainpage_onitemselected")
             );
             
@@ -3048,7 +3048,7 @@ xui.Class('App', 'xui.Module',{
                 .setLeft("9.142857142857142em")
                 .setTop("0.7619047619047619em")
                 .setWidth("15.333333333333334em")
-                .setCaption("維修站管理系統-20240229")
+                .setCaption("維修站管理系統-20240307")
                 .setHAlign("left")
                 .setVAlign("middle")
                 .setFontColor("#006400")

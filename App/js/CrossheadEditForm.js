@@ -5549,9 +5549,9 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             ns.repairStatus.setDataBinder(dbname);
-            //utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
-            utils.writeRepairStatus(ns);
             db.updateDataFromUI();
+            utils.updateRepairFinishDate(ns, db);
+            utils.writeRepairStatus(ns);
             //var d = db.getData();
             //var data = {"Crosshead編號":d["Crosshead編號"], "Pump/Module ETM":d["Running Time"]};
             //utils.modifyTableItem("Cryopump維修工單","Crosshead編號", data);

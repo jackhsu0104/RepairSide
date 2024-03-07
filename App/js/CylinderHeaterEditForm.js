@@ -1615,7 +1615,8 @@ xui.Class('App.CylinderHeaterEditForm', 'xui.Module',{
         */
         _savebtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
-            utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
+            utils.updateRepairFinishDate(ns, ns.chdb);
+            utils.writeRepairStatus(ns);
             utils.saveForm(ns);
         },
 

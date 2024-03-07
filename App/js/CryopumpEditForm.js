@@ -11369,14 +11369,13 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
             ns.pump.setDataBinder(dbname);
             ns.repairNo.setDataBinder(dbname);
             ns.repairStatus.setDataBinder(dbname);
-           // utils.updateWorkSheetRepairState(ns.repairNo.getUIValue(), "開始維修");
             if(finishState == "完工" && ns.checkFinishState(db)==false)
                 return;
+            utils.updateRepairFinishDate(ns, db);
             utils.writeRepairStatus(ns);
             ns.writeBack(db);
             utils.saveForm(ns,"","",null, db);
             utils.checkSaveSimpleFinish(ns, ns.repairNo.getUIValue());
-            ns.prevRepairStatus = ns.repairStatus.getUIValue();
         },
 
         /**

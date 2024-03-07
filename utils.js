@@ -2215,6 +2215,17 @@ utils = {
           uictrl.setValue(r);
         return r;
     },
+	updateRepairFinishDate:function(ns,db){
+        status = ns.repairStatus.getUIValue();
+        if(typeof ns.prevRepairStatus != 'undefined')
+        {
+            if(ns.prevRepairStatus == status)
+                return;
+        }
+		if(status.includes("完工") || status == "不修")
+		  db.setData("完工日期", utils.today());			
+		
+	},
     writeRepairStatus:function(ns, status){
         
         if(typeof ns == "string")
@@ -2271,6 +2282,8 @@ utils = {
             tableName = "Cryopump維修工單";    
             writecn = true;
           }
+		  if(status == "入庫")
+			  data["入庫日期"] = utils.today();
           utils.modifyTableItem(tableName,"登錄編號", data);
           if(status == "入庫" && tableName == "Cryopump維修工單") //write Module and Crosshead
           {
@@ -2278,7 +2291,7 @@ utils = {
             item = utils.getItemValue("Cryopump維修工單","登錄編號",rno);
             if(item != "")
             {
-              var data2 = {"Crosshead編號":item["Crosshead編號"], "維修狀態":status}
+              var data2 = {"Crosshead編號":item["Crosshead編號"], "維修狀態":status, "入庫日期":utils.today()}
               utils.modifyTableItem("Crosshead維修工單","Crosshead編號", data2);
             }
           }

@@ -859,6 +859,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
         downloadExcel: function(){
                     var ns = this, prop=ns.properties;
                     var ids=ns.grid.getUIValue(true);
+					var tableName = prop.tableName;
                     if(ids&&ids.length){
                         var rows =[];
                         var r = ns.grid.getRowMap(ids[0]);
@@ -875,7 +876,17 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                               var a = [];
                               r = datas[i];
                               for(var j=0;j<keys.length;j++)
-                                a.push(r[keys[j]]);
+							  {
+								var type = "string";  
+							    var config = utils.getTableFieldConfig(tableName, keys[j]);
+								if(config)
+								  type = config.DATA_TYPE;  
+  
+								let it = r[keys[j]];
+								if(type == "int" || type == "money")
+								  it = Number(it);		
+                                a.push(it);
+							  }
                               rows.push(a);
                             }
 						}
@@ -886,7 +897,12 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                             var a = [];
                             r = ns.grid.getRowMap(ids[i]);
                             for(var j=0;j<keys.length;j++)
-                              a.push(r[keys[j]]);
+							{
+							  let it = r[keys[j]];
+							  if(it instanceof Date)
+							    it = utils.dateToString(it);
+                              a.push(it);
+							}
                             rows.push(a);
                           }
 						}
