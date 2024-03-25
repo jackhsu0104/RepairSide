@@ -308,7 +308,7 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
                 .setDock("top")
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("c")
+                .setValue("d")
             );
             
             host.tabs1.append(
@@ -5841,7 +5841,13 @@ xui.Class('App.CrossheadEditForm', 'xui.Module',{
         */
         _optionbtn_onclick:function(profile, e, src, value){
             var ns = this, uictrl = profile.boxing();
-            utils.showRepairOptionForm(ns.crdb);
+            var db = ns.crdb, dbname = "crdb";
+            if(ns.sheetType.getUIValue().includes("SHI"))
+            {
+                db = ns.crdb2;
+                dbname = "crdb2";
+            }
+            utils.showRepairOptionForm(db);
         }
         /*,
         // To determine how properties affects this module

@@ -330,7 +330,7 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 ])
                 .setLeft("0em")
                 .setTop("0em")
-                .setValue("b")
+                .setValue("a")
             );
             
             host.tabs.append(
@@ -378,23 +378,9 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                 .setDataField("上次故障原因")
                 .setLeft("1.3333333333333333em")
                 .setTop("5.333333333333333em")
-                .setWidth("18em")
+                .setWidth("61.333333333333336em")
                 .setLabelSize("8em")
                 .setLabelCaption("上次故障原因")
-                .setMaxlength("200")
-            );
-            
-            host.xui_ui_block246.append(
-                xui.create("xui.UI.Input")
-                .setHost(host,"xui_ui_input498")
-                .setName("進廠原因")
-                .setDataBinder("comdb")
-                .setDataField("進廠原因")
-                .setLeft("1.2em")
-                .setTop("14.733333333333333em")
-                .setWidth("38em")
-                .setLabelSize("8em")
-                .setLabelCaption("進廠原因")
                 .setMaxlength("200")
             );
             
@@ -496,6 +482,22 @@ xui.Class('App.CompressorEditForm', 'xui.Module',{
                         "caption" : "N/A"
                     }
                 ])
+            );
+            
+            host.xui_ui_block246.append(
+                xui.create("xui.UI.Input")
+                .setHost(host,"xui_ui_input498")
+                .setName("進廠原因")
+                .setDataBinder("comdb")
+                .setDataField("進廠原因")
+                .setLeft("1.2em")
+                .setTop("14.733333333333333em")
+                .setWidth("61.46666666666667em")
+                .setHeight("7.2em")
+                .setLabelSize("8em")
+                .setLabelCaption("進廠原因")
+                .setMaxlength("200")
+                .setMultiLines(true)
             );
             
             host.tabs.append(

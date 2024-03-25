@@ -457,7 +457,7 @@ xui.Class('Module.DataGrid', 'xui.Module',{
             var ns = this, 
                 grid=profile.boxing(),
                 rowId=row.id;
-            if(ns.properties.mode=="selection" || ns.properties.mode=="readonly")return;
+            if(ns.properties.mode=="selection" || ns.properties.mode=="readonly" || ns.properties.mode=="editor")return;
             
             ns._openForm(rowId, ns.getRowMap(row));
         },
@@ -869,10 +869,11 @@ xui.Class('Module.DataGrid', 'xui.Module',{
                         delete r.__row__id;
                         var keys = Object.keys(r);
                         rows.push(keys);
-						if(ns.selectAllClickCount % 2 == 1 && ids.length == rowDatas.length)  //select all
+						if(ns.selectAllClickCount % 2 == 1 && (ids.length == rowDatas.length || ids.length == rowDatas.length-1))  //select all
 						{
-							var datas = ns.loadAllData();
-                            for(var i=0; i<datas.length && i<1000;i++)
+							var pagelen = 5000;
+							var datas = ns.loadAllData(pagelen);
+                            for(var i=0; i<datas.length && i<pagelen;i++)
                             {
                               var a = [];
                               r = datas[i];
@@ -902,6 +903,10 @@ xui.Class('Module.DataGrid', 'xui.Module',{
 							  let it = r[keys[j]];
 							  if(it instanceof Date)
 							    it = utils.dateToString(it);
+							  if(it == false)
+								  it = 0;
+							  if(it == true)
+								  it = 1;
                               a.push(it);
 							}
                             rows.push(a);
@@ -1286,12 +1291,15 @@ xui.Class('Module.DataGrid', 'xui.Module',{
          * @param {String} src , the event source DOM element's xid
         */
         _grid_onhotkeypress:function(profile, keyboard, e, src){
-            var ns = this, uictrl = profile.boxing(), row;
+            var ns = this, uictrl = profile.boxing(), row, prop=ns.properties;
             if(keyboard.key == "enter")
             {
+				if(prop.mode == "normal")
+				{
                     if((row=ns.grid.getActiveRow())){
                         ns._openForm(row.id, ns.getRowMap(row));
                     }
+				}
             }
         },
 

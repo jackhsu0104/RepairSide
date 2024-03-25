@@ -1,13 +1,5 @@
-/*************************************************************************************************
- 程式代號：RepairSide
- 程式名稱：App/js/PickingEditForm.js
- 系統版本：企業版(for SQL Server)
-*************************************************************************************************
- 程式版本：1.0
- 修改日期：2024/03/02
- 修改人員：Jack Hsu
- 修改說明：(1). 初始版本
-*************************************************************************************************/
+// The default code is a module class (inherited from xui.Module)
+// Ensure that all the value of "key/value pair" does not refer to external variables
 xui.Class('App.PickingEditForm', 'xui.Module',{
     Instance:{
         // Dependency classes
@@ -455,7 +447,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
             var ns = this;
             if(typeof ns.storeCountList == "undefined")
             {
-              ns.storeCountList = utils.getItemValue("ERP領料庫存查詢","庫別", ns.storeName,"*", true);    
+              ns.storeCountList = utils.getItemValue("ERP領料庫存查詢_去除不要的","庫別", ns.storeName,"*", true);    
               if(ns.storeCountList == "")
                   ns.storeCountList = [];
               for(var i=0; i<ns.storeCountList.length; i++)
@@ -642,7 +634,7 @@ xui.Class('App.PickingEditForm', 'xui.Module',{
               ns.grid2.setRows(items);  
               //ns.updateGridStoreCount(ns.grid2);
             }
-            let datas2 = utils.getTableItems({"tableName":"ERP領料庫存查詢", "condition":condition2, "orderby":"品號"});
+            let datas2 = utils.getTableItems({"tableName":"ERP領料庫存查詢_去除不要的", "condition":condition2, "orderby":"品號"});
             cb2(datas2);
             
         },

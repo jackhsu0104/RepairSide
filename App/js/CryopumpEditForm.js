@@ -452,7 +452,7 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
                 .setTop("0em")
                 .setHeight("19.35238095238095em")
                 .setLazyAppend(false)
-                .setValue("b")
+                .setValue("a")
             );
             
             host.tabs1.append(
@@ -11430,7 +11430,14 @@ xui.Class('App.CryopumpEditForm', 'xui.Module',{
         */
                 _optionbtn_onclick:function(profile, e, src, value){
                     var ns = this, uictrl = profile.boxing();
-                    utils.showRepairOptionForm(ns.crydb1);
+                    var db = ns.crydb1, dbname = "crydb1";
+
+                    if(ns.sheetType.getUIValue().includes("SHI"))
+                    {
+                        db = ns.crydb2;
+                        dbname = "crydb2";
+                    }
+                    utils.showRepairOptionForm(db);
                 },
         /**
          * Fired when control's UI value is changed!

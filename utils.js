@@ -1143,15 +1143,15 @@ utils = {
     },
     textToBase64QRcode: function (text){
         var c = document.createElement("canvas");
-		let canvas = bwipjs.toCanvas(c, {
-			bcid: "qrcode", // Barcode type
-			text: text, // Text to encode
-	//		scale: 3, // 3x scaling factor
-			height: 12, // Bar height, in millimeters
-	//		padding: 5,
+        let canvas = bwipjs.toCanvas(c, {
+            bcid: "qrcode", // Barcode type
+            text: text, // Text to encode
+    //        scale: 3, // 3x scaling factor
+            height: 12, // Bar height, in millimeters
+    //        padding: 5,
     // rotate: 'R',
-			includetext: false, // Show human-readable text
-		});
+            includetext: false, // Show human-readable text
+        });
         return canvas.toDataURL("image/png");
     },
     showServiceRecordForm: function(item, mode){
@@ -1289,8 +1289,17 @@ utils = {
                     }
                     var item = utils.getItemValue("Option零件更換表","登錄編號",id,"*");
                     if(item == "")
-                      utils.showDataPage("RepairOptionForm",{"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName,"CreateDate":utils.today(), "公司名稱":data["客戶名稱"]},
-                                        "new");        
+                    {
+                      var newdata = {"登錄編號":id,"Model":data["Pump"],"S/N":data["Pump S/N"], "BenchName":LoginUser.DisplayName,"CreateDate":utils.today(), "公司名稱":data["客戶名稱"]}; 
+					  if(typeof newdata["Model"] == 'undefined')
+					  {
+						  newdata["Model"] = data["Model"];
+						  newdata["S/N"] = data["S/N"];
+						  if(data["S/N#2"] != "")
+							  newdata["S/N"] = data["S/N#2"];
+					  }
+                      utils.showDataPage("RepairOptionForm", newdata, "new");    
+                    }
                     else
                       utils.showDataPage("RepairOptionForm", item, "edit")  ;      
 
@@ -1364,23 +1373,23 @@ utils = {
                       if(readonly)
                           mod.saveBtn.setDisabled(true);
                   };
-				  var formMap = {"Cryopump維修工單":"CryopumpEditForm", "Crosshead維修工單":"CrossheadEditForm","3phControler維修工單":"3phControlerEditForm","CylinderHeater維修工單":"CylinderHeaterEditForm",
-								"Compressor維修工單":"CompressorEditForm","Module功能測試表":"ModuleTestForm"};	
+                  var formMap = {"Cryopump維修工單":"CryopumpEditForm", "Crosshead維修工單":"CrossheadEditForm","3phControler維修工單":"3phControlerEditForm","CylinderHeater維修工單":"CylinderHeaterEditForm",
+                                "Compressor維修工單":"CompressorEditForm","Module功能測試表":"ModuleTestForm"};    
                   var item =utils.getItemValue(tableName,"登錄編號",rno);
                   if(item != "")
                   {
-					  if(item["維修站名"] != SiteName || utils.repairFinishStates().includes(item["維修狀態"]))
-					  {
-						  var s = `登錄編號: ${item["登錄編號"]}<br>所在站名: ${item["維修站名"]}<br>維修狀態: ${item["維修狀態"]}<br>`
-						  utils.alert(s,"物件狀態");
-						  return;
-					  }
-					  else
+                      if(item["維修站名"] != SiteName || utils.repairFinishStates().includes(item["維修狀態"]))
+                      {
+                          var s = `登錄編號: ${item["登錄編號"]}<br>所在站名: ${item["維修站名"]}<br>維修狀態: ${item["維修狀態"]}<br>`
+                          utils.alert(s,"物件狀態");
+                          return;
+                      }
+                      else
                         utils.showDataPage(formMap[tableName], item, "edit", loadcb);
                       return;
                   }
-				  else
-					  utils.alert("查無此工單!  " + rno);
+                  else
+                      utils.alert("查無此工單!  " + rno);
      
   },   
   updateNewWorkSheetValue: function(db, rno){
@@ -1686,10 +1695,10 @@ utils = {
         else 
           CloseDate = 26;  
       }
-	  
+      
       var n = new Date();
-	  if(ddd != null)
-		  n = new Date(ddd);
+      if(ddd != null)
+          n = new Date(ddd);
       var d = n.getDate();
       if(d >= CloseDate)  
       {
@@ -2215,17 +2224,17 @@ utils = {
           uictrl.setValue(r);
         return r;
     },
-	updateRepairFinishDate:function(ns,db){
+    updateRepairFinishDate:function(ns,db){
         status = ns.repairStatus.getUIValue();
         if(typeof ns.prevRepairStatus != 'undefined')
         {
             if(ns.prevRepairStatus == status)
                 return;
         }
-		if(status.includes("完工") || status == "不修")
-		  db.setData("完工日期", utils.today());			
-		
-	},
+        if(status.includes("完工") || status == "不修")
+          db.setData("完工日期", utils.today());            
+        
+    },
     writeRepairStatus:function(ns, status){
         
         if(typeof ns == "string")
@@ -2282,8 +2291,8 @@ utils = {
             tableName = "Cryopump維修工單";    
             writecn = true;
           }
-		  if(status == "入庫")
-			  data["入庫日期"] = utils.today();
+          if(status == "入庫")
+              data["入庫日期"] = utils.today();
           utils.modifyTableItem(tableName,"登錄編號", data);
           if(status == "入庫" && tableName == "Cryopump維修工單") //write Module and Crosshead
           {
@@ -2460,12 +2469,12 @@ utils = {
           xui.confirm("確認","是否將相關工單設為簡修完工?", cb);
         }          
     },
-	getLastRepairDatas: function(insn, rno=""){
-				var R = {"上次登錄編號":"NA", "上次Pump出廠CN":"NA", "上次CN保固截止日期":null};
+    getLastRepairDatas: function(insn, rno=""){
+                var R = {"上次登錄編號":"NA", "上次Pump出廠CN":"NA", "上次CN保固截止日期":null};
                 if(insn == "NA" || insn == "N/A")
                     return R; 
-				if(insn == "")
-					return {"上次登錄編號":"", "上次Pump出廠CN":"", "上次CN保固截止日期":null};		
+                if(insn == "")
+                    return {"上次登錄編號":"", "上次Pump出廠CN":"", "上次CN保固截止日期":null};        
                   
                 var condition = `[In S/N] = '${insn}' AND 登錄編號 != '${rno}' ORDER BY [Log date] DESC`;  
                 var item = utils.getItemValueByCondition("CTI Control Number總資料庫",condition);
@@ -2485,50 +2494,50 @@ utils = {
                     R["上次Pump出廠CN"] = item["CN#"];
                     R["上次CN保固截止日期"] = item["保固期限"];
                 }    
-				return R;
-	},
-	startCodeRead:function(tableName){
-		//utils.alert("還未完成");
-		//return;
-		var cb = function(rno){
-			//utils.alert(rno);
-			utils.showWorkSheet2(tableName, rno);
-		}
-		if(typeof tableName == 'function')
-			cb = tableName;
-		
-		var cb2 = function(mod){
-			mod.onCodeRead = cb;
+                return R;
+    },
+    startCodeRead:function(tableName){
+        //utils.alert("還未完成");
+        //return;
+        var cb = function(rno){
+            //utils.alert(rno);
+            utils.showWorkSheet2(tableName, rno);
+        }
+        if(typeof tableName == 'function')
+            cb = tableName;
+        
+        var cb2 = function(mod){
+            mod.onCodeRead = cb;
             mod.dialog.setModal(true);            
-		};
+        };
         xui.showModule("App.ScanForm", cb2, null, null, false);
-		
-	},
-	repairFinishStates:function(){
-		return ["出貨","完工","簡修完工","入庫","不修"];
-	},
-	writeRepairShipped: function(rno){
-		var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
-		var code = data["CN分類碼"];
-		if(code == "CON")
-			utils.modifyTableItem("3phControler維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-		if(code == "CYL")
-			utils.modifyTableItem("CylinderHeater維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-		if(code == "EFC")
-			utils.modifyTableItem("Compressor維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-		if(code == "EFM")
-			utils.modifyTableItem("Crosshead維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-		if(code == "EFP")
-		{
-			utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-			utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
-		}
-		if(code == "MOD")
-			utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        
+    },
+    repairFinishStates:function(){
+        return ["出貨","完工","簡修完工","入庫","不修"];
+    },
+    writeRepairShipped: function(rno){
+        var data = utils.getItemValue("CTI Control Number總資料庫","登錄編號",rno);
+        var code = data["CN分類碼"];
+        if(code == "CON")
+            utils.modifyTableItem("3phControler維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        if(code == "CYL")
+            utils.modifyTableItem("CylinderHeater維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        if(code == "EFC")
+            utils.modifyTableItem("Compressor維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        if(code == "EFM")
+            utils.modifyTableItem("Crosshead維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        if(code == "EFP")
+        {
+            utils.modifyTableItem("Cryopump維修工單","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+            utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
+        }
+        if(code == "MOD")
+            utils.modifyTableItem("Module功能測試表","登錄編號",{"登錄編號":rno,"維修狀態":"出貨"});
 
-		utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",{"登錄編號":rno,"維修狀況":"出貨"});
-		
-	},
+        utils.modifyTableItem("CTI Control Number總資料庫","登錄編號",{"登錄編號":rno,"維修狀況":"出貨"});
+        
+    },
     downloadxlsx: function(filename, sheetname, data) {
             //儲存xlsx檔
 
@@ -2614,5 +2623,5 @@ utils = {
             saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), filename)
 
 
-        }, 	
+        },     
  };

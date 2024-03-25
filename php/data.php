@@ -569,7 +569,7 @@ else  if($req->cmd == "modifyTableItem")
     $key = $req->key; 
     $table = $req->table;
     $item = json_decode($req->item);
-    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".json_encode($item, JSON_UNESCAPED_UNICODE)."\r\n", FILE_APPEND);   
     try{
       if($table == "[CTI Control Number總資料庫]")
         unset($item->type);  //no use    
@@ -589,7 +589,7 @@ else  if($req->cmd == "modifyTableItem2")
     $keyValue = $req->keyValue; 
     $table = $req->table;
     $item = json_decode($req->item);
-    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".$req->item."\r\n", FILE_APPEND);   
+    file_put_contents("modify.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n".json_encode($item, JSON_UNESCAPED_UNICODE)."\r\n", FILE_APPEND);   
     try{
       if($table == "[CTI Control Number總資料庫]")
         unset($item->type);  //no use    

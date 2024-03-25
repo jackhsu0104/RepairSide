@@ -530,6 +530,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
             var ns = this, uictrl = profile.boxing(), prop = ns.properties;
             if(prop.mode.includes("new"))
                 ns.pdb.setData("Creator", LoginUser.EmplID);
+            ns.date.setValue(utils.dateToString(ns.date.getValue()));
             utils.saveForm(ns);
         },
         prepareNewData: function(rno){
