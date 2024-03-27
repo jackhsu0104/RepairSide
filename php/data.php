@@ -641,8 +641,13 @@ else  if($req->cmd == "deleteTableItem")
         $rid = "登錄編號";
         if(count($items) > 0)
         {
-          $it = $items[0];  
-          myDeleteTableItem("[CTI Control Number總資料庫]", $rid, $it[$rid]);  
+          $it = $items[0];
+		  $rno = $it[$rid];
+		  if($rno != "")
+		  {
+            myDeleteTableItem("[CTI Control Number總資料庫]", $rid, $rno);
+            file_put_contents("delete.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:[CTI Control Number總資料庫] in php \r\nkey:$rid  value:$rno\r\n", FILE_APPEND);   
+		  }			
         }
     }
     file_put_contents("delete.txt", date("Y-m-d H:i:s ")."User: $LoginUser Table:".$table."\r\n"."key:$key  value:$value"."\r\n", FILE_APPEND);   

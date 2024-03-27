@@ -4,6 +4,11 @@
  系統版本：企業版(for SQL Server)
 *************************************************************************************************
  程式版本：1.0
+ 修改日期：2024/03/26
+ 修改人員：Jack Hsu
+ 修改說明：(1).上傳後,時間修正為00:00
+*************************************************************************************************
+ 程式版本：1.0
  修改日期：2024/03/02
  修改人員：Jack Hsu
  修改說明：(1). 初始版本
@@ -733,7 +738,7 @@ xui.Class('App.ErpPickingForm', 'xui.Module',{
               ns.uploadBtn.setDisabled(true);
               ns.deleteBtn.setDisabled(true);  
               ns.pdb.setData("已上傳", true);  
-              data = {"領料報工單號":  ns.id.getUIValue(), "已上傳":1, "單據日期":ns.date.getUIValue()};  
+              data = {"領料報工單號":  ns.id.getUIValue(), "已上傳":1, "單據日期": utils.dateToString(ns.date.getUIValue())};  
               utils.modifyTableItem("領料報工單","領料報工單號", data);  
               ns.mgrid.setMode("readonly");  
               utils.setContainerDisabled(ns.block, true);  
